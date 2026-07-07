@@ -216,3 +216,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# DecantCC run artifacts (report + its JSONL audit trail)
+/report.md
+/report.md.jsonl
+*.jsonl
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/

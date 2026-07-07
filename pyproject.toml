@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "decantcc-eval"
+version = "0.1.0"
+description = "LLM-digestibility eval harness: scores how well a document conversion transfers meaning to an LLM reader, for the fewest tokens."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.9"
+# The harness core and its whole test suite run on the stdlib alone
+# (FakeModelClient, no API key, no network). Real runs need the extras below.
+dependencies = []
+
+[project.optional-dependencies]
+live = ["anthropic>=0.40"]   # real Opus/Haiku target tiers + the judge
+yaml = ["pyyaml>=6.0"]       # author question sets in YAML instead of JSON
+
+[project.scripts]
+decantcc-eval = "decant_eval.cli:main"
+
+[tool.setuptools]
+packages = ["decant_eval"]

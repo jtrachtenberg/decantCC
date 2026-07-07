@@ -1,0 +1,8 @@
+{
+  "questions": [
+    { "id": "total", "question": "What is the invoice total in USD?", "gold": "1250.00", "type": "numeric", "tolerance": 0.01 },
+    { "id": "vendor", "question": "Who is the vendor?", "gold": "Acme Corp", "type": "exact" },
+    { "id": "lineitems", "question": "Which line items appear on the invoice?", "gold": ["widgets", "gaskets", "shipping"], "type": "set" },
+    { "id": "summary", "question": "In one sentence, what is this document?", "gold": "An invoice from Acme Corp billing 1250.00 USD for widgets, gaskets, and shipping.", "type": "open" }
+  ]
+}
