@@ -71,8 +71,8 @@ corpus/<case>/
 ## Run
 
 ```bash
-# Offline — the whole suite, stdlib only, no API key:
-cd eval && python -m unittest discover tests
+# Offline — the whole suite, stdlib only, no API key (from repo root):
+python -m unittest discover tests
 
 # Real run (needs Anthropic credentials):
 pip install -r requirements.txt
