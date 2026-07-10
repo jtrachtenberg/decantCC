@@ -6,16 +6,22 @@ AnthropicModelClient is the real thing.
 
 A `document` may accompany the question:
 
-    None                 no document — the memory-contamination control arm
-    ("text", markdown)   a cached conversion (a .md/.txt file being scored)
-    ("pdf", Path)        the source PDF itself — the *raw upload* arena anchor,
-                         the baseline the whole thesis is measured against
+    None                       no document — the memory-contamination control arm
+    ("text", markdown)         a cached conversion (a .md/.txt file being scored)
+    ("text+pdf", (md, Path))   a conversion plus its figures-companion PDF
+                               (e.g. decant.md + decant.pdf): the text carries
+                               labels that reference figures the companion holds
+    ("pdf", Path)              the source PDF itself — the *raw upload* arena
+                               anchor, the baseline the thesis is measured against
 
-The document is sent as its own content block with a `cache_control` breakpoint,
-so the loop re-uses the cached document across every question about it instead
-of re-billing the full input each time (~90% cheaper on large documents). The
-question follows in an uncached block. Text conversions and PDFs share this path
-so caching applies to both.
+The document is sent as its own content block(s) with a single `cache_control`
+breakpoint on the last of them — prefix caching then covers the whole document
+group — so the loop re-uses the cached document across every question about it
+instead of re-billing the full input each time (~90% cheaper on large
+documents). The question follows in an uncached block. All document kinds share
+this path so caching applies uniformly. Note a companion PDF is billed as
+rendered page images on every (cache-miss) request — that token weight is part
+of what the eval measures for such arms.
 
 Deliberate: no thinking / effort is requested. The harness measures whether a
 *representation transfers meaning* — thinking off keeps a strong model from
@@ -54,6 +60,9 @@ def _render(document) -> str:
     kind, payload = document
     if kind == "text":
         return f"DOCUMENT:\n{payload}\n\n"
+    if kind == "text+pdf":
+        text, path = payload
+        return f"DOCUMENT:\n{text}\n\n[PDF {Path(path).name}]\n\n"
     return f"[PDF {Path(payload).name}]\n\n"  # raw upload — no extractable text
 
 
@@ -68,32 +77,39 @@ class AnthropicModelClient:
             client = Anthropic()
         self._client = client
 
-    def _document_block(self, document):
-        """A cached content block for the document, or None when there isn't one."""
+    @staticmethod
+    def _pdf_block(path):
+        data = base64.standard_b64encode(Path(path).read_bytes()).decode("ascii")
+        return {
+            "type": "document",
+            "source": {"type": "base64", "media_type": "application/pdf", "data": data},
+        }
+
+    def _document_blocks(self, document) -> list:
+        """The document as content blocks ([] when there is no document). Text
+        precedes its figures companion so the text's labels read as references
+        to the figures that follow."""
         if document is None:
-            return None
+            return []
         kind, payload = document
         if kind == "text":
-            block = {"type": "text", "text": f"DOCUMENT:\n{payload}"}
+            blocks = [{"type": "text", "text": f"DOCUMENT:\n{payload}"}]
+        elif kind == "text+pdf":
+            text, path = payload
+            blocks = [{"type": "text", "text": f"DOCUMENT:\n{text}"}, self._pdf_block(path)]
         elif kind == "pdf":
-            data = base64.standard_b64encode(Path(payload).read_bytes()).decode("ascii")
-            block = {
-                "type": "document",
-                "source": {"type": "base64", "media_type": "application/pdf", "data": data},
-            }
+            blocks = [self._pdf_block(payload)]
         else:  # pragma: no cover - guarded by the runner
             raise ValueError(f"unknown document kind {kind!r}")
-        # Cache the (expensive, repeated) document; the question after it is not cached.
-        block["cache_control"] = {"type": "ephemeral"}
-        return block
+        # One breakpoint on the last block caches the whole document prefix;
+        # the question after it is not cached.
+        blocks[-1]["cache_control"] = {"type": "ephemeral"}
+        return blocks
 
     def answer(self, *, model, system, prompt, max_tokens=512, document=None) -> AnswerResult:
         # No thinking/effort (see module docstring): omit thinking → Opus 4.8
         # runs without it; Haiku 4.5 would 400 on effort, so it's absent too.
-        content = []
-        doc = self._document_block(document)
-        if doc is not None:
-            content.append(doc)
+        content = list(self._document_blocks(document))
         content.append({"type": "text", "text": prompt})
         resp = self._client.messages.create(
             model=model,

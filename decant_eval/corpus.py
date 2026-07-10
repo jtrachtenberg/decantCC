@@ -10,6 +10,9 @@ question set authored against it and the candidate conversions to score:
         conversions/
           raw.md              # each file = one conversion in the arena
           decant.md
+          decant.pdf          # optional figures companion: same stem as the
+                              # conversion it belongs to; fed to the model
+                              # alongside that conversion's text (see runner)
           markitdown.md
           docling.md
 
@@ -21,7 +24,7 @@ measures conformance to a converter instead of correctness.
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 # Question types the grader understands (see grading.py).
@@ -43,6 +46,9 @@ class Case:
     questions: tuple[Question, ...]
     conversions: dict[str, str]  # conversion name -> markdown/text
     source: Path | None = None
+    # conversion name -> its optional figures-companion PDF (same filename
+    # stem), fed to the model alongside that conversion's text.
+    companions: dict[str, Path] = field(default_factory=dict)
 
 
 def _load_questions_file(path: Path) -> list[dict]:
@@ -116,8 +122,26 @@ def load_case(case_dir: Path) -> Case:
     if not conversions:
         raise ValueError(f"{conv_dir}: no non-empty .md/.txt conversions found")
 
+    # A PDF in conversions/ is a figures companion for the same-stem conversion
+    # (e.g. decant.pdf rides with decant.md). An orphan PDF — no non-empty
+    # matching conversion — is a loud error rather than a silent skip: a typo'd
+    # stem would otherwise quietly drop the figures from a billed run.
+    companions: dict[str, Path] = {}
+    for p in sorted(conv_dir.iterdir()):
+        if p.is_file() and p.suffix.lower() == ".pdf":
+            if p.stem in conversions:
+                companions[p.stem] = p
+            else:
+                raise ValueError(
+                    f"{p}: companion PDF has no non-empty {p.stem}.md/.txt "
+                    "conversion to attach to"
+                )
+
     source = next((p for p in case_dir.glob("source.*") if p.is_file()), None)
-    return Case(name=case_dir.name, questions=questions, conversions=conversions, source=source)
+    return Case(
+        name=case_dir.name, questions=questions, conversions=conversions,
+        source=source, companions=companions,
+    )
 
 
 def load_corpus(corpus_dir: str | Path) -> list[Case]:

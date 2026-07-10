@@ -5,6 +5,11 @@ During a run the exact per-answer cost comes from each response's `usage`
 *before* running — e.g. to rank conversions by size, or budget a run. It wraps
 the model-specific count_tokens endpoint, with a portable chars/4 fallback so a
 rough number is available with no client.
+
+Caveat: these estimates cover a conversion's *text* only. A figures-companion
+PDF (e.g. decant.pdf riding with decant.md) is billed as rendered page images,
+which this module does not estimate — the run's own `usage` is the source of
+truth for such arms.
 """
 
 from __future__ import annotations

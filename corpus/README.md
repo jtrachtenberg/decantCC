@@ -11,9 +11,19 @@ corpus/<case>/
   questions.json           # or questions.yaml (needs pyyaml)
   conversions/
     decant.md
+    decant.pdf              # optional figures companion: a PDF with the same
+                            # stem rides with that conversion — the model gets
+                            # the text AND the figures PDF together (labels in
+                            # the text point into the figures)
     markitdown.md
     docling.md              # each file = one conversion in the arena
 ```
+
+A companion PDF must have a non-empty same-stem conversion to attach to —
+an orphan (typo'd stem, or figures next to a still-empty `.md`) fails the
+load loudly rather than silently dropping the figures from a billed run.
+Companion pages are billed as images; `tokens.py` pre-run estimates don't
+include them (the run's own `usage` does).
 
 A case is only picked up by `load_corpus()` once it has **both** a
 `questions.json` (or `.yaml`/`.yml`) and at least one **non-empty**

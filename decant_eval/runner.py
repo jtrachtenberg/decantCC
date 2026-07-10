@@ -87,8 +87,16 @@ def load_completed(jsonl_path) -> tuple[list[Result], set]:
 
 def _arena_entries(case: Case, *, raw_arena: bool):
     """(name, document) per conversion in the arena. document is ("text", md)
-    for a conversion, or ("pdf", path) for the source-PDF raw baseline."""
-    entries = [(name, ("text", text)) for name, text in case.conversions.items()]
+    for a conversion, ("text+pdf", (md, figures_path)) for a conversion with a
+    same-stem figures-companion PDF (e.g. decant.md + decant.pdf), or
+    ("pdf", path) for the source-PDF raw baseline."""
+    entries = []
+    for name, text in case.conversions.items():
+        companion = case.companions.get(name)
+        if companion is not None:
+            entries.append((name, ("text+pdf", (text, companion))))
+        else:
+            entries.append((name, ("text", text)))
     if raw_arena and case.source is not None and case.source.suffix.lower() == ".pdf":
         if RAW not in case.conversions:  # don't shadow an explicit raw.md
             entries.append((RAW, ("pdf", case.source)))
