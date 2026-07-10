@@ -1,3 +1,0 @@
-Drop decant.md, markitdown.md, docling.md here once source.pdf exists and
-you've run each converter against it. This file just keeps the empty
-directory tracked in git -- delete it once real conversion files land.

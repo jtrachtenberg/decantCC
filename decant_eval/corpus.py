@@ -84,6 +84,21 @@ def _parse_questions(raw: list[dict], where: str) -> tuple[Question, ...]:
     return tuple(out)
 
 
+def _read_conversions(conv_dir: Path) -> dict[str, str]:
+    """Non-empty .md/.txt files in conv_dir, keyed by filename stem. Empty or
+    whitespace-only files are skipped so a placeholder or half-written arm
+    (e.g. a decant.md the converter hasn't populated yet) cannot become a
+    silently-blank arena entry that scores uniformly wrong in a billed run."""
+    out: dict[str, str] = {}
+    if conv_dir.is_dir():
+        for p in sorted(conv_dir.iterdir()):
+            if p.is_file() and p.suffix in (".md", ".txt"):
+                text = p.read_text(encoding="utf-8")
+                if text.strip():
+                    out[p.stem] = text
+    return out
+
+
 def load_case(case_dir: Path) -> Case:
     case_dir = Path(case_dir)
     qfile = next(
@@ -97,13 +112,9 @@ def load_case(case_dir: Path) -> Case:
     conv_dir = case_dir / "conversions"
     if not conv_dir.is_dir():
         raise FileNotFoundError(f"{case_dir}: no conversions/ directory")
-    conversions = {
-        p.stem: p.read_text(encoding="utf-8")
-        for p in sorted(conv_dir.iterdir())
-        if p.is_file() and p.suffix in (".md", ".txt")
-    }
+    conversions = _read_conversions(conv_dir)
     if not conversions:
-        raise ValueError(f"{conv_dir}: no .md/.txt conversions found")
+        raise ValueError(f"{conv_dir}: no non-empty .md/.txt conversions found")
 
     source = next((p for p in case_dir.glob("source.*") if p.is_file()), None)
     return Case(name=case_dir.name, questions=questions, conversions=conversions, source=source)
@@ -124,10 +135,7 @@ def load_corpus(corpus_dir: str | Path) -> list[Case]:
         has_questions = any(
             (child / f"questions{ext}").exists() for ext in (".json", ".yaml", ".yml")
         )
-        conv_dir = child / "conversions"
-        has_conversions = conv_dir.is_dir() and any(
-            p.is_file() and p.suffix in (".md", ".txt") for p in conv_dir.iterdir()
-        )
+        has_conversions = bool(_read_conversions(child / "conversions"))
         if has_questions and has_conversions:
             cases.append(load_case(child))
     if not cases:

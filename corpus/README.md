@@ -16,10 +16,12 @@ corpus/<case>/
 ```
 
 A case is only picked up by `load_corpus()` once it has **both** a
-`questions.json` (or `.yaml`/`.yml`) and at least one `.md`/`.txt` file in
-`conversions/` — until then it's just a placeholder directory and is
-silently skipped, so it's safe to scaffold slots ahead of having real
-content, in either order (questions-first or conversions-first).
+`questions.json` (or `.yaml`/`.yml`) and at least one **non-empty**
+`.md`/`.txt` file in `conversions/` — until then it's just a placeholder
+directory and is silently skipped, so it's safe to scaffold slots ahead of
+having real content, in either order (questions-first or conversions-first).
+Empty or whitespace-only conversion files are ignored, so a not-yet-written
+`decant.md` won't be scored as a blank (uniformly wrong) arena entry.
 
 ## The hard rule
 
