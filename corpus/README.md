@@ -15,9 +15,11 @@ corpus/<case>/
     docling.md              # each file = one conversion in the arena
 ```
 
-A case is only picked up by `load_corpus()` once it has a `questions.json`
-(or `.yaml`/`.yml`) — until then it's just a placeholder directory and is
-silently skipped, so it's safe to scaffold slots ahead of having real content.
+A case is only picked up by `load_corpus()` once it has **both** a
+`questions.json` (or `.yaml`/`.yml`) and at least one `.md`/`.txt` file in
+`conversions/` — until then it's just a placeholder directory and is
+silently skipped, so it's safe to scaffold slots ahead of having real
+content, in either order (questions-first or conversions-first).
 
 ## The hard rule
 

@@ -110,13 +110,25 @@ def load_case(case_dir: Path) -> Case:
 
 
 def load_corpus(corpus_dir: str | Path) -> list[Case]:
-    """Every immediate subdirectory of corpus_dir that has a questions file."""
+    """Every immediate subdirectory of corpus_dir that is a complete case:
+    a questions file plus at least one conversion. Scaffold dirs that are
+    still missing either half are skipped, so cases can be authored
+    incrementally in any order (questions-first or conversions-first).
+    load_case() stays strict — pointing it at an incomplete case is an error.
+    """
     corpus_dir = Path(corpus_dir)
     cases = []
     for child in sorted(corpus_dir.iterdir()):
-        if child.is_dir() and any(
+        if not child.is_dir():
+            continue
+        has_questions = any(
             (child / f"questions{ext}").exists() for ext in (".json", ".yaml", ".yml")
-        ):
+        )
+        conv_dir = child / "conversions"
+        has_conversions = conv_dir.is_dir() and any(
+            p.is_file() and p.suffix in (".md", ".txt") for p in conv_dir.iterdir()
+        )
+        if has_questions and has_conversions:
             cases.append(load_case(child))
     if not cases:
         raise ValueError(f"{corpus_dir}: no cases found")
