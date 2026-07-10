@@ -1,0 +1,42 @@
+{
+  "questions": [
+    {
+      "id": "eps-2004",
+      "question": "What was ABC Manufacturing's net income per common share for the year ended December 31, 2004?",
+      "gold": "3.21",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "current-ratio",
+      "question": "What is ABC Manufacturing's current ratio in the worked example?",
+      "gold": "2.31",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "cfo",
+      "question": "Which Merrill Lynch Chief Financial Officer signed the message at the front of the guide?",
+      "gold": "Ahmass Fakahany",
+      "type": "exact"
+    },
+    {
+      "id": "example-company",
+      "question": "What is the name of the imaginary company used for the sample financial statements throughout the guide?",
+      "gold": "ABC Manufacturing",
+      "type": "exact"
+    },
+    {
+      "id": "product-costs",
+      "question": "According to the guide, what are the three basic components of product costs?",
+      "gold": ["direct materials", "direct labor", "manufacturing overhead"],
+      "type": "set"
+    },
+    {
+      "id": "doc-purpose",
+      "question": "In one or two sentences, what is this document and who published it?",
+      "gold": "The Merrill Lynch Guide to Understanding Financial Reports, an investor-education booklet published by Merrill Lynch with its communications partner Addison, explaining how to read and analyze corporate financial statements (balance sheet, income statement, shareholders' equity, cash flows and ratios) using an imaginary company called ABC Manufacturing.",
+      "type": "open"
+    }
+  ]
+}

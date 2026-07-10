@@ -1,0 +1,42 @@
+{
+  "questions": [
+    {
+      "id": "land-improvements-life",
+      "question": "According to the FAQ, what is the GAAP depreciable life in years for land improvements?",
+      "gold": "15",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "irc-section",
+      "question": "Which Internal Revenue Code section governs the project's low-income housing credits?",
+      "gold": "42",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "audit-firm",
+      "question": "Which firm is listed as the Equity Fund Audit Firm in the Resources section?",
+      "gold": "CohnReznick",
+      "type": "exact"
+    },
+    {
+      "id": "vp-central-ops",
+      "question": "Who is listed in the contact information as Vice President, Central Operations?",
+      "gold": "Sunil Gupta",
+      "type": "exact"
+    },
+    {
+      "id": "utilities",
+      "question": "Which specific utilities appear as line items under Utilities Expenses in the sample Statement of Operations?",
+      "gold": ["fuel oil", "coal", "electricity", "gas", "water", "sewer"],
+      "type": "set"
+    },
+    {
+      "id": "doc-purpose",
+      "question": "In one or two sentences, what is this document and who is its intended audience?",
+      "gold": "The 2021 Financial Statement Preparation Guide from Enterprise, telling CPAs and sponsors of low-income housing tax credit (LIHTC) limited partnerships how to prepare and submit year-end audited financial statements - deadlines, sample statements and notes, required auditor letters, and impairment analysis guidance.",
+      "type": "open"
+    }
+  ]
+}

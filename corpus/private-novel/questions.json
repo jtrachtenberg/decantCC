@@ -1,0 +1,43 @@
+{
+  "questions": [
+    {
+      "id": "scope1-2025",
+      "question": "What were MSIM's total financed Scope 1 GHG emissions reported for 2025, in tCO2e?",
+      "gold": "3782020",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "fw-temp",
+      "question": "Under the Fragmented World scenario, global temperature rise by 2100 is limited to how many degrees Celsius?",
+      "gold": "2.3",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "aum",
+      "question": "What were MSIM's assets under management as of 31 December 2025, in trillions of US dollars?",
+      "gold": "1.9",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "assurer",
+      "question": "Which firm provided independent limited assurance over the 2025 climate metrics?",
+      "gold": "KPMG",
+      "type": "exact"
+    },
+    {
+      "id": "scenarios",
+      "question": "What are the names of the three climate scenario narratives used in MSIM's climate scenario analysis?",
+      "gold": ["Net Zero 2050", "Fragmented World", "Hot House World"],
+      "type": "set"
+    },
+    {
+      "id": "doc-purpose",
+      "question": "In one or two sentences, what is this document and why was it produced?",
+      "gold": "Morgan Stanley Investment Management's Climate Report 2025 (published June 2026), a TCFD-aligned climate disclosure covering 1 January to 31 December 2025, produced to satisfy the FCA's ESG Sourcebook reporting requirements for the in-scope entities MSIM Ltd, EVAIL and MSIP - covering governance, strategy, scenario analysis, risk management, and financed-emissions metrics.",
+      "type": "open"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "questions": [
+    {
+      "id": "mobile-combustion",
+      "question": "What were Discovery's Group total Scope 1 mobile combustion emissions for FY2024, in tCO2e?",
+      "gold": "942",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "waste-landfill-pct",
+      "question": "What percentage of the Group's waste went to landfill in FY2024?",
+      "gold": "4.5",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "reduction-achieved",
+      "question": "What cumulative percentage reduction in Scope 1 and 2 emissions against the 2019 baseline did Discovery actually reach in FY2024?",
+      "gold": "21.4",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "asset-manager",
+      "question": "Which majority asset manager did Discovery hold several meetings with about calculating the Group's financed emissions?",
+      "gold": "Ninety One",
+      "type": "exact"
+    },
+    {
+      "id": "scope3-categories",
+      "question": "Which four Scope 3 categories did Discovery's FY2022 relevance assessment identify as having the greatest potential contribution to its Scope 3 emissions?",
+      "gold": ["investments", "purchased goods and services", "capital goods", "franchises"],
+      "type": "set"
+    },
+    {
+      "id": "doc-purpose",
+      "question": "In one or two sentences, what is this document and what does it cover?",
+      "gold": "Discovery Limited's Climate Report for the financial year ended 30 June 2024, a TCFD-aligned disclosure covering the South African insurance group's climate governance, risk management, strategy and scenario analysis, and metrics and targets - including its 2019-baseline emissions reduction targets, deferred 2027 carbon-neutral goal, and net zero by 2050 ambition.",
+      "type": "open"
+    }
+  ]
+}

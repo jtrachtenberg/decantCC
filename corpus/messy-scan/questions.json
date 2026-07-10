@@ -1,0 +1,42 @@
+{
+  "questions": [
+    {
+      "id": "farm-size",
+      "question": "In 1999, approximately how many square miles of farmland did the three MWRD properties (the METROGRO Farm) encompass?",
+      "gold": "70",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "transport-distance",
+      "question": "About how many miles east of Denver are the biosolids transported to the MWRD property near Deer Trail?",
+      "gold": "75",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "aquifer",
+      "question": "What is the primary water-supply aquifer in the study area?",
+      "gold": "Laramie-Fox Hills aquifer",
+      "type": "exact"
+    },
+    {
+      "id": "superfund",
+      "question": "The transfer of treated water from which Superfund site raised public concern about biosolids radioactivity?",
+      "gold": "Lowry Landfill Superfund site",
+      "type": "exact"
+    },
+    {
+      "id": "crop-metals",
+      "question": "Which trace elements were the crops monitored for near Deer Trail?",
+      "gold": ["arsenic", "cadmium", "copper", "lead", "mercury", "molybdenum", "nickel", "selenium", "zinc"],
+      "type": "set"
+    },
+    {
+      "id": "doc-purpose",
+      "question": "In one or two sentences, what is this document and what does it present?",
+      "gold": "A U.S. Geological Survey data report presenting biosolids, crop, ground-water, and streambed-sediment chemical data for the year 2000 from an expanded monitoring program at a biosolids-application area near Deer Trail, Colorado, run by the USGS in cooperation with the Metro Wastewater Reclamation District (MWRD) and the North Kiowa Bijou Groundwater Management District.",
+      "type": "open"
+    }
+  ]
+}

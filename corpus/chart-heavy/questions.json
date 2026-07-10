@@ -1,0 +1,43 @@
+{
+  "questions": [
+    {
+      "id": "staff-2023",
+      "question": "According to the staff-evolution chart in the CERN in Figures section, how many staff members did CERN have in 2023?",
+      "gold": "2666",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "technicians",
+      "question": "According to the CERN staff breakdown for 2025, how many technicians did CERN employ?",
+      "gold": "808",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "personnel-expense",
+      "question": "What were CERN's personnel expenses for 2025, in MCHF?",
+      "gold": "767.33",
+      "type": "numeric",
+      "tolerance": 0
+    },
+    {
+      "id": "dg",
+      "question": "Who signed the message from the Director-General in this report?",
+      "gold": "Fabiola Gianotti",
+      "type": "exact"
+    },
+    {
+      "id": "lhc-experiments",
+      "question": "What are the four large LHC experiments named in the report?",
+      "gold": ["ALICE", "ATLAS", "CMS", "LHCb"],
+      "type": "set"
+    },
+    {
+      "id": "doc-purpose",
+      "question": "In one or two sentences, what is this document and what period does it cover?",
+      "gold": "CERN's Annual Report for 2025 (the seventy-first annual report of the European Organization for Nuclear Research), presenting the year's highlights - record LHC luminosity in its final full year before Long Shutdown 3, first oxygen and neon runs, the completed FCC Feasibility Study, new Member State Slovenia - plus governance, outreach, environment and budget figures.",
+      "type": "open"
+    }
+  ]
+}
