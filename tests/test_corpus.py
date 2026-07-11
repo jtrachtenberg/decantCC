@@ -25,6 +25,19 @@ class TestCorpus(unittest.TestCase):
         cases = load_corpus(FIXTURES)
         self.assertTrue(any(c.name == "sample-invoice" for c in cases))
 
+    def test_source_tag_parsed_and_optional(self):
+        from decant_eval.corpus import _parse_questions
+
+        qs = _parse_questions(
+            [
+                {"id": "a", "question": "?", "gold": "x", "source": "figure-12"},
+                {"id": "b", "question": "?", "gold": "y"},
+            ],
+            "test",
+        )
+        self.assertEqual(qs[0].source, "figure-12")
+        self.assertEqual(qs[1].source, "")  # untagged is the default, not an error
+
 
 if __name__ == "__main__":
     unittest.main()

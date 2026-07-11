@@ -21,7 +21,7 @@ from pathlib import Path
 
 from .corpus import load_corpus
 from .models import AnthropicModelClient
-from .report import build_report, to_markdown
+from .report import build_report, build_source_scores, source_scores_markdown, to_markdown
 from .runner import CONTROL, run_control, run_corpus
 
 
@@ -86,6 +86,9 @@ def main(argv=None) -> int:
     arena_rows = [r for r in rows if r.conversion != CONTROL]
     report = build_report(arena_rows, strong=args.strong, weak=args.weak)
     md = to_markdown(report)
+    source_md = source_scores_markdown(build_source_scores(arena_rows), report.models)
+    if source_md:
+        md += "\n\n" + source_md
 
     if not args.no_control:
         control_rows = []

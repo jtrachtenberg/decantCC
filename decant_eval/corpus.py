@@ -38,6 +38,11 @@ class Question:
     gold: object  # str | list[str] | number, by type
     type: str = "exact"
     tolerance: float = 0.0  # numeric only: absolute tolerance on the value
+    # Where in the source document the answer lives ("figure-12", "table-3",
+    # "text") — free-form, case-scoped. Carried through to result rows so the
+    # report can slice accuracy by answer location (e.g. do chart-borne
+    # questions survive without the figures companion?). Empty = untagged.
+    source: str = ""
 
 
 @dataclass(frozen=True)
@@ -85,6 +90,7 @@ def _parse_questions(raw: list[dict], where: str) -> tuple[Question, ...]:
                 gold=q["gold"],
                 type=qtype,
                 tolerance=float(q.get("tolerance", 0.0)),
+                source=str(q.get("source", "")),
             )
         )
     return tuple(out)

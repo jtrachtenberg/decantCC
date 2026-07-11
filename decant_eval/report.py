@@ -108,6 +108,61 @@ def build_report(
     )
 
 
+@dataclass
+class SourceScore:
+    """Accuracy of one conversion on the questions tagged with one answer
+    location (Question.source) within one case."""
+    case: str
+    source: str
+    conversion: str
+    accuracy: dict[str, float] = field(default_factory=dict)  # model -> mean score
+    n_questions: int = 0
+
+
+def build_source_scores(rows) -> list[SourceScore]:
+    """Per-(case, source, conversion) accuracy over the rows whose question
+    carries a source tag. Empty when nothing is tagged. Source tags are
+    case-scoped ("figure-12" in one case is unrelated to another's), so slices
+    are never aggregated across cases; within a (case, source) group every
+    conversion answered the same questions, so the cells compare directly —
+    e.g. decant vs decant-plain on figure-tagged questions is the companion
+    PDF's per-figure contribution."""
+    tagged = [r for r in rows if getattr(r, "source", "")]
+    out: list[SourceScore] = []
+    groups = sorted({(r.case, r.source, r.conversion) for r in tagged})
+    for case, source, conv in groups:
+        grp = [r for r in tagged if (r.case, r.source, r.conversion) == (case, source, conv)]
+        ss = SourceScore(case=case, source=source, conversion=conv)
+        ss.n_questions = len({r.question_id for r in grp})
+        for model in sorted({r.model for r in grp}):
+            ss.accuracy[model] = mean(r.score for r in grp if r.model == model)
+        out.append(ss)
+    return out
+
+
+def source_scores_markdown(scores: list[SourceScore], models: list[str]) -> str:
+    """A '## By answer source' appendix table, or "" when nothing is tagged."""
+    if not scores:
+        return ""
+    lines = ["## By answer source", ""]
+    header = ["case", "source", "conversion", *models, "n"]
+    lines.append("| " + " | ".join(header) + " |")
+    lines.append("| " + " | ".join("---" for _ in header) + " |")
+    for ss in scores:
+        cells = [ss.case, ss.source, ss.conversion]
+        for m in models:
+            cells.append(f"{ss.accuracy[m]:.2f}" if m in ss.accuracy else "-")
+        cells.append(str(ss.n_questions))
+        lines.append("| " + " | ".join(cells) + " |")
+    lines.append("")
+    lines.append(
+        "_Accuracy sliced by where the answer lives in the source (the questions' "
+        "`source` tags). Tags are case-scoped; conversions within one case+source "
+        "group answered the same questions and compare directly._"
+    )
+    return "\n".join(lines)
+
+
 def to_markdown(report: Report) -> str:
     lines = ["# Decant eval report", ""]
     header = ["conversion", *report.models, "cost (strong tok)", "spread", "n"]

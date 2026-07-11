@@ -61,6 +61,9 @@ class Result:
     output_tokens: int
     answer: str
     detail: str
+    # The question's answer-location tag (Question.source). Defaulted so rows
+    # from a pre-tagging JSONL audit trail still load on --resume.
+    source: str = ""
 
 
 def _key(case: str, conversion: str, model: str, question_id: str):
@@ -146,6 +149,7 @@ def run_case(
                         output_tokens=res.output_tokens,
                         answer=res.text,
                         detail=detail,
+                        source=q.source,
                     )
                     rows.append(row)
                     if sink is not None:
@@ -196,6 +200,6 @@ def run_control(
                 case=case.name, conversion=CONTROL, model=model,
                 question_id=q.id, question_type=q.type, correct=correct, score=score,
                 input_tokens=res.input_tokens, output_tokens=res.output_tokens,
-                answer=res.text, detail=detail,
+                answer=res.text, detail=detail, source=q.source,
             ))
     return rows

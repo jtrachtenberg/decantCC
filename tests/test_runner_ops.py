@@ -148,6 +148,69 @@ class TestReportIntegrity(unittest.TestCase):
         self.assertTrue(md.isascii(), "printed report must be pure ASCII for any console")
 
 
+class TestSourceSlice(unittest.TestCase):
+    """The `source` tag: question -> result row -> per-(case, source) report
+    slice. This is the per-figure readout for the companion-PDF ablation."""
+
+    def _row(self, conv, model, qid, score, source):
+        return Result("c1", conv, model, qid, "exact", score == 1.0, score,
+                      100, 5, "a", "d", source=source)
+
+    def test_tag_flows_from_question_to_row(self):
+        case = Case(
+            name="c",
+            questions=(
+                Question(id="vendor", question="vendor?", gold="Acme Corp",
+                         type="exact", source="figure-3"),
+            ),
+            conversions={"clean": "Vendor: Acme Corp"},
+        )
+        rows = run_case(case, client=FakeModelClient(answerer), models=[STRONG])
+        self.assertEqual(rows[0].source, "figure-3")
+        control = run_control(case, client=FakeModelClient(answerer), models=[STRONG])
+        self.assertEqual(control[0].source, "figure-3")
+
+    def test_pre_tagging_jsonl_still_loads(self):
+        # A resume from an audit trail written before the field existed.
+        old = {"case": "c", "conversion": "clean", "model": STRONG,
+               "question_id": "q", "question_type": "exact", "correct": True,
+               "score": 1.0, "input_tokens": 1, "output_tokens": 1,
+               "answer": "a", "detail": "d"}  # no "source"
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "rows.jsonl"
+            path.write_text(json.dumps(old) + "\n", encoding="utf-8")
+            rows, done = load_completed(path)
+            self.assertEqual(rows[0].source, "")
+            self.assertIn(("c", "clean", STRONG, "q"), done)
+
+    def test_slice_groups_by_case_and_source(self):
+        from decant_eval.report import build_source_scores, source_scores_markdown
+
+        rows = [
+            # figure-borne question: companion arm answers, plain arm doesn't
+            self._row("decant", STRONG, "f1", 1.0, "figure-12"),
+            self._row("decant-plain", STRONG, "f1", 0.0, "figure-12"),
+            # text-borne question: both arms fine
+            self._row("decant", STRONG, "t1", 1.0, "text"),
+            self._row("decant-plain", STRONG, "t1", 1.0, "text"),
+        ]
+        scores = build_source_scores(rows)
+        by = {(s.source, s.conversion): s for s in scores}
+        self.assertEqual(by[("figure-12", "decant")].accuracy[STRONG], 1.0)
+        self.assertEqual(by[("figure-12", "decant-plain")].accuracy[STRONG], 0.0)
+        self.assertEqual(by[("text", "decant-plain")].accuracy[STRONG], 1.0)
+        md = source_scores_markdown(scores, [STRONG])
+        self.assertIn("figure-12", md)
+        self.assertTrue(md.isascii())
+
+    def test_untagged_rows_produce_no_section(self):
+        from decant_eval.report import build_source_scores, source_scores_markdown
+
+        rows = [self._row("decant", STRONG, "q", 1.0, "")]
+        self.assertEqual(build_source_scores(rows), [])
+        self.assertEqual(source_scores_markdown([], [STRONG]), "")
+
+
 def _load(case_dir):
     from decant_eval.corpus import load_case
     return load_case(case_dir)

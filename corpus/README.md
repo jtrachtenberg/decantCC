@@ -46,8 +46,13 @@ converter, not correctness.
 2. `conversions/*.md` — run MarkItDown, Docling, and Decant's own output
    against it and drop each in. `raw` is automatic (see above) — don't
    hand-author it unless you want to override the auto-generated one.
-3. `questions.json` — 3–6 questions spanning the four graded types
-   (`numeric` / `exact` / `set` / `open`), gold answers from the source.
+3. `questions.json` — questions spanning the graded types
+   (`numeric` / `exact` / `set` / `ordered_list` / `open`), gold answers
+   from the source. Each question may carry an optional `source` tag naming
+   where in the document its answer lives (`"figure-12"`, `"table-3"`,
+   `"text"` — free-form, case-scoped); the report then slices accuracy by
+   tag, so figure-tagged questions reveal what a figures-companion PDF
+   contributes and which figures earn their image tokens.
 
 ## Diversity checklist for corpus selection
 
