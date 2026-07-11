@@ -38,6 +38,42 @@
       "question": "In one or two sentences, what is this document and what does it cover?",
       "gold": "Discovery Limited's Climate Report for the financial year ended 30 June 2024, a TCFD-aligned disclosure covering the South African insurance group's climate governance, risk management, strategy and scenario analysis, and metrics and targets - including its 2019-baseline emissions reduction targets, deferred 2027 carbon-neutral goal, and net zero by 2050 ambition.",
       "type": "open"
+    },
+    {
+      "id": "frameworks-applied",
+      "question": "What frameworks were applied in preparing this report?",
+      "gold": ["Global Reporting Initiative (GRI) standards", "Sustainability Accounting Standards Board (SASB)", "Task Force on Climate-related Financial Disclosures (TCFD) recommendations"],
+      "type": "set"
+    },
+    {
+      "id": "signatory-commitments",
+      "question": "To which related commitments is Discovery a signatory?",
+      "gold": ["UN Principles for Responsible Investment (PRI)", "The Alliance for Climate Action South Africa", "UNEP FI Principles for Sustainable Insurance (PSI)", "UN Global Compact"],
+      "type": "set"
+    },
+    {
+      "id": "three-climate-goals",
+      "question": "What are the three climate related goals?",
+      "gold": ["Short-term: annual reduction against 2019 baseline", "Medium-term: carbon-neutral operations by 2027", "Long-term: net zero by 2050 or earlier"],
+      "type": "set"
+    },
+    {
+      "id": "governance-elements-all-phases",
+      "question": "Across all three phases of the approach to climate reporting, which named elements are related to Governance?",
+      "gold": ["Board oversight", "Management's role", "How the Board considers climate-related issues in reviewing capital expenditure, acquisitions and divestiture", "How the Board considers climate-related issues in reviewing and guiding strategy"],
+      "type": "set"
+    },
+    {
+      "id": "risk-management-steps",
+      "question": "What are the steps to risk management?",
+      "gold": ["Identify", "Assess", "Treat", "Report", "Monitor"],
+      "type": "ordered_list"
+    },
+    {
+      "id": "legal-risks-timeframe",
+      "question": "What time frame are the transition risks for legal considerations?",
+      "gold": "Medium term to long term",
+      "type": "exact"
     }
   ]
 }

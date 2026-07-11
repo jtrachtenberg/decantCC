@@ -5,10 +5,11 @@ discrete value — a grader that can itself be wrong reintroduces the very
 treacherous-degradation problem the eval exists to measure — and fall back to
 an LLM judge only where wording genuinely varies.
 
-    numeric  the answer's number vs. gold, within tolerance
-    exact    normalized equality (or barely-longer containment); else the judge
-    set      every gold item present as a whole word — score = fraction
-    open     LLM judge → correct / partial / incorrect
+    numeric       the answer's number vs. gold, within tolerance
+    exact         normalized equality (or barely-longer containment); else the judge
+    set           every gold item present as a whole word — score = fraction
+    ordered_list  like set, but each item must appear *after* the previous one
+    open          LLM judge → correct / partial / incorrect
 
 The graders over-credited hedged, negated, and verbose answers — exactly what
 models emit when reading a *corrupted* conversion — which would have rescued bad
@@ -117,6 +118,24 @@ def _grade_set(answer: str, gold):
     return score == 1.0, score, f"{len(hits)}/{len(items)} items present"
 
 
+def _grade_ordered_list(answer: str, gold):
+    """Each gold item must appear (whole-token) after the previous item's match,
+    so a correct list in the wrong order scores as misses from the first
+    out-of-place item onward. Score = fraction matched in sequence."""
+    items = list(gold) if isinstance(gold, (list, tuple)) else [gold]
+    a = _norm(answer)
+    pos = 0
+    hits = 0
+    for g in items:
+        ng = _norm(g)
+        m = _boundary(ng).search(a, pos) if ng else None
+        if m:
+            hits += 1
+            pos = m.end()
+    score = hits / len(items) if items else 0.0
+    return score == 1.0, score, f"{hits}/{len(items)} items present in order"
+
+
 _JUDGE_SYSTEM = (
     "You are a strict grader. Given a QUESTION, the GOLD answer, and a CANDIDATE "
     "answer, decide whether the candidate conveys the same factual content as the "
@@ -170,6 +189,8 @@ def grade(question, answer: str, *, judge=None, judge_model: str = "claude-opus-
         )
     if question.type == "set":
         return _grade_set(answer, question.gold)
+    if question.type == "ordered_list":
+        return _grade_ordered_list(answer, question.gold)
     if question.type == "open":
         return _grade_open(answer, question.gold, question.question, judge, judge_model)
     raise ValueError(f"unknown question type {question.type!r}")

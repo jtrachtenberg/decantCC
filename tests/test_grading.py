@@ -69,6 +69,34 @@ class TestSet(unittest.TestCase):
         self.assertTrue(grade(q("set", gold), "widgets, gaskets, shipping")[0])
 
 
+class TestOrderedList(unittest.TestCase):
+    GOLD = ["Identify", "Assess", "Treat", "Report", "Monitor"]
+
+    def test_full_credit_in_order(self):
+        ans = "The steps are: identify, assess, treat, report, and monitor."
+        ok, score, _ = grade(q("ordered_list", self.GOLD), ans)
+        self.assertTrue(ok)
+        self.assertEqual(score, 1.0)
+
+    def test_wrong_order_penalized(self):
+        # "assess" before "identify": identify matches at its later position is
+        # impossible, so everything from the swap scores as misses in sequence.
+        ans = "assess, identify, treat, report, monitor"
+        ok, score, _ = grade(q("ordered_list", self.GOLD), ans)
+        self.assertFalse(ok)
+        self.assertLess(score, 1.0)
+
+    def test_missing_item_partial(self):
+        ok, score, _ = grade(q("ordered_list", self.GOLD), "identify, assess, treat")
+        self.assertFalse(ok)
+        self.assertAlmostEqual(score, 3 / 5)
+
+    def test_substring_not_matched(self):
+        ok, score, _ = grade(q("ordered_list", ["treat"]), "treatment plans")
+        self.assertFalse(ok)
+        self.assertEqual(score, 0.0)
+
+
 class TestOpenJudge(unittest.TestCase):
     def test_judge_verdict_parsed(self):
         judge = judge_saying('{"verdict": "correct", "reason": "matches"}')

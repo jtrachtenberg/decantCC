@@ -28,7 +28,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 # Question types the grader understands (see grading.py).
-QUESTION_TYPES = ("numeric", "exact", "set", "open")
+QUESTION_TYPES = ("numeric", "exact", "set", "ordered_list", "open")
 
 
 @dataclass(frozen=True)
