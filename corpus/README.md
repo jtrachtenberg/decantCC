@@ -58,7 +58,8 @@ not many:
 - **`clean-text/`** — clean, text-heavy native PDF. The easy baseline; every
   conversion should score well here, so a bad score is a real bug signal.
 - **`table-heavy/`** — dense tabular data. Stresses row/column binding
-  (the "confidently wrong table" failure mode `sample-invoice/` simulates).
+  (the "confidently wrong table" failure mode the `sample-invoice` fixture
+  simulates synthetically).
 - **`chart-heavy/`** — figures and charts. Decant's differentiator
   (chart-fidelity tiers); a good place to see conversions diverge sharply.
 - **`messy-scan/`** — scanned, multi-column, or otherwise structurally messy.
@@ -72,6 +73,9 @@ not many:
   seen. The clean-signal counterpart to `public-famous/` — no memory
   confound, so scores here isolate representation transfer.
 
-`sample-invoice/` is the harness's synthetic end-to-end test fixture (clean
-vs. deliberately garbled table) — it's not part of the real corpus and stays
-put regardless of what lands in the slots above.
+The harness's synthetic end-to-end fixture (a fake invoice with a clean and
+a deliberately garbled conversion) lives at `tests/fixtures/sample-invoice/`,
+**not** in this directory: its `clean`/`garbled` arms share no case with the
+real conversion arms, so inside the corpus it would leave the report with no
+common case at all — nothing comparable. Keep test-only cases out of
+`corpus/`.

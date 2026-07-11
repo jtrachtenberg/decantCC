@@ -12,7 +12,7 @@ from decant_eval.models import FakeModelClient
 from decant_eval.report import build_report, to_markdown
 from decant_eval.runner import run_case
 
-CORPUS = Path(__file__).resolve().parent.parent / "corpus"
+FIXTURES = Path(__file__).resolve().parent / "fixtures"
 STRONG, WEAK = "claude-opus-4-8", "claude-haiku-4-5"
 
 
@@ -45,7 +45,7 @@ def scripted(model, system, prompt):
 
 class TestRunnerReport(unittest.TestCase):
     def setUp(self):
-        case = load_case(CORPUS / "sample-invoice")
+        case = load_case(FIXTURES / "sample-invoice")
         client = FakeModelClient(scripted)
         # Judge scores the open question by keyword in the candidate.
         judge = FakeModelClient(

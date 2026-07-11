@@ -87,5 +87,7 @@ rows. The document sits in its own `cache_control` block, so the loop re-uses it
 across every question about it (~90% cheaper on large documents). Flags:
 `--no-raw` skips the source-PDF baseline, `--no-control` skips the control arm.
 
-`sample-invoice/` is a worked case (clean vs. deliberately garbled conversion)
-and doubles as the harness's end-to-end fixture.
+`tests/fixtures/sample-invoice/` is a worked example case (clean vs.
+deliberately garbled conversion) and the harness's end-to-end fixture. It
+lives with the tests rather than in `corpus/` so a real run never scores it
+or lets its test-only arms break the report's common-case comparison.
