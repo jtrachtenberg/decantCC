@@ -15,17 +15,23 @@ directory is skipped by the harness until `questions.json` exists.
 **Decant ablation for this case.** Because this is where chart fidelity is
 supposed to matter, the Decant arm is split into two arena entries:
 
-- `conversions/decant.md` + `conversions/decant.pdf` — Decant's markdown
-  with its extracted-figures companion PDF (same stem = paired; the PDF's
-  labels tie each figure back to its place in the markdown). The harness
-  feeds both to the model together — this is the product being tested.
-- `conversions/decant-plain.md` — the *same* Decant markdown with **no**
-  companion PDF (text only).
+- `conversions/decant.md` + `conversions/decant.pdf` — Decant in
+  **md+charts** mode: markdown plus its extracted-figures companion PDF
+  (same stem = paired; the PDF's labels tie each figure back to its place
+  in the markdown). The harness feeds both to the model together.
+- `conversions/decant-plain.md` — Decant in **markdown-only** mode. Not a
+  byte copy of decant.md: the md+charts markdown carries a few extra
+  figure-location labels that the md-only output lacks.
 
-Scoring both isolates the marginal value of the chart tiers: `decant` vs
-`decant-plain` differ only by the figures companion, so any accuracy or
-reliability-spread gap between them is attributable to it and nothing else —
-including its token cost, since companion pages are billed as images.
+Scoring both compares Decant's two product configurations — the choice a
+Decant user actually faces. Any accuracy or reliability-spread gap between
+the arms is attributable to choosing the charts option (figures companion
+plus its location labels), including its token cost, since companion pages
+are billed as images.
+
+Both modes must be generated from the **same Decant build in the same
+sitting** — a bug fix landing between the two runs makes the ablation
+compare two different converters.
 Worth watching against `markitdown`/`docling`, which already diverge here —
 MarkItDown keeps the "CERN in Figures" pie-chart numbers (they're text in
 the source's layout layer) while Docling drops them as graphic regions.
