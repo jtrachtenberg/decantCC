@@ -7,8 +7,6 @@ PREPARATION GUIDE
 
 ---
 
-### 2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 ### Table of Contents
 
 ### Page
@@ -36,75 +34,52 @@ PREPARATION GUIDE
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 ## FINANCIAL STATEMENT REQUIREMENTS
 
 ### Documents due by February 15, 2022, where a draft is required:
 
-o
-
-o
-
-DRAFT Audited Financial Statements in their entirety, including footnote disclosures and
+o DRAFT Audited Financial Statements in their entirety, including footnote disclosures and
 supplemental information
-Trial balance and CPA Journal Entries to support draft audit numbers (uploaded as work papers)
+o Trial balance and CPA Journal Entries to support draft audit numbers (uploaded as work papers)
 
 Remember: Our review is required before you direct your CPA to issue the FINAL.
 
 ### Documents due by March 1, 2022*, where a draft is not required:
 
-o
-o
-o
-
-FINAL Audited Financial Statements with signed opinion
-Trial balance and CPA Journal Entries to support audit numbers (uploaded as work papers)
-CPA Component Auditor Letter - Please note that this can (and should) be uploaded to our portal
+o FINAL Audited Financial Statements with signed opinion
+o Trial balance and CPA Journal Entries to support audit numbers (uploaded as work papers)
+o CPA Component Auditor Letter - Please note that this can (and should) be uploaded to our portal
 prior to the Final Audit
 
 *If submission of Final Audit is not possible by March 1, 2022, please upload a draft along with a list of
-
 remaining open items in the comments section on the Financial Reporting Portal.
 
 ### Additional Information available on our website at:
 
 www.enterprisecommunity.org/capabilities/low-income-housing-tax-credit/asset-management-resources
 
-o
-o
-o
-o
-
-Financial Reporting Portal “Quick Reference Card”
-Financial Statement and Tax Return Preparation Guides
-Limited Partnerships financial statement and tax return deadline requirements
-Frequently Asked Questions
+o Financial Reporting Portal “Quick Reference Card”
+o Financial Statement and Tax Return Preparation Guides
+o Limited Partnerships financial statement and tax return deadline requirements
+o Frequently Asked Questions
 
 ### Document Submission
 
-o
-
-o
-
-Financial Statements are required to be submitted through our secure Financial Reporting Portal
+o Financial Statements are required to be submitted through our secure Financial Reporting Portal
 (www.e360community.com). In addition, we request that trial balances, depreciation schedules
 and CPA journal entries be uploaded as well. Please refer to the Community Quick Reference
 Guide for further details.
 
-All CPA firms and sponsors should have received registration information to access our Financial
+o All CPA firms and sponsors should have received registration information to access our Financial
 Reporting Portal for LIHTC Financial Reporting. If you have not registered or received the
 information to do so, please contact us at financialreporting@enterprisecommunity.com.
 
 Should you have any questions or concerns about the above, please contact your Asset Manager/Accounting
-
 Manager or email us at financialreporting@enterprisecommunity.com.
 
 3
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 Legislative & Miscellaneous Updates
 
@@ -148,8 +123,6 @@ financial statement line items (that is, debt issuance cost asset and the debt l
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 FINANCIAL STATEMENTS AND
 INDEPENDENT AUDITORS’ REPORT
 
@@ -160,8 +133,6 @@ OCTOBER 31, 20XX AND 20XX
 5
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 TABLE OF CONTENTS
 
@@ -198,8 +169,6 @@ X
 [1 image omitted — page 6]
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 Independent Auditors’ Report
 
@@ -247,8 +216,6 @@ basis for our audit opinion.
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 Emphasis of Matter - Change in Accounting Principle
 
 As discussed in Note 2 to the financial statements, the Partnership has early-adopted ASU No.
@@ -285,62 +252,61 @@ Date
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 XYZ LIMITED PARTNERSHIP
 BALANCE SHEET
 
 ASSETS
+
 December 31,
 20XX 20XX
-CURRENT ASSETS
 
-| Cash – operations | $ | xx $ | xx |
-| --- | --- | --- | --- |
-| Cash – entity | xx | xx |  |
-| Tenant accounts receivable | xx | xx |  |
-| Subsidy accounts receivable | xx | xx |  |
-| Due from Affiliates | xx | xx |  |
-| Other Receivables | xx | xx |  |
-| Prepaid expenses | xx | xx |  |
-| Prepaid Interest | xx | xx |  |
-| Total current assets | xxx | xxx |  |
+CURRENT ASSETS
+Cash – operations $
+Cash – entity
+Tenant accounts receivable
+Subsidy accounts receivable
+Due from Affiliates
+Other Receivables
+Prepaid expenses
+Prepaid Interest
+
+Total current assets
 
 DEPOSITS HELD IN TRUST
-Tenant deposits xx xx
+Tenant deposits
 
 RESTRICTED DEPOSITS AND FUNDED RESERVES
-
-| Operating Reserve | xx | xx |
-| --- | --- | --- |
-| Reserve for replacements | xx | xx |
-| Lease-up reserve | xx | xx |
-| Tax and Insurance escrow | xx | xx |
-| Other restricted reserves | xx | xx |
-
-Total restricted deposits and funded reserves xxx xxx
+Operating Reserve
+Reserve for replacements
+Lease-up reserve
+Tax and Insurance escrow
+Other restricted reserves
+Total restricted deposits and funded reserves
 RENTAL PROPERTY
+Land
+Buildings & Improvements
+Construction in Progress
+Office furniture and equipment
 
-| Land | xx | xx |
-| --- | --- | --- |
-| Buildings & Improvements | xxx | xxx |
-| Construction in Progress | xx | xx |
-| Office furniture and equipment | xx | xx |
+Less accumulated depreciation
 
-xxx xxx
-Less accumulated depreciation xx xx
-
-Total rental property xxx xxx
+Total rental property
 OTHER ASSETS
+Tax Credit fees, net of accumulated amortization of $XX
+Organizational Costs, net of accumulated amortization of $XX
+Partnership Fees, net of accumulated amortization of $XX
+Utility and Other Deposits
+Land Lease
+Other Assets
+Investment in Partnership
 
-| Tax Credit fees, net of accumulated amortization of $XX | xx | xx |
-| --- | --- | --- |
-| Organizational Costs, net of accumulated amortization of $XX | xx | xx |
-| Partnership Fees, net of accumulated amortization of $XX | xx | xx |
-| Utility and Other Deposits | xx | xx |
-| Land Lease | xx | xx |
-| Other Assets | xx | xx |
-| Investment in Partnership | xx | xx |
+| xx $ xx xx xx xx xx xx xx xxx | xx xx xx xx xx xx xx xx xxx |
+| --- | --- |
+| xx | xx |
+| xx xx xx xx xx xxx | xx xx xx xx xx xxx |
+| xx xxx xx xx xxx xx | xx xxx xx xx xxx xx |
+| xxx | xxx |
+| xx xx xx xx xx xx xx | xx xx xx xx xx xx xx |
 
 Total assets $ xxxx $ xxxx
 
@@ -348,29 +314,28 @@ Total assets $ xxxx $ xxxx
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
+[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
 XYZ LIMITED PARTNERSHIP
 BALANCE SHEET (CONTINUED)
 
 LIABILITIES AND PARTNERS' CAPITAL
 
 December 31,
-20XX 20XX
-CURRENT LIABILITIES
 
-| Accounts Payable | $ | xx $ | xx |
-| --- | --- | --- | --- |
-| Accounts payable - construction | xx | xx |  |
-| Real Estate Taxes Payable | xx | xx |  |
-| Accrued Expenses & Other Liabilities | xx | xx |  |
-| Due to affiliates | xx | xx |  |
-| Accrued interest - first mortgage | xx | xx |  |
-| Accrued interest - affiliates | xx | xx |  |
-| Accrued interest – notes | xx | xx |  |
-| Accrued interest – construction loan | xx | xx |  |
-| Deferred rental income | xx | xx |  |
-| Mortgage payable - (Current Portion) | xx | xx |  |
+20XX 20XX
+
+CURRENT LIABILITIES
+Accounts Payable $
+Accounts payable - construction
+Real Estate Taxes Payable
+Accrued Expenses & Other Liabilities
+Due to affiliates
+Accrued interest - first mortgage
+Accrued interest - affiliates
+Accrued interest – notes
+Accrued interest – construction loan
+Deferred rental income
+Mortgage payable - (Current Portion)
 
 Total current liabilities
 
@@ -379,28 +344,47 @@ Tenant deposits held in trust
 
 LONG-TERM LIABILITIES
 Mortgage payable - first mortgage (net of Current Portion)
-
-| xxx | xxx |  |
-| --- | --- | --- |
-| xx | xx |  |
-| xxx | xxx |  |
-| Less unamortized deferred financing costs | (xx) | (xx) |
-
+Less unamortized deferred financing costs
 Mortgage payable – first mortgage payable (net of Current Portion and
+Deferred financing costs)
+Mortgage payable -affiliates
+Note payable
+Notes payable - affiliates
+Construction loan payable
+Deferred Development fee payable
+Deferred Interest Payable
 
-| Deferred financing costs) | xxx | xxx |
-| --- | --- | --- |
-| Mortgage payable -affiliates | xxx | xxx |
-| Note payable | xxx | xxx |
-| Notes payable - affiliates | xxx | xxx |
-| Construction loan payable | xxx | xxx |
-| Deferred Development fee payable | xxx | xxx |
-| Deferred Interest Payable | xxx | xxx |
+| xx $ | xx |
+| --- | --- |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xxx | xxx |
+| xx | xx |
+| xxx | xxx |
+| (xx) | (xx) |
+| xxx | xxx |
+| xxx | xxx |
+| xxx | xxx |
+| xxx | xxx |
+| xxx | xxx |
+| xxx | xxx |
+| xxx | xxx |
 
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-Total long-term liabilities xxxx xxxx
+Total long-term liabilities
 
-Total liabilities xxxx xxxx
+Total liabilities
+
+| xxxx | xxxx |
+| --- | --- |
+| xxxx | xxxx |
 
 COMMITMENT
 
@@ -409,15 +393,16 @@ PARTNERS' CAPITAL
 | - | - |
 | --- | --- |
 | xxx | xxx |
-| Total liabilities and partners' capital | $ xxxx $ xxxx |
+
+Total liabilities and partners' capital
+
+$ xxxx $ xxxx
 
 10
 
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 XYZ LIMITED PARTNERSHIP
 STATEMENT OF OPERATIONS
 
@@ -443,7 +428,7 @@ xx
 | Concessions | (x) | (x) |
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-Net rental revenue xxx xxx
+Net rental revenue
 
 FINANCIAL REVENUE
 Financial revenue - project operations
@@ -456,22 +441,23 @@ Grant Income
 Other Income
 Total other revenue
 
-| xx | xx |
+| Total revenue | $ |
 | --- | --- |
+| xxx | xxx |
+| xx | xx |
 | xx | xx |
 | xx | xx |
 | xx $ | xx |
 | xx | xx |
 | xx | xx |
 | xx | xx |
-| Total revenue | $ xxx $ xxx |
+
+xxx $ xxx
 
 11
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 XYZ LIMITED PARTNERSHIP
 STATEMENT OF OPERATIONS (CONTINUED)
 
@@ -479,45 +465,49 @@ EXPENSES
 
 December 31,
 20XX 20XX
-ADMINISTRATIVE EXPENSES
 
-| Management consultants | $ | xx $ | xx |
-| --- | --- | --- | --- |
-| Advertising and marketing | xx | xx |  |
-| Office salaries | xx | xx |  |
-| Office expenses | xx | xx |  |
-| Management fee | xx | xx |  |
-| Legal expense – project | xx | xx |  |
-| Auditing expense | xx | xx |  |
-| Bookkeeping fees/accounting services | xx | xx |  |
-| Bad debts | xx | xx |  |
-| Staff Rent Free Unit | xx | xx |  |
-| Security Payroll/Contract | xx | xx |  |
-| Social and Other Tenant Services | xx | xx |  |
-| Payroll Taxes | xx | xx |  |
-| Health Insurance & Other Employee Benefits | xx | xx |  |
-| Telephone | xx | xx |  |
-| Miscellaneous administrative expenses | xx | xx |  |
-| Total administrative expenses | $ xxx $ xxx |  |  |
+ADMINISTRATIVE EXPENSES
+Management consultants $
+Advertising and marketing
+Office salaries
+Office expenses
+Management fee
+Legal expense – project
+Auditing expense
+Bookkeeping fees/accounting services
+Bad debts
+Staff Rent Free Unit
+Security Payroll/Contract
+Social and Other Tenant Services
+Payroll Taxes
+Health Insurance & Other Employee Benefits
+Telephone
+Miscellaneous administrative expenses
+
+Total administrative expenses $
 
 UTILITIES EXPENSES
+Fuel Oil $
+Coal
+Electricity
+Gas
+Water
+Sewer
+Other Utilities
 
-| Fuel Oil | $ | xx $ | xx |
-| --- | --- | --- | --- |
-| Coal | xx | xx |  |
-| Electricity | xx | xx |  |
-| Gas | xx | xx |  |
-| Water | xx | xx |  |
-| Sewer | xx | xx |  |
-| Other Utilities | xx | xx |  |
-| Total Utilities | $ | xx $ | xx |
+Total Utilities $
+
+| xx $ xx xx xx xx xx xx xx xx xx xx xx xx xx xx xx | xx xx xx xx xx xx xx xx xx xx xx xx xx xx xx xx |
+| --- | --- |
+| xxx $ | xxx |
+| xx $ xx xx xx xx xx xx | xx xx xx xx xx xx xx |
+| xx $ | xx |
 
 12
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
+[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
 XYZ LIMITED PARTNERSHIP
 STATEMENT OF OPERATIONS (CONTINUED)
 
@@ -525,69 +515,93 @@ EXPENSES
 
 December 31,
 20XX 20XX
-OPERATING AND MAINTENANCE EXPENSES
 
-| Repairs & Maintenance Payroll | $ xx $ xx |  |
-| --- | --- | --- |
-| Cleaning | xx | xx |
-| Repairs Contracts | xx | xx |
-| Painting & Decorating | xx | xx |
-| Elevator Maintenance | xx | xx |
-| Exterminating | xx | xx |
-| Trash Removal | xx | xx |
-| Grounds Maintenance | xx | xx |
-| HVAC Maintenance | xx | xx |
-| Supplies | xx | xx |
-| Other Repairs & Maintenance | xx | xx |
-| Snow Removal | xx | xx |
-| Equipment Maintenance & Repairs | xx | xx |
-| Miscellaneous operating and maintenance expenses | xx | xx |
-| Total operating and maintenance expenses | $ xxx $ xxx |  |
+OPERATING AND MAINTENANCE EXPENSES
+Repairs & Maintenance Payroll $
+Cleaning
+Repairs Contracts
+Painting & Decorating
+Elevator Maintenance
+Exterminating
+Trash Removal
+Grounds Maintenance
+HVAC Maintenance
+Supplies
+Other Repairs & Maintenance
+Snow Removal
+Equipment Maintenance & Repairs
+Miscellaneous operating and maintenance expenses
+
+Total operating and maintenance expenses $
 
 TAXES AND INSURANCE
-Real estate taxes $ xx $ xx
+Real estate taxes $
+Property and liability insurance
+Workmen's compensation
+Miscellaneous taxes, licenses, permits and insurance
 
-| Property and liability insurance | xx | xx |
-| --- | --- | --- |
-| Workmen's compensation | xx | xx |
-| Miscellaneous taxes, licenses, permits and insurance | xx | xx |
-
-Total taxes and insurance $ xx $ xx
+Total taxes and insurance $
 
 PROPERTY MANAGEMENT FEES
-Property Management Fees $ xx $ xx
+Property Management Fees $
 
-Total Property Management Fees $ xx $ xx
+Total Property Management Fees $
+
+xx $ xx
+
+| xx | xx |
+| --- | --- |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+| xx | xx |
+
+xxx $ xxx
+
+xx $ xx
+
+| xx | xx |
+| --- | --- |
+| xx | xx |
+| xx | xx |
+
+xx $ xx
+
+xx $ xx
+
+xx $ xx
 
 13
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
+[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
 XYZ LIMITED PARTNERSHIP
+
 STATEMENT OF OPERATIONS (CONTINUED)
 
 EXPENSES
 
-December 31,
-20XX 20XX
 MUST PAY FEES
+Partnership Admin/Mgmt
+Other Management
 
-| Partnership Admin/Mgmt | $ | xx $ | xx |
-| --- | --- | --- | --- |
-| Other Management | xx | xx |  |
-| Total Must Pay Fees | $ | xx $ | xx |
+Total Must Pay Fees
 
 CASH FLOW CONTINGENT FEES
+Partnership Admin/Mgmt.
+Investor Services Fee
+Incentive Management Fees.
+Other Management
 
-| Partnership Admin/Mgmt. | $ | xx $ | xx |
-| --- | --- | --- | --- |
-| Investor Services Fee | xx | xx |  |
-| Incentive Management Fees. | xx | xx |  |
-| Other Management | xx | xx |  |
-
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
 Total Cash Flow Contingent Fees
 
 MISCELLANEOUS EXPENSE
@@ -598,26 +612,38 @@ Total Miscellaneous Expenses
 
 FINANCIAL EXPENSES
 Interest on mortgage payable
+Interest on notes payable - long-term
+Deferred Interest Expense
+Mortgage Insurance Premium
 
-| $ | xx $ | xx |  |
-| --- | --- | --- | --- |
-| $ | xx $ | xx |  |
-| xx | xx |  |  |
-| $ | xx $ | xx |  |
-| $ | xxx $ | xxx |  |
-| Interest on notes payable - long-term | xxx | xxx |  |
-| Deferred Interest Expense | xxx | xxx |  |
-| Mortgage Insurance Premium | xxx | xxx |  |
-| Total financial expenses | $ | xxx $ | xxx |
+Total financial expenses
+
+December 31,
+
+| 20XX | 20XX |  |
+| --- | --- | --- |
+| $ | xx $ | xx |
+| xx | xx |  |
+| $ | xx $ | xx |
+| $ | xx $ | xx |
+| xx | xx |  |
+| xx | xx |  |
+| xx | xx |  |
+| $ | xx $ | xx |
+| $ | xx $ | xx |
+| xx | xx |  |
+| $ | xx $ | xx |
+| $ | xxx $ | xxx |
+| xxx | xxx |  |
+| xxx | xxx |  |
+| xxx | xxx |  |
+| $ | xxx $ | xxx |
 
 14
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 XYZ LIMITED PARTNERSHIP
-
 STATEMENT OF OPERATIONS (CONTINUED)
 
 EXPENSES
@@ -675,9 +701,6 @@ Supplementary Information.
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-
-### 2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 XYZ LIMITED PARTNERSHIP
 STATEMENT OF PARTNERS’ EQUITY (DEFICIT)
 Years ended December 31, 20XX and 20XX
@@ -740,8 +763,7 @@ Partners’ equity
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
+[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
 XYZ LIMITED PARTNERSHIP
 STATEMENT OF CASH FLOWS
 
@@ -751,31 +773,32 @@ Year ended December 31
 
 Cash flows from operating activities
 
-$ (xx,xxx) $ (xx,xxx)Net loss
+Net loss $ (xx,xxx) $ (xx,xxx)
 
 Adjustments to reconcile net loss to net cash provided by (used in)
 operating activities
 
-Depreciation xxx,xxx xxx,xxx
+Depreciation
 
 Amortization
 
-| x,xxx | x,xxx |  |
-| --- | --- | --- |
-| (Increase) decrease in accounts receivable - tenants | (xx,xxx) | (x,xxx) |
-| (Increase) decrease in accounts receivable - subsidy | (x,xxx) | (x,xxx) |
+xxx,xxx xxx,xxx
+
+| x,xxx | x,xxx |
+| --- | --- |
+| (xx,xxx) | (x,xxx) |
+
+(Increase) decrease in accounts receivable - tenants
+
+(Increase) decrease in accounts receivable - subsidy
 
 (Increase) decrease in miscellaneous receivables
 
-| - | - |  |
-| --- | --- | --- |
-| (Increase) decrease in prepaid expenses | (x,xxx) | (x,xxx) |
+(Increase) decrease in prepaid expenses
 
 (Increase) decrease in real estate taxes and insurance escrow
 
-| (xxx) | (x,xxx) |  |
-| --- | --- | --- |
-| Increase (decrease) in accounts payable | (x,xxx) | x,xxx |
+Increase (decrease) in accounts payable
 
 Increase (decrease) in government overage payable
 
@@ -787,19 +810,31 @@ Increase (decrease) in real estate taxes payable
 
 Net security deposits received (paid)
 
-| - | - |
+| (x,xxx) | (x,xxx) |
 | --- | --- |
+| - | - |
+| (x,xxx) | (x,xxx) |
+| (xxx) | (x,xxx) |
+| (x,xxx) | x,xxx |
+| - | - |
 | x,xxx | x,xxx |
 | xx,xxx | xx,xxx |
 | x,xxx | - |
 | - | - |
-| Net cash provided by (used in) operating activities | xxx,xxx xxx,xxx |
+
+Net cash provided by (used in) operating activities
+
+xxx,xxx xxx,xxx
 
 Cash flows from investing activities
 
-Increase in rental property (x,xxx) -
+Increase in rental property
 
-Deposits to reserve for replacements (xx,xxx) (xx,xxx)
+(x,xxx) -
+
+(xx,xxx) (xx,xxx)
+
+Deposits to reserve for replacements
 
 Withdrawals from reserve for replacements
 
@@ -813,76 +848,23 @@ Principal collections on notes receivable
 
 ---
 
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
-Proceeds from sale of rental property
-
-- -
-
-(Identify other inflows and outflows) Operating Reserve Deposit (xx,xxx) (xx,xxx)
-
-Net cash provided by (used in) investing activities
-
-Cash flows from financing activities $
-
-Loans from general partners
-
-Mortgage proceeds
-
-Loan proceeds from related parties
-
-Loan repayments to related parties
-
-(xx,xxx) (xx,xxx)
-
-| - $ | - |  |
-| --- | --- | --- |
-| - | - |  |
-| - | - |  |
-| x,xxx | xx,xxx |  |
-| - | - |  |
-| Principal payments on mortgage | (xx,xxx) (xx,xxx) |  |
-| Partner contributions | xxx,xxx | - |
-
-Partner withdrawals
-
-(Identify other inflows and outflows)
-
-Net cash provided by (used in) financing activities
-
-NET INCREASE (DECREASE) IN CASH
-
-| - | - |
+| Proceeds from sale of rental property (Identify other inflows and outflows) Operating Reserve Deposit | - - (xx,xxx) (xx,xxx) |
 | --- | --- |
-| - | - |
+| Net cash provided by (used in) investing activities | (xx,xxx) (xx,xxx) |
+| Cash flows from financing activities $ Loans from general partners Mortgage proceeds Loan proceeds from related parties Loan repayments to related parties Principal payments on mortgage Partner contributions Partner withdrawals (Identify other inflows and outflows) Net cash provided by (used in) financing activities NET INCREASE (DECREASE) IN CASH Cash, beginning | - $ - - - - - x,xxx xx,xxx - - (xx,xxx) (xx,xxx) xxx,xxx - - - - - xx,xxx (xx,xxx) xx,xxx (xx,xxx) xx,xxxx xxx,xxx |
+| Cash, end $ | xx,xxx $ xx,xxx |
 
-xx,xxx (xx,xxx)
+### ====== ======
 
-xx,xxx (xx,xxx)
-
-Cash, beginning xx,xxxx xxx,xxx
-
-Cash, end
-$
-
-xx,xxx $ xx,xxx
-
-====== ======
-
-Supplemental disclosure of cash flow information
+### Supplemental disclosure of cash flow information
 
 Cash paid during the year for interest $
 
-xx,xxx $ xx,xxx
-
-====== ======
+### xx,xxx $ xx,xxx ====== ======
 
 18
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 XYZ LIMITED PARTENRSHIP
 NOTES TO THE FINANCIAL STATEMENTS
@@ -925,8 +907,6 @@ does not consider these investments to be impaired at December 31, 20XX.
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 XYZ LIMITED PARTENRSHIP
 NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
 
@@ -967,8 +947,6 @@ financial statement purposes, the following estimated useful lives are used:
 20
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 XYZ LIMITED PARTENRSHIP
 NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
@@ -1017,8 +995,6 @@ Advertising costs are charged to operations when incurred.
 21
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 XYZ LIMITED PARTENRSHIP
 NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
@@ -1070,16 +1046,12 @@ ended December 31, 20xx, $xx,xxx of amortization expense related to such deferre
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 XYZ LIMITED PARTENRSHIP
 
 NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
 
 costs were reclassified to interest expense in the statement of operations, with no effect on
-
 previously reported net income (loss). Other than this reclassification, the adoption of ASU
-
 2015-03 did not have a material impact on the Partnership's financial position, results of
 
 operations or cash flows.
@@ -1087,17 +1059,19 @@ operations or cash flows.
 NOTE 3 – PROPERTY AND EQUIPMENT
 
 Property and equipment consisted of the following:
+20XX
 
-| 20XX | 20XX |  |
-| --- | --- | --- |
-| Land | $ XXX,XXX | $ XXX,XXX |
-| Building and Improvements | X,XXX,XXX |  |
-| Furniture and fixtures | XXX,XXX |  |
+Land $ XXX,XXX
+Building and Improvements X,XXX,XXX
+Furniture and fixtures XXX,XXX
+$X,XXX,XXX
 
+20XX
+
+$ XXX,XXX
 X,XXX,XXX
 XXX,XXX
-
-$X,XXX,XXX $X,XXX,XXX
+$X,XXX,XXX
 
 NOTE 4 – CAPITALIZED COSTS
 
@@ -1105,15 +1079,20 @@ The costs incurred to obtain financing of the project and to obtain tax credits 
 
 capitalized:
 
-| 20XX | 20XX |  |
-| --- | --- | --- |
+20XX
+
 | Tax Credit Fees | $ XXX,XXX | $ |
+| --- | --- | --- |
 | Less Accumulated Amortization | XXX,XXX |  |
 
+20XX
+
 XXX,XXX
 XXX,XXX
 
-Net Capitalized Costs $X,XXX,XXX $X,XXX,XXX
+Net Capitalized Costs
+
+$X,XXX,XXX $X,XXX,XXX
 
 Estimated amortization expense for each of the ensuing years through December 31, 20XX
 
@@ -1124,16 +1103,12 @@ NOTE 5 – RESTRICTED ESCROW DEPOSITS AND RESERVES
 Operating Reserve
 
 The Partnership is required to fund an operating reserve from Limited Partner capital
-
 contributions and surplus cash as defined in the Partnership Agreement in the initial amount of
-
 $X. The Operating Reserve has been fully funded in accordance with the partnership agreement.
 
 23
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 XYZ LIMITED PARTENRSHIP
 
@@ -1142,7 +1117,6 @@ NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
 Replacement Reserve (If Applicable)
 
 The Partnership is required to fund a replacement reserve from Limited Partner capital
-
 contributions followed by annual deposits of $X per unit. The replacement reserve has been
 
 fully funded in accordance with the partnership agreement.
@@ -1156,11 +1130,8 @@ $X by capital contributions from the Limited Partner at December 31, 20XX.
 Tax and Insurance Escrow (If Applicable)
 
 During 20XX, the Partnership established a tax and insurance escrow. The Partnership is
-
 required to make periodic payments to the escrow account and make all payments for taxes and
-
 insurance payments with disbursements from this account. The escrow funds are held by
-
 [LENDER NAME]. The balance in this escrow as of December 31, 20XX was $X.
 
 FOR OTHER RESTRICTED RESERVES NOT LISTED ABOUVE USE THE SAME
@@ -1168,15 +1139,16 @@ FOR OTHER RESTRICTED RESERVES NOT LISTED ABOUVE USE THE SAME
 FORMAT STATED ABOVE.
 
 PLEASE INCLUDE IN DISCLOSURE, WHETHER DEPOSITS/WITHDRAWALS WERE NOT
-
 MADE OR APPROVED IN ACCORDANCE WITH THE LIMITED PARTERNSHIP OR
 
 REGULATORY AGREEMENTS.
 Additional Presentation:
 
-Beginning Balance Additions Withdrawals Ending Balance
+Beginning Balance Additions
 
-December 31, and Interest and Transfers December 31, 20XX
+| Withdrawals | Ending Balance |
+| --- | --- |
+| December 31, | and Interest and Transfers December 31, 20XX |
 
 20XX
 Operating Reserve $ $ $
@@ -1201,8 +1173,6 @@ $
 24
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 XYZ LIMITED PARTENRSHIP
 NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
@@ -1248,8 +1218,6 @@ First Amended and Restated Agreement of Limited Partnership.
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 XYZ LIMITED PARTENRSHIP
 NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
 
@@ -1291,8 +1259,6 @@ respectively.
 26
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 As discussed in Note 2, as a result of the early
 adoption of ASU No. 2015-03, Interest -
@@ -1339,14 +1305,12 @@ accreted value of the loan totaled [$___] and
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
+balance sheet. The difference between
 
-balance sheet. The difference between the
+the
 
 accreted value and the face amount of the note is
-
 amortized based on the effective yield at
-
 [ _ _ %] interest over the remaining life of the
 
 loan.
@@ -1357,16 +1321,19 @@ $ $
 
 Aggregate maturities of mortgage payable for the next five years are as follows:
 
-| Year Ending December 31, | Amount |
-| --- | --- |
-| 20XX | $X,XXX,XXX |
-| 20XX | X,XXX,XXX |
+Year Ending December 31,
 
+Amount
+
+20XX $X,XXX,XXX
+
+20XX
 20XX
 20XX
 20XX
 Thereafter
 
+X,XXX,XXX
 XXX,XXX
 XXX,XXX
 XXX,XXX
@@ -1377,8 +1344,6 @@ Total $X,XXX,XXX
 28
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 XYZ LIMITED PARTENRSHIP
 NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
@@ -1420,8 +1385,6 @@ and $X, respectively, of which $X and $X remains payable.
 29
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 XYZ LIMITED PARTENRSHIP
 NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
@@ -1467,38 +1430,33 @@ guarantees.
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 XYZ LIMITED PARTENRSHIP
-
 NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
 
 Due From Affiliate
 
 The partnership advanced funds to an affiliate of the general partner for [EXPLAIN]. As of
-
 December 31, 20XX and 20XX, $X and $X, respectively remains outstanding.
 
 Due to Affiliates
 
 The General Partner advanced funds to the partnership for [EXPLAIN]. As of December 31,
-
 20XX and 20XX, $X and $X, respectively remains outstanding.
 
 Amounts due to the General Partner at December 31, 20XX and 20XX are as follows:
 
-| 20XX | 20XX |  |
-| --- | --- | --- |
-| Developer Fee | $X,XXX,XXX | $X,XXX,XXX |
-
+Developer Fee
 Property Management Fee
 
 Due to affiliates
+Total
 
-| X,XXX,XXX | X,XXX,XXX |  |
-| --- | --- | --- |
-| XXX,XXX | XXX,XXX |  |
-| Total | $X,XXX,XXX | $X,XXX,XXX |
+| 20XX | 20XX |
+| --- | --- |
+| $X,XXX,XXX | $X,XXX,XXX |
+| X,XXX,XXX | X,XXX,XXX |
+| XXX,XXX | XXX,XXX |
+| $X,XXX,XXX | $X,XXX,XXX |
 
 Amounts due from the General Partner at December 31, 20XX and 20XX are as follows:
 
@@ -1520,8 +1478,6 @@ legal and accounting counsel.
 31
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 XYZ LIMITED PARTENRSHIP
 NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
@@ -1551,7 +1507,7 @@ At December 31, 20XX and 20XX tenant accounts receivable consist of the followin
 20XX 20XX
 
 Accounts Receivable –
-$X,XXX,XXX $X,XXX,XXXTenants
+Tenants $X,XXX,XXX $X,XXX,XXX
 
 Accounts Receivable –
 
@@ -1571,8 +1527,6 @@ impact the rental operations of the Project.
 32
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 XYZ LIMITED PARTENRSHIP
 NOTES TO THE FINANCIAL STATEMENTS (CONTINUED)
@@ -1616,8 +1570,6 @@ cost of these securities was $X.
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 SAMPLE COMPONENT AUDITOR LETTER
 
 (AICPA Reference)
@@ -1630,8 +1582,6 @@ current CPA firm on file.***
 [1 image omitted — page 34]
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 BACK-UP REQUIREMENTS CHECKLIST FOR EQUITY FUND AUDITORS (only
 when requested)
@@ -1671,8 +1621,6 @@ Please upload all required documents through our secure Financial Reporting Port
 [1 image omitted — page 35]
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 Statement Of Financial Accounting Standards No. 144 (SFAS No. 144)
 
@@ -1718,8 +1666,6 @@ impairment, please contact Enterprise before finalizing the audit.
 
 ---
 
-### 2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 IMPAIRMENT WORKSHEET
 Sample NOI
 
@@ -1733,7 +1679,9 @@ History of poor cash flow
 Expiring Section 8 contract during audit period (with no
 extension)
 
-Is there a triggering event (in the current year)? No -----------> Stop
+Is there a triggering event (in the current year)?
+
+No -----------> Stop
 
 Yes ---------> Continue
 
@@ -1781,8 +1729,6 @@ Is #3. positive Yes--------------> Stop
 
 ---
 
-### 2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 No ---------> Continue
 If the answer above is No then calculate the Present value of the
 undiscounted future cash flows at an appropriate discount rate and
@@ -1800,8 +1746,6 @@ level.
 38
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 RECORDING CAPITAL CONTRIBUTIONS AND DEVELOPMENT FEES
 
@@ -1846,8 +1790,6 @@ To record payment of the first installment of the development fee
 
 ---
 
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
-
 CONTACT INFORMATION
 
 Tax & Regional Accounting
@@ -1888,8 +1830,6 @@ response.
 40
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 FREQUENTLY ASKED QUESTIONS
 
@@ -1937,8 +1877,6 @@ Regional Accounting Manager should you have any questions.
 41
 
 ---
-
-2021 FINANCIAL STATEMENT PREPARATION GUIDE
 
 RESOURCES
 

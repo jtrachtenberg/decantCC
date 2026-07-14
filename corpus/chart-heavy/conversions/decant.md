@@ -10,30 +10,27 @@ Annual Report
 # CONTENTS
 
 CERN, the European Organization for Nuclear Research, is the world’s leading
-
 laboratory for particle physics. It provides a unique range of particle-accelerator
-
 facilities enabling research at the forefront of human knowledge. Its business
-
 is fundamental physics, finding out what the Universe is made of and how
 
 it works.
 
 Founded in 1954, CERN has 25 Member States, with other nations from around
-
 the globe also contributing to and participating in its research programmes.
-
 The Laboratory has become a prime example of international collaboration,
-
 uniting people from all over the world in the quest to push back the frontiers of
-
 science and technology for the benefit of all.
 
-### P4 MESSAGES
+P4
+
+### MESSAGES
 
 ### P36 INSPIRING AND EDUCATING
 
-### P6 2025 IN PICTURES
+P6
+
+### 2025 IN PICTURES
 
 ### P12 A LABORATORY FOR THE WORLD
 
@@ -255,17 +252,11 @@ Fabiola Gianotti
 # 2025 IN PICTURES
 
 As the Large Hadron Collider completed its last full year of operation before
-
 Long Shutdown 3, 2025 was marked by both achievement and anticipation.
-
 The first-ever oxygen and neon runs enriched the physics programme, while
-
 the admission of new Member and Associate Member States strengthened
-
 CERN’s global community. Collaborations and awards highlighted excellence
-
 across the Laboratory, while steady progress was made towards the
-
 High-Luminosity LHC (HiLumi LHC). Enjoy a visual journey through some of
 
 the year’s key moments.
@@ -290,19 +281,24 @@ superconducting
 transmission line for
 electric aircrafts.
 
+For the first time, the
+
+LHCb experiment reveals a
+
+fundamental asymmetry in
+
+the behaviour of particles
+
 21 MARCH 31 MARCH
 
-For the first time, the After several years of
+After several years of
+intense work, CERN
+releases a report on the
+feasibility of a possible
 
-LHCb experiment reveals a intense work, CERN
-
-fundamental asymmetry in releases a report on the
-
-the behaviour of particles feasibility of a possible
-
-called baryons. Future Circular Collider
-
-23 MARCH (FCC).
+| called baryons. | Future Circular Collider |
+| --- | --- |
+| 23 MARCH | (FCC). |
 
 Surprising results from the
 NA61/SHINE collaboration
@@ -453,14 +449,23 @@ experiences and research at
 the STELLAR event at CERN
 Science Gateway.
 
-| 23 JULY | 7–12 SEPTEMBER | 25 SEPTEMBER |
-| --- | --- | --- |
-| The BASE Collaboration | First results from the oxygen | CERN Science Gateway |
-| keeps a trapped antiproton | and neon collisions at the | premiers the new film |
-| oscillating smoothly | LHC confirm the unusual | about CERN directed by |
-| between two different | “bowling pin” shape of neon | the French film-maker |
-| quantum states for almost | nuclei and offer up a new | Cédric Klapisch. |
+The BASE Collaboration First results from the oxygen
 
+keeps a trapped antiproton and neon collisions at the
+
+oscillating smoothly LHC confirm the unusual
+
+between two different “bowling pin” shape of neon
+
+23 JULY 7–12 SEPTEMBER 25 SEPTEMBER
+
+CERN Science Gateway
+premiers the new film
+about CERN directed by
+the French film-maker
+Cédric Klapisch.
+
+quantum states for almost nuclei and offer up a new
 a minute. tool to study quark-gluon
 plasma.
 
@@ -470,60 +475,67 @@ plasma.
 
 ---
 
-| 18 SEPTEMBER | 2 OCTOBER | 9 OCTOBER |
-| --- | --- | --- |
-| CLEAR and MEDICIS | The CERN-born open | TIME chooses the LHC |
-| receive five-year extensions. | source timing technology | as one of the 25 most |
-| The two platforms will boost | White Rabbit is tested for | iconic inventions of |
-| the impact of cutting-edge | use in quantum networks | the last 25 years. |
+| 18 SEPTEMBER 2 OCTOBER | 9 OCTOBER |
+| --- | --- |
+| CLEAR and MEDICIS The CERN-born open receive five-year extensions. source timing technology The two platforms will boost White Rabbit is tested for the impact of cutting-edge use in quantum networks accelerator technologies in and secure quantum areas ranging from medical communication. treatments to aerospace electronics. | TIME chooses the LHC as one of the 25 most iconic inventions of the last 25 years. |
+| 22 OCTOBER 11 NOVEMBER | 13 NOVEMBER |
+| Ireland becomes an | CERN’s 4th Environment |
 
-accelerator technologies in and secure quantum
-areas ranging from medical communication.
-treatments to aerospace
-electronics.
+CERN and the Nobel Prize
+Museum announce a new
 
-| 22 OCTOBER | 11 NOVEMBER | 13 NOVEMBER |
-| --- | --- | --- |
-| Ireland becomes an | CERN and the Nobel Prize | CERN’s 4th Environment |
-| Associate Member State of | Museum announce a new | Report contains pledges to |
-| CERN. Irish scientists have | partnership under the | limit electricity consumption, |
-| been involved in CERN’s | umbrella of Collide, Arts at | reduce CO2-equivalent |
-| programmes for more than | CERN’s flagship residency | emissions, enhance effluent |
-| two decades, covering | programme. | water quality, promote |
+Associate Member State of
+CERN. Irish scientists have partnership under the
 
-a variety of fields. biodiversity on CERN’s sites
+Report contains pledges to
+limit electricity consumption,
+
+been involved in CERN’s
+
+reduce CO2-equivalent
+
+umbrella of Collide, Arts at
+CERN’s flagship residency
+
+programmes for more than
+two decades, covering programme.
+a variety of fields.
+
+emissions, enhance effluent
+water quality, promote
+biodiversity on CERN’s sites
 and reinforce waste and
 noise control in the period
 up to 2030.
 
-10 | CERN
+10 |
 
 [6 images omitted — page 10]
 
 ---
 
-| 3 DECEMBER | 8 DECEMBER | 11 DECEMBER |
-| --- | --- | --- |
-| The CMS Collaboration | During its last full year of | To reach the increased |
-| reports the first | operation, the LHC delivers | cooling power needed for |
-| measurement of the | a record number of particle | the High-Luminosity LHC, |
-| quantum properties of | collisions. | two new cold boxes are |
+3 DECEMBER 8 DECEMBER
 
-a family of three “all-charm” being installed on the
-tetraquarks. ATLAS and CMS sites.
+### 11 DECEMBER
 
-| 12 DECEMBER | 17 DECEMBER | 18 DECEMBER |
-| --- | --- | --- |
-| The CERN Council receives | CERN reaches one exabyte | Private donors pledge |
-| the recommendations for | (one million terabytes) of | 860 million euros for CERN’s |
-| the update of the European | experimental data from | Future Circular Collider. |
+The CMS Collaboration
 
-Strategy for Particle the LHC sent to the
-Physics, marking CERN storage system.
-an important milestone
-in the update process.
+To reach the increased
 
-2025 | 11
+reports the first
+
+cooling power needed for
+
+During its last full year of
+operation, the LHC delivers
+a record number of particle
+
+| measurement of the quantum properties of collisions. a family of three “all-charm” tetraquarks. | the High-Luminosity LHC, two new cold boxes are being installed on the ATLAS and CMS sites. |
+| --- | --- |
+| 12 DECEMBER | 17 DECEMBER 18 DECEMBER |
+| The CERN Council receives the recommendations for the update of the European Strategy for Particle Physics, marking an important milestone in the update process. | CERN reaches one exabyte Private donors pledge (one million terabytes) of 860 million euros for CERN’s experimental data from Future Circular Collider. the LHC sent to the CERN storage system. |
+
+| 11
 
 [6 images omitted — page 11]
 
@@ -567,7 +579,7 @@ Saudi Arabia 6 – South Africa 83 – Sri Lanka 6 – Taiwan 52 – Thailand 18
 
 * in the pre-stage to membership
 
-12 | CERN
+12 |
 
 [1 image omitted — page 12]
 
@@ -587,34 +599,36 @@ Guatemala, and the Council approved ICAs with Indonesia
 and Oman, which are expected to be signed in 2026.
 
 CERN’s capacity-building programmes attracted interest
+around the world. The Summer Student Programmes hosted
+331 students from around 100 countries and territories,
+and the non-Member State Doctoral Studentship scheme,
+supported by the CERN & Society Foundation, welcomed
+five students.
 
-around the world. The Summer Student Programmes hosted Ireland became an Associate Member State of CERN in October.
+Throughout the year, 132 high-level visits took place
+at CERN. These included visits by heads of state and
+government from Croatia, Italy, Luxembourg and Slovenia
+and by 30 ministers or persons of an equivalent rank.
 
-331 students from around 100 countries and territories, The agreement was signed in May (photo) by Irish Minister for
-
-and the non-Member State Doctoral Studentship scheme, Further and Higher Education, Research, Innovation
-
-supported by the CERN & Society Foundation, welcomed and Science James Lawless and CERN Director-General
-
-five students. Fabiola Gianotti.
-
-Throughout the year, 132 high-level visits took place has grown significantly since its creation, comprising over
-
-at CERN. These included visits by heads of state and 11 400 active members at the end of December 2025. In
-
-government from Croatia, Italy, Luxembourg and Slovenia 2025, new groups were formed in Central Asia, Costa Rica,
-
-and by 30 ministers or persons of an equivalent rank. Estonia, India and Morocco and a Sustainability Interest
-
-group was launched, bringing the total to 22 regional
-
-CERN’s global community of alumni is an important network groups spanning Africa, Europe, North America and Asia.
-
-of support for the Organization across the world. Alumni stay Throughout the year, more than 50 CERN Alumni events
-
-connected through the CERN Alumni Network, which took place.
-
+CERN’s global community of alumni is an important network
+of support for the Organization across the world. Alumni stay
+connected through the CERN Alumni Network, which
 celebrated its eighth anniversary in June 2025. The Network
+
+Ireland became an Associate Member State of CERN in October.
+The agreement was signed in May (photo) by Irish Minister for
+Further and Higher Education, Research, Innovation
+and Science James Lawless and CERN Director-General
+Fabiola Gianotti.
+
+has grown significantly since its creation, comprising over
+11 400 active members at the end of December 2025. In
+2025, new groups were formed in Central Asia, Costa Rica,
+Estonia, India and Morocco and a Sustainability Interest
+group was launched, bringing the total to 22 regional
+groups spanning Africa, Europe, North America and Asia.
+Throughout the year, more than 50 CERN Alumni events
+took place.
 
 ### 25 BY ’25: CONCLUDING CERN’S DIVERSITY TARGET INITIATIVE
 
@@ -645,24 +659,17 @@ to consolidate progress and reinforce long-term
 attraction and retention by embedding inclusion in
 everyday practices.
 
-2025 | 13
+| 13
 
 [5 images omitted — page 13]
 
 ---
 
-# EXPLORING
-
-# THE NATURE
-
-# OF THE UNIVERSE
+# EXPLORING THE NATURE OF THE UNIVERSE
 
 To investigate the fundamental structure of the Universe, CERN operates a
-
 unique complex of accelerators that collide particle beams head on or direct
-
 them onto fixed targets. The products of these collisions are recorded by giant
-
 detectors and studied by thousands of scientists at the Laboratory and across
 
 the globe.
@@ -693,7 +700,7 @@ antimatter quantum bit and NA61/SHINE reported that a type
 of symmetry between up and down quarks is more broken
 than expected.
 
-14 | CERN
+14 |
 
 [2 images omitted — page 14]
 
@@ -706,7 +713,9 @@ Number of institutes involved
 
 CERN’s accelerators serve many experiments and facilities that are used by researchers across the globe.
 
-2025 | 15
+| 15
+
+[chart on this page encodes values as colored symbols that are not text — rows here may be missing their values; see attached figure — page 15]
 
 ---
 
@@ -778,7 +787,7 @@ observables associated with the rare decay of the beauty
 meson B into a K* meson and a pair of muons. The results
 confirm a tension with predictions from the Standard
 
-16 | CERN
+16 |
 
 [1 image omitted — page 16]
 
@@ -790,10 +799,10 @@ within the theoretical physics community, further study of
 this decay offers a promising, indirect way to search for
 new phenomena. LHCb further announced the observation
 +
-of new excited states of the charmed B meson (B ).C
+of new excited states of the charmed B meson (BC ).
 Containing two heavy quarks of different flavours, charm
 +
-and beauty, the B meson serves as a unique platform toC
+and beauty, the BC meson serves as a unique platform to
 test quantum chromodynamics, the theory of the strong
 interaction.
 
@@ -877,7 +886,7 @@ lived union of a top quark and
 a top antiquark formed by the
 exchange of gluons.
 
-2025 | 17
+| 17
 
 [1 image omitted — page 17]
 
@@ -885,14 +894,10 @@ exchange of gluons.
 
 ### SMASHING LIGHT IONS AND MORE
 
-Colliding ions with one another allows physicists to study presented by LHCb confirmed the bowling-pin shape of the
-
-quark–gluon plasma (QGP), an extreme state of matter neon nucleus. The results were based on lead–argon and
-
-that mimics the conditions of the Universe during its first lead–neon collisions in a fixed-target configuration, using
-
-microseconds, before atoms formed. Until now, exploration data recorded in 2024 with LHCb’s SMOG apparatus.
-
+Colliding ions with one another allows physicists to study
+quark–gluon plasma (QGP), an extreme state of matter
+that mimics the conditions of the Universe during its first
+microseconds, before atoms formed. Until now, exploration
 at the LHC of this hot and dense state of matter relied on
 collisions between heavy ions, such as lead and xenon,
 which maximise the size of the plasma droplet created.
@@ -907,6 +912,22 @@ comparison.
 
 In 2025, the LHC Collaborations presented the first results
 from the first oxygen–oxygen and neon–neon collisions at
+the LHC (p. 27). The experiments focused on measurements
+of subtle “flow” patterns in the angles and directions of the
+particles flying outwards as the QGP droplet expands and
+cools, which are caused by small distortions in the original
+collision zone. ALICE, which specialises in the study of QGP,
+as well as the general-purpose experiments ATLAS and
+CMS, provided strong evidence that flow in oxygen–oxygen
+and neon–neon collisions is driven by nuclear geometry,
+supporting the bowling-pin structure of the neon nucleus
+and demonstrating that hydrodynamic flow emerges robustly
+across collision systems at the LHC. Complementary results
+
+presented by LHCb confirmed the bowling-pin shape of the
+neon nucleus. The results were based on lead–argon and
+lead–neon collisions in a fixed-target configuration, using
+data recorded in 2024 with LHCb’s SMOG apparatus.
 
 ## THE LHC COLLABORATIONS
 
@@ -918,38 +939,27 @@ from the first oxygen–oxygen and neon–neon collisions at
 
 ## AT THE LHC
 
-the LHC (p. 27). The experiments focused on measurements ALICE also explained a long-standing puzzle in nuclear
-
-of subtle “flow” patterns in the angles and directions of the physics, namely how light nuclei can survive the scorching
-
-particles flying outwards as the QGP droplet expands and temperatures of a high-energy collision at the LHC, even
-
-cools, which are caused by small distortions in the original though the bonds holding the nuclei together would normally
-
-collision zone. ALICE, which specialises in the study of QGP, be expected to break at a much lower temperature. In
-
-as well as the general-purpose experiments ATLAS and studying deuterons (a proton and a neutron bound together)
-
-CMS, provided strong evidence that flow in oxygen–oxygen and antideuterons (an antiproton and an antineutron) that
-
-and neon–neon collisions is driven by nuclear geometry, were produced in proton collisions, ALICE found that,
-
-supporting the bowling-pin structure of the neon nucleus rather than emerging directly from the collisions, nearly
-
-and demonstrating that hydrodynamic flow emerges robustly 90% of them were created by the nuclear fusion of particles
-
-across collision systems at the LHC. Complementary results emerging from the collision.
+ALICE also explained a long-standing puzzle in nuclear
+physics, namely how light nuclei can survive the scorching
+temperatures of a high-energy collision at the LHC, even
+though the bonds holding the nuclei together would normally
+be expected to break at a much lower temperature. In
+studying deuterons (a proton and a neutron bound together)
+and antideuterons (an antiproton and an antineutron) that
+were produced in proton collisions, ALICE found that,
+rather than emerging directly from the collisions, nearly
+90% of them were created by the nuclear fusion of particles
+emerging from the collision.
 
 Artist's impression of quark–gluon plasma.
 
-18 | CERN
+18 |
 
 [1 image omitted — page 18]
 
 ---
 
 Illustration of how deuterons can be produced from a high-energy collision at the LHC. A delta particle emerging from the collision decays
-
 into a proton and a pion. The proton undergoes nuclear fusion with a neutron to form deuteron.
 
 ALICE further made contributions to solving the muon
@@ -1022,7 +1032,7 @@ It also hosted the inaugural SEARCH conference, which
 is designed to become a hub for exploring the discovery
 potential of new physics.
 
-2025 | 19
+| 19
 
 [1 image omitted — page 19]
 
@@ -1105,7 +1115,7 @@ Ra F energy levels, a phenomenon that had previously
 been observed in atoms but not in a molecule. The results
 will help to shape future research on the possible use of
 
-20 | CERN
+20 |
 
 [1 image omitted — page 20]
 
@@ -1185,6 +1195,7 @@ the feasibility of searching for high-mass dark matter after
 Long Shutdown 3.
 
 Meanwhile, researchers working at the HiRadMat facility
+probed a sample of the Campo del Cielo meteorite, a
 
 metal-rich iron-nickel body, under conditions relevant to
 planetary defence scenarios. By exposing the sample
@@ -1193,32 +1204,23 @@ researchers found the first experimental evidence that
 metal-rich asteroid material may behave far more robustly
 under extreme, sudden energy loading than predicted.
 
-probed a sample of the Campo del Cielo meteorite, a NA61/SHINE’s lead-scintillator calorimeter.
+NA61/SHINE’s lead-scintillator calorimeter.
 
-2025 | 21
+| 21
 
 [2 images omitted — page 21]
 
 ---
 
-# DISCOVERY
-
-# MACHINES
+# DISCOVERY MACHINES
 
 To study the infinitesimally small, CERN operates a unique complex of
-
 accelerators and experiments. The accelerators propel subatomic particles
-
 at speeds close to the speed of light and collide them inside giant detectors,
-
 which record the products of the interactions. The data is then analysed by
-
 a global computing infrastructure. In 2025, the accelerator complex achieved
-
 excellent performance during the continued Run 3 of the Large Hadron Collider
-
 (LHC), reflecting the commitment of the teams responsible for the operation,
-
 maintenance and continuous upgrade of the facilities.
 
 In 2025, the complex broke even more records than in 2024,
@@ -1239,7 +1241,7 @@ and robustness of CERN’s accelerator complex.
 
 The Large Hadron Collider (LHC).
 
-22 | CERN
+22 |
 
 [1 image omitted — page 22]
 
@@ -1326,7 +1328,7 @@ and more pumping to be carried out.
 In August, the PS teams replaced a wire scanner, one of the
 instruments used to monitor beam quality. In addition, the
 
-2025 | 23
+| 23
 
 [1 image omitted — page 23]
 
@@ -1362,7 +1364,7 @@ sensors for measuring particle beams.
 The sensors are based on hollow glass
 fibres, making them more resistant.
 
-24 | CERN
+24 |
 
 [2 images omitted — page 24]
 
@@ -1412,17 +1414,11 @@ removal of the first magnets.
 ### THE ANTIMATTER FACTORY
 
 At the antimatter factory, the commissioning of the equipment for the Antiproton
-
 Decelerator (AD) was completed on 3 April. To produce antiprotons, a proton beam from
-
 the Proton Synchrotron (PS) is fired into a block of metal. The collisions produce secondary
-
 particles, including antiprotons, which are then focused and decelerated into a beam of low-
-
 energy antiprotons by the AD. The ELENA (Extra Low Energy Antiproton ring) decelerator
-
 further slows down the antiprotons, which are then divided into four bunches and sent to the
-
 ALPHA, AEgIS, ASACUSA, BASE, GBAR, PUMA and BASE-STEP experiments.
 
 The TELMAX beamline,
@@ -1431,7 +1427,7 @@ tests to be carried out using
 low-energy antiprotons from
 the ELENA decelerator.
 
-2025 | 25
+| 25
 
 [2 images omitted — page 25]
 
@@ -1497,7 +1493,7 @@ from the PS. All the goals set for the year were met.
 
 Part of the n_TOF facility.
 
-26 | CERN
+26 |
 
 [1 image omitted — page 26]
 
@@ -1592,31 +1588,43 @@ removed and replaced by a calorimeter, which
 provided additional data during the oxygen–oxygen
 and neon–neon collisions.
 
-On 8 October, with 100 fb¹ delivered to ATLAS and CMS, fluctuation in the vacuum of the ring. In this configuration,
+On 8 October, with 100 fb¹ delivered to ATLAS and CMS,
 
-the LHC Machine Committee (LMC) gave the go-ahead the potential 8% loss of luminosity caused by operating
+the LHC Machine Committee (LMC) gave the go-ahead
 
-for the progressive increase of intensity from 1.63 × 10¹¹ the two beams at 1.4 × 10¹¹ protons per bunch was largely
+for the progressive increase of intensity from 1.63 × 10¹¹
 
+fluctuation in the vacuum of the ring. In this configuration,
+the potential 8% loss of luminosity caused by operating
+the two beams at 1.4 × 10¹¹ protons per bunch was largely
 to 1.70 × 10¹¹ protons per bunch, a target that was thwarted compensated for.
 
 for Ring 1 due to new vacuum fluctuations in the faulty
 
-RF finger module. As a result, the number of particles was On 4 November, CERN’s Control Centre ejected the last
+RF finger module. As a result, the number of particles was
 
-reduced to 1.4 × 10¹¹ protons per bunch in this ring. As the of the 2025 proton beams. At that point, the integrated
+On 4 November, CERN’s Control Centre ejected the last
+of the 2025 proton beams. At that point, the integrated
 
--
-
-faulty module only affected Beam 1, the latter’s intensity luminosity of ATLAS and CMS had reached 125.4 fb¹,
-
--
-
-was maintained at 1.4 × 10¹¹ protons per bunch, but the exceeding the 2025 target by 5.4 fb¹ and the 2024
+reduced to 1.4 × 10¹¹ protons per bunch in this ring. As the
 
 -
 
-intensity of Beam 2 was increased. The injector complex record by 1.5 fb¹. This record performance was mirrored
+luminosity of ATLAS and CMS had reached 125.4 fb¹,
+
+faulty module only affected Beam 1, the latter’s intensity
+
+-
+
+exceeding the 2025 target by 5.4 fb¹ and the 2024
+
+was maintained at 1.4 × 10¹¹ protons per bunch, but the
+
+-
+
+record by 1.5 fb¹. This record performance was mirrored
+
+intensity of Beam 2 was increased. The injector complex
 
 -
 
@@ -1624,15 +1632,18 @@ therefore produced beams of different intensities for each of by the other exper
 
 - -
 
-the LHC’s two rings. The intensity of Beam 2 thus reached LHCb (the target was 12 fb¹) and 58.9 nb¹ to ALICE
+LHCb (the target was 12 fb¹) and 58.9 nb¹ to ALICE
+
+the LHC’s two rings. The intensity of Beam 2 thus reached
 
 -
 
-1.8 × 10¹¹ protons per bunch in collisions with the machine (the target was 50 nb¹).
+(the target was 50 nb¹).
 
+1.8 × 10¹¹ protons per bunch in collisions with the machine
 completely filled and, crucially, without any noticeable
 
-2025 | 27
+| 27
 
 ---
 
@@ -1669,12 +1680,11 @@ more than 94.5% for proton–proton collisions. Major steps
 were taken in modernising the detectors.
 
 Displays of events (collisions) in the detectors of the four main LHC experiments in 2025. Top left: the first collisions recorded by CMS in
-
 May. Top right: collisions between protons and oxygen nuclei detected by ATLAS. Below, lead-ion collisions as seen by ALICE
 
 and LHCb.
 
-28 | CERN
+28 |
 
 [4 images omitted — page 28]
 
@@ -1756,7 +1766,7 @@ conditions. In parallel, the transition from X.509 certificate-
 based authentication to token-based mechanisms
 progressed steadily.
 
-2025 | 29
+| 29
 
 [4 images omitted — page 29]
 
@@ -1843,7 +1853,7 @@ the Next-Generation Triggers
 workflows on the new NextGen
 Cluster.
 
-30 | CERN
+30 |
 
 [1 image omitted — page 30]
 
@@ -1957,7 +1967,7 @@ rising demands, from full-scale HiLumi LHC to deeper AI
 integration, advancements in quantum technologies and
 growing sustainability needs.
 
-2025 | 31
+| 31
 
 [1 image omitted — page 31]
 
@@ -1976,7 +1986,7 @@ through collaboration with external partners.
 CERN engineer and ESA Project Astronaut Sławosz Uznański-Wiśniewski on the International Space Station in July 2025, getting ready to
 install the SigmaLabs radiation monitor (foreground), which uses CERN-developed technology.
 
-32 | CERN
+32 |
 
 [1 image omitted — page 32]
 
@@ -2055,7 +2065,7 @@ Technology Coordination Unit. This initiative connects
 CERN’s expertise in accelerators, materials and engineering
 with global efforts to develop sustainable fusion power.
 
-2025 | 33
+| 33
 
 [2 images omitted — page 33]
 
@@ -2147,7 +2157,7 @@ ATTRACT, a pilot designed to improve Europe’s generation
 of commercial innovation from its world-class scientific
 excellence, also ended in 2025. The project led to the
 
-34 | CERN
+34 |
 
 [2 images omitted — page 34]
 
@@ -2246,7 +2256,7 @@ participation and reinforced
 competition across the
 Member States.
 
-2025 | 35
+| 35
 
 [2 images omitted — page 35]
 
@@ -2276,7 +2286,7 @@ participating in the Photowalk
 competition; the beam of the
 ELISA accelerator.
 
-36 | CERN
+36 |
 
 [8 images omitted — page 36]
 
@@ -2386,7 +2396,7 @@ for the CERN community. Around 100 videos and several
 hundred photos were also published. The number of visits to
 home.cern reached 4 867 082. Digital engagement through
 
-2025 | 37
+| 37
 
 [1 image omitted — page 37]
 
@@ -2482,7 +2492,7 @@ education and outreach activities were made possible
 by the generous support of the Foundation’s donors
 and partners.
 
-38 | CERN
+38 |
 
 [2 images omitted — page 38]
 
@@ -2492,25 +2502,22 @@ and partners.
 
 Arts at CERN continued to deepen the dialogue between art
 
+The artist Martyna Marciniak
+
+during her residency at CERN
+
 and science through international collaborations, 11 residencies
-
 and the Uncertainty Summit, fostering new avenues for reflection
-
 and cross-disciplinary exchange. The summit brought together leading
-
 artists, scientists and thinkers to explore quantum physics and its cultural
-
 impact during the International Year of Quantum Science and Technology. The
-
 programme also renewed its partnership with Pro Helvetia and launched a new collaboration
-
 with the Nobel Prize Museum, establishing the Collide Stockholm residency. Projects were
+presented worldwide, including Soft Robots at Copenhagen Contemporary, which featured
+Collide Copenhagen artists alongside a new commission by Nanna Debois Buhl. On its
+tenth anniversary, the programme also released In the Spaces Between, its first publication.
 
-presented worldwide, including Soft Robots at Copenhagen Contemporary, which featured The artist Martyna Marciniak
-
-Collide Copenhagen artists alongside a new commission by Nanna Debois Buhl. On its during her residency at CERN
-
-tenth anniversary, the programme also released In the Spaces Between, its first publication. in 2025.
+in 2025.
 
 ### TRAINING YOUNG RESEARCHERS
 
@@ -2540,27 +2547,20 @@ Apprentices 21
 324 Trainees
 
 CERN offers a wide range of scientific and technical training opportunities in an international setting. As well as working on cutting-edge
-
 scientific and technological projects, students attend a special series of lectures and tours.
 
-2025 | 39
+| 39
+
+[chart on this page encodes values as colored symbols that are not text — rows here may be missing their values; see attached figure — page 39]
 
 [1 image omitted — page 39]
 
 ---
 
-# A SAFE AND
-
-# SUSTAINABLE
-
-# RESEARCH
-
-# ENVIRONMENT
+# A SAFE AND SUSTAINABLE RESEARCH ENVIRONMENT
 
 CERN is committed to ensuring the health and safety of everyone who
-
 participates in its activities, is present on its site or lives in the vicinity of its
-
 installations. It also strives to limit its impact on the environment.
 
 ### ENVIRONMENTALLY RESPONSIBLE RESEARCH
@@ -2582,7 +2582,7 @@ In November, CERN published its fourth Environment
 Report, which highlighted the progress achieved in 2023
 and 2024 and set ambitious environmental targets for
 2030. These include limiting electricity use to 1.5 TWh/year
-during LHC Run 4, halving direct CO emissions compared2
+during LHC Run 4, halving direct CO2 emissions compared
 to 2018 and enhancing water quality, water retention and
 biodiversity. Moving forward, CERN is transitioning to a
 broader sustainability reporting framework that integrates
@@ -2591,10 +2591,9 @@ and reinforces its ambition to serve as a role model for
 sustainable research.
 
 Construction of Building 777, shown here as an artist’s impression, has begun on the Prévessin site. Scheduled for delivery in late 2027,
-
 this timber construction integrates state-of-the-art sustainability and BREEAM standards.
 
-40 | CERN
+40 |
 
 [1 image omitted — page 40]
 
@@ -2619,7 +2618,7 @@ the goal of limiting maximum annual personal doses to
 on track, with over 85 planned evacuation exercises taking
 place during the year and more than 1600 personnel having
 completed training in life-saving actions. Long-term objectives
-such as reducing direct CO emissions and reinforcing2
+such as reducing direct CO2 emissions and reinforcing
 electrical safety remain central. New safety objectives for
 Long Shutdown 3 (p. 25) were drawn up for approval by the
 incoming management. These efforts ensure a cohesive
@@ -2683,7 +2682,7 @@ The OpenSkyLab onsite camera shows the progress made from
 April (top) to October (bottom) in transforming excavated
 materials into fertile soil.
 
-2025 | 41
+| 41
 
 [4 images omitted — page 41]
 
@@ -2699,7 +2698,7 @@ drawing up plans for novel machines for the longer-term future.
 The High-Luminosity LHC test stand, an exact replica of a new accelerator segment, was completed in 2025. It will test the behaviour of
 the new magnet systems and their complex infrastructure.
 
-42 | CERN
+42 |
 
 [1 image omitted — page 42]
 
@@ -2740,7 +2739,7 @@ A crucial feature of the upgrade is the installation of
 innovative superconducting focusing magnets on either
 side of the ATLAS and CMS experiments. These magnets
 are made of a superconducting material called niobium–
-tin (Nb Sn), which will allow higher magnetic fields to be3
+tin (Nb3Sn), which will allow higher magnetic fields to be
 achieved. Two types of these magnets will be installed:
 a short version (4.2 metres long), produced by the US
 collaboration AUP (Accelerator Upgrade Programme), and
@@ -2800,7 +2799,7 @@ screen into one of the new
 quadrupole magnets for the
 HiLumi LHC.
 
-2025 | 43
+| 43
 
 [1 image omitted — page 43]
 
@@ -2884,7 +2883,7 @@ and the expansion of lattice design features.
 
 3D view of the life-size mock-up of an arc half-cell of the FCC-ee.
 
-44 | CERN
+44 |
 
 [1 image omitted — page 44]
 
@@ -2981,7 +2980,7 @@ offers synergies with other fields. The development of high-
 temperature superconducting magnets could benefit a wide
 range of applications, from medical imaging and therapy to
 
-2025 | 45
+| 45
 
 [2 images omitted — page 45]
 
@@ -3007,18 +3006,18 @@ The High-Field Magnet (HFM) Programme is an international
 collaboration of 12 institutes with the aim of developing
 accelerator magnets that generate operational magnetic fields
 of 14 tesla (T). Two avenues are being explored, one based on
-low-temperature superconductors, mainly niobium-tin (Nb Sn),3
+low-temperature superconductors, mainly niobium-tin (Nb3Sn),
 and another on high-temperature superconductors that would
 allow magnetic fields of 20 T to be reached.
 
-Magnets made of Nb Sn have reached maturity thanks to3
+Magnets made of Nb3Sn have reached maturity thanks to
 the HiLumi LHC. Institutes are using different approaches to
 develop demonstration and short-model magnets. At CERN,
 the racetrack model magnet (RMM) made from flat coils was
 reassembled and tested, demonstrating the reproducibility of
 the results. A field of 16.95 T was measured in a 50-millimetre
 diameter aperture. The teams began developing a dipole
-magnet made from Nb Sn coils in a block configuration, as well3
+magnet made from Nb3Sn coils in a block configuration, as well
 as the associated manufacturing tools. Fabrication is planned
 for 2026.
 
@@ -3078,7 +3077,7 @@ Neutrino interaction cross-section uncertainties increase
 systematic uncertainty and are a limiting factor for future
 long-baseline neutrino experiments such as DUNE and
 
-46 | CERN
+46 |
 
 [1 image omitted — page 46]
 
@@ -3190,7 +3189,7 @@ design, production and procurement of key components
 Fabrication of a prototype target composed of tungsten blocks as
 the beam dump for the HI-ECN3 project.
 
-2025 | 47
+| 47
 
 [1 image omitted — page 47]
 
@@ -3280,7 +3279,7 @@ High-Granularity Calorimeter
 team assembling and testing
 a pre-series cassette.
 
-48 | CERN
+48 |
 
 [1 image omitted — page 48]
 
@@ -3367,7 +3366,7 @@ ALICE 3, which is proposed for HiLumi LHC Run 5. This
 will provide considerably improved tracking precision and
 extended acceptance coverage.
 
-2025 | 49
+| 49
 
 [1 image omitted — page 49]
 
@@ -3382,28 +3381,26 @@ Vice-Presidents: Professor F. Canelli (Switzerland), Professor K. Desch (Germany
 
 ### MEMBER STATES
 
-| Austria | Israel | Sweden | Latvia |
-| --- | --- | --- | --- |
-| Professor J. Schieck | Professor M. Karliner | Professor R. Brenner | Ms L. Levada |
-| H.E. Ms D. Schweitzer | H.E. Mr D. Meron | Dr E. Sjöstedt | H.E. Mr I. Pundurs |
-| Belgium | Italy | Switzerland | Lithuania |
-| Dr Ir. V. Halloin | H.E. Mr V. Grassi | Professor F. Canelli | Dr R. Aleksiejūnas |
-| Professor P. Van Mechelen | Professor A. Zoccoli | H.E. Mr M. Gerber | H.E. Mr D. Staniulis |
-| Bulgaria | Netherlands | United Kingdom | Pakistan |
-| Professor L. Litov | Professor E. Laenen | Professor M. Dougherty | H.E. Mr B. Ahmad |
-| H.E. Mr Y. Sterk | Ms M. Lieshout-Vijverberg | Dr S. Haque | Dr R. A. Raza Anwar |
-| Czech Republic | Norway | Türkiye |  |
-| H.E. Mr V. Bálek | Dr P. Sørgaard | H.E. Mr B. Akçapar |  |
-| Professor R. Leitner | Professor A. Strandlie | Dr A. B. Karaveli |  |
+Austria
+Professor J. Schieck
+H.E. Ms D. Schweitzer
 
-### STAGE TO MEMBERSHIP
+Belgium
+Dr Ir. V. Halloin
+Professor P. Van Mechelen
 
-| Denmark | Poland | Ukraine |
-| --- | --- | --- |
-| Mr G. E. Nielsen | Dr D. Drewniak | Professor B. Grynyov |
-| Mr T. C. Petersen | Professor T. Lesiak | Dr Y. Kudriavets |
+Bulgaria
+Professor L. Litov
+H.E. Mr Y. Sterk
 
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
+Czech Republic
+H.E. Mr V. Bálek
+Professor R. Leitner
+
+Denmark
+Mr G. E. Nielsen
+Mr T. C. Petersen
+
 Estonia
 Dr M. Kadastik
 Dr K. Otto
@@ -3412,68 +3409,165 @@ Finland
 Professor K. Huitu
 Dr U. Jakobsson
 
-H.E. Ms O. Neocleous
-Portugal Professor P. Razis OBSERVERS
+France
+H.E. Ms C. Jurgensen
+Dr A. Petit
+
+Germany
+Professor K. Desch
+Dr A. Fischer
+
+Greece
+H.E. Mr I. Ghikas
+Dr C. Markou
+
+Hungary
+Dr L. Lengyel
+Professor P. Lévai
+
+Israel
+Professor M. Karliner
+H.E. Mr D. Meron
+
+Italy
+H.E. Mr V. Grassi
+Professor A. Zoccoli
+
+Netherlands
+Professor E. Laenen
+Ms M. Lieshout-Vijverberg
+
+Norway
+Dr P. Sørgaard
+Professor A. Strandlie
+
+Poland
+Dr D. Drewniak
+Professor T. Lesiak
+
+Portugal
 H.E. Mr J. A. Mira Gomes
 Professor M. Pimenta
-European Union,
 
-| Romania | ASSOCIATE MEMBER | Japan, UNESCO, |
-| --- | --- | --- |
-| Dr F. Buzatu | STATES | United States of America |
-
+Romania
+Dr F. Buzatu
 Ms A. Ghinescu
 
-| France | Serbia | Brazil |
-| --- | --- | --- |
-| H.E. Ms C. Jurgensen | Professor P. Adžić | H.E. Mr T. da Silva Nunes |
-| Dr A. Petit | H.E. Mr M. Milanović | Professor R. Galvão |
-| Germany | Slovakia | Croatia |
-| Professor K. Desch | H.E. Mr D. Matulay | Dr V. Brigljević |
-| Dr A. Fischer | Professor S. Tokár | Mr H. Meštrić |
-| Greece | Slovenia | India |
-| H.E. Mr I. Ghikas | Dr J. Gašparič | Professor A. Mohanty |
-| Dr C. Markou | Professor M. Mikuž | Dr D. Prakash |
-| Hungary | Spain | Ireland |
-| Dr L. Lengyel | Ms I. Figueroa Rojas | Ms T. Duffy |
-| Professor P. Lévai | H.E. Mr M. Gómez-Martínez | H.E. Mr N. White |
+Serbia
+Professor P. Adžić
+H.E. Mr M. Milanović
 
-50 | CERN
+Slovakia
+H.E. Mr D. Matulay
+Professor S. Tokár
+
+Slovenia
+Dr J. Gašparič
+Professor M. Mikuž
+
+Spain
+Ms I. Figueroa Rojas
+H.E. Mr M. Gómez-Martínez
+
+Sweden Latvia
+Professor R. Brenner Ms L. Levada
+Dr E. Sjöstedt H.E. Mr I. Pundurs
+
+Switzerland Lithuania
+Professor F. Canelli Dr R. Aleksiejūnas
+H.E. Mr M. Gerber H.E. Mr D. Staniulis
+
+United Kingdom Pakistan
+Professor M. Dougherty H.E. Mr B. Ahmad
+Dr S. Haque Dr R. A. Raza Anwar
+
+Türkiye
+ASSOCIATE MEMBER H.E. Mr B. Akçapar
+STATES IN THE PRE- Dr A. B. Karaveli
+
+### STAGE TO MEMBERSHIP
+
+Ukraine
+Professor B. Grynyov
+Cyprus Dr Y. Kudriavets
+H.E. Ms O. Neocleous
+Professor P. Razis OBSERVERS
+
+European Union,
+
+| ASSOCIATE MEMBER | Japan, UNESCO, |
+| --- | --- |
+| STATES | United States of America |
+
+Brazil
+H.E. Mr T. da Silva Nunes
+Professor R. Galvão
+
+Croatia
+Dr V. Brigljević
+Mr H. Meštrić
+
+India
+Professor A. Mohanty
+Dr D. Prakash
+
+Ireland
+Ms T. Duffy
+H.E. Mr N. White
+
+50 |
 
 ---
 
 # COMMITTEES OF THE COUNCIL
 
-SCIENTIFIC POLICY FINANCE
-COMMITTEE COMMITTEE
+### SCIENTIFIC POLICY COMMITTEE
 
-Chair Ex-officio members Chair
-Professor H. Montgomery Dr L. Salzarulo (Switzerland)
-Chair of the ISOLDE and Neutron
+### FINANCE COMMITTEE
 
-| Members | Time-of-Flight Experiments | Members |
-| --- | --- | --- |
-| Professor J. Alcaraz Maestre | Committee | One or two representatives |
-| Professor K. Blaum | Professor M. Pfützner | of each Member State and |
+Chair
+Professor H. Montgomery
 
-Professor P. Burrows up to two representatives
-
-| Professor B. Erazmus | Chair of the SPS and PS | of each Associate Member |
-| --- | --- | --- |
-| Professor A. Faus-Golfe | Experiments Committee | State and Associate Member |
-| Professor T. Gershon | Professor J. Nash | State in the pre-stage to |
-
+Members
+Professor J. Alcaraz Maestre
+Professor K. Blaum
+Professor P. Burrows
+Professor B. Erazmus
+Professor A. Faus-Golfe
+Professor T. Gershon
 Professor N. Glover
-Professor D. Gross Chair of the LHC Experiments
-Professor P. Hernández Committee
-Professor G. Isidori Professor F. Simon
+Professor D. Gross
+Professor P. Hernández
+Professor G. Isidori
 Professor M. Kado
-Professor P. Križan Chair of the CERN Machine
-Professor F. Maltoni Advisory Committee
-Professor J. Monroe Professor R. Assmann
+Professor P. Križan
+Professor F. Maltoni
+Professor J. Monroe
 Professor K. Scholberg
-Professor H. Weise Chair of the Scientific Advisory
-Professor A. Yamamoto Committee for the FCC
+Professor H. Weise
+Professor A. Yamamoto
+
+Ex-officio members
+
+Chair of the ISOLDE and Neutron
+Time-of-Flight Experiments
+Committee
+Professor M. Pfützner
+
+Chair of the SPS and PS
+Experiments Committee
+Professor J. Nash
+
+Chair of the LHC Experiments
+Committee
+Professor F. Simon
+
+Chair of the CERN Machine
+Advisory Committee
+Professor R. Assmann
+
+Chair of the Scientific Advisory
+Committee for the FCC
 Feasibility Study
 Professor A. Parker
 
@@ -3499,6 +3593,16 @@ Dr L. Salzarulo
 Director-General
 Dr F. Gianotti
 
+Chair
+Dr L. Salzarulo (Switzerland)
+
+Members
+One or two representatives
+of each Member State and
+up to two representatives
+of each Associate Member
+State and Associate Member
+State in the pre-stage to
 Membership.
 
 ### TREF (TRIPARTITE EMPLOYMENT CONDITIONS FORUM)
@@ -3525,7 +3629,7 @@ At least two external
 experts, appointed
 by the Council.
 
-2025 | 51
+| 51
 
 ---
 
@@ -3626,7 +3730,7 @@ Daniel Schulte
 Gianluigi Arduini
 Simone Campana
 
-52 | CERN
+52 |
 
 ---
 
@@ -3638,10 +3742,11 @@ Simone Campana
 
 1.81% 3.30%
 
-Total: 2762 people 50 Manual workers and craftspeople 91 Research physicists
+50 Manual workers and craftspeople 91 Research physicists
+
+## Total: 2762 people
 
 17.09%
-
 472 Administrators and office staff
 
 48.55%
@@ -3680,16 +3785,16 @@ services were used by a large scientific community of
 37.99% Materials 530.14 MCHF, comprising
 goods, consumables and supplies
 (292.28 MCHF) and other materials expenses
-
 0.44% Interest and financial costs 6.13 MCHF (services, repairs, maintenance, etc.)
-
 (237.86 MCHF)
 
 In 2025, 35.91% of CERN’s budget was returned to industry
 through the procurement of supplies and services. CERN strives
 to ensure a balanced industrial return for its Member States.
 
-2025 | 53
+| 53
+
+[chart on this page encodes values as colored symbols that are not text — rows here may be missing their values; see attached figure — page 53]
 
 ---
 
@@ -3702,11 +3807,9 @@ home.cern
 Seventy-first Annual Report of the European Organization for Nuclear Research
 
 CERN’s Annual Report aims to present the highlights and the main activities of the Laboratory.
-
 For the electronic version, see: https://library.cern/annual-reports
 
 In addition to this report, an annual progress report details the achievements and expenses by
-
 activity with respect to the objectives agreed by the CERN Council. This report is available at:
 
 http://cern.ch/go/annual-progress-reports
@@ -3744,7 +3847,6 @@ p. 40: Vivid and Henning Larsen
 CERN: all other images
 
 Editorial and Design Production:
-
 CERN Education, Communications and Outreach Group
 
 Translation and Proofreading:
@@ -3760,19 +3862,17 @@ https://doi.org/10.17181/AnnualReport2025
 © Copyright 2026, CERN
 
 CERN publishes this volume open access under the Creative Commons Attribution
-
 4.0 International licence https://creativecommons.org/licenses/by/4.0/, in order to permit its wide
-
 dissemination and use, excepting the images that are published under copyright (see above).
 
-54 | CERN
+54 |
 
 ---
 
-2025 | 55
+| 55
 
 ---
 
 ---
 
-The figures from this document are attached as "source-charts.pdf" (its page 1 = document page 5; its page 2 = document page 6; its page 3 = document page 12; its page 4 = document page 13; its page 5 = document page 14; its page 6 = document page 16; its page 7 = document page 17; its page 8 = document page 18; its page 9 = document page 19; its page 10 = document page 20; its page 11 = document page 21; its page 12 = document page 22; its page 13 = document page 23; its page 14 = document page 24; its page 15 = document page 25; its page 16 = document page 26; its page 17 = document page 28; its page 18 = document page 29; its page 19 = document page 30; its page 20 = document page 53).
+The figures from this document are attached as "decant.pdf" (its page 1 = document page 5; its page 2 = document page 6; its page 3 = document page 7; its page 4 = document page 10; its page 5 = document page 12; its page 6 = document page 13; its page 7 = document page 14; its page 8 = document page 15; its page 9 = document page 16; its page 10 = document page 17; its page 11 = document page 18; its page 12 = document page 19; its page 13 = document page 20; its page 14 = document page 21; its page 15 = document page 22; its page 16 = document page 23; its page 17 = document page 24; its page 18 = document page 25; its page 19 = document page 39; its page 20 = document page 53).

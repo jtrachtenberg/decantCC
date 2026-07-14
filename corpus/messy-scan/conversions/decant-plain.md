@@ -21,46 +21,27 @@ Form Approved
 OMB No. 0704-0188
 
 Public reporting burden for the collection of information is estimated to average 1 hour per response, including the time for reviewing instructions, searching existing data sources, gathering and
-
 maintaining the data needed, and completing and reviewing the collection of information. Send comments regarding this burden estimate or any other aspect of this collection of information,
-
 including suggestions for reducing this burden, to Washington Headquarters Services, Directorate for Information Operations and Reports, 1215 Jefferson Davis Highway, Suite 1204, Arlington
-
 VA 22202-4302. Respondents should be aware that notwithstanding any other provision of law, no person shall be subject to a penalty for failing to comply with a collection of information if it
 
 does not display a currently valid OMB control number.
 
-| 1. REPORT DATE | 2. REPORT TYPE | 3. DATES COVERED |
-| --- | --- | --- |
-| 2003 | N/A |  |
+1. REPORT DATE 2. REPORT TYPE
 
-# -
+2003 N/A
 
-4. TITLE AND SUBTITLE 5a. CONTRACT NUMBER
+### 4. TITLE AND SUBTITLE
 
-# Biosolids, Soil, Crop, Ground-Water, and Streambed-Sediment Data for 5b. GRANT NUMBER
+# Biosolids, Soil, Crop, Ground-Water, and Streambed-Sediment Data for A Biosolids-Application Area Near Deer Trail, Colorado, 2000
 
-# A Biosolids-Application Area Near Deer Trail, Colorado, 2000
+### 6. AUTHOR(S)
 
-### 5c. PROGRAM ELEMENT NUMBER
-
-6. AUTHOR(S) 5d. PROJECT NUMBER
-
-### 5e. TASK NUMBER
-
-### 5f. WORK UNIT NUMBER
-
-7. PERFORMING ORGANIZATION NAME(S) AND ADDRESS(ES) 8. PERFORMING ORGANIZATION
-
-### REPORT NUMBER
+### 7. PERFORMING ORGANIZATION NAME(S) AND ADDRESS(ES)
 
 # U.S. Department of the Interior U.S. Geological Survey 1849 C. Street, NW Washington, DC 20240
 
-9. SPONSORING/MONITORING AGENCY NAME(S) AND ADDRESS(ES) 10. SPONSOR/MONITOR’S ACRONYM(S)
-
-### 11. SPONSOR/MONITOR’S REPORT
-
-### NUMBER(S)
+### 9. SPONSORING/MONITORING AGENCY NAME(S) AND ADDRESS(ES)
 
 ### 12. DISTRIBUTION/AVAILABILITY STATEMENT
 
@@ -74,21 +55,40 @@ does not display a currently valid OMB control number.
 
 ### 15. SUBJECT TERMS
 
-16. SECURITY CLASSIFICATION OF: 17. LIMITATION OF
+### 16. SECURITY CLASSIFICATION OF: ABSTRACT
 
-### ABSTRACT
-
-a. REPORT b. ABSTRACT c. THIS PAGE
-
-# UU
-
+a. REPORT b. ABSTRACT c. THIS PAGE UU
 unclassified unclassified unclassified
+
+### 17. LIMITATION OF
+
+### 3. DATES COVERED
+
+-
+
+### 5a. CONTRACT NUMBER
+
+### 5b. GRANT NUMBER
+
+### 5c. PROGRAM ELEMENT NUMBER
+
+### 5d. PROJECT NUMBER
+
+### 5e. TASK NUMBER
+
+### 5f. WORK UNIT NUMBER
+
+### 8. PERFORMING ORGANIZATION REPORT NUMBER
+
+### 10. SPONSOR/MONITOR’S ACRONYM(S)
+
+### 11. SPONSOR/MONITOR’S REPORT NUMBER(S)
 
 ### 18. NUMBER 19a. NAME OF
 
 OF PAGES RESPONSIBLE PERSON
 
-# 97
+97
 
 Standard Form 298 (Rev. 8-98)
 Prescribed by ANSI Std Z39-18
@@ -294,7 +294,6 @@ vi
 | milliliter (mL) | 0.0610 | cubic inch |
 | millimeter (mm) | 0.03937 | inch |
 | square mile (mi2) | 2.590 | square kilometer |
-| square mile (mi ) | 2.590 | square kilometer |
 
 Temperature in degrees Celsius (ºC) can be converted to degrees Fahrenheit (ºF) using the formula
 
@@ -305,7 +304,6 @@ Temperature in degrees Fahrenheit (ºF) may be converted to degrees Celsius (ºC
 ºC = (ºF -32) /1.8
 
 Vertical coordinate information is referenced to National Geodetic Vertical Datum of 1929 (NGVD 29);
-
 horizontal coordinate information is referenced to North American Datum of 1927 (NAD 27) except as
 
 noted.
@@ -354,9 +352,7 @@ residue on evaporation
 
 ---
 
-# Biosolids, Soil, Crop, Ground-Water, and Streambed-
-
-# Sediment Data for a Biosolids-Application Area Near
+# Biosolids, Soil, Crop, Ground-Water, and Streambed- Sediment Data for a Biosolids-Application Area Near
 
 # Deer Trail, Colorado, 2000
 
@@ -1458,16 +1454,16 @@ statistical evidence that selected median constituent concentra-
 tions were significantly greater than regulatory standards. The
 hypotheses tested were as follows:
 
-H = median concentration is less than or equal too
+Ho = median concentration is less than or equal to
 the regulatory standard, and
-H = median concentration is greater than thea
+Ha = median concentration is greater than the
 regulatory standard.
 
 ---
 
-A small p-value result from the Sign Test indicates H ,o
+A small p-value result from the Sign Test indicates Ho,
 the null hypothesis, should be rejected. The confidence level
-in rejecting H and, therefore, accepting H can be determinedo a
+in rejecting Ho and, therefore, accepting Ha can be determined
 by subtracting the p-value from 1 and multiplying by 100. The
 confidence level also can be thought of as the probability (in
 percent) that the regulatory standard has been exceeded by the
@@ -1809,8 +1805,9 @@ sored form provides more information about the uncertainty,
 
 14 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
 
-the very small concentrations of plutonium, and the gross Fishman, M.J., and Friedman, L.C., 1989, Methods for
+Fishman, M.J., and Friedman, L.C., 1989, Methods for
 
+the very small concentrations of plutonium, and the gross
 alpha and gross beta activity. The negative activity concentra-
 tion reported for one of the radiochemical samples means the
 sample count was less than the laboratory background count
@@ -1820,8 +1817,9 @@ determination of inorganic substances in water and fluvial
 sediments: U.S. Geological Survey Techniques of Water-
 Resources Investigations, book 5, chap. A1, 545 p.
 
-Friedman, L.C., and Erdmann, D.E., 1982, Quality-assurancethat detect radioactive decay (disintegrations) in a sample as
+Friedman, L.C., and Erdmann, D.E., 1982, Quality-assurance
 
+that detect radioactive decay (disintegrations) in a sample as
 counts per minute. The background count was subtracted from
 the sample count, and the resulting value was converted to
 activity-concentration units of picocuries per gram.
@@ -1830,8 +1828,9 @@ practices for the chemical and biological analyses of water
 and fluvial sediments: U.S. Geological Survey Techniques
 of Water-Resources Investigations, book 5, chap. A6, 181 p.
 
-The streambed-sediment data in this report should pro- Greenberg, A.E., ed., 1992, Method 7110—Gross alpha and
+Greenberg, A.E., ed., 1992, Method 7110—Gross alpha and
 
+The streambed-sediment data in this report should pro-
 vide baseline information for concerns about contamination of
 the study area from the Lowry Landfill Superfund site water
 transfer. No water from the Lowry site was transferred to
@@ -1856,16 +1855,18 @@ B.F., ed., Analytical methods manual for the Mineral
 Resource Surveys Program, U.S. Geological Survey: U.S.
 Geological Survey Open-File Report 96–525, p. 24–30.
 
-Helsel, D.R., and Hirsch, R.M., 1995, Statistical methods ined., 1996, Analytical methods manual for the Mineral
+Helsel, D.R., and Hirsch, R.M., 1995, Statistical methods in
 
+ed., 1996, Analytical methods manual for the Mineral
 Resource Surveys Program, U.S. Geological Survey: U.S.
 Geological Survey Open-File Report 96–525, p. 77–94.
 
 water resources (3d ed.): Amsterdam, Elsevier Studies in
 Environmental Science 49, 529 p.
 
-Horowitz, A.J., Demas, C.R., Fitzgerald, K.K., Miller, T.L.,Briggs, P.H., and Meier, A.L., 1999, The determination of
+Horowitz, A.J., Demas, C.R., Fitzgerald, K.K., Miller, T.L.,
 
+Briggs, P.H., and Meier, A.L., 1999, The determination of
 forty-two elements in geological materials by inductively
 coupled plasma-mass spectrometry: U.S. Geological Survey
 Open-File Report 99–166, 15 p.
@@ -1879,7 +1880,9 @@ for the subsequent determination of inorganic constituents
 in filtered water: U.S. Geological Survey Open-File Report
 94–539, 57 p.
 
-Jones, S.R., and Garbarino, J.R., 1999, Methods of analysis byJuly 14, 1997, 56 p.
+Jones, S.R., and Garbarino, J.R., 1999, Methods of analysis by
+
+July 14, 1997, 56 p.
 
 1998, Biosolids regulation: 5CCR 1002–64, January 12, 1998,
 53 p.
@@ -1891,7 +1894,9 @@ tory-Determination of arsenic and selenium in water and
 sediment by graphite furnace-atomic absorption spectrome-
 try: U.S. Geological Survey Open-File Report 98–639, 39 p.
 
-New Jersey, Prentice-Hall, p. 328–329. Larsen, L.S., Baber, T.G., Wesswick, E.L., McCoy, D.E., and
+Larsen, L.S., Baber, T.G., Wesswick, E.L., McCoy, D.E., and
+
+New Jersey, Prentice-Hall, p. 328–329.
 
 Drew, L.J., Schuenemeyer, J.H., and Bawiec, W.J., 1979,
 Petroleum exhaustion maps of the Cretaceous “D–J”
@@ -1917,7 +1922,7 @@ spectrometry: U.S. Geological Survey Open-File Report
 
 problems: Ann Arbor Science, p. 215–221 and 223–230.
 
-Major, T.J., Robson, S.G., Romero, J.C., and Zawistowski,92–634, 28 p.
+92–634, 28 p. Major, T.J., Robson, S.G., Romero, J.C., and Zawistowski,
 
 Fishman, M.J., ed., 1993, Methods of analysis by the U.S.
 Geological Survey National Water Quality Laboratory-
@@ -1933,8 +1938,9 @@ Basin, Colorado: U.S. Geological Survey Open-File Report
 
 References 15
 
-McLain, Betty, 1993, Methods of analysis by the U.S. Geo- Struzeski, T.M., DeGiacomo, W.J., and Zayhowski, E.J., 1996,
+Struzeski, T.M., DeGiacomo, W.J., and Zayhowski, E.J., 1996,
 
+McLain, Betty, 1993, Methods of analysis by the U.S. Geo-
 logical Survey National Water Quality Laboratory--Deter-
 mination of chromium in water by graphite furnace atomic
 absorption spectrophotometry: U.S. Geological Survey
@@ -1948,8 +1954,9 @@ minum and boron in water by inductively coupled plasma-
 atomic emission spectrometry: U.S. Geological Survey
 Open-File Report 96–149, 17 p.
 
-elements by inductively coupled plasma-atomic emission U.S. Geological Survey, 1974, Hydrologic unit map—1974,
+U.S. Geological Survey, 1974, Hydrologic unit map—1974,
 
+elements by inductively coupled plasma-atomic emission
 spectrometry, in Arbogast, B.F., ed., Analytical methods
 manual for the Mineral Resource Surveys Program, U.S.
 Geological Survey: U.S. Geological Survey Open-File
@@ -1957,7 +1964,9 @@ Geological Survey: U.S. Geological Survey Open-File
 State of Colorado: U.S. Geological Survey Hydrologic Unit
 Map 1974, scale 1:500,000, 1 sheet.
 
-1980, Land use and land cover, 1975, Limon, Colorado;Report 96–525, p. 102–108.
+1980, Land use and land cover, 1975, Limon, Colorado;
+
+Report 96–525, p. 102–108.
 
 O’Leary, R.M., Hageman, P.L., and Crock, J.G., 1996, Mer-
 cury in water, geologic, and plant materials by continuous
@@ -1965,8 +1974,9 @@ cury in water, geologic, and plant materials by continuous
 Kansas: U.S. Geological Survey Land Use Series L–191,
 scale 1:250,000, 1 sheet.
 
-Whittaker, E.L., and Grothaus, G.E., 1979, Acid dissolutionflow-cold vapor-atomic absorption spectrometry, in Arbo-
+Whittaker, E.L., and Grothaus, G.E., 1979, Acid dissolution
 
+flow-cold vapor-atomic absorption spectrometry, in Arbo-
 gast, B.F., ed., Analytical methods manual for the Mineral
 Resource Surveys Program, U.S. Geological Survey: U.S.
 Geological Survey Open-File Report 96–525, p. 42–50.
@@ -1978,7 +1988,7 @@ method for the analysis of plutonium in soil, EPA–600/
 tory, Office of Research and Development: Las Vegas, U.S.
 Environmental Protection Agency, p. 23–59.
 
-Wilde, F.D., Radtke, D.B., Gibs, J., and Iwatsubo, R.T.,U.S. Geological Survey National Water Quality Laboratory-
+U.S. Geological Survey National Water Quality Laboratory- Wilde, F.D., Radtke, D.B., Gibs, J., and Iwatsubo, R.T.,
 
 -Determination of total phosphorus by a Kjeldahl digestion
 method and an automated colorimetric finish that includes
@@ -1990,7 +2000,7 @@ water-quality data—Chapters A1-A5: U.S. Geological
 Survey Techniques of Water-Resources Investigations, Book
 9, Chapters A1, A2, A3, A4, and A5, variously paginated.
 
-Yager, T.J.B., and Arnold, L.R., 2003, Hydrogeology of a bio-Radtke, D.B., 1997, National field manual for the collection of
+Radtke, D.B., 1997, National field manual for the collection of Yager, T.J.B., and Arnold, L.R., 2003, Hydrogeology of a bio-
 
 water-quality data—Chapter A8. Bottom-material samples:
 U.S. Geological Survey Techniques of Water-Resources
@@ -2037,17 +2047,14 @@ Data Section
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
+19
 
-## Data Section 19
-
-���� ����������
-���
+���� ���������� �������
 ���
 
-������� �������
+�������
 
-ADAMS COUNTY
-
+��� ADAMS COUNTY
 ARAPAHOE COUNTY
 
 ��
@@ -2059,18 +2066,16 @@ ARAPAHOE COUNTY
 
 ����
 
-��������� ��� ��
+���� ��� �� �����
 ������� ��
 �����
 
 WASHINGTON COUNTY
 
-�����
+����� �����
 ����
 �����
 � ���� �
-�����
-
 �����
 
 ���� Route 34 �������������
@@ -2083,17 +2088,14 @@ WASHINGTON COUNTY
 ��
 
 �����������
+������� ������
+������� ��
 
 Creek
 
-������� ������
-
-������� ��
-
 ���
 
-�����
-���� ����
+��������� ����
 ELBERT COUNTY
 ����
 ���
@@ -2103,20 +2105,20 @@ ELBERT COUNTY
 
 ����
 
-LINCOLN COUNTY
-
 ������
-
 �����������
 ������������ ��
 ����
 ���
+
+LINCOLN COUNTY
 
 ����
 
 ����������
 
 �����
+
 �����
 
 ��
@@ -2129,43 +2131,48 @@ quadrangles, Elbert County and Arapahoe County
 ### EXPLANATION
 
 �����
-���� Metro Wastewater Reclamation DistrictDENVER
+
+DENVER ���� Streambed-sediment
+
+Metro Wastewater Reclamation District
 property
 C O L O R A D O ���� USGS alluvial-aquifer monitoring well
-��� USGS bedrock-aquifer monitoring well
+
+sampling area
+
+��� Soil-sampling area
+
+USGS bedrock-aquifer monitoring well
 
 ���� Monitoring well with continuous
 recorder
 
-Streambed-sediment
-sampling area
-
-Soil-sampling area
-
 Figure 1. Location of study area and USGS monitorings sites near Deer Trail, Colorado, 2000. MWRD property
 
-### boundaries shown are from 1999.
+## boundaries shown are from 1999.
 
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
+20
 
-## 20 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+### U.S. HIGHWAY 36
 
 � �
-����������������
+
+### ����������������
+
 ������
 � �
 ������
-
-U.S. HIGHWAY 36
 
 | � | � |  |
 | --- | --- | --- |
 | � | �� | �� |
 
 ������
-����������������
+
+### ����������������
 
 ������ ������
 
@@ -2185,7 +2192,7 @@ U.S. HIGHWAY 36
 
 ������ ������
 
-### ��
+��
 
 �� �� �� ��
 
@@ -2193,14 +2200,14 @@ U.S. HIGHWAY 36
 
 ������ ������ ������ ������
 
-### ��
+��
 
 | �� | �� | �� | �� |
 | --- | --- | --- | --- |
 | ������� | ������ ������ ������ ������ ������� |  |  |
 | ������� | ������ ������ | ������� |  |
 
-### �
+�
 
 � � � �
 
@@ -2208,14 +2215,19 @@ U.S. HIGHWAY 36
 
 ������ ������
 
-### �
+�
 
 | � | �� | �� | �� |
 | --- | --- | --- | --- |
 | ������ ������ | JOLLY ROAD |  |  |
-| ������ ������ ������ | ARAPAHOE COUNTY ROAD 34 |  |  |
-| �� | �� |  |  |
-| �� | �� | �� | �� |
+
+������ ������ ������
+
+�� ��
+
+### ARAPAHOE COUNTY ROAD 34
+
+�� �� �� ��
 
 ������ ������ ������
 
@@ -2231,81 +2243,82 @@ U.S. HIGHWAY 36
 
 ������ ������ ������
 
-| �� | �� �� | �� | �� |  |  |
-| --- | --- | --- | --- | --- | --- |
-| �� | �� | �� | �� | �� | �� �� |
-
-����������������
-
-| ������������������ | �� | �� | �� | �� | �� | �� | �� |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| ������ ������ ���������������������� ������� | DC 397 | ������� |  |  |  |  |  |
-| �������������� | ������� | ������ ������ ������ ������ |  |  |  |  |  |
-| � | � | � | � | � |  |  |  |
-| ������ | ������ ������ ������ | ������ | ������������� |  |  |  |  |
-| �� | � | � | � | � | � | � |  |
-
-������������ ������ ������ ������ ������ ������ ������ ������ ������ ������ ������
-����������������
-
-������������ ������ ������ ������ ������ ������ ������
-
-������
-
-| � | �� | ��� |  |  |  |  |  |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| �� | � | � | � | �� | �� | �� | � |
-| ������ | ������ ������ ������ ������ ������ ������ ������ |  |  |  |  |  |  |
-
-������ ������ ������ ������ ������ ������ ������
-
-### ��
-
-�� �� �� �� �� �� �� ��
-
-������ ������ ������ ������ ������ ������ ������
-
-������ ������ ������ ������ ������ ������ ������
-
-### ��
-
-�� �� �� �� �� �� �� ��
-
-������ ������ ������ ������ ������ ������ ������
-
-������ ������ ������ ������ ������ ������ ������
-
-### ��
-
-�� �� �� �� �� �� �� ��
-
-������ ������ ������ ������ ������ ������ ������
-
-### ��
-
-�������
-
-������ ������ ������ ������ ������ ������
-�� �� �� �� �� �� �� ��
-������ ������ ������ ������ ������ ������
-�������
-
-������� ������ ������ ������ ������ ������ �������
-
-### �
-
-� � � � � � � �
-������
-
-| RD 166 | ������ ������ ������ ������ ������ |  |  |  |
+| �� | �� | �� | �� | �� |
 | --- | --- | --- | --- | --- |
-| � | � | � | � | ������� |
+| ���������������� ������� | ������ ������ ������ | DC 397 |  |  |
+| �������������� | ������� | ������ ������ ������ ������ |  |  |
+| � | � | � | � | � |
 
-### ��
+������������ ������ ������ ������
 
+������
+������
+� � �� ��
+������
+
+��
+
+��
+
+��
+
+��
+
+### ������� �������
+
+�
+
+### RD 166
+
+� � � � �������
+
+��
 � � � � ������������
 
-### ��
+��
+
+�� �� �� �� �� �� ��
+
+### ����������������
+
+�� �� �� �� �� �� �� ������������������
+
+### �������
+
+| ������ ������ ������ ������ ������ | ������ | ������� |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| � | � | � | � | � | � | � | � |
+
+������ ������ ������ ������ ������ ������ ������
+����������������
+������ ������ ������ ������ ������ ������ ������
+�� � � � �� �� �� �
+������ ������ ������ ������ ������ ������ ������
+
+������ ������ ������ ������ ������ ������ ������
+
+�� �� �� �� �� �� �� ��
+������ ������ ������ ������ ������ ������ ������
+
+������ ������ ������ ������ ������ ������ ������
+�� �� �� �� �� �� �� ��
+������ ������ ������ ������ ������ ������ ������
+
+������ ������ ������ ������ ������ ������ ������
+
+�� �� �� �� �� �� �� ��
+������ ������ ������ ������ ������ ������ ������
+
+������ ������ ������ ������ ������ ������
+�� �� �� �� �� �� �� ��
+������ ������ ������ ������ ������ ������ �������
+
+| ������ ������ ������ ������ ������ | ������� |  |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| � | � | � | � | � | � | � | � |
+
+������
+������ ������ ������ ������ ������
 
 ������ ������
 
@@ -2313,9 +2326,9 @@ U.S. HIGHWAY 36
 | --- | --- | --- | --- | --- | --- |
 | �� | � |  |  |  |  |
 
-����������������
+### ����������������
 
-�� ������������������
+### �� ������������������
 
 Figure 2 Metro Wastewater Reclamation District biosolids-application areas (METROGRO Farm) near Deer Trail, Colorado, 2000
 
@@ -2324,7 +2337,7 @@ Figure 2 Metro Wastewater Reclamation District biosolids-application areas (METR
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-Data Section 21
+21
 
 ��������
 
@@ -2367,18 +2380,18 @@ Figure 3. Arapahoe County, Colorado, soil-monitoring site: T. 4 S., R. 58 W., se
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-22 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+22
 
 ������������������������
 
 ��������
 
-��������
-N ������������
-
 �������
 ����
 ��������
+
+��������
+N ������������
 
 ��������
 
@@ -2410,10 +2423,11 @@ Figure 4. Elbert County, Colorado, soil-monitoring site: T. 6 S., R. 57 W., sec.
 
 ---
 
-### Data Section 23
+23
+
+Protective Casing
 
 Locking Cap and Padlock
-Protective Casing
 
 Inner Well Cap
 
@@ -2423,10 +2437,7 @@ Stickup ........................... 2.24'
 
 Vent hole
 
-Well Development............... completed 1/24/00
-
 Drain
-
 Hole
 
 Well Number: DTX11
@@ -2439,9 +2450,11 @@ Well Number: DTX11
 Longitude 103˚55'40"
 Local Weisensee Ranch
 
+Well Development............... completed 1/24/00
+
 Traffic Pad .............................2' x 2' x 4" (concrete)
 
-5Borehole Diameter ...............8 / "8
+Borehole Diameter ...............85/8"
 
 Casing Diameter....................2"
 
@@ -2452,7 +2465,7 @@ Grout: Material/Mixture ............ Bentonite high-solids Voclay
 
 Setting ..................0-23' BLS
 
-Plug: Material............Bentonite Tablets (1/ ")4
+Plug: Material............Bentonite Tablets (1/4")
 Setting ..................23-24'; 31-34' BLS
 
 Sandpack: Material ..........Silica sand
@@ -2476,14 +2489,12 @@ Bottom Cap
 Total Depth of Well ..........30' BLS well; 34' BLS borehole
 
 Figure 5. Well-completion information for U.S. Geological Survey monitoring well DTX11 near Deer Trail, Colorado, 2000
-
 (PVC, polyvinyl chloride; SCH., schedule; ALS, above land surface; BLS, below land surface).
 
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-
-## 24 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+24
 
 21 28
 21 28
@@ -2502,6 +2513,16 @@ Figure 5. Well-completion information for U.S. Geological Survey monitoring well
 | 7 | 7 |
 | 28 | 28 |
 | 21 | 21 |
+| 14 Sept | 14 Sept |
+| 7 | 7 |
+| 28 | 28 |
+| 21 | 21 |
+| 14 Aug | 14 Aug |
+| 7 | 7 |
+| 28 | 28 |
+| 21 | 21 |
+| 14 July | 14 July |
+| 7 | 7 |
 
 21 28
 21 28
@@ -2527,50 +2548,33 @@ Figure 5. Well-completion information for U.S. Geological Survey monitoring well
 7
 7
 
-| 28 | 28 |  |  |
-| --- | --- | --- | --- |
-| 21 | 21 |  |  |
-| 14 Sept | 14 Sept | 14 Sept | 14 Sept |
-| 7 | 7 | 7 | 7 |
-| 28 | 28 | 28 | 28 |
-
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-28
-
-21 21
-
-28
-
-| 21 | 21 |  |  |
-| --- | --- | --- | --- |
-| 14 Aug | 14 Aug | 14 Aug | 14 Aug |
-| 7 | 7 | 7 | 7 |
-| 28 | 28 | 28 | 28 |
-| 21 | 21 | 21 | 21 |
-| 14 July | 14 July | 14 July | 14 July |
-| 7 | 7 | 7 | 7 |
-| 28 2000 | 28 2000 | 28 2000 | 28 2000 |
-
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-
-| 28 | 28 |  |
-| --- | --- | --- |
-| 21 | 21 |  |
-| 14 June | 14 June |  |
-| 7 | 7 |  |
-| 28 | 28 |  |
-| 21 | 21 |  |
-| 14 | 14May | May |
-| 7 | 7 |  |
-| 28 | 28 |  |
-| 21 | 21 |  |
-| 14 Apr | 14 Apr |  |
-| 7 | 7 |  |
-
-28
-
-| 21 | 21 |
+| 28 | 28 |
 | --- | --- |
+| 21 | 21 |
+| 14 Sept | 14 Sept |
+| 7 | 7 |
+| 28 | 28 |
+| 21 | 21 |
+| 14 Aug | 14 Aug |
+| 7 | 7 |
+| 28 | 28 |
+| 21 | 21 |
+| 14 July | 14 July |
+| 7 | 7 |
+| 28 2000 | 28 2000 |
+| 21 | 21 |
+| 14 June | 14 June |
+| 7 | 7 |
+| 28 | 28 |
+| 21 | 21 |
+| 14 May | 14 May |
+| 7 | 7 |
+| 28 | 28 |
+| 21 | 21 |
+| 14 Apr | 14 Apr |
+| 7 | 7 |
+| 28 2000 | 28 2000 |
+| 21 | 21 |
 | 14 June | 14 June |
 | 7 | 7 |
 | 28 | 28 |
@@ -2580,19 +2584,19 @@ Figure 5. Well-completion information for U.S. Geological Survey monitoring well
 
 DAILY MAXIMUM AIR TEMPERATURE , IN DEGREES CELSIUS
 
-| 28 | 28 |  |
-| --- | --- | --- |
-| 21 | 21 |  |
-| 14 Apr | 14 Apr |  |
-| 7 | 7 |  |
-| 21 28 | 21 28 |  |
-| 14 | 14Mar | Mar |
-| 7 | 7 |  |
-| 21 28 | 21 28 |  |
-| 14 Mar | 14 Mar |  |
-| 7 | 7 |  |
-| 21 28 | 21 28 |  |
-| 21 28 | 21 28 |  |
+| 28 | 28 |
+| --- | --- |
+| 21 | 21 |
+| 14 Apr | 14 Apr |
+| 7 | 7 |
+| 21 28 | 21 28 |
+| 14 Mar | 14 Mar |
+| 7 | 7 |
+| 21 28 | 21 28 |
+| 14 Mar | 14 Mar |
+| 7 | 7 |
+| 21 28 | 21 28 |
+| 21 28 | 21 28 |
 
 DAILY MAXIMUM WATER TEMPERATURE, IN DEGREES CELSIUS
 
@@ -2601,15 +2605,12 @@ DAILY MAXIMUM WATER TEMPERATURE, IN DEGREES CELSIUS
 | 7 | 7 |
 | 28 | 28 |
 | 21 | 21 |
-| Jan | 14 Jan14 |
+| 14 Jan | 14 Jan |
 | 14 Feb | 14 Feb |
 | 7 | 7 |
-
-2828
-
+| 28 | 28 |
 | 21 | 21 |
-| --- | --- |
-| Jan14 | 14 Jan |
+| 14 Jan | 14 Jan |
 
 DAILY SUMMATION PRECIPITATION, IN INCHES
 
@@ -2617,11 +2618,9 @@ DAILY MAXIMUM DEPTH BELOW LAND SURFACE, IN FEET
 
 | 7 | 7 |  |  |  |  |
 | --- | --- | --- | --- | --- | --- |
-| 9 82 4 6 8 | 14 13 12 11 10 | 3 | 2 | 1 | 0 |
+| 2 4 6 8 10 | 14 13 12 11 10 9 8 | 3 | 2 | 1 | 0 |
+| 7 | 7 |  |  |  |  |
 
-10
-
-7 7
 Continuous water-level, water-temperature, precipitation, and air-temperature data for well D25 near Deer Trail, Colorado, 2000
 0
 
@@ -2631,7 +2630,10 @@ Continuous water-level, water-temperature, precipitation, and air-temperature da
 
 IN INCHES
 
-WATER LEVEL, IN DEGREES IN DEGREES
+WATER LEVEL, IN DEGREES
+
+IN DEGREES
+
 PRECIPITATION,
 
 TEMPERATURE,
@@ -2644,31 +2646,36 @@ AIR TEMPERATURE,
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
+25
 
-## Data Section 25
-
-| �� �� | �� ���� �� |  |
+| �� �� | �� �� | �� �� |
 | --- | --- | --- |
-| �� ��� | ���� | ������ |
-| � | �� |  |
+| �� ��� | �� ��� | �� ��� |
+| � | � | � |
 | �� | �� |  |
-| �� | �� ���� |  |
-| �� ��� | ���� | ������ |
-| � | �� |  |
-| �� | ���� |  |
-| �� | ���� |  |
-| �� ��� | ���� | ������ |
-| � | �� |  |
-| �� | ���� |  |
-| �� | ���� |  |
-| �� ���� | ���� | �������� |
-| � | �� |  |
+| �� | �� | �� �� |
+| �� ��� | �� ��� | �� ��� |
+| � | � | � |
+| �� | �� | �� |
+| �� | �� | �� |
+| �� ��� | �� ��� | �� ��� |
+| � | � | � |
+| �� | �� | �� |
+| �� | �� | �� |
+| �� ���� | �� ���� | �� ���� |
+| � | � | � |
 | �� | �� |  |
-| �� | �� ���� |  |
-| �� ��� | ���� | ������ |
-| � | �� |  |
+| �� | �� | �� �� |
+| �� ��� | �� ��� | �� ��� |
+| � | � | � |
 | �� | �� |  |
-| �� | ���� �� |  |
+| �� | �� �� | �� |
+| �� ���� | �� ���� | �� ���� |
+| � | � | � |
+| �� ���� | �� ���� | �� ���� |
+| �� | �� | �� |
+| �� ���� | �� ���� | �� ���� |
+| � | � | � |
 
 ��
 
@@ -2705,48 +2712,40 @@ AIR TEMPERATURE,
 
 �� ��
 
-| �� ���� | �� ���� | �� ���� | �� ���� |
-| --- | --- | --- | --- |
-| � | � | � | � |
-| �� ���� | �� ���� | �� ���� | �� |
+�� ����
+�
 
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-����
+�� ����
 
-| �� | ���� |  |  |
-| --- | --- | --- | --- |
-| �� | ������ | �� | �������� |
-| � | �� |  |  |
-
-����
 ��
 
 ��
 ����
 �
 
-| �� | ���� |
-| --- | --- |
-| �� | ���� |
+| �� | �� | �� |
+| --- | --- | --- |
+| �� | �� | �� |
 
 �� ��
 
 DAILY MAXIMUM AIR TEMPERATURE , IN DEGREES CELSIUS
 
-| �� | ����� | �� | ������ |
-| --- | --- | --- | --- |
-| � | �� |  |  |
-| �� | ���� |  |  |
-
-��
-
-| �� ���� ��� | �� �� | ������ |
+| �� ��� | �� ��� | �� ��� |
 | --- | --- | --- |
-| � | �� |  |
+| � | � | � |
 
 ��
 ���
 �
+
+�� �� ��
+
+��
+
+| �� ��� | �� ����� | �� ����� |
+| --- | --- | --- |
+| � | � | � |
 
 �� �� ��
 ���
@@ -2754,10 +2753,10 @@ DAILY MAXIMUM AIR TEMPERATURE , IN DEGREES CELSIUS
 
 ��
 
-| ���� �� | �� �� |  |
+| �� �� | �� �� | �� |
 | --- | --- | --- |
-| ���� ��� | �� | ������ |
-| � | �� |  |
+| �� ��� | �� ��� | �� ��� |
+| � | � | � |
 
 ��
 
@@ -2767,21 +2766,20 @@ DAILY MAXIMUM AIR TEMPERATURE , IN DEGREES CELSIUS
 ���
 �
 
-�� ���� �� �� ��
-��
-
-| �� ��� | �� | ������ |
+| �� �� | �� �� | �� �� |
 | --- | --- | --- |
-| �� | � |  |
-| ��� | �� |  |
-| ���� | �� �� |  |
+| �� ��� | �� ��� | �� ��� |
+| � | � | � |
+| � | �� | �� |
+| �� | �� �� | �� |
 
-DAILY MAXIMUM WATER TEMPERATURE, IN DEGREES CELSIUS DAILY SUMMATION PRECIPITATION, IN INCHES
+DAILY MAXIMUM WATER TEMPERATURE, IN DEGREES CELSIUSDAILY SUMMATION PRECIPITATION, IN INCHES
 
-| DAILY MAXIMUM DEPTH BELOW LAND SURFACE, IN FEET��� | �� ����� | �� ��� |  |  |  |
-| --- | --- | --- | --- | --- | --- |
-| � | �� | � |  |  |  |
-| � | � | � | �� � � � | � � | � |
+| DAILY MAXIMUM DEPTH BELOW LAND SURFACE, IN FEET���������� | �� ��� |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- |
+| � | � | � | � |  |  |  |
+| � � � � | � � | � | � | � | � | � |
+| �� | �� �� �� �� �� | �� �� �� �� |  |  |  |  |
 
 �� ��
 
@@ -2798,16 +2796,15 @@ DAILY MAXIMUM WATER TEMPERATURE, IN DEGREES CELSIUS DAILY SUMMATION PRECIPITATIO
 �
 Continuous water-level, water-temperature, precipitation, and air-temperature data for well DTX2 near Deer Trail, Colorado, 2000
 
-| �� �� | �� �� �� | �� | �� �� �� �� |
-| --- | --- | --- | --- |
-| ��������� | ������ |  |  |
-| ������� | �������� | ������� |  |
+������� ��������� �������������
 
-��������������������������
+��������
 
-| ���������� | ����������� |
-| --- | --- |
-| ������������ | ���������������� |
+������������ �������������� �����������
+
+����������
+
+������������ ����������������
 
 ������
 
@@ -2816,58 +2813,60 @@ Continuous water-level, water-temperature, precipitation, and air-temperature da
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-
-## 26 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+26
 
 ��
 ��
 ��
 ��
 
-| �� ��� | �� ��� |  |  |
-| --- | --- | --- | --- |
-| � | � |  |  |
-| �� | �� |  |  |
-| �� | �� |  |  |
-| �� ��� | �� ��� |  |  |
-| � | � |  |  |
-| �� | �� |  |  |
-| �� | �� |  |  |
-| �� | �� |  |  |
-| �� | �� |  |  |
-| �� ��� | �� ��� |  |  |
-| � | � |  |  |
-| �� | �� |  |  |
-| �� | �� |  |  |
-| �� ��� | ����� |  |  |
-| � | � |  |  |
-| �� | �� |  |  |
-| �� | �� |  |  |
-| �� | �� ��� | �� | �� ��� |
-| � | � | � | � |
-| �� | �� | �� | �� |
+| �� ��� | �� ��� |
+| --- | --- |
+| � | � |
+| �� | �� |
+| �� | �� |
+| �� ��� | �� ��� |
+| � | � |
+| �� | �� |
+| �� | �� |
+| �� ��� | ��� |
 
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
 ��
 
-| �� | �� |  |  |
-| --- | --- | --- | --- |
-| �� ���� | �� ���� |  |  |
-| DAILY MAXIMUM DEPTH BELOW LAND SURFACE, IN FEET � | � |  |  |
-| �� | �� |  |  |
-| �� | �� |  |  |
-| �� ���� | �� ���� |  |  |
-| � | � |  |  |
-| �� | �� |  |  |
-| �� | �� |  |  |
-| �� | �� |  |  |
-| �� | �� |  |  |
-| �� ��� | �� ��� | �� ��� | �� ��� |
-| � | � | � | � |
-| �� | �� | �� | �� |
+| � | � |
+| --- | --- |
+| �� | �� |
+| �� | �� |
+| �� ���� | �� ���� |
 
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
+DAILY MAXIMUM DEPTH BELOW LAND SURFACE, IN FEET � �
+
+| �� | �� |
+| --- | --- |
+| �� | �� |
+| �� ��� | �� ��� |
+| � | � |
+| �� | �� |
+| �� | �� |
+| �� ��� | �� ��� |
+| � | � |
+| �� | �� |
+| �� | �� |
+| �� ��� | ��� |
+
 ��
+
+| � | � |
+| --- | --- |
+| �� | �� |
+| �� | �� |
+| �� ���� | �� ���� |
+| � | � |
+| �� | �� |
+| �� | �� |
+| �� ��� | �� ��� |
+| � | � |
+| �� | �� |
 
 ��
 
@@ -2877,29 +2876,32 @@ Continuous water-level, water-temperature, precipitation, and air-temperature da
 
 ����
 
-| �� | �� ���� |  |  |
-| --- | --- | --- | --- |
-| �� | �� |  |  |
-| �� | �� |  |  |
-| �� ���� | �� ���� |  |  |
-| � | � |  |  |
-| �� ���� | ������ |  |  |
-| �� | �� |  |  |
-| �� ���� | �� ���� | �� ���� | �� ���� |
-| � | � | � | � |
-| �� | �� | �� | �� |
-
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-
-| �� | �� |  |  |  |  |
+| �� | �� ���� |  |  |  |  |
 | --- | --- | --- | --- | --- | --- |
 | �� | �� |  |  |  |  |
+| �� ���� | �� ���� |  |  |  |  |
+| � | � |  |  |  |  |
+| �� | �� |  |  |  |  |
+| �� | �� |  |  |  |  |
+| �� ��� | �� ��� |  |  |  |  |
+| � | � |  |  |  |  |
+| �� | �� |  |  |  |  |
+| �� | �� |  |  |  |  |
+| �� ���� | �� ���� |  |  |  |  |
+| � | � |  |  |  |  |
+| �� ���� | �� ���� |  |  |  |  |
+| �� | �� |  |  |  |  |
+| �� ���� | �� ���� |  |  |  |  |
+| � | � |  |  |  |  |
+| �� | �� |  |  |  |  |
+| �� | �� |  |  |  |  |
 | �� ��� | �� ��� |  |  |  |  |
 | � | � |  |  |  |  |
 | �� | �� |  |  |  |  |
 | �� | �� |  |  |  |  |
 | �� ��� | �� ��� |  |  |  |  |
 | � | � |  |  |  |  |
+| �� | �� |  |  |  |  |
 | �� | DAILY MAXIMUM AIR TEMPERATURE , IN DEGREES CELSIUS�� |  |  |  |  |
 | �� ��� | �� ��� |  |  |  |  |
 | � | � |  |  |  |  |
@@ -2916,18 +2918,18 @@ Continuous water-level, water-temperature, precipitation, and air-temperature da
 | �� �� | �� �� |  |  |  |  |
 | �� ��� | �� ��� |  |  |  |  |
 | � | � |  |  |  |  |
-| �� | ��� |  |  |  |  |
-| �� | �� |  |  |  |  |
 | �� �� | �� �� |  |  |  |  |
 | �� ��� | �� ��� |  |  |  |  |
 | � | � |  |  |  |  |
+| � | �� | �� |  |  |  |
+| �� | �� |  |  |  |  |
+| ��� | ��� |  |  |  |  |
 | �� | �� |  |  |  |  |
 | �� | �� |  |  |  |  |
-| ��� | ��� | ��� | ��� |  |  |
-| �� | DAILY SUMMATION PRECIPITATION, IN INCHES�� | ���� |  |  |  |
+| ��� | ��� |  |  |  |  |
+| �� | �� | DAILY SUMMATION PRECIPITATION, IN INCHES�� | �� |  |  |
 | � | � |  |  |  |  |
-| � � � � | � � | � | � | � | � |
-| �� | �� �� �� �� �� |  |  |  |  |
+| � � � � �� | �� �� �� �� �� � � | � | � | � | � |
 | � | � |  |  |  |  |
 
 Continuous water-level, water-temperature, precipitation, and air-temperature data for well DTX5 near Deer Trail, Colorado, 2000
@@ -2941,11 +2943,12 @@ Continuous water-level, water-temperature, precipitation, and air-temperature da
 
 �������
 
-���������� �������������� �����������
+���������� ��������������
 
 ������������
 ������
 
+�����������
 ����������������
 
 ## Figure 8.
@@ -2953,8 +2956,7 @@ Continuous water-level, water-temperature, precipitation, and air-temperature da
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-
-## Data Section 27
+27
 
 28
 
@@ -2975,7 +2977,7 @@ Continuous water-level, water-temperature, precipitation, and air-temperature da
 28
 
 21
-Oct14
+14 Oct
 
 7
 
@@ -2997,58 +2999,74 @@ Oct14
 
 28
 
-| 28 | 28 | 28 |  |
-| --- | --- | --- | --- |
-| 21 | 21 |  |  |
-| 14 | 14Dec | Dec | 14 21Dec |
-| 7 | 7 | 7 |  |
-| 28 | 28 | 28 |  |
-| 21 | 21 | 21 |  |
-| 14 Nov | 14 Nov | Nov14 |  |
-| 7 | 7 | 7 |  |
-| 28 | 28 | 28 |  |
-| 21 | 21 | 21 |  |
-| Oct Oct | 14 | Oct14 | 14 |
-| 7 | 7 | 7 |  |
-| 28 | 28 | 28 |  |
-| 21 | 21 | 21 |  |
-| 14 Sept | 14 Sept | 14 Sept |  |
-| 7 | 7 | 7 |  |
-| 28 | 28 | 28 |  |
-| 21 | 21 | 21 |  |
-| 14 Aug | 14 Aug |  |  |
+14 21July
 
-14 Aug
+7
 
-| 7 | 7 | 7 |  |
-| --- | --- | --- | --- |
-| 28 | 28 | 28 |  |
-| 21 | 21 | 21 |  |
-| 14 21July | 14 July | 14 July | 14 July |
-| 7 | 7 | 7 | 7 |
-| 28 2000 | 28 2000 | 28 2000 | 28 2000 |
+28 2000
 
-2000
+21
 
-| 21 | 21 | 21 |  |
-| --- | --- | --- | --- |
-| 14 June | 14 June | 14 21June | 14 June |
-| 7 | 7 | 7 | 7 |
-| 28 | 28 | 28 | 28 |
-| 21 | 21 | 21 | 21 |
-| 14 May | 14 May | 14 May | 14 May |
-| 7 | 7 | 7 | 7 |
-| 28 | 28 | 28 | 28 |
+14 June
 
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
+7
+
+| 28 | 28 | 28 |
+| --- | --- | --- |
+| 21 | 21 |  |
+| 14 Dec | 14 Dec | 14 21Dec |
+| 7 | 7 | 7 |
+| 28 | 28 | 28 |
+| 21 | 21 | 21 |
+| 14 Nov | 14 Nov | 14 Nov |
+| 7 | 7 | 7 |
+| 28 | 28 | 28 |
+| 21 | 21 | 21 |
+| Oct | 14 Oct | Oct |
+| 14 | 14 |  |
+| 7 | 7 | 7 |
+| 28 | 28 | 28 |
+| 21 | 21 | 21 |
+| 14 Sept | 14 Sept | 14 Sept |
+| 7 | 7 | 7 |
+| 28 | 28 | 28 |
+| 21 | 21 | 21 |
+| 14 Aug | 14 Aug | 14 Aug |
+| 7 | 7 | 7 |
+| 28 | 28 | 28 |
+| 21 | 21 | 21 |
+| 14 July | 14 July | 14 July |
+| 7 | 7 | 7 |
+| 28 2000 | 28 2000 | 28 2000 |
+| 21 | 21 |  |
+| 14 June | 14 21June | 14 June |
+| 7 | 7 | 7 |
+
+28
+
+21
+
+14 May
+
+7
+
+| 28 | 28 | 28 |
+| --- | --- | --- |
+| 21 | 21 | 21 |
+| 14 May | 14 May | 14 May |
+| 7 | 7 | 7 |
+
+28
+
 21
 
 14 Apr
 
 7
 
-| 21 | 21 | 21 |
+| 28 | 28 | 28 |
 | --- | --- | --- |
+| 21 | 21 | 21 |
 | 14 Apr | 14 Apr | 14 Apr |
 | 7 | 7 | 7 |
 
@@ -3056,46 +3074,57 @@ Oct14
 
 21
 
-| 21 28 | 21 28 | 21 28 |  |
-| --- | --- | --- | --- |
-| 14 Mar | 14 Mar | 14 Mar | 14 Mar |
-| 7 | 7 | 7 | 7 |
-| 21 28 | 21 28 | 21 28 | 21 28 |
-| 14 Feb | 14 Feb | 14 Feb | 14 Feb |
-| 7 | 7 | 7 | 7 |
-| 28 | 28 | 28 | 28 |
-
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-21
-Jan14
-
-21 21
-Jan Jan14 21Jan14 14
-
-Continuous water-level data for wells DTX9, DTX10A, and DTX11, and precipitation data for the EDL recharge-evaluation site near Deer Trail, Colorado,DAILY MAXIMUM DEPTH BELOW LAND SURFACEAT WELL DTX9, IN FEET DAILY MAXIMUM DEPTH BELOW LAND SURFACEAT WELL DTX10A, IN FEET DAILY SUMMATION PRECIPITATION, IN INCHES
+14 Mar
 
 7
 
-DAILY MAXIMUM DEPTH BELOW LAND SURFACEAT WELL DTX11, IN FEET
+| 21 28 | 21 28 | 21 28 |
+| --- | --- | --- |
+| 14 Mar | 14 Mar | 14 Mar |
+| 7 | 7 | 7 |
+
+21 28
+
+14 Feb
+
+7
+
+| 21 28 | 21 28 | 21 28 |
+| --- | --- | --- |
+| 14 Feb | 14 Feb | 14 Feb |
+| 7 | 7 | 7 |
+
+28
+
+21
+14 Jan
+
+| 28 | 28 | 28 |
+| --- | --- | --- |
+| 21 | 21 |  |
+| 14 Jan | 14 21Jan | 14 Jan |
+
+DAILY MAXIMUM DEPTH BELOW LAND SURFACEAT WELL DTX9, IN FEETDAILY MAXIMUM DEPTH BELOW LAND SURFACEAT WELL DTX10A, IN FEETDAILY MAXIMUM DEPTH BELOW LAND SURFACEAT WELL DTX11, IN FEETDAILY SUMMATION PRECIPITATION, IN INCHESContinuous water-level data for wells DTX9, DTX10A, and DTX11, and precipitation data for the EDL recharge-evaluation site near Deer Trail, Colorado,
+
+7
 
 | 7 | 7 | 7 |  |  |
 | --- | --- | --- | --- | --- |
-| 5 7 95 7 9 | 11 1311 13 |  |  |  |
+| 5 7 9 11 13 | 5 7 9 11 13 |  |  |  |
 | IN FEET | IN FEET |  |  |  |
-| 5 7 9 | 3 | 2 | 1 | 011 13 |
+| 5 7 9 11 13 | 3 | 2 | 1 | 0 |
 | IN FEET | IN INCHES |  |  |  |
-| WATER LEVEL, | WATER LEVEL, | WATER LEVEL, |  |  |
+| WATER LEVEL, | WATER LEVEL, | PRECIPITATION, |  |  |
 
-PRECIPITATION,
+WATER LEVEL,
 
 ## Figure 9.2000.
 
 ---
 
-[figure or chart on this page was flattened into text — labels may be scrambled and any values here are unreliable]
-28 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+28
 
-������������������������������������ ������������
+������������� ����������������������� ������������
 
 ����
 
@@ -3106,33 +3135,28 @@ PRECIPITATION,
 
 ������������������
 ������������������ �����������
-�������������������������������������
+������������������������ �������������
 
-EXPLANATION
+### EXPLANATION
 
 ��������������������������
 
 ������������������
-
 �����������������������
-
 �������������������������
 
 �����
 
-�����
-��
+����� ��
 
 Figure 10. Water levels for the recharge-evaluation site containing well DTX7 and nested well
 
-DTX8 (includes DTX8A and DTX8B) near Deer Trail, Colorado, for (a) July, (b) August, and
-
-(c) September 2000. (Elevation is in feet above NAVD 88.)
+## DTX8 (includes DTX8A and DTX8B) near Deer Trail, Colorado, for (a) July, (b) August, and (c) September 2000. (Elevation is in feet above NAVD 88.)
 
 ---
 
 [figure or chart on this page was flattened into text — labels may be scrambled and any values here are unreliable]
-Data Section 29
+29
 
 �������������
 ����
@@ -3150,11 +3174,9 @@ Data Section 29
 ������������������������ �������������
 
 EXPLANATION
-
 ��������������������������
 
 ������������������
-
 �������������������������
 
 �������������������������
@@ -3165,24 +3187,22 @@ EXPLANATION
 ��
 
 Figure 10. Water levels for the recharge-evaluation site containing well DTX7 and nested
-
 well DTX8 (includes DTX8A and DTX8B) near Deer Trail, Colorado, for (a) July, (b) August, and
-
 (c) September 2000. (Elevation is in feet above NAVD 88.)—Continued.
 
 ---
 
 [figure or chart on this page was flattened into text — labels may be scrambled and any values here are unreliable]
-30 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+30
 
 ������������� ����������������������� ������������
 
 ����
 
+���������������� ����
+
 ������������������
 ������������������������
-
-���������������� ����
 
 ������������������
 ������������������
@@ -3195,27 +3215,21 @@ EXPLANATION
 ��������������������������
 
 ������������������
-
 ����������������������������
-
 �������������������������
 
 �����
 
-�����
-��
+����� ��
 
 Figure 10. Water levels for the recharge-evaluation site containing well DTX7 and nested
-
 well DTX8 (includes DTX8A and DTX8B) near Deer Trail, Colorado, for (a) July, (b) August, and
-
 (c) September 2000. (Elevation is in feet above NAVD 88.)—Continued.
 
 ---
 
 [figure or chart on this page was flattened into text — labels may be scrambled and any values here are unreliable]
-
-# Data Section 31
+31
 
 10.0
 
@@ -3265,8 +3279,7 @@ Figure 11. Water levels for the recharge-evaluation site containing wells DTX9, 
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-
-## 32 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+32
 
 120.04
 
@@ -3306,7 +3319,9 @@ Colorado Human Health Standard
 
 Proposed Human Health Standard
 
-DISSOLVED NITRITE + NITRATE AS NITROGEN, IN MRL=1
+MRL=1
+
+### DISSOLVED NITRITE + NITRATE AS NITROGEN, IN
 
 MRL=0.037
 
@@ -3326,14 +3341,16 @@ DTX10A
 
 ### U.S. GEOLOGICAL SURVEY MONITORING WELL NUMBER
 
-11 121
+11
 
 Colorado Agricultural Standard
 10
 
-101 Colorado Human Health and Agricultural Standards
-
 9
+
+121
+
+101 Colorado Human Health and Agricultural Standards
 
 8
 
@@ -3359,7 +3376,9 @@ MRL= 2
 
 21
 
-DISSOLVED CADMIUM, IN MICROGRAMS PER LITER DISSOLVED CHROMIUM, IN MICROGRAMS PER LITER
+DISSOLVED CADMIUM, IN MICROGRAMS PER LITER
+
+DISSOLVED CHROMIUM, IN MICROGRAMS PER LITER
 
 MRL= 1 MRL = 1
 
@@ -3385,21 +3404,22 @@ NUMBER
 
 Figure 12. Distribution of ground-water constituent data collected near Deer Trail, Colorado, compared to regulatory standards for
 
-### selected constituents, 2000.
+## selected constituents, 2000.
 
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
+33
 
-## Data Section 33
+1,201
 
-1,201 121
+121
 
 Colorado Human Health Standard
+1,001
 
 Colorado Agricultural Standard
-
-1,001 101
+101
 
 801
 
@@ -3421,9 +3441,9 @@ Colorado Agricultural Standard
 21
 
 DISSOLVED LEAD, IN MICROGRAMS PER LITER
+MRL = 7
 
-DISSOLVED COPPER, IN MICROGRAMS PER LITER MRL = 7
-
+DISSOLVED COPPER, IN MICROGRAMS PER LITER
 for D6
 
 MRL = 1 MRL = 1
@@ -3456,7 +3476,7 @@ Colorado Agricultural Standard
 10.1
 
 No Colorado standard
-for molybdenum13
+13 for molybdenum
 
 8.1
 
@@ -3483,7 +3503,7 @@ Colorado Human Health Standard
 
 DISSOLVED MERCURY, IN MICROGRAMS PER LITER
 
-DISSOLVED MOLYBDENUM, IN MICROGRAMS PER LITERMRL = 1MRL = 0.1
+MRL = 0.1 DISSOLVED MOLYBDENUM, IN MICROGRAMS PER LITERMRL = 1
 
 D6
 D13D17D25D29D30
@@ -3507,13 +3527,12 @@ NUMBER
 
 Figure 12. Distribution of ground-water constituent data collected near Deer Trail, Colorado, compared to regulatory standards for
 
-### selected constituents, 2000—Continued.
+## selected constituents, 2000—Continued.
 
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-
-## 34 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+34
 
 61
 251
@@ -3539,9 +3558,11 @@ Colorado Agricultural Standard
 51
 11
 
-DISSOLVED NICKEL, IN MICROGRAMS PER LITER DISSOLVED SELENIUM, IN MICROGRAMS PER LITER
+DISSOLVED SELENIUM, IN MICROGRAMS PER LITER
 
-MRL = 1MRL = 1
+DISSOLVED NICKEL, IN MICROGRAMS PER LITER
+
+MRL = 1 MRL = 1
 
 D6
 D13D17D25D29D30
@@ -3583,30 +3604,27 @@ DISSOLVED ZINC, IN MICROGRAMS PER LITER
 
 MRL = 1
 
+DTX1 DTX2DTX3DTX4DTX5DTX6
+
 D6
 D13D17D25D29D30
-
-DTX1 DTX2DTX3DTX4DTX5DTX6
 
 DTX8A
 
 DTX10A
 
 U.S. GEOLOGICAL SURVEY
-
 MONITORING WELL
-
 NUMBER
 
 Figure 12. Distribution of ground-water constituent data collected near Deer Trail, Colorado, compared to regulatory standards for
 
-### selected constituents, 2000—Continued.
+## selected constituents, 2000—Continued.
 
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-
-## Data Section 35
+35
 
 �� �������������������������������������������������������������������������������������������������������
 
@@ -3618,13 +3636,27 @@ Figure 12. Distribution of ground-water constituent data collected near Deer Tra
 
 ����
 
-���� ����
+����
+
+### �������
+
+���
+
+���
+ARSENIC DATE CHROMIUM
+���
+
+����
+
+��������
+
+�� � � � � � � ������������ � ��� ��� �� �� �� �� ������������ �
+
+����
+
+����
 
 ### ����
-
-| ���� | ��� |
-| --- | --- |
-| ������� | ��� |
 
 ���
 
@@ -3634,28 +3666,19 @@ Figure 12. Distribution of ground-water constituent data collected near Deer Tra
 
 ### DATE
 
-CHROMIUM ���DATE
-
-### ARSENIC
-
 ���
 
 ����
 
-����
-
-### ��������
-
-### ��������
+��������
 
 ���
 
 ���
-��� ���
 
-| � � � � � � � � � � | � | ��� | �� | �� | �� | ���� | ��������� | ��������� |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ����������������������� | ������������������������ |  |  |  |  |  |  |  |
+### �����������������������
+
+### ������������������������
 
 �� �������������������������������������������������������������������������������������������������������������������
 
@@ -3679,7 +3702,7 @@ CHROMIUM ���DATE
 
 ### NITRITE PLUS NITRATE
 
-### ���� ��������
+���� ��������
 
 ���
 
@@ -3715,39 +3738,46 @@ CHROMIUM ���DATE
 
 ���
 
-��������������������� ����������������������
+### ����������������������
+
+### ���������������������
 
 ## Figure 13.
 
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-36 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+36
 
-������
-��
-
-�����������
+### ������
 
 ��
 
-��
+### �����������
 
 ��
 
 ��
-���������
+
 ��
 
 ��
-����������������������
+
+### ���������
+
+��
+
+��
+
+### ����������������������
+
 �
 
 | ��� ��� ���� ���� ��� ��� ��� | ��� ���� ���� |
 | --- | --- |
 | ���� | ���� |
 
-����
+### ����
 
 ��
 
@@ -3761,38 +3791,40 @@ CHROMIUM ���DATE
 ���������������
 �����������������
 
-����������
-��
-
-�����������
+### ����������
 
 ��
 
+### �����������
+
+��
 ���
 
-������
+�� ����
 
 ��
 
 �
 
-����������
+### ����������
 
 �
 
 �
 
-���������������������������
+### ���������������������������
+
 ��� ��� ���� ���� ��� ��� ��� ��� ���� ����
 
 ���� ����
 
-����
+### ����
 
-����
+### ����
+
 ��
 
-�����������
+### �����������
 
 | �� | �� |
 | --- | --- |
@@ -3801,33 +3833,36 @@ CHROMIUM ���DATE
 ��
 
 ��
-���������
+
+### ���������
+
 ��
 
 ��
-��������������������
+
+### ��������������������
+
 �
 ��� ��� ���� ���� ��� ��� ��� ��� ���� ����
 
 ���� ����
 
-����
+### ����
 
 Figure 13. Ground-water concentrations near Deer Trail, Colorado, for selected constituents and selected
 
-wells, 1999-2000—Continued.
+## wells, 1999-2000—Continued.
 
 ---
 
-Data Section 37
+37
 
 [1 image omitted — page 45]
 
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-
-### 38 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+38
 
 � � � � � � � � � � � � � � �
 ��������������������
@@ -3842,57 +3877,63 @@ Data Section 37
 
 �����
 
-����� ������ ����������������������������
+������ ������
 
-��������� �� �� �� �� �� �� �� �� �� �� �� �� �� ��
-������������ ���
+���������������������� �����
+
+| ��������� | �� �� �� �� �� �� �� �� �� �� �� �� �� �� |
+| --- | --- |
+| ������������ | ��� |
+
 ��������
 
 ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� �����
+��� ������
+
+��������������������������������������� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ������
+
+��������������������������������������
+��� �����������������������������������������������������������������������������������
 
 ��
 ���
 
 �����
-
-��� ������ ������
-
-�� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� �����
-���������������������������
+������
 
 ����� �����
-
-����� ������
-
-��������������������������������������
-��� �����������������������������������������������������������������������������������
 
 ������������
 
 ��������
 
-���� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� �����������������
-
-��� ���
-
+������������������� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��
 �����
 
-| ��� | ��� |  |  |  |
-| --- | --- | --- | --- | --- |
-| ��������������� ��������������� | ��������������������������������������������� | ���������������� |  |  |
-| �� �� �� �� | �� �� �� �� �� �� | �� ����� | ��� | �������������� |
-
-���������
+��� ���
+��������������� ��������������� ���������������������������������������������
 
 ��� ���
-
-�����������������������������������������������������������������������������������������������������������������������������
 
 ����������
 
-����������������������������������������������������������������������������������������������������������������������������
+������
+
+����������� �� �� �� �� ��� �� �� �� �� �� �� ��� �� �� ���
+
+���������
+��������������������������������������������������������������������������������������������������������������
+
+����������
+��������������������������������������������������������������������������������������������������������������
 
 �������������������������
+
+��� ���
+
+���������������
+
+��������������
 
 ����������������������������������������������������������������������������������������������������
 
@@ -3900,17 +3941,16 @@ Data Section 37
 
 ����������������������������������������������������������������������������������������������������������������������������������������
 
-������ ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� �����
+�� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ���� �����
 ��
 
-�� ���� ���� ����
+| �� | ���� ���� | ���� |  |
+| --- | --- | --- | --- |
+| ������������������ ��� ��� ����� | ��� �������������������� | ���������� | ����� |
 
 ����� �����
 
 ����
-
-��� ��� ����� ��� ����������������������� ���������� ���������� ����������
-
 �����
 
 ������������������������������������������������������
@@ -3926,7 +3966,7 @@ Data Section 37
 
 ---
 
-### Data Section 39
+39
 
 � � �� � � �� � � � � � � � � � �
 ��������������������
@@ -3937,21 +3977,22 @@ Data Section 37
 
 ������������ ������������ �����������������������������������������������������������������
 
-�� ������������ ���������� �����������������������������������������������������������������
+������������ ������������ ��������������������������������������������������
+���������������������� �����
 
-���������������������������
-
-��������� �� ���� �� �� �� �� �� �� �� �� �� �� �� �� ��
+��������� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� ��
 ������������
 ��������
 
 ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� �����
 ���
 
-�� ����� ����� ���� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� �����
-��������������������������������
+��������������������������������������� ����� ���� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� ����� �����
 
 ��������������������������������������
+���
+
+���������������
 
 �� �� ��
 
@@ -3959,22 +4000,25 @@ Data Section 37
 
 ����� ����� �����
 
-��� ����������������������������������������������������������������������������������������������������� ������������
+�����
 
-�� ��� ��� ���� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� �����������������
+������������������������������������������������������������������������������������������������ ������������
 
-��� ��� ���
+������������������� ��� ���� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ���
+
+| ��� | ��� ��� |  |
+| --- | --- | --- |
+| ��������������� | ����������� | ������������������������������������������������������� |
+
+����������� �� ��� ���� �� �� �� ��� ��� ��� ��� ��� ��� ��� ��� ��� ���
+
+���������
 
 ��
 ��� ���
 
 ���
-
-| ��������������� | ����������� | ������������������������������������������������������� | ���������� |
-| --- | --- | --- | --- |
-| �� | �� �� ����� ���� | ��� ��� ��� ��� ��� ��� ��� ��� ��� �������������� |  |
-
-���������
+����������
 
 ��
 ��� ���
@@ -3994,18 +4038,14 @@ Data Section 37
 ��������������������������������������������������������������������������������������������������������������������������������������
 
 �� ����� ����� ����� ����� �����
-������������������
+������������������������������������������������������������������
+��
+
+���� �� ��
+������������������ ����������� �������� ������������� ��� ��� ��� ��� ��� ���
 
 ����
 ����� �����
-
-������������������������������������������������
-
-��
-
-| ���� | �� �� |
-| --- | --- |
-| ����������� | �������� ������������� ��� ��� ��� ��� ��� ��������������������� |
 
 ��
 ��� �����
@@ -4023,56 +4063,73 @@ Data Section 37
 
 ---
 
-## 40 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+[figure or chart on this page was flattened into text — labels may be scrambled and any values here are unreliable]
+40
 
-| � � � � � � �� �������������������� | �� � � � � � � |
-| --- | --- |
-| ���� �������������������������������� | �� ������������������������������ |
-| �������������������������������� ��������������������������� | �� ������������������������������ |
-| ��������� ���� �� �� �� �� �� ������������ �������� | �� �� �� �� �� �� �� |
-| ����� ����� ����� ����� ����� ����� | ����� ����� ����� ����� ����� ����� |
+� � � � � � ��
+��������������������
 
-��� ������������
+����
+��������������������������������
 
-�� ����� ����� ����� ����� ����� �����
-���������������������������
+��������������������������������
+���������������������� �����
 
-����� ����� ����� ����� ����� �����
-
-����� ������������
-
-��������������������������������������
-��� ����������������������������������
-
-������������������������������������������
-
+��������� �� �� �� �� �� �� ��
+������������
 ��������
 
-�� ���� ��� ��� ��� �����������������
+����� ����� ����� ����� ����� �����
+��� ������
 
-��� ��� ��� ��� ��� ��� ���
+��������������������������������������� ����� ����� ����� ����� ����� ������
 
+��������������������������������������
+��� ������������ ����������
+
+�� � � � � � �
+
+�� ������������������������������
+
+�� ������������������������������
+
+�� �� �� �� �� �� ��
+
+����� ����� ����� ����� ����� �����
+������
+
+����������� ����� ����� ����� ����� �����
+
+������������ ��������������������������������������������������
+
+������������������� ��� ��� ��� �� ��
 �����
 
 ��� ���
+��������������� �������������������� �����
 
-| ��� | ��� |  |  |
-| --- | --- | --- | --- |
-| ��������������� �������������������� | ��������������� | ���������� | ����� |
-| �� | �� ����� | ��� ��� | �������������� |
+����������� ��� �� ��� ��� �� �� ���
 
 ���������
-
-�� �� �� �� ��
-��� ���
-
-����������������������������������������������������������������������������������������������
+������������������������������������������������
 
 ����������
-
-����������������������������������������������������������������������������������������������
+������������������������������������������������
 
 �������������������������
+
+��� ��� ��� ��� ��� ��� ���
+
+| ��� | ��� |  |
+| --- | --- | --- |
+| ���������� | ���������� | ����� |
+| �� �� �� | �� �� |  |
+
+��� ���
+
+����������������������������������������������
+
+����������������������������������������������
 
 ����������������������������������������������������������������������������������������������������
 
@@ -4085,17 +4142,16 @@ Data Section 37
 ��
 
 �� ��
+������������������ ��� ��� ��� ��� �����
 
 ����
 ����� ����� ����� ����� ����� �����
 
-| ���� | �� | ���� ���� |  |
-| --- | --- | --- | --- |
-| ������������� ��� ��� ��� ��� | ����� | ��� | ��� ��� |
+| ���� | �� | ���� ���� |
+| --- | --- | --- |
+| ��� | ��� ��� |  |
 
-�����
-
-### ����������������������������������������������������������������
+����������������������������������������������������������������
 
 �����������������
 
@@ -4109,7 +4165,7 @@ Data Section 37
 
 ---
 
-Data Section 41
+41
 
 �������� ��������������������������������������������������������������������������������������������
 
@@ -4148,17 +4204,68 @@ Data Section 41
 
 ---
 
-42 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
+42
 
-| ��� ��� �� ��� �������� | ��� �� �� �� ��� ���� ������ � ���������������������� |
+��� ��� �� ��� �� �� ��
+���
+��������
+
+| ��� ��� | �� ��� �� | �� �� |
+| --- | --- | --- |
+| �������� | ��� |  |
+| ��� ��� | ��� |  |
+| ������� | �� | �� �� |
+
+��� ���
+
+| ��� ��� | �� ��� �� | �� �� |
+| --- | --- | --- |
+| ��������� | ��� |  |
+
+��� ���� ������ �
+����������������������
+
+��� ����������� �
+�����������
+������������
+
+��� ����������� �
+�����������������������
+
+��� ����������� �
+����������������������
+
+��������� ��� ��� �� ��� �� �� ��
+
+��� �������������
+����������������� ����
+
+���� ��� ��� �� ��� �� �� ��
+���
+
+��� �������������
+����������������������
+
+| ��� ��� | ��� | ��� |  |
+| --- | --- | --- | --- |
+| ����� | �� | �� | �� |
+
+���
+
+��� �������������
+����������������������
+
+| �� �� | �� |
 | --- | --- |
-| ��� ��� �� �������� ��� | ��� �� �� �� ��� ����������� � ����������� ������������ |
-| ��� ��� ������� ��� ��� | ��� �� �� �� ��� ����������� � ����������������������� |
-| ��� ��� �� ��������� ��� | ��� �� �� �� ��� ����������� � ���������������������� |
-| ��� ��� ������ ����� | ��� �� �� �� ��� ������������� ����������������� ���� |
-| ��� ������� �� ��� | ��� �� �� �� ��� ������������� ���������������������� |
-| ��� ��� ����� ����� | ��� ����� �� ��� ������������� ���������������������� |
-| �� �� ���������������������������� ��������� | �� �� ���� ���� ����� ����������������������� ������� ������� ������� �������������������� ���������������������������������������� |
+| ���������������������������� ��������� | ���� ���� |
+
+�����������������������
+��������������������
+
+��
+����� ������� ������� �������
+����������������������������������������
 
 ������������������������������������������������������������������������������������������������������������������������
 
@@ -4169,15 +4276,18 @@ Data Section 41
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-Data Section 43
+43
 
 �������� ����������������������������������������������������������������������������
 
+������������������ �����������������������������������
+
 ����������������������������������������������������������������������������������������������������������������������
 
-������������������ ����������������������������������� ����������������������������������
+����������������������������������
+�������� �����������������
 
-��������� ��������������������� ����������������
+���������������������
 
 ��������������������������
 
@@ -4209,8 +4319,9 @@ Data Section 43
 
 �������������������������������������
 
-����������������� ���������������������������������������������������� ����������������������������������������
+���������������������������������������������������� ����������������������������������������
 
+�����������������
 �������������������������������������
 
 � ������������������������������������������������������������������������������������������������������������������������������
@@ -4223,11 +4334,14 @@ Data Section 43
 
 ���������������������������������������������������
 
-| �������������������� | ������������������ |  |
-| --- | --- | --- |
-| ������ | ������ |  |
-| ����� | ����� | ������������ |
+������������������
 
+��������������������
+
+������
+������� ����� ����� �����
+
+������
 �����
 
 | ���������� | ���������� |  |
@@ -4260,7 +4374,7 @@ Data Section 43
 
 ---
 
-44 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+44
 
 �������� ������������������������������������������������������������������������������������������������������
 �����������������������������������������
@@ -4269,8 +4383,8 @@ Data Section 43
 
 | �������������������� | ������������������ |  |  |  |  |
 | --- | --- | --- | --- | --- | --- |
-| ������ | ����������������� | ����� | ����� | ����� |  |
-| ���������� | ������������������ | ��������� | ��������� | ��������� |  |
+| ����������� | ����� | ������ | ����� | ������ | ����� |
+| �������� | ��������� | ���������� | ��������� | ���������� | ��������� |
 | ������������ | ������������ |  |  |  |  |
 | ����� | ����� | ����� |  |  |  |
 | ����� | ����� |  |  |  |  |
@@ -4297,9 +4411,9 @@ Data Section 43
 
 ������
 
-| ����� | ������������ | ���������� |
-| --- | --- | --- |
-| ��������� | ��������� |  |
+| ������� | ����� | ���������� | ����� |
+| --- | --- | --- | --- |
+| ��������� | ��������� |  |  |
 
 ������������
 ����� �����
@@ -4318,40 +4432,75 @@ Data Section 43
 
 ---
 
-Data Section 45
+45
 
 �������� ��������������������������������������������������������������������������������������
 
 ����������������������������������������������������������������������������������������������������������������������������������������������������
 ���������������������������������������������������������������������������������������������������������������������������������������������������
 ���������������������������������������������������������������������������������������������������������������������������������������������������
+
 �������������������������������������������������������������������������������������
 
-| ������� | ������ |  |
-| --- | --- | --- |
-| ����������������������� | ����� | ����������������� |
-| ��� | ��������� |  |
+�����������������������
+
+�������������������������
+
+�������
+
+������������������
+
+��������������������
+
+�����������������
+
+��������������������
+
+����������������������������������������
+
+������������������
+
+�������������������
+
+�������������������
+
+������������������
+
+�����������������
+
+����������������������������������
+
+����� �����������������
 
 ��������������������������������������
 
-| ������������������������� | ����� ����������������� | ��� | ��������������������������� |
-| --- | --- | --- | --- |
-| ������� | ����� ����������������������� | ��� | ��������������������������� |
-| ������������������ | ���� ��� | ���� | �������������� |
-| �������������������� | ���� ��� | ����� | �������������� |
-| ����������������� | ���� ��� | ���� | �������������� |
-| �������������������� | ���� �� | ���� | ��������������������������� |
-| ���������������������������������������� | ���� ����������������������� | � | ��������������������������� |
-| ������������������ | ���� �� | ���� | ��������������������������� |
-| ������������������� | ���� �� | ���� | ��������������������������� |
-| ������������������� | ���� �������������������������������� | ��� | ��������������������������� |
+����� �����������������
+
+����� �����������������������
+
+���� ���
+
+���� ���
+
+���� ���
+
+���� ��
+
+���� �����������������������
+
+���� ��
+
+���� ��
+
+���� ��������������������������������
 
 ���������
 
-| ������������������ | ���� ����������������������������� | ���� | ��������������������������� |
-| --- | --- | --- | --- |
-| ����������������� | ���� �������������������������������� | ���� | �������������� |
-| ���������������������������������� | ���� ����������� | �� | ��������������������������� |
+���� �����������������������������
+
+���� ��������������������������������
+
+���� �����������
 
 �������������������������������������������������������
 
@@ -4368,42 +4517,131 @@ Data Section 45
 
 ��������������������������
 
-���� �������������������������������� ����� ��������������
+�������������������������
+
+�������������������������
+
+������������������������
+
+�����������������������
+
+��������������������������
+
+���� ��������������������������������
 
 �������������������
 
-���� ����������������������������� ����� ��������������
+���� �����������������������������
 
 ������������
 
-���� �������������������������������� ��� �����������
+���� ��������������������������������
 
 ���������
 
-���� �������������������������������� ��� ������������������������
+���� ��������������������������������
 
 ���������
 
-���� �������������������������������� ���� ������������������������
+���� ��������������������������������
 
 ���������
 
-���� �������������������������������� ���� ������������������������
+���� ��������������������������������
 
 ���������
 
 ��������������
 
-| ������������������������� | ���� | ������ | � | ������������� |
-| --- | --- | --- | --- | --- |
-| ������������������������� | ���� | ������ | � | ������������� |
-| ������������������������ | ���� | ������������������ | � | �������������������������� |
-| ����������������������� | ���� | ������ | � | ������������� |
-| �������������������������� | ���� | ������ | � | ������������� |
+���� ������
+
+���� ������
+
+���� ������������������
+
+���� ������
+
+���� ������
+
+�������
+���
+
+������
+���������
+
+���
+
+���
+
+����
+
+�����
+
+����
+
+����
+
+�
+
+����
+
+����
+
+���
+
+���������������������������
+
+���������������������������
+
+��������������
+
+��������������
+
+��������������
+
+���������������������������
+
+���������������������������
+
+���������������������������
+
+���������������������������
+
+���������������������������
+
+����
+
+����
+
+��
+
+���������������������������
+
+��������������
+
+���������������������������
+
+�����
+
+��������������
+
+�����
+
+��������������
+
+���
+
+�����������
+
+| ��� | ������������������������ |
+| --- | --- |
+| ���� | ������������������������ |
+| ���� | ������������������������ |
+| � � � � � | ������������� ������������� �������������������������� ������������� ������������� |
 
 ---
 
-46 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+46
 
 �������� ������������������������������������������������������������������������������������������������
 
@@ -4448,19 +4686,17 @@ Data Section 45
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-Data Section 47
+47
 
 �������� �����������������������������������������������������������������������
 
 ��������������������������������������������������������������������������������������������������������
-
 ������������������������������������
 
+������
+������
+
 �������
-
-������
-������
-
 �����������
 ��
 ��
@@ -4481,30 +4717,43 @@ Data Section 47
 
 ����������
 
-��������
 ����
 
-���� �����������������������������������������������������
+����
+
+����
+
+����
+
+����
+
+����
+
+����
+
+��������
+
+�����������������������������������������������������
 
 ������������������������������������
 
-���� �������������������������������������������
+�������������������������������������������
 
-���� ���������������������������������������������������������
+���������������������������������������������������������
 
 �������������������������������������������������
 
-���� ���������������������������������������������������������
+���������������������������������������������������������
 
 ������������������������������������������
 
-���� ���������������������������������������������������������
+���������������������������������������������������������
 
 ���������������������������������������������������������
 
 ��������
 
-���� ���������������������������������������������������������
+���������������������������������������������������������
 
 ��������������������������������������������������������
 
@@ -4512,54 +4761,29 @@ Data Section 47
 
 ---
 
-[figure or chart on this page was flattened into text — labels may be scrambled and any values here are unreliable]
-48 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+48
 
-���������� � � � � � � � � � � � � � � � � � � � ������
+| ��������������� � � � �������� | � � � � � � � � � � � � � � � � � |
+| --- | --- |
+| �������������� ��������������� | ����������������������������������������������������������������������������������������������������� |
+| ����������������������������������� ���������� | ���������������������������������������������������������������������������������������������������� |
+| ������������ ������������������ | ������������������������������������������� �������� ��� ��� �������� |
+| ��������������� ����������������������� | ������������������������������������������������������������������������������������� |
+| ������������ �������������������� | ������������������������������������������ �� �� �� �� �� �� |
+| ������������������������� ������� | ������������������������������������������������� �� �������� �� �� �������� |
+| ���������������������������� | ������������������������������������������������� �� ������� �� �� ������� |
 
-��������
+��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� ��
 
-��������������
+�
 
-��������������������������������������������������������������������������������������������������������������������
+������ ������������
 
-���������������������������������������������������������������������������������������������������������������������������������������
+������ ������ ������ ������
 
-����������
+��������������������������������������������������������������������
 
-������������������������������������������������������� ��� ��� ��� �������� �����
-
-������������������
-
-����������������������������������������������������������������������������������������������������
-
-�����������������������
-
-����������������������������������������������������
-
-��������������������
-
-�� �� �� �� �� �� ��
-
-�������������������������������������������������� ���������� �� �� �� �� �� ��
-
-�������
-
-| ������ | ������ | ������ | ������ |
-| --- | --- | --- | --- |
-| ��� | � | ��������������������������������������������������� ���������� �� �� | �� �� |
-| ������ | ������ | ������ | ������ |
-
-������������ ����������������������������������������
-
-| ��������������������������������������������������������������������������������������������������������������������������� | ���������� �� �� | �� �� �� | �� |
-| --- | --- | --- | --- |
-| ������ | ������ | ������ | ������� |
-
-������ ��������������������������������������������������������������������������������
-��������
-
-�������������������������������������������������������������������
+���������������������������������������������������������������������������
 
 ������������
 
@@ -4579,142 +4803,167 @@ Data Section 47
 
 ��������������������������������������������
 
-������������������������������������������������������������������ ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
+��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
 
 ---
 
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-Data Section 49
+[figure or chart on this page was flattened into text — labels may be scrambled and any values here are unreliable]
+49
 
-�������� ������������ �������� �������������������� ��������������������
-
-���� ���� ���������
-
-������ ������
+���� ����������������������������������������������������������������
 
 ������������������������������
 
-���� ������������ ������������ ������������������� ��������������������
-
-���� ���� ���������
-
-������ ������
+���� ���������������������������������������������������������������
 
 ������������������������������
 
-�������� ������������ �������� �������������������� ��������������������
+��������������������������������������������������������������������
 
-���� ���� ���������
+���������������������������������������
 
-������ ��������������
+���� ����������������������������������������������������������������
 
 �������������������������������
 
-���� �������� ������������ ������������������������ ��������������������
+�� �� �� ����������� �� �� �� �� ������� �� ��
+�������
+���������������������
 
-���� ���� ���������
+��� �� �� ����������� �� �� �� �� ������� �� ��
+�������
+���������������������
 
+��
+
+����
+
+��� ���������������������������������������������������������������
+
+�������
+���������������������
+
+���� ���������������������������������������������������������������
+
+�����
+���������������������
+
+���� ���������������� ������������
+
+����
+
+����� ���������� ��������������������
+
+���������������������
+
+���� �������������������� ������������
+
+����
+
+���� ����� ��������������������
+
+���������������������
+
+���� �������������������� ������������
+
+����
+
+������ ����� ��������������������
+
+���������������������
+
+���� �������������������������������������������������������������
+
+������
+���������������������
+
+���� ������������������������������������������������������
+������������������������������
+
+����
+
+������������� ����
 ������ ������
 
-�������������������������������
+������������� ����
+������ ������
 
-�� �� �� ���� �� �� �� �� �� �� �� �� �� ������� �����
-�������
+������������� ����
+������ ������
+
+������������� ����
+������ ������
+
+�� ����������� �� ����
+
+�� ����������� �� ����
+
+������������� ����
+������ ������
+
+�������������� ����
+������ ������
+
+�������������� ����
+������ ������
+
+�������������� ����
+������ ������
+
+�������������� ����
+������ ������
+
+�������������� ����
+������ ������
+
+�������������� ����
+������ ������
+
+����������� ������������������������������������������������������ ����
 ���������������������
 
-��� �� �� ���� �� �� �� �� �� �� �� �� ����������� �����
-�������
-���������������������
+�������������� ����
+������ ������
 
-������������ ������������ ������� ��������������� ��������������������
+����������������������������������������������������������������������������������������������������
 
-���� �� �� ���������
+�������� ����������������������������������������������������������������
 
-���� �� �� ���������
-
-���� ���� ���������
-
-������� ������ ������
-
-���������������������
-
-| ���� �������� | ������������ | ���� |  |  |  |
-| --- | --- | --- | --- | --- | --- |
-| ���� | ���� |  |  |  |  |
-| ����� ���� | ����� | ���������� | �������������������� | ���������������� | ������ |
-
-���������������������
-
-| ���������������� | ������������ | �������� |  |  |
-| --- | --- | --- | --- | --- |
-| ���� | ���� |  |  |  |
-| ����� | ���������� | �������������������� | ���������������� | ������ |
-
-���������������������
-
-| �������������������� ������������ | ���� |  |  |  |
-| --- | --- | --- | --- | --- |
-| ���� | ���� |  |  |  |
-| ���� ���� | ����� | �������������������� | ���������������� | ������ |
-
-���������������������
-
-| �������������������� ������������ | �������� |  |  |  |
-| --- | --- | --- | --- | --- |
-| ���� | ���� |  |  |  |
-| ������ | ����� | �������������������� | ���������������� | ������ |
-
-���������������������
-
-| �������������������� ������������ | �������� | ����� | �������������������� |
-| --- | --- | --- | --- |
-| ���� | �������������� |  |  |
-| ������ | ������ | ������ |  |
-
-���������������������
-
-| ���� �������������������� ������������ | �� ��������� | ��������������� |
-| --- | --- | --- |
-| ���� | �������������� |  |
-| ��������� | ������ | ��������������������������� |
-| ��� �������������������� ������������ | �� ��������� | ��������������� |
-| ���� | �������������� |  |
-| �������� | ������ | ���������������� |
-
-���������������������������������������������������������������������������������������������������������������
-
-�������� ���������������������������������������������������������������� ��������������������
+��������������������
 
 �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
 
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-50 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+50
 
 ��������� ������������������������������������������������������������������������������������������
 
 �����������������������������������������������������������������������������������������������������������������������������������
 
-��������� ���������� ������
+������������
+
+��������� ���������� ������ �������
+
 �������
 
-������������
-�������
 ��������
 
 | ������������ | ������� | ������ | ������������ | ���������� |
 | --- | --- | --- | --- | --- |
 | ���� | ����� |  |  |  |
-| ���������� | ������������� | ����� | ��������� |  |
-
-������
-�������� ������ ��������
 
 ����������
-������������
+
+���������� ������������� ����� ��������� ������������
+
 ������
-����������
+
+������
+
+�������� ������ �������� ����������
+
 ������������
 
 | ���� | �������� | ���� | ����� | ��� | ���� | ���� | ���� |
@@ -4749,15 +4998,13 @@ Data Section 49
 
 ---
 
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-Data Section 51
+51
 
 ��������� ����������������������������������������������������������������������������������������������������
 
 �����������������������������������������������������������������������������������������������������������������������������������
 
 ������������
-
 ��������� ���������� ������ �������
 
 �������
@@ -4777,164 +5024,97 @@ Data Section 51
 ������
 
 �������� ������ �������� ����������
-
 ������������
 
-| ������ | �������� | ���� | ����� | ��� | ���� | ����� | ���� |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| ������ | �������� | ���� | ����� | ��� | ���� | ����� | ���� |
-| ������ | �������� | ���� | ����� | ��� | ���� | ����� | ���� |
-| ������ | �������� | ���� | ����� | ��� | ���� | ����� | ���� |
-| �� | �������� | ���� | ������ | ��� | ���� | ���� | ���� |
-| �� | �������� | ��� | ������ | ��� | ���� | ���� | ���� |
-| �� | �������� | ���� | ������ | ��� | ���� | ���� | ���� |
-| �� | �������� | ���� | ������ | ��� | ���� | ���� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ��� | ���� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ��� | ���� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ���� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ���� | ���� |
-| ��� | �������� | ���� | ��� | ��� | ���� | ����� | ���� |
-| ��� | �������� | ���� | ��� | ��� | ���� | ����� | ���� |
-| ��� | �������� | ���� | ��� | ��� | ���� | ����� | ���� |
-| ��� | �������� | ���� | ��� | ��� | ���� | ����� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ����� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ����� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ����� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ���� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ������ | ��� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ������ | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ������ | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ������ | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ���� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ���� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ���� | ���� |
-| ��� | �������� | ���� | ����� | ��� | ���� | ���� | ���� |
+| ������ �������� ���� ����� ��� ���� ������ �������� ���� ����� ��� ���� ������ �������� ���� ����� ��� ���� ������ �������� ���� ����� ��� ���� | ����� ���� ����� ���� ����� ���� ����� ���� |
+| --- | --- |
+| �� �������� ���� ������ ��� ���� �� �������� ��� ������ ��� ���� �� �������� ���� ������ ��� ���� �� �������� ���� ������ ��� ���� | ���� ���� ���� ���� ���� ���� ���� ���� |
+| ��� �������� ���� ����� ��� ��� ��� �������� ���� ����� ��� ��� ��� �������� ���� ����� ��� ���� ��� �������� ���� ����� ��� ���� | ���� ���� ���� ���� ���� ���� ���� ���� |
+| ��� �������� ���� ��� ��� ���� ��� �������� ���� ��� ��� ���� ��� �������� ���� ��� ��� ���� ��� �������� ���� ��� ��� ���� | ����� ���� ����� ���� ����� ���� ����� ���� |
+| ��� �������� ���� ����� ��� ���� ��� �������� ���� ����� ��� ���� ��� �������� ���� ����� ��� ���� ��� �������� ���� ����� ��� ���� | ����� ���� ����� ���� ����� ���� ���� ���� |
+
+��� �������� ���� ����� ��� ���� ������ ���
+
+��� �������� ���� ����� ��� ���� ������ ����
+
+��� �������� ���� ����� ��� ���� ������ ����
+
+��� �������� ���� ����� ��� ���� ������ ����
+
+��� �������� ���� ����� ��� ����
+
+��� �������� ���� ����� ��� ����
+
+��� �������� ���� ����� ��� ����
+
+��� �������� ���� ����� ��� ����
+
+���� ����
+
+���� ����
+
+���� ����
+
+���� ����
 
 ---
 
-52 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+52
 
 [1 image omitted — page 60]
 
 ---
 
-Data Section 53
-
-���
-�����������������������������
-
-��
+53
 
 ��� ���
-�������� ���������������� ���������������� ����������������
-
-������ ������������ ������������ ������������ ������������
-����
-
-���������������������������������������������
-
-�������������
-
-����������������
-
-���
-���������������������������
-
-�� �� �� �� �� �� �� �� �� �� �� �� �� �� �� ��
-
-��������
-������ ������������ ������������ ������������
-
-�� � � � � � � � � � � � � � � �
-
-������������������������
-
-��
-������������
-
-��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ������������������� �����
-
-�������������������
-
-���������
-������
-
-| ���������������� | ���������������� |
-| --- | --- |
-| ������������ | ������������ |
-
-�������������������
-
-���
-����������������������������
-
-������������ ������������ ������������ ������������
-
-�������������������������������������������������������������������������������������������������������������������������
-
-� �
-
-������
-����������������������
-
-������������
-�������������������� �������������������� ��������������������
-
-| ������������� ������������������� | ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� |
-| --- | --- |
-| ����� ����������������������������� | �������������������� �������������������� �������������������� �������������������� |
-| ����� ������ | ���������������� ���������������� ���������������� ���������������� |
-
-�����
-
-��������������������������������������������������������������������������������������������������������������������������������
-
-����������
-
-���������������������������������������������������������������������������������
-
-�����
-
-�������������������������������������������������������������������������������������������
-
-� ���������������� ���������������� ������������������������������������������������������ �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
-
----
-
-54 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
-
-��� ��� ��� ��� ��� ��� ��� ������
-������������
+��� ��������
 �����������������������������
 
 ��
 
-������ ������������ ������������ ������������
+������ ������������
 �����������������������
 ���������������������������������������
 
-�� �� �� �� �� �� �� �� �� �� �� ��
+�� �� �� ��
 ����������������
 
-���������������� �������������������
-�������� ���������������������������������������
+��� ��������������
+���������������������������
 
-�� �� �� ��
-� � � � � � � �
+� �� � �
 ������������������������
 
-�� ��� ��� ��� ��� ��� ��� ��� �������������������
+�� ��� ��� ��� ���
 ������������
 �������������������
 
-���������������� ����������������
-��������� ��������������������������
-�������������������
+����������������
+������ ���
+�������������������������
 
-���������������������������� ���������������
+��� ������������
 ����������������������������
 
-��������������
+���������������� ����������������
+
+������������ ������������
+
+�� �� �� �� �� �� �� ��
+
+������������ ������������
+
+� � � � � � � �
+
+���������������� ��� ��� ��� ���
+
+����������������
+������������
+
+������������ ������������
+
+����������������
 
 ������������
 
@@ -4944,41 +5124,112 @@ Data Section 53
 
 � � � �
 
-��� ��� ��� ���
+������� ��� ���
+�
 
 ������������
 
 ������������
 
-�������������������������������������������������������������������������������������������������������������������������
+��������������������������������������������������������������������������������������������������������������������������
 
-� �
-������������ ������������
-������
-���������������������� ������������������������
+�
+
+������������
+���������� �������������������� ��������������������
+������������������
 
 ��������������������
 
 | ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ������������� ������������������� | ��� ��� ��� ��� |
 | --- | --- |
-| ����������������� � ������������������������������������� ����������������������������������� | �������������������� |
-| ���������������� ���������������� ��������������������� ������ | ���������������� |
+| ������������������������������������������������������ �������������������� �������������������� | �������������������� |
+| ����� ���������������� ���������������� ���������������� ������ | ���������������� |
 
 �����
-
-��������������������������������������������������������������������������������������������������������������������������������
-
+������������������������������������������������������������������������������������������������
 ����������
 ���������������������������������������������������������������������������������
 
 �����
 �������������������������������������������������������������������������������������������
 
-� �� �� �� �� ������������ ������������ ����������������������� �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
+��������������������������������
+
+��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
 
 ---
 
-Data Section 55
+54
+
+���
+������������
+�����������������������������
+
+��
+
+������ ����������������
+����������������������������������������������������������
+
+�� �� �� ��
+����������������
+
+���
+��������������������������� ��������������������
+
+� � � �
+������������������������
+
+������������ �� ����������������
+�������������������
+
+������������ ��� ��������������������
+�������������������
+
+��� ������������
+����������������������������
+
+| ��� ��� ��� ��� | ��� ��� ��� ��� �������������� |
+| --- | --- |
+| ������������ | ������������ ������������ |
+| �� �� �� �� | �� �� �� �� �� �� �� �� |
+| ���������������� | ���������������� ������������ |
+| � � � � | �� �� �� �� � � � � |
+| ��� ��� ��� ��� | ��� ��� ��� ��� ��� ��� ��� ��� |
+| ���������������� | ���������������� ������������ |
+| ������������ | ���������������� ������������ |
+
+��������������������������������������������������������������������������������������������������������������������������
+
+�
+
+������
+���������������������� ������������������������
+
+������������ ������������
+��������������������
+
+| ��� ��� ��� ��� ������������� ������������������� | ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� |
+| --- | --- |
+| ����� ����������������������������������������������������� | ������������ �������������������� �������������������� |
+| ����� ���������������� ������ | ���������������� ���������������� ���������������� |
+
+�����
+��������������������������������
+����������
+
+������������������������������������������������������������������������������������������������
+
+���������������������������������������������������������������������������������
+
+�����
+
+�������������������������������������������������������������������������������������������
+�������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
+
+---
+
+55
 
 ��� ����������������
 �����������������������������
@@ -5001,23 +5252,22 @@ Data Section 55
 | ��� ������������ ��������������������������� | ������������ |
 | --- | --- |
 | � � � � ���������� �������������� | � � � � |
-| �� ��������������������������� ������������������� | ��� ��� ��� ��� |
-| ��������������� ������ ������������������������ | ������������ |
+| ������������ �� ��������������� ������������������� | ��� ��� ��� ��� |
+| ��� ������������ ������ ������������������������ | ������������ |
 
-������������ ����������������������������������������������������������������������������������������������������������������������������������
+����������������������������������������������������������������������������������������������������������������������������������������������
 
 �
 ����������������������������
 
-������
-��������������������������
+��������������������������������
 ������������������
 
 ��������������������
 
 | ��� ��� ��� ��� ������������� ������������������� | ��� ��� ��� ��� |
 | --- | --- |
-| ����� � ������������������������������������������������ | �������������������� |
+| ����� ������������������������������������������������� | �������������������� |
 | ����� ������ ���������������� | ���������������� |
 
 ����� �������
@@ -5028,50 +5278,54 @@ Data Section 55
 
 ������������������������������������������������������������������������������������������
 
-� ������� ����������������
+�� ������ ����������������
 
 ����������������
 
-���������[ ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
+���������[���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
 
 ---
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-56 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+56
 
 �����
-����������������������������������������� �������������������� ���������������������������������������
+������������������������������������������������������������ �������������������� ��������������������
+
+��������������������
 
 ����
 
 �������� ������
-����������������������������������������������� �������������������� ��������������������������������
+�����������������������������������������������������������
 
-| �� | ������������ |  |
-| --- | --- | --- |
-| ����������� | ����� | ���������������� ������������������������ |
+������������� �����������������
+�����������������
 
-���������
-
-| �� | ������������ |  |
-| --- | --- | --- |
-| ����� | ����� | ���������������� ������������������������ |
+| �� | ������������ |
+| --- | --- |
+| ������������� | ����� |
 
 �������������������
 
-����� ��������������������� ������������ ���������������������������������
+����� �� ����������������
+����������������
 ���������
 
-| �� | ���� | ���������������� |
-| --- | --- | --- |
-| ���������� ����� | �������������������� |  |
-
+�� ����
+���������� �����
 ���������������������������������������
 
-����� ��� ��� ��� ��� ��� ��� ��� ��� ��� ��� ������������
-���������������������������
-������������
+�������������������� ��������������������
 
+���������������� ����������������
+
+���������������� ����������������
+
+���
+������������ �����������������
+
+����������������
 ��������������������
 
 ��������������������
@@ -5084,22 +5338,27 @@ Data Section 55
 
 ����������������
 
+����� ������������ ��� ��� ��� ��� ��� ��� ��� ��� ��� ���
+���������������������������
+������������
+
 ��� ��� ��� ���
 
 | ����� | ��� ��� | ��� ��� ��� | ��� | ��� ��� |
 | --- | --- | --- | --- | --- |
-| ���� | ���� | ����������������������� | ���� |  |
+| ����������������������������������������� | ���� | ����� | ���� |  |
 | ��� | ��� ��� |  |  |  |
 
 ����
 
-| ������������������������������������������������������������������������������������������������������������������������������������������ | � |
-| --- | --- |
-| � | ����������� |
+�����������������������������������������������������������������������������������������������������������������������������������
+
+�
 
 ������������
-���� �������������������� �����������������������������
-�������������������
+���������������������������������������������������� ��������������������
+
+��������������������
 
 �������� ����� ���������������� ���������������� ����������������
 �������������������
@@ -5114,8 +5373,6 @@ Data Section 55
 �����
 ������
 
-��������������������
-
 ����������������
 
 �� �� �� ��
@@ -5123,20 +5380,19 @@ Data Section 55
 ����������������
 
 �����
-
-�����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
-
+���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
 ����������
 
 �����
 �������������������������������������������������������������������������������������������
 
-� ���������������� ���������������� ���������������� �������������������������� ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
+��������������������������������
+
+�������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
 
 ---
 
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-Data Section 57
+57
 
 �����
 ������������������������������������������������������������
@@ -5147,103 +5403,94 @@ Data Section 57
 �����������������������������������������������������������
 
 ��
-����������� ���������������� �������������������
+����������������������������������������������
 
 ��
+��������������������������������������������������
 
-| ����� | ���������������� | ����������������������������� |
-| --- | --- | --- |
-| ������� | �������� |  |
-
-���������������� ����������
+����������������������� ������������������
 ���������
 
 �� ��������
 ����������
 ���������������������������������������
 
-����� ��� ����������������
-���������������������������
+������������������������������������������������ ���
 ������������
 
-�������������������� �������������������� ��������������������
-������������������������
+| �������������������� | �������������������� |
+| --- | --- |
+| �������������������� | �������������������� |
+| ����������������� | ���������������� |
+| ����������������� | �������� �������� |
+| ��� ��� ��� ���� | ���������������� |
+| �������� ���������� | ���������������� |
+| ������� ��� ���� | ��� ��� ��� ��� |
 
-�������������������� �������������������� ��������������������
-������������������������
-
-������������ ���������������� ������������ ��������������������� �����
-
-���������������� ���� �������� ������������ ��������������������� �����
+����� ��� ���
+�����������������������������������������
 
 ��� ��� ���
+���� ��� ��� ��� ���
 
-| ���� | ���������������� | ������������ |  |  |
-| --- | --- | --- | --- | --- |
-| ����� | ���������������� |  |  |  |
-| �������� ������������ | ���������������� | ��������������� | ���������������� |  |
-| ��� ��� | ��� ������� ��� | ��� ��� ��� ������� | ���� ��� ��� ��� ��� | � |
-| ����� | ��� ��� |  |  |  |
+| �������������������� | ������������������������ |
+| --- | --- |
+| �������������������� | ������������������������ |
+| ����������������� | ���������������� |
+| ����������������� | ���������������� |
+| ����������������� | ���������������� |
+| ���������������� | �������� ���� ����� |
+| ����������� ��� | ��� ��� ��� ��� |
+| ��� ��� �������� | ��� ��� ��� ��� |
 
-��������� ��������������
+����������������������������������������������������������������������������������������������������������������������������������������
 
-��� ��� ��� ��� ��� ��� ���� ��� ��� ��� ������� ��� ��� ��� ��� �
+�
 
-�����������������������������������������������������������������������������������������������������������������������������������������������
-
-� �����������
+��
+������������
+�������������������������������������������������� ��������������������
 
 ��
 
-�� �����������������������������
+�������� ��� ���������������� ���������������� ����������������
 �������������������
 
-��
+| �� �� | �� �� �� | �� �� �� �� |
+| --- | --- | --- |
+| ��� ��� | ��� |  |
 
-�������� ��� ����������������
-�������������������
-
-�� ����� ���
 ��
 
 �����������������������������
 
-����������������
+���������������� ���������������� ����������������
 �����
 ������
 
-������������
-�������������������� �������������������� ������������������������
+�������������������� ������������������������
 
-���������������� �������������������������������� ����������������
+���������������� ����������������
 
-| �� �� �� | �� �� �� �� |  |
-| --- | --- | --- |
-| ��� | �� �� �� | �� �� �� �� |
-
+�� �� �� �� �� �� ��
 ���
 
-���������������� ���������������� ���������������� ����������������
+���������������� ����������������
 
 �����
-
-�������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
-
+���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
 ����������
 
 �����
-�������������������������������������������������������������������������������������
+�������������������������������������������������������������������������������������������
 
-������� ����������������
+����������������������������������������������������������������
 
-���������������� ���������������������������������������������� �� �� ��
-
-���������� ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
+���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
 
 ---
 
-[table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-58 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+58
 
 �����
 ������������������������������������������������������������
@@ -5254,64 +5501,44 @@ Data Section 57
 �����������������������������������������������������������
 
 ��
-����������� �������� ������������ ��������������
+���������������������������������������������
 
 ��
-����� �������� ������������ �����
-�������������������
+�������������������������������������������������
 
-| �� | �������� |
-| --- | --- |
-| �������� | ���������������� |
-| ��������� | ����� |
-| ������ | ��������������� |
+������������������������������������������������
 
+�� �������������������
 ���������������������������������������
 
-| ��� ��� | ��� |
-| --- | --- |
-| ����� ����� | ���� |
-
+����� �������� ��� �������
 ���������������������������
 ������������
 
-��� ��� �������� ����
+����� ��� ��� �������
+�������������������������������������
 
-������������
-�������������������� �������������������� ��������������������
+| ������������ �������������������� | �������������������� �������������������� |
+| --- | --- |
+| ������������ �������������������� | �������������������� �������������������� |
+| ��� ��� ��� ��� ������� ��� ��� | ��� ��� ������������ ������������ |
+| ��� ��� ��� ��� ��� ��� ���� ���� | ���������������� ���������������� |
+| ��� ������������ ��� ��� ��� ��� | ���������������� ���������������� |
+| ������������ �������������������� ����� | ���������������� ���������������� |
+| ������� ��� ���� ������� ��� ��� | ��� ��� ��� ��� ��� ��� ��� ��� |
+| ��� ��� ��� ��� ��� ���� ���� ���� � | ��� ��� ��� ��� ��� ��� ��� ��� |
 
-������������
-�������������������� �������������������� ��������������������
+�����������������������������������������������������������������������������������������������������������������������������������
 
-| ��� ��� ��� ��� | ��� ��� ��� | ��� | ������� | ������������ | ������������ |
-| --- | --- | --- | --- | --- | --- |
-| ��� ��� ��� | ��� ��� ��� |  |  |  |  |
-| ���� ���� | ���������������� ���������������� |  |  |  |  |
-
-���
-������������ ��� ��� ��� ��� ���������������� ����������������
-
-������������ ���������������� ����������������
-�������������������� �����
-
-| ��� ��� | ��� ��� ��� | ��� ��� ��� ��� | ��� ��� ��� ��� |
-| --- | --- | --- | --- |
-| ���� | ���� ���� |  |  |
-| ��� ��� | ��� ��� ��� | ��� ��� ��� ��� | ��� ��� ��� ��� |
-| ���� | ���� ���� | � |  |
-
-�������������������������������������������������������������������������������������������������������������������������������������������������������������
-
-� �����������
+�
 
 ��
 ������������
 ��
 ����������������������������
 
-� �
-����������������
-�������� ���
+��
+�������� ��� ����������������
 �������������������
 
 �� ��� ��� ��� ���
@@ -5340,198 +5567,196 @@ Data Section 57
 
 �����
 
-�������������������������������������������������������������������������������������������
-
-� ������������ ������������ ���������������� ���������������� �������������������������� ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
+����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������
 
 ---
 
-Data Section 59
+59
 
 [1 image omitted — page 67]
 
 ---
 
-60 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+60
 
 [1 image omitted — page 68]
 
 ---
 
-Data Section 61
+61
 
 [1 image omitted — page 69]
 
 ---
 
-62 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+62
 
 [1 image omitted — page 70]
 
 ---
 
-Data Section 63
+63
 
 [1 image omitted — page 71]
 
 ---
 
-64 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+64
 
 [1 image omitted — page 72]
 
 ---
 
-Data Section 65
+65
 
 [1 image omitted — page 73]
 
 ---
 
-66 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+66
 
 [1 image omitted — page 74]
 
 ---
 
-Data Section 67
+67
 
 [1 image omitted — page 75]
 
 ---
 
-68 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+68
 
 [1 image omitted — page 76]
 
 ---
 
-Data Section 69
+69
 
 [1 image omitted — page 77]
 
 ---
 
-70 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+70
 
 [1 image omitted — page 78]
 
 ---
 
-Data Section 71
+71
 
 [1 image omitted — page 79]
 
 ---
 
-72 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+72
 
 [1 image omitted — page 80]
 
 ---
 
-Data Section 73
+73
 
 [1 image omitted — page 81]
 
 ---
 
-74 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+74
 
 [1 image omitted — page 82]
 
 ---
 
-Data Section 75
+75
 
 [1 image omitted — page 83]
 
 ---
 
-76 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+76
 
 [1 image omitted — page 84]
 
 ---
 
-Data Section 77
+77
 
 [1 image omitted — page 85]
 
 ---
 
-78 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+78
 
 [1 image omitted — page 86]
 
 ---
 
-Data Section 79
+79
 
 [1 image omitted — page 87]
 
 ---
 
-80 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+80
 
 [1 image omitted — page 88]
 
 ---
 
-Data Section 81
+81
 
 [1 image omitted — page 89]
 
 ---
 
-82 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+82
 
 [1 image omitted — page 90]
 
 ---
 
-Data Section 83
+83
 
 [1 image omitted — page 91]
 
 ---
 
-84 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+84
 
 [1 image omitted — page 92]
 
 ---
 
-Data Section 85
+85
 
 [1 image omitted — page 93]
 
 ---
 
-86 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+86
 
 [1 image omitted — page 94]
 
 ---
 
-Data Section 87
+87
 
 [1 image omitted — page 95]
 
 ---
 
-88 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+88
 
 [1 image omitted — page 96]
 
 ---
 
-Data Section 89
+89
 
 [1 image omitted — page 97]
 
 ---
 
-90 Data for a Biosolids-Application Area near Deer Trail, Colorado, 2000
+90
 
 [1 image omitted — page 98]

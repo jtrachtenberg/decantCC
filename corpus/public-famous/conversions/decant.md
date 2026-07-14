@@ -8,9 +8,7 @@ The Merrill Lynch Guide to
 
 Merrill Lynch believes an informed investing public is critical to both the capital markets
 
-### and the economy. We are committed to clear and accurate reporting of our own financial
-
-### information and also to an enhanced understanding of the reports of other corporations.
+### and the economy. We are committed to clear and accurate reporting of our own financial information and also to an enhanced understanding of the reports of other corporations.
 
 ### This Guide to Understanding Financial Reports
 
@@ -105,11 +103,7 @@ page 1
 
 # Introduction: About This Guide
 
-### The increasing number of accounting rules and disclosure requirements
-
-### have made financial statements a larger and more complex—but not always
-
-### transparent—vehicle for understanding a company’s true economic position.
+### The increasing number of accounting rules and disclosure requirements have made financial statements a larger and more complex—but not always transparent—vehicle for understanding a company’s true economic position.
 
 At Merrill Lynch, we are committed to following
 a principles-based approach to financial reporting,
@@ -244,17 +238,15 @@ page 3
 
 # The Key Components
 
-### This page shows the key components of the basic financial statements of an imaginary
+# This page shows the key components of the basic financial statements of an imaginary company, ABC Manufacturing. Annual financial statements are usually stated at historical cost and are accompanied by an independent auditors’ report, which is
 
-### company, ABC Manufacturing. Annual financial statements are usually stated at
+# why they are called “audited” financial statements.
 
-### historical cost and are accompanied by an independent auditors’ report, which is
+# Balance SheetGives a “snapshot” of the Statement of Changes in Shareholders’ Equity
 
-### why they are called “audited” financial statements.
-
-Balance Sheet CONSOLIDATED BALANCE SHEETS(Dollars in Thousands) December 31 December 31Assets 2004 2003 Liabilities and Shareholders’ Equity
-
-Statement of ChangesDecember 31 December 312004 2003
+CONSOLIDATED BALANCE SHEETS(Dollars in Thousands)AssetsCurrent Assets:Cash and cash equivalentsMarketable securities December 31$ 19,50046,3002004 December 31$ 15,00032,0002003 Liabilities and Shareholders’ EquityCurrent Liabilities:Accounts payableNotes payable
+December 312004 December 312003
+$ 51,00060,000 $ 57,00061,000
 
 | Accounts receivable—net of allowance for doubtful accounts | 156,000 | 145,000 | Accrued expensesCurrent income taxes payable | 30,00017,000 | 36,00015,000 |
 | --- | --- | --- | --- | --- | --- |
@@ -262,157 +254,116 @@ Statement of ChangesDecember 31 December 312004 2003
 | Total Current AssetsTotal property, plant and equipment | 405,800385,000 | 380,000346,600 | Total Current LiabilitiesLong-Term Liabilities: | 176,000 | 181,000 |
 | Less accumulated depreciationNet Property, Plant and Equipment | 260,000125,000 | 249,60097,000 | Unfunded retiree benefit obligationDeferred income taxes | 16,000— | 9,000— |
 
-Unfunded retiree benefit obligation
-
-specific point in time—showing Net Property, Plant and Equipment 260,000 249,600 Deferred income taxes
-
-— —
-
-16,000 9,000 the Shareholders’ Equity
-
 Other Assets:
-Long-term debt
-Deferred charges — —
-Other long-term debt
 
-| 130,000 | 130,000 |
-| --- | --- |
-| — | 6,000 |
+| Long-term debt | 130,000 | 130,000 |
+| --- | --- | --- |
+| Deferred charges | — | — |
+| Other long-term debt | — | 6,000 |
 
 Intangibles (goodwill, patents)—
+net of accumulated amortization 1,950 2,000
+Total Liabilities 322,000 326,000
 
-what the company owns and what net of accumulated amortization 1,950 2,000 Total Liabilities Investment securities, at cost 300 — Shareholders’ Equity:Total Other Assets 2,250 2,000 Preferred stock Total Assets $668,050 $631,600 Common stock Additional paid-in capital it owes at the report date. The Retained earnings
-Foreign currency translation adjustments (net of taxes)
+what the company owns and whatit owes at the report date. Thebalance sheet is always divided into Investment securities, at costTotal Other AssetsTotal Assets $668,0502,250300 $631,6002,000— Shareholders’ Equity:Preferred stockCommon stockAdditional paid-in capitalRetained earningsForeign currency translation adjustments (net of taxes)Unrealized gain on available-for-sale securities (net of taxes)Less treasury stock at costTotal Shareholders’ Equity 249,000346,05075,00020,000(5,000)6,0001,00050 219,600305,60072,50013,500(5,000)(1,000)6,000—
 
-322,000 326,000
+# section of the balance sheet from period to period. Generally, changes in share-
 
-section of the balance6,000 6,00075,000 72,50020,000 13,500249,000 219,600 sheet from period to period. 1,000 (1,000)
+# two halves: Assets (presented first),
 
-Unrealized gain on available-for-sale securities (net of taxes) 50 —
+# holders’ equity result from
 
-Less treasury stock at cost (5,000) (5,000)
+# and Liabilities and Shareholders’
 
-| balance sheet is always divided into Total Shareholders’ Equity | 346,050 305,600 Generally, changes in share- |
-| --- | --- |
-| two halves: Assets (presented first), | holders’ equity result from |
-| and Liabilities and Shareholders’ | company profits or losses, |
-| Equity (presented below or to the | dividendsand/or stock |
+# company profits or losses,
+
+# Equity (presented below or to the
+
+# dividends and/or stock
 
 CONSOLIDATED INCOME STATEMENTS CONSOLIDATED STATEMENT OF CHANGES IN SHAREHOLDERS’ EQUITY
-
 (Dollars in Thousands, Except Per-Share Amounts) (Dollars in Thousands)
+right of Assets). In the standardaccounting model, Assets = Cost of salesGross marginOperating expenses:Depreciation and amortizationNet sales December 31Year Ended$765,050535,000230,05028,0502004 December 31Year Ended$725,000517,000208,00025,0002003 Net incomeBalanceJanuary 1, 2003 Preferred$6,000Stock $72,500CommonStock Additional$13,500CapitalPaid-in Year Ended December 31, 2004$219,600RetainedEarnings47,750 AdjustmentsTranslationCurrency$(1,000)Foreign UnrealizedSecurityGain$ – Treasury$(5,000)Stock $305,60047,750Total
 
-right of Assets). In the standard Year Ended Year Ended Year Ended December 31, 2004 issuance.December 31 December 31
+# issuance.
 
-2004 2003
+Dividends paid on:
 
-Foreign
+# Liabilities + Shareholders’ Equity,so the two halves will always be
 
-| Depreciation and amortization | 28,050 | 25,000 | Net incomeJanuary 1, 2003 $6,000$72,500 $13,500$219,60047,750 $(1,000) $ –$(5,000)$305,60047,750 |
-| --- | --- | --- | --- |
-| Selling, general and administrative expensesOperating income | 105,19696,804 | 109,50073,500 | Dividends paid on:Preferred stockCommon stock |
-| Other income (expense):Dividend and interest income | 5,250 | 10,000 | Common stock issuedForeign currency 2,500 6,500 |
+Selling, general and administrative expensesOperating incomeOther income (expense):Dividend and interest incomeInterest expenseIncome before income taxes and extraordinary loss 105,196(16,250)96,80494,1965,250 109,500(16,750)10,00073,50066,750 Common stock issuedForeign currencyNet unrealized gain onPreferred stockCommon stocktranslation gain 2,500 6,500 (18,000)(350) 2,000 (18,000)2,0009,000(350)
 
-Dividend and interest income 5,250 10,000 Foreign currency
+# Statement of Cash Flows
 
-Interest expense (16,250) (16,750)
-translation gain 2,000 2,000
-so the two halves will always be
-
-Income before income taxes and extraordinary loss 94,196 66,750
-Net unrealized gain on
 available-for-sale
 Income tax expense 41,446 26,250 securities 50 50
 
 Income before extraordinary loss 52,750 40,500 Balance
-
-Extraordinary items, net of tax (5,000) —
 December 31, 2004 $6,000 $75,000 $20,000 $249,000 $1,000 $50 $(5,000) $346,050
-in balance. From an economic Net Income $ 47,750 $ 40,500Earnings Per Common Share
+in balance. From an economic Extraordinary items, net of taxNet IncomeEarnings Per Common Share $ 47,750(5,000) $ 40,500—
 Before extraordinary loss $ 3.55 $ 2.77
 
-viewpoint, each dollar of assets
-must be offset by a dollar of
+# viewpoint, each dollar of assets must be offset by a dollar of
 
-Cash Flows
-Reports on the company’s
-cash movements during the
-period(s), separating them
+# Reports on the company’s cash movements during the period(s), separating them
 
-liabilities or equity. Shareholders’
+# liabilities or equity. Shareholders’
 
-into operating, investing
+# into operating, investing
 
-Equity represents a company’s
+# Equity represents a company’s
 
-and financing activities.
+# and financing activities.
 
-ownership structure and the net CONSOLIDATED STATEMENT OF CASH FLOWS(Dollars in Thousands, Except Per-Share Amounts) NOTES TO CONSOLIDATED FINANCIAL STATEMENTSYear Ended 1. Basis of Presentation. Lorem ipsum dolor sit amet, 6. Translation of Foreign Securities. Lorem ipsum dolor sit
+ownership structure and the netassets available to shareholdersafter all liabilities have been paid. CONSOLIDATED STATEMENT OF CASH FLOWS(Dollars in Thousands, Except Per-Share Amounts)Adjustments to reconcile net earnings to net cash from operating activitiesNet cash flows provided by operating activitiesCash Flows from Investing Activities:Cash Flows from Operating Activities:Net earnings December 31Year Ended$ 47,75074,80027,0502004 et iusto odio dignissim qui blandit praesent luptatum zzrilNOTES TO CONSOLIDATED FINANCIAL STATEMENTS1. Basis of Presentation.consectetuer adipiscing elit, sed diam nonummy nibh euis-mod tincidunt ut laoreet dolore magna aliquam erat volutpat.Ut wisi enim ad minim veniam, quis nostrud exerci tationullamcorper suscipit lobortis nisl ut aliquip ex ea commodoconsequat. Duis autem vel eum iriure dolor in hendrerit invulputate velit esse molestie consequat, vel illum dolore eufeugiat nulla.2. Financial Instruments. Lorem ipsum dolor sit amet,Facilisis at vero eros et accumsan6. Translation of Foreign Securities.amet, consectetuer adipiscing elit, sed diam nonummy nibheuismod tincidunt ut laoreet dolore magna aliquam eratvolutpat. Ut wisi enim ad minim veniam, quis nostrud exercitation ullamcorper suscipit lobortis nisl ut aliquip ex ea com-modo consequat.7. Income Taxes.drerit in vulputate velit esse molestie consequat, vel illumdolore eu feugiat nulla facilisis at vero eros et accumsan etiusto odio dignissim qui blandit praesent luptatum zzril Duis autem vel eum iriure dolor in hen- Lorem ipsum dolor sit
 
-| Adjustments to reconcile net earnings to net cash from operating activitiesNet earnings | $ 47,75027,050 | consequat. Duis autem vel eum iriure dolor in hendrerit invulputate velit esse molestie consequat, vel illum dolore eufeugiat nulla. modo consequat.7. Income Taxes.Duis autem vel eum iriure dolor in hen- |
-| --- | --- | --- |
-| Net cash flows provided by operating activitiesCash Flows from Investing Activities: | 74,800 | et iusto odio dignissim qui blandit praesent luptatum zzril2. Financial Instruments.Facilisis at vero eros et accumsan drerit in vulputate velit esse molestie consequat, vel illumdolore eu feugiat nulla facilisis at vero eros et accumsan etiusto odio dignissim qui blandit praesent luptatum zzril |
-| Securities purchases:Trading | (14,100) | delenit augue duis dolore te feugait nulla facilisi. Loremipsum dolor sit amet, consectetuer adipiscing elit, sed diamnonummy nibh euismod tincidunt ut laoreet dolore magna ali- delenit augue duis dolore te feugait nulla facilisi. Loremipsum dolor sit amet, consectetuer adipiscing elit, sed diamnonummy nibh euismod tincidunt ut laoreet dolore magna ali- |
+# Notes
 
-Trading (14,100)
+Securities purchases: delenit augue duis dolore te feugait nulla facilisi. Lorem delenit augue duis dolore te feugait nulla facilisi. Lorem
 ipsum dolor sit amet, consectetuer adipiscing elit, sed diam ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-nonummy nibh euismod tincidunt ut laoreet dolore magna ali- nonummy nibh euismod tincidunt ut laoreet dolore magna ali-
+Trading (14,100) nonummy nibh euismod tincidunt ut laoreet dolore magna ali- nonummy nibh euismod tincidunt ut laoreet dolore magna ali-
 
 Held-to-maturity (350) quam erat volutpat. quam erat volutpat.
 
 Available-for-sale (150) 3. Customer Transactions. Ut wisi enim ad minim veniam, 8. Earnings Per Share. Ut wisi enim ad minim veniam, quis
 
 Principal payment received on held-to-maturity securities 50 quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-
-Purchase of fixed assets (38,400)
 aliquip ex ea commodo consequat. Duis autem vel eum iriure aliquip ex ea commodo consequat. Duis autem vel eum iriure
-dolor in hendrerit in vulputate velit esse molestie consequat, dolor in hendrerit in vulputate velit esse molestie consequat,
+Purchase of fixed assets (38,400) dolor in hendrerit in vulputate velit esse molestie consequat, dolor in hendrerit in vulputate velit esse molestie consequat,
 
-Income Statement Net cash flows used in investing activities (52,950) vel illum dolore eu feugiat nulla facilisis at vero eros et vel illum dolore eu feugiat nulla facilisis at vero eros et
+# Provide more detailed information about the
 
-information about the
+vel illum dolore eu feugiat nulla facilisis at vero eros et vel illum dolore eu feugiat nulla facilisis at vero eros et
 
-Cash Flows from Financing Activities:
-accumsan et iusto odio dignissim qui blandit praesent lupta- accumsan et iusto odio dignissim qui blandit praesent lupta-
-tum zzril delenit augue duis dolore te feugait nulla facilisi. tum zzril delenit augue duis dolore te feugait nulla facilisi.
+# Income StatementReports on how the company
 
-Net cash flows used in financing activities (19,350) Nam liber tempor cum soluta nobis eleifend option congue
+Net cash flows used in investing activitiesCash Flows from Financing Activities:Net cash flows used in financing activitiesEffect of exchange rate changes on cash flowsIncrease in cash flowsCash and cash equivalents at beginning of yearCash and Cash Equivalents at the End of Year $ 19,500(52,950)(19,350)15,0004,5002,000 accumsan et iusto odio dignissim qui blandit praesent lupta-tum zzril delenit augue duis dolore te feugait nulla facilisi.Nam liber tempor cum soluta nobis eleifend option conguenihil imperdiet doming id quod mazim placerat facer possimassum. Lorem ipsum dolor.4. Collateralized Securities Transactions.sectetuer adipiscing elit, sed diam nonummy nibh euismodtincidunt ut laoreet dolore magna aliquam erat volutpat. Utwisi enim ad minim veniam, quis nostrud exerci tation ullam-corper suscipit lobortis nisl ut aliquip ex ea commodo Sit amet, con- accumsan et iusto odio dignissim qui blandit praesent lupta-tum zzril delenit augue duis dolore te feugait nulla facilisi.9. Statement of Cash Flows.nobis eleifend option congue nihil imperdiet doming id quodmazim placerat facer possim assum. Lorem ipsum dolor sitamet, consectetuer adipiscing elit, sed diam nonummy nibheuismod tincidunt ut laoreet dolore magna aliquam eratvolutpat. Ut wisi enim ad minim veniam, quis nostrud exercitation ullamcorper suscipit lobortis nisl ut aliquip ex ea com-modo consequat. Nam liber tempor cum soluta
 
-Effect of exchange rate changes on cash flows 2,000
-nihil imperdiet doming id quod mazim placerat facer possim 9. Statement of Cash Flows. Nam liber tempor cum soluta
-assum. Lorem ipsum dolor. nobis eleifend option congue nihil imperdiet doming id quod
-
-Increase in cash flows 4,500 mazim placerat facer possim assum. Lorem ipsum dolor sit
-
-Cash and cash equivalents at beginning of year 15,000
-4. Collateralized Securities Transactions. Sit amet, con- amet, consectetuer adipiscing elit, sed diam nonummy nibh
-Reports on how the company sectetuer adipiscing elit, sed diam nonummy nibh euismod euismod tincidunt ut laoreet dolore magna aliquam eratCash and Cash Equivalents at the End of Year $ 19,500 tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut volutpat. Ut wisi enim ad minim veniam, quis nostrud exerciwisi enim ad minim veniam, quis nostrud exerci tation ullam- tation ullamcorper suscipit lobortis nisl ut aliquip ex ea com-corper suscipit lobortis nisl ut aliquip ex ea commodo modo consequat.
-
-financial statements.
+# financial statements.
 
 consequat.
 10. Stock-Base Compensation. Duis autem vel eum iriure
-performed during the period(s) 5. Fixed Assets. Duis autem vel eum iriure dolor in hendrerit dolor in hendrerit in vulputate velit esse molestie consequat,in vulputate velit esse molestie consequat vel illum dolore vel illum dolore eu feugiat nulla facilisis
+performed during the period(s) 5. Fixed Assets.in vulputate velit esse molestie consequat vel illum dolore Duis autem vel eum iriure dolor in hendrerit dolor in hendrerit in vulputate velit esse molestie consequat,vel illum dolore eu feugiat nulla facilisis
 
-presented and shows whether its
+# presented and shows whether its
 
-operations resulted in a profit or a loss.
+# operations resulted in a profit or a loss.
 
 Audit A systematic examination of a company’s financial statements to determine if the amounts and disclosures in the
 
-reports are fairly stated and follow generally accepted accounting principles, or GAAP.
+# reports are fairly stated and follow generally accepted accounting principles, or GAAP.
 
-Dividends Payments to shareholders as a return on their investment.
+# Dividends Payments to shareholders as a return on their investment.
 
 Generally Accepted Accounting Principles (GAAP) The rules and standards followed in recording transactions
 
-and in preparing financial statements.
+# and in preparing financial statements.
 
 Historical Cost Assets are reported as the amount of cash or cash equivalents paid to purchase them, and liabilities
 
 are reported as the amount of cash and cash equivalents received when the obligation was incurred.
 
-page 4
+# page 4
 
 ---
 
@@ -420,9 +371,7 @@ page 4
 
 # The Balance Sheet: Assets
 
-### The assets section includes all the goods and property owned by the company, as well
-
-### as uncollected amounts, called “receivables,” that are due to the company from others.
+### The assets section includes all the goods and property owned by the company, as well as uncollected amounts, called “receivables,” that are due to the company from others.
 
 Like the other sections of the financial statements, this section is subdivided into line items,
 
@@ -435,33 +384,49 @@ December 31 December 31
 
 Assets
 
-| 1 | Current Assets: |  |  |
-| --- | --- | --- | --- |
-| 2004 | 2003 |  |  |
-| 2 | Cash and cash equivalents | $ 19,500 | $ 15,000 |
-| 3 | Marketable securities |  |  |
-| 4 | Accounts receivable— |  |  |
-| 46,300 | 32,000 |  |  |
-| net of allowance for doubtful accounts | 156,000 | 145,000 |  |
-| 5 | Inventories | 180,000 | 185,000 |
-| 6 | Prepaid expenses and other current assets |  |  |
-| 4,000 | 3,000 |  |  |
-| Total Current Assets | 405,800 | 380,000 |  |
-| Total property, plant and equipment | 385,000 | 346,600 |  |
-| Less accumulated depreciation | 125,000 | 97,000 |  |
-| Net Property, Plant and Equipment | 260,000 | 249,600 |  |
+| 1 | Current Assets: |  |
+| --- | --- | --- |
+| 2004 | 2003 |  |
+| 2 | $ 19,500 | $ 15,000 |
+
+Cash and cash equivalents
+
+3 Marketable securities
+
+4 Accounts receivable—
+net of allowance for doubtful accounts
+
+| 5 | Inventories |  |
+| --- | --- | --- |
+| 6 | Prepaid expenses and other current assets |  |
+| 46,300 | 32,000 |  |
+| 156,000 | 145,000 |  |
+| 180,000 | 185,000 |  |
+| 4,000 | 3,000 |  |
+| Total Current Assets | 405,800 | 380,000 |
+| Total property, plant and equipment | 385,000 | 346,600 |
+| Less accumulated depreciation | 125,000 | 97,000 |
+| Net Property, Plant and Equipment | 260,000 | 249,600 |
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
 Other Assets:
 
-| 9 | Deferred charges |  |
+| 9 | Deferred charges |
+| --- | --- |
+| 10 | Intangibles (goodwill, patents)— |
+| — | — |
+| 1,950 | 2,000 |
+
+net of accumulated amortization
+
+| 11 | Investment securities, at cost |
+| --- | --- |
+| 300 | — |
+
+Total Other Assets
+
+| 2,250 | 2,000 |  |
 | --- | --- | --- |
-| 10 | Intangibles (goodwill, patents)— |  |
-| — | — |  |
-| net of accumulated amortization | 1,950 | 2,000 |
-| 11 | Investment securities, at cost |  |
-| 300 | — |  |
-| Total Other Assets | 2,250 | 2,000 |
 | Total Assets | $668,050 | $631,600 |
 
 Note Line items are numbered to facilitate the discussion on the following pages.
@@ -478,8 +443,7 @@ particular day, December 31, 2004. The company’s assets for the previous year 
 
 ### presented, making it possible to compare the balance sheets for those dates.
 
-Current Assets  Trading securities—debt and equity securities,
-
+Current Assets 
 1
 In general, current assets include cash and other
 assets that, in the normal course of business, will
@@ -487,15 +451,7 @@ be turned into cash within a year from the balance
 sheet date. These other assets primarily include
 marketable securities, accounts receivable, invento-
 ries and prepaid expenses. Current assets are listed
-
-bought and sold frequently, primarily to generate
-short-term profits, and carried at fair market
-value. Any changes in such values are included
-in the statement of earnings as unrealized gains
-and losses from trading activities.
-
- Held-to-maturity securities—debt securities
-
+
 on the balance sheet in order of their “liquidity,”
 i.e., the amount of time it takes to convert these
 assets into cash.
@@ -505,17 +461,7 @@ that they are liquid—they can, and will, be con-
 verted into cash for other business purposes, or be
 consumed in the business. Inventories, when sold,
 become accounts receivable; receivables, upon
-
-that the company has the ability and intent
-to hold to maturity, i.e., the date when debt
-instruments, such as Treasury bills, are due
-and payable. These securities are reported at
-amortized cost (their original cost, adjusted for
-changes in any purchase discount or premium,
-less any principal payments received).
-
- Available-for-sale securities—debt or equity
-
+
 collection, become cash; the cash can then be used
 to pay the company’s debt and operating expenses.
 
@@ -524,6 +470,28 @@ Cash and Cash Equivalents
 Money on deposit in the bank, cash on hand (petty
 cash) and highly liquid securities such as Treasury bills.
 
+Marketable Securities
+3
+Short-term securities that are readily salable and
+usually have quoted prices. May include:
+
+Trading securities—debt and equity securities,
+bought and sold frequently, primarily to generate
+short-term profits, and carried at fair market
+value. Any changes in such values are included
+in the statement of earnings as unrealized gains
+and losses from trading activities.
+
+Held-to-maturity securities—debt securities
+that the company has the ability and intent
+to hold to maturity, i.e., the date when debt
+instruments, such as Treasury bills, are due
+and payable. These securities are reported at
+amortized cost (their original cost, adjusted for
+changes in any purchase discount or premium,
+less any principal payments received).
+
+Available-for-sale securities—debt or equity
 securities not classified as either trading or held-
 to-maturity. They are recorded at fair value, with
 changes in such values included as a component
@@ -531,23 +499,12 @@ of other comprehensive income as unrealized
 gains and losses from available-for-sale securities.
 
 ABC Manufacturing owns short-term, high-grade
-
-Marketable Securities commercial paper, classified as “trading securities,”
-
-3
-
+commercial paper, classified as “trading securities,”
 as well as preferred stock, classified as “available
-
-Short-term securities that are readily salable and
-
 for sale.” ABC, however, has no short-term “held-
-
-usually have quoted prices. May include:
-
 to-maturity” securities.
 
 Fair Market Value The amount at which an item could be exchanged between willing unrelated parties, other
-
 than in a forced liquidation. It is usually the quoted market price when a market exists for the item.
 
 page 6
@@ -621,13 +578,11 @@ factured inventory are added up, they comprise
 the value of finished goods.
 
 Allowance for Doubtful Accounts Amounts deducted from the total accounts receivable balance as a way of
-
 recognizing that some customers will not pay what they owe. Also called Provision for Doubtful Accounts, Reserve
 
 for Doubtful Accounts or Bad Debt Reserve.
 
 Lower of Cost or Market Rule A rule providing that inventories be valued at either their cost or market value,
-
 whichever is lower. The intent is to provide a conservative figure in valuing a company’s inventories.
 
 page 7
@@ -636,42 +591,22 @@ page 7
 
 The Balance Sheet: Assets
 
-Prepaid Expenses and Other Current Assets Accumulated Depreciation
-
+Prepaid Expenses and Other Current Assets
 6
-
-8
-
-Payments made for which the company has not The practice of charging to or expensing against
-
-yet received benefits, but for which it will receive income the cost of a fixed asset over its estimated
-
-benefits within the coming year. These are listed useful life. For accounting purposes, depreciation
-
-among current assets as prepaid expenses. In ABC’s is the decline in useful value of a fixed asset due to
-
-case, the company paid fire insurance premiums and “wear and tear” from use and the passage of time.
-
-advertising charges covering periods after the date Taking these factors into consideration, the cost
-
-on the balance sheet. Because ABC has the contrac- related to property, plant and equipment must be
-
-tual right to the insurance and advertising services allocated over the item’s expected useful life.
-
+Payments made for which the company has not
+yet received benefits, but for which it will receive
+benefits within the coming year. These are listed
+among current assets as prepaid expenses. In ABC’s
+case, the company paid fire insurance premiums and
+advertising charges covering periods after the date
+on the balance sheet. Because ABC has the contrac-
+tual right to the insurance and advertising services
 after that date, it has an asset that will be used after
+year-end. The company has simply “prepaid”—paid
+in advance—for the right to use these services.
 
-year-end. The company has simply “prepaid”—paid For example, suppose a delivery truck costs $10,000
-
-in advance—for the right to use these services. and is expected to last five years. Using the straight-
-
-line method (equal periodic depreciation charges
-
-Total Property, Plant and Equipment over the life of the asset), $2,000 of the truck’s cost is
-
+Total Property, Plant and Equipment
 7
-
-charged or expensed to each year’s income statement.
-
 Often referred to as fixed assets, this line item
 consists of long-lived assets (i.e., assets with a useful
 life greater than one year) not intended for sale that
@@ -685,43 +620,78 @@ mobiles and trucks. In the standard accounting
 model, Fixed Assets = Cost – Accumulated
 Depreciation.
 
+The total property, plant and equipment figure
+displayed is not intended to reflect present market
+value or replacement cost, because there is generally
+no intention of selling or replacing these assets in the
+near term. The cost of replacing plant and equipment
+at a future date might, and probably will, be higher.
+
+Accumulated Depreciation
+
+8
+
+The practice of charging to or expensing against
+income the cost of a fixed asset over its estimated
+useful life. For accounting purposes, depreciation
+is the decline in useful value of a fixed asset due to
+“wear and tear” from use and the passage of time.
+Taking these factors into consideration, the cost
+related to property, plant and equipment must be
+allocated over the item’s expected useful life.
+
+For example, suppose a delivery truck costs $10,000
+and is expected to last five years. Using the straight-
+line method (equal periodic depreciation charges
+over the life of the asset), $2,000 of the truck’s cost is
+charged or expensed to each year’s income statement.
+
 Straight-Line Depreciation: Year-to-Year
 
-Year 1 Year 2
+Year 1
+
+Year 2
+
 
 
-Truck (Cost) $10,000 Truck (Cost) $10,000
+Truck (Cost) $10,000
 
-Less Accumulated Less Accumulated
-Depreciation (2,000) Depreciation (4,000)
- 
+Less Accumulated
+Depreciation (2,000)
+
+Net Depreciated
+Cost $ 8,000
 
-| Net Depreciated | Net Depreciated |  |  |
-| --- | --- | --- | --- |
-| Cost | $ 8,000 | Cost | $ 6,000 |
+Truck (Cost) $10,000
+
+Less Accumulated
+Depreciation (4,000)
+
+Net Depreciated
+Cost $ 6,000
 
 ABC Manufacturing’s balance sheet shows
 
-accumulated depreciation—the total of accumulatedThe total property, plant and equipment figure
+accumulated depreciation—
 
-depreciation for buildings, machinery, leaseholddisplayed is not intended to reflect present market
+the total of accumulated
 
-improvements, furniture and fixtures. Land isvalue or replacement cost, because there is generally
+depreciation for buildings, machinery, leasehold
+improvements, furniture and fixtures. Land is
+not subject to depreciation. Its reported balance
+remains unchanged from year to year at the
 
-not subject to depreciation. Its reported balanceno intention of selling or replacing these assets in the
-
-remains unchanged from year to year at thenear term. The cost of replacing plant and equipment
-
-original purchase price.at a future date might, and probably will, be higher.
+original purchase price.
 
 Fixed Assets The property, plant and equipment used in the operation of a business.
 
 Market Value In these examples, the current cost of replacing the inventory by purchase or manufacture
 
-(with certain exceptions). Also sometimes referred to as Market Price.
+(with certain exceptions). Also sometimes referred to as
+
+Market Price.
 
 Estimated Useful Life The period of time over which the owner of a physical or intangible asset estimates that
-
 that asset will continue to be of productive use or have continuing value.
 
 page 8
@@ -800,7 +770,6 @@ ment, and no required write-down in investment
 security value.
 
 Goodwill The amount by which the price of an acquired company exceeds the fair value of the related net assets
-
 acquired. It is presumed to represent the value of the company’s name, reputation, customer base, intellectual
 
 capital and workforce.
@@ -825,51 +794,48 @@ The balance sheet is always divided into two halves: Assets and Liabilities, and
 
 Liabilities and
 CONSOLIDATED BALANCE SHEETS
+Shareholders’ Equity (Dollars in Thousands) December 31 December 31 December 31 December 31
 
 | Assets | 2004 | 2003 | Liabilities and Shareholders’ EquityCurrent Liabilities: | 2004 | 2003 |
 | --- | --- | --- | --- | --- | --- |
 | Current Assets:Cash and cash equivalents | $ 19,500 | $ 15,000 | Accounts payable | $60,000 | $ 57,000 |
-| Marketable securities | 46,300 | 32,000 | Notes payable | 51,000 | 61,000 |
-| Accounts receivable—net of allowance for doubtful accounts | 156,000 | 145,000 | Accrued expensesCurrent income taxes payable | 30,00017,000 | 36,00015,000 |
+| Marketable securities | 46,300 | 32,000 | Notes payableAccrued expenses | 51,00030,000 | 61,00036,000 |
+
+Accounts receivable—
+
+| net of allowance for doubtful accounts | 156,000 | 145,000 | Current income taxes payable | 17,000 | 15,000 |
+| --- | --- | --- | --- | --- | --- |
 | Inventories | 180,000 | 185,000 | Other liabilities | 12,000 | 12,000 |
 | Prepaid expenses and other current assets | 4,000 | 3,000 | Current portion of long-term debt | 6,000 | — |
 | Total Current Assets | 405,800 | 380,000 | Total Current Liabilities | 176,000 | 181,000 |
+| Total property, plant and equipment | 385,000 | 346,600 | Long-Term Liabilities: |  |  |
+| Less accumulated depreciation | 125,000 | 97,000 | Unfunded retiree benefit obligation |  |  |
+| Net Property, Plant and EquipmentOther Assets: | 260,000 | 249,600 | Deferred income taxes |  |  |
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-This section always appears to Total property, plant and equipment 385,000 346,600 Long-Term Liabilities:
-Less accumulated depreciation 125,000 97,000 Unfunded retiree benefit obligation
+Long-term debt
 
-the right of, or below, the Assets Net Property, Plant and Equipment 260,000 249,600 Deferred income taxes
-Other Assets:
-
-| — | — |  |
-| --- | --- | --- |
-| 16,000 | 9,000 |  |
-| Long-term debt | 130,000 | 130,000 |
-| Deferred charges | — | — |
-
-Other long-term debt
-section of the balance sheet. Intangibles (goodwill, patents)—
-
-— 6,000
-
-Total Liabilities 322,000 326,000
-net of accumulated amortization 1,950 2,000
-
-Shareholders’ Equity:
-
-Remember that, in the standard Investment securities, at cost 300 — Preferred stock Total Other Assets 2,250 2,000 Common stock
+Deferred charges — — Other long-term debt
+section of the balance sheet. Intangibles (goodwill, patents)—net of accumulated amortization 1,950 2,000 Total LiabilitiesShareholders’ Equity:
+Remember that, in the standard Investment securities, at costTotal Other Assets 2,250300 2,000— Preferred stockCommon stock
 Total Assets $668,050 $631,600
+accounting model, Assets = Additional paid-in capital
+Retained earnings
 
-6,000 6,000
+Foreign currency translation adjustments (net of taxes)
 
-75,000 72,500
-
-accounting model, Assets = Additional paid-in capital 20,000 13,500
-Retained earnings 249,000 219,600
-
-| Less treasury stock at cost | (5,000) | (5,000) |
+| Liabilities + Shareholders’ Equity. | Unrealized gain on available-for-sale securities (net of taxes) |  |
 | --- | --- | --- |
+| 130,000 | 130,000 |  |
+| — | 6,000 |  |
+| 322,000 | 326,000 |  |
+| 6,000 | 6,000 |  |
+| 75,000 | 72,500 |  |
+| 20,000 | 13,500 |  |
+| 249,000 | 219,600 |  |
+| 1,000 | (1,000) |  |
+| 50 | — |  |
+| Less treasury stock at cost | (5,000) | (5,000) |
 | Total Shareholders’ Equity | 346,050 | 305,600 |
 | Total Liabilities and Shareholders’ Equity | $668,060 | $631,600 |
 
@@ -901,34 +867,60 @@ CONSOLIDATED BALANCE SHEETS
 | 6 | Other liabilities | 12,000 | 12,000 |
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
-Other liabilities
+7 Current portion of long-term debt
 
-| 7 | Current portion of long-term debt |  |  |
-| --- | --- | --- | --- |
-| 12,000 | 12,000 |  |  |
-| 6,000 | — |  |  |
-| Total Current Liabilities | 176,000 | 181,000 |  |
-| 8 | Long-Term Liabilities: |  |  |
-| 9 | Unfunded retiree benefit obligations |  |  |
-| 10 | Deferred income taxes |  |  |
-| — | — |  |  |
-| 16,000 | 9,000 |  |  |
-| 11 | Long-term debt | 130,000 | 130,000 |
-| 12 | Other long-term debt |  |  |
-| — | 6,000 |  |  |
-| Total Liabilities | 322,000 | 326,000 |  |
-| 13 | Shareholders’ Equity: |  |  |
-| 14 | Preferred stock |  |  |
-| 6,000 | 6,000 |  |  |
-| 15 | Common stock | 75,000 | 72,500 |
-| 16 | Additional paid-in capital | 20,000 | 13,500 |
-| 17 | Retained earnings | 249,000 | 219,600 |
-| 18 | Foreign currency translation adjustments (net of taxes) | 1,000 | (1,000) |
-| Foreign currency translation adjustments (net of taxes) | 1,000 (1,000) |  |  |
-| 19 Unrealized gain on available-for-sale securities (net of taxes) | 50 — |  |  |
-| 20 Less treasury stock at cost | (5,000) (5,000) |  |  |
-| Total Shareholders’ Equity | 346,050 | 305,600 |  |
-| Total Liabilities and Shareholders’ Equity | $668,060 | $631,600 |  |
+Total Current Liabilities
+
+8 Long-Term Liabilities:
+
+9 Unfunded retiree benefit obligations
+
+10 Deferred income taxes
+
+11 Long-term debt
+
+12 Other long-term debt
+
+Total Liabilities
+
+13 Shareholders’ Equity:
+
+14 Preferred stock
+
+15 Common stock
+
+16 Additional paid-in capital
+
+17 Retained earnings
+
+18 Foreign currency translation adjustments (net of taxes)
+
+19 Unrealized gain on available-for-sale securities (net of taxes)
+
+20 Less treasury stock at cost
+
+Total Shareholders’ Equity
+
+| 6,000 | — |
+| --- | --- |
+| 176,000 | 181,000 |
+| — | — |
+| 16,000 | 9,000 |
+| 130,000 | 130,000 |
+| — | 6,000 |
+| 322,000 | 326,000 |
+| 6,000 | 6,000 |
+| 75,000 | 72,500 |
+| 20,000 | 13,500 |
+| 249,000 | 219,600 |
+| 1,000 | (1,000) |
+| 50 | — |
+| (5,000) | (5,000) |
+| 346,050 | 305,600 |
+
+Total Liabilities and Shareholders’ Equity
+
+$668,060 $631,600
 
 page 11
 
@@ -938,9 +930,7 @@ The Balance Sheet: Liabilities and Shareholders’ Equity
 
 This section of the balance sheet represents a snapshot of ABC Manufacturing’s Liabilities
 
-### and Shareholders’ Equity at the end of one particular day, December 31, 2004. The
-
-### information for the previous year end is also presented, making it possible to compare
+### and Shareholders’ Equity at the end of one particular day, December 31, 2004. The information for the previous year end is also presented, making it possible to compare
 
 ### the balance sheets for those dates.
 
@@ -1007,7 +997,6 @@ due at maturity (2005). Since ABC is not required to
 Current Liabilities Details the obligations due and payable within 12 months. Counterpart to “current assets.”
 
 Material Amount The threshold that would have an impact on an individual’s decisions or conclusions.
-
 Materiality varies according to the size and scope of a company.
 
 page 12
@@ -1094,7 +1083,6 @@ Long-Term Liabilities Amounts due after one year from the date of the financial 
 Deferred Income Tax Assets Future income tax credits recognized in advance of actually receiving them.
 
 Accelerated Depreciation Deductions IRS rules allow specific assets to be depreciated at a higher rate during
-
 the first few years of usage, instead of depreciating evenly over the asset’s useful life.
 
 Debentures Formal, unsecured debt obligations (bonds or notes) backed only by the general credit of the issuer
@@ -1109,33 +1097,18 @@ page 13
 
 The Balance Sheet: Liabilities and Shareholders’ Equity
 
-Other Long-Term Debt Preferred Stock
-
+Other Long-Term Debt
 12
-
-14
-
-Includes all debt due more than one year from the Preferred stock is an equity—or ownership—security
-
-date of the balance sheet (other than that specifically that differs from common stock in a number of ways.
-
-reported elsewhere on the balance sheet). In ABC’s While they are equity securities, preferred stocks
-
-case, this debt is the $6,000,000 note that the com- carry many of the same features as bonds. Most
-
-pany took out four years ago (see “Current Portion preferred issues do not carry the right to vote. They
-
-of Long-Term Debt”). This loan was reported as offer a fixed dividend, and in many ways are safer
-
-long-term debt at the end of 2003. Because it is than common stock because they have preference
-
-payable in full next year, it no longer qualifies as over common shares with regard to dividends and the
-
-a long-term liability and is reported as the current distribution of assets in case the company is liqui-
-
-portion of long-term debt at the end of 2004. dated. The corporation’s charter contains full details
-
-of the preferences applicable to this kind of stock.
+Includes all debt due more than one year from the
+date of the balance sheet (other than that specifically
+reported elsewhere on the balance sheet). In ABC’s
+case, this debt is the $6,000,000 note that the com-
+pany took out four years ago (see “Current Portion
+of Long-Term Debt”). This loan was reported as
+long-term debt at the end of 2003. Because it is
+payable in full next year, it no longer qualifies as
+a long-term liability and is reported as the current
+portion of long-term debt at the end of 2004.
 
 Shareholders’ Equity
 13
@@ -1154,45 +1127,46 @@ reasons, it is separated into the following categories:
 (Net of Taxes)
  Unrealized Gain on Available-for-Sale Securities
 (Net of Taxes)
+ Treasury Stock
+
+These items are discussed in detail in the pages
+that follow.
+
+Preferred Stock
+
+14
+
+Preferred stock is an equity—or ownership—security
+that differs from common stock in a number of ways.
+While they are equity securities, preferred stocks
+carry many of the same features as bonds. Most
+preferred issues do not carry the right to vote. They
+offer a fixed dividend, and in many ways are safer
+than common stock because they have preference
+over common shares with regard to dividends and the
+distribution of assets in case the company is liqui-
+dated. The corporation’s charter contains full details
+of the preferences applicable to this kind of stock.
 
 General Characteristics of
+
 Preferred Stock Versus Common Stock
 
-Preferred Stock Common Stock
- 
-
-| Voting Rights Does not vote | May vote |  |
-| --- | --- | --- |
-| Callable | May be callable | Not callable |
-
-Convertible May be convertible Not convertible
-into common stock
-
-| Dividends | Fixed dividend | Variable dividend |
-| --- | --- | --- |
-| Seniority of Priority over | Lowest claim to |  |
-| Dividend | common stock | dividend |
-| Senior in | Priority over | Lowest claim to |
-| Dissolution | common stock | dissolution |
+[chart table omitted — unreliable extraction; see attached figure, document page 17]
 
 Source: Rini, William A. The Basics of Stocks, Bonds and
 
- Treasury Stock Options © 1998 by William A. Rini.
+Options © 1998 by William A. Rini.
 
-These items are discussed in detail in the pages In ABC’s case, the company issued $5.83 cumulative
-
-that follow. preferred stock with a $100 par value. The $5.83
-
+In ABC’s case, the company issued $5.83 cumulative
+preferred stock with a $100 par value. The $5.83
 refers to the yearly per-share dividend to which each
-
 preferred shareholder is entitled before any dividends
 
 Shareholders’ Equity The total equity interest that all shareholders have in the corporation. Equivalent to the
-
 company’s net worth, or its assets after subtracting all of its liabilities.
 
 Cumulative Preferred Stock Preferred stock with a stated annual dividend that is accumulated if dividends
-
 are not declared in a given year. Payments to cumulative preferred shareholders take priority over dividends to
 
 common shareholders.
@@ -1205,60 +1179,26 @@ page 14
 
 The Balance Sheet: Liabilities and Shareholders’ Equity
 
-are paid to the common shareholders. “Cumulative” $13,500,000, this amount brings additional
-
-means that if in any year the dividend is not paid, it paid-in capital at December 31, 2004, to a total
-
-continues to grow in favor of preferred shareholders. of $20,000,000.
-
+are paid to the common shareholders. “Cumulative”
+means that if in any year the dividend is not paid, it
+continues to grow in favor of preferred shareholders.
 The company must declare total unpaid dividends
-
-and pay them to preferred shareholders when avail- Retained Earnings
-
+and pay them to preferred shareholders when avail-
 able, before paying any dividends on the common
-
-17
-
-When a company first starts in business, it has no
-
 stock. Even though preferred shareholders are entitled
-
-retained earnings. Retained earnings are accumu-
-
 to dividends before common shareholders, their
-
-lated profits that the company “retains”—i.e., earns
-
 entitlement is generally limited—to $5.83 per share
-
-and reinvests in the company. Retained earnings
-
 annually in ABC’s case. Generally, preferred share-
-
-increase by the amount of profits earned, less
-
 holders have no voice in company affairs unless
-
-dividends declared and/or paid to shareholders.
-
 the company fails to pay them dividends at the
 promised rate.
 
-In the example below, profits at the end of 2003
-
-were $40,500,000. The company paid no dividends—
-
 Common Stock
-
-so the balance sheet shows retained earnings of15
-
-Unlike preferred stock, common stock has no limit $219,600,000. Profits at the end of 2004 were
-
-on dividends payable each year. When earnings are $47,750,000; the company paid dividends of
-
-high, dividends may also be high. When earnings $350,000 on the preferred and $18,000,000 on the
-
-drop, so may dividends. common—so retained earnings totaled $249,000,000.
+15
+Unlike preferred stock, common stock has no limit
+on dividends payable each year. When earnings are
+high, dividends may also be high. When earnings
+drop, so may dividends.
 
 In the example, ABC’s common stock has a par
 value of $5.00 a share. In 2004, the company sold
@@ -1276,23 +1216,61 @@ Additional Paid-In Capital
 As noted, paid-in capital increased by $6,500,000 in
 2004. When added to last year’s ending balance of
 
+$13,500,000, this amount brings additional
+paid-in capital at December 31, 2004, to a total
+
+of $20,000,000.
+
+Retained Earnings
+
+17
+
+When a company first starts in business, it has no
+retained earnings. Retained earnings are accumu-
+lated profits that the company “retains”—i.e., earns
+and reinvests in the company. Retained earnings
+increase by the amount of profits earned, less
+dividends declared and/or paid to shareholders.
+
+In the example below, profits at the end of 2003
+were $40,500,000. The company paid no dividends—
+so the balance sheet shows retained earnings of
+$219,600,000. Profits at the end of 2004 were
+$47,750,000; the company paid dividends of
+$350,000 on the preferred and $18,000,000 on the
+common—so retained earnings totaled $249,000,000.
+
 Calculating Accumulated Retained Earnings
+
 (Dollars in Thousands)
-2004 2003
- 
 
 Accumulated Retained
 Earnings at Beginning
+of Year
 
-| of Year | $219,600 $179,100 |  |
-| --- | --- | --- |
-| Profit | $ 47,750 $ 40,500 |  |
-| Preferred Dividends | (350) | — |
-| Common Dividends | (18,000) | — |
+Profit
+
+Preferred Dividends
+
+Common Dividends
+
+Accumulated Retained
+Earnings at End of Year
+
+2004 2003
+ 
+
+$219,600 $179,100
+
+$ 47,750 $ 40,500
+
+| (350) | — |
+| --- | --- |
+| (18,000) | — |
 
  
-Accumulated Retained
-Earnings at End of Year $249,000 $219,600
+
+$249,000 $219,600
 
 Additional Paid-In Capital The amount paid by shareholders in excess of the par, or stated value, of
 
@@ -1373,29 +1351,13 @@ page 16
 
 ### balance-sheet analysis.
 
-Investors look at certain financial statement ratios Current Ratio
-
+Investors look at certain financial statement ratios
 for guidance in determining a company’s:
 
-Analysts use several methods to determine what
-
-constitutes a “comfortable” amount of working
-
  Ability to pay its debts
-
-capital. The current ratio, which shows a company’s
-
  Inventory turnover
-
-current position, may reveal more about a company’s
-
  Amount of assets backing corporate securities
-
-suitability as an investment than does the total
-
  Relative mix of these securities
-
-dollar amount of working capital.
 
 Working Capital
 
@@ -1406,7 +1368,28 @@ all current liabilities were paid.
 ABC Manufacturing: Working Capital
 (Dollars in Thousands)
 
-Current Assets $ 405,800
+| Current Assets | $ 405,800 |
+| --- | --- |
+| Current Liabilities | $(176,000) |
+| Working Capital | $ 229,800 |
+
+Working capital is an important tool for analyzing
+balance-sheet figures. Companies that maintain a
+comfortable amount of working capital are more
+attractive to conservative investors. Working capital
+often dictates a company’s ability to meet obligations,
+expand volume and take advantage of opportunities.
+Year-to-year increases in working capital indicate
+that a company is financially healthy.
+
+Current Ratio
+
+Analysts use several methods to determine what
+constitutes a “comfortable” amount of working
+capital. The current ratio, which shows a company’s
+current position, may reveal more about a company’s
+suitability as an investment than does the total
+dollar amount of working capital.
 
 ABC Manufacturing: Current Ratio
 (Dollars in Thousands)
@@ -1417,37 +1400,24 @@ ABC Manufacturing: Current Ratio
 | Current Ratio | = 2.31, or 2.31:1 |  |
 
 In the example, ABC has a current ratio of 2.31:1,
-
-Current Liabilities $(176,000) or $2.31 in current assets to back up each dollar of
-
-Working Capital $ 229,800 current liabilities. In general, a current ratio of 2:1
-
+or $2.31 in current assets to back up each dollar of
+current liabilities. In general, a current ratio of 2:1
 is considered adequate. Current ratios vary consid-
-
 erably among different types of companies, so it is
-
-Working capital is an important tool for analyzing often difficult to compare firms in different industries.
-
-balance-sheet figures. Companies that maintain a As a rough guideline, companies with small inventories
-
-comfortable amount of working capital are more and quickly collectible accounts receivable can
-
-attractive to conservative investors. Working capital operate safely with a lower current ratio. Companies
-
-often dictates a company’s ability to meet obligations, with a greater proportion of their current assets in
-
-expand volume and take advantage of opportunities. inventory, or that sell their products on extended
-
-Year-to-year increases in working capital indicate credit terms, need a higher current ratio to be
-
-that a company is financially healthy. comfortable.
+often difficult to compare firms in different industries.
+As a rough guideline, companies with small inventories
+and quickly collectible accounts receivable can
+operate safely with a lower current ratio. Companies
+with a greater proportion of their current assets in
+inventory, or that sell their products on extended
+credit terms, need a higher current ratio to be
+comfortable.
 
 Financial Statement Ratio The mathematical relationship between two or more amounts reported in the
 
 financial statements.
 
 Working Capital The difference between total current assets and total current liabilities (i.e., debts due within
-
 one year of the balance-sheet date and paid from current assets).
 
 Current Ratio Current assets divided by current liabilities (i.e., debts due within one year of the balance-sheet
@@ -1460,24 +1430,21 @@ page 17
 
 Analyzing the Balance Sheet
 
-Quick Assets Ratio A well-positioned company should show a reason-
-
-able excess of net quick assets, or quick assets
+Quick Assets Ratio
 
 The quick assets ratio offers another way to
-
-over current liabilities. The lack of positive net
-
 determine the adequacy of working capital. Quick
-
-quick assets would demonstrate a company’s
-
 assets are those current assets that can quickly be
-
-potential inability to meet current liabilities.
-
 converted to cash. To find the quick assets ratio,
 divide quick assets by current liabilities.
+
+ABC Manufacturing: Quick Assets and
+
+A well-positioned company should show a reason-
+able excess of net quick assets, or quick assets
+over current liabilities. The lack of positive net
+quick assets would demonstrate a company’s
+potential inability to meet current liabilities.
 
 ABC Manufacturing: Net Quick Assets
 (Dollars in Thousands)
@@ -1487,13 +1454,12 @@ ABC Manufacturing: Net Quick Assets
 | (Dollars in Thousands) | Less Current Liabilities | $(176,000) |
 | Current Assets | Net Quick Assets | $ 45,800 |
 
-Net Quick Assets $ 45,800
 Less Inventories $(180,000)
 
 Less Prepaid Expenses $ (4,000) Debt-to-Equity Ratio
 
 Quick Assets $ 221,800 The debt-to-equity ratio indicates whether a
-company is using debt responsibly. In the example,Current Liabilities ÷ $ 176,000
+Current Liabilities ÷ $ 176,000 company is using debt responsibly. In the example,
 ABC’s debt-to-equity ratio of .93 means the com-
 Quick Assets Ratio = 1.26, or 1.26:1 pany is using 93 cents of liabilities for every dollar
 of shareholders’ equity in the business. Industrial
@@ -1532,25 +1498,26 @@ Analyzing the Balance Sheet
 Inventory Turnover
 ABC Manufacturing:
 
-Net Asset Value Per Share of Common StockBy comparing inventory with the cost of sales for
+By comparing inventory with the cost of sales for
 
+Net Asset Value Per Share of Common Stock
 (Dollars in Thousands, Except Per-Share Amounts)
 
 the year, investors can derive a company’s inventory
-METHOD ONEturnover. In the example, ABC’s inventory turnover
-
-of 2.9 for the year means that goods are bought, Common Stock $ 75,000
-
+turnover. In the example, ABC’s inventory turnover METHOD ONE
+of 2.9 for the year means that goods are bought, Common Stock $
 manufactured and sold out almost three times Additional Paid-In Capital
 annually. Analysts also look at “inventory as a
 Retained Earnings
 percentage of current assets”— in ABC’s case 44%
-Foreign Currency Translation Adjustments ($180,000,000 ÷ $405,800,000).
+($180,000,000 ÷ $405,800,000). Foreign Currency Translation Adjustments
 Unrealized Gains on
 Available-for-Sale Securities
 
 ABC Manufacturing: Inventory Turnover Treasury Stock
 (Dollars in Thousands)
+
+75,000
 
 20,000
 
@@ -1562,46 +1529,53 @@ ABC Manufacturing: Inventory Turnover Treasury Stock
 
 (5,000)
 
-Total Common Shareholders’ Equity $ 340,050
+$ 340,050
 
+Total Common Shareholders’ Equity
 Cost of Sales for Year $535,000
 Less Intangible Assets
 Average Inventory for Year ÷ $182,500 Total Tangible Common
 
 (1,950)
 
-Shareholders’ Equity $ 338,100
+$ 338,100
 
+Shareholders’ Equity
 Inventory Turnover = 2.9
 $338,100
 
-What is an appropriate inventory level? The ade- Common Shares Outstanding ÷ 15,000,000
+÷ 15,000,000
 
+What is an appropriate inventory level? The ade- Common Shares Outstanding
 quacy and balance of inventory depends on a number
 Book Value Per Common Share = $
 of factors, notably the type of business and the time
-METHOD TWOof year. For example, a car dealer with a large stock
+of year. For example, a car dealer with a large stock METHOD TWO
 
 22.54
 
-at the height of the season is in a strong financial Total Assets $ 668,050
+Total Assets $ 668,050
 
+at the height of the season is in a strong financial
 position, while the same inventory at the end of the Less Intangibles
 
 (1,950)
 
-model year represents a financial weakness. Total Tangible Assets $ 666,100
+$ 666,100
 
-Less Current Liabilities (176,000)
+model year represents a financial weakness. Total Tangible Assets
 
+Less Current Liabilities
 Book Value of Securities
-
-Less Long-Term Liabilities (146,000)
-
+Less Long-Term Liabilities
 The terms “net book value” or “net asset value”
 Preferred Stock
 refer to the amount of corporate assets backing a
-Net Tangible Assets Available forcompany’s bonds or preferred shares. While intangible
+company’s bonds or preferred shares. While intangible Net Tangible Assets Available for
+
+(176,000)
+
+(146,000)
 
 (6,000)
 
@@ -1611,8 +1585,9 @@ Net Tangible Assets Available forcompany’s bonds or preferred shares. While in
 
 rights, goodwill and the like) are sometimes included
 
-when computing book value, our discussion focuses Common Shares Outstanding ÷ 15,000,000
+÷ 15,000,000
 
+when computing book value, our discussion focuses Common Shares Outstanding
 on the more conservative net tangible book value.
 Book Value Per Common Share = $
 
@@ -1690,40 +1665,54 @@ of cost of sales
 | --- | --- | --- | --- |
 | Net sales | $765,050 | $725,000 | and selling, general |
 | Cost of sales | 535,000 | 517,000 |  |
-| and administrativeGross margin | 230,050 | 208,000 |  |
-| Depreciation and amortization | 28,050 | 25,000 |  |
-| Selling, general and administrative expenses | 96,804 | 109,500 |  |
-| Operating income | 105,196 | 73,500 |  |
+| Gross margin | 230,050 | 208,000 | and administrative |
+
+Operating expenses:
+expenses (e.g.,
+
+| Depreciation and amortization | 28,050 | 25,000 |
+| --- | --- | --- |
+| Selling, general and administrative expenses | 96,804 | 109,500 |
+| Operating income | 105,196 | 73,500 |
 
 [table extracted with low structural confidence — columns may be misaligned and cell-to-row mapping is unverified]
+Net Income
+The difference
+between revenues
+and outlays for
+the year.
+
 Other income (expense):
 
 Dividend and interest income
 
 Interest expense
-Net Income Income before income taxes and extraordinary loss
+
+Income before income taxes and extraordinary loss
+
 Income tax expense
-The difference Income before extraordinary loss
-between revenues Extraordinary items, net of tax
 
-rent, supplies,
+Income before extraordinary loss
 
-| 5,250 | 10,000 | depreciation, |
-| --- | --- | --- |
-| (16,250) | (16,750) |  |
-| 94,196 | 66,750 | interest on |
-| 41,446 | 26,250 |  |
-| money borrowed,52,750 | 40,500 |  |
-| (5,000) | — | and taxes). |
-| Net Income | $ 47,750 | $ 40,500 |
-| and outlays for | Earnings Per Common Share |  |
-| Before extraordinary loss | $ |  |
+Extraordinary items, net of tax
 
-the year.
+Net Income
+
+Earnings Per Common Share
+
+Before extraordinary loss $
+
 Extraordinary loss
 
 | Net Income Per Common Share | $ |  |
 | --- | --- | --- |
+| 5,250 | 10,000 | depreciation, |
+| (16,250) | (16,750) |  |
+| 94,196 | 66,750 | interest on |
+| 41,446 | 26,250 |  |
+| 52,750 | 40,500 | money borrowed, |
+| (5,000) | — | and taxes). |
+| $ 47,750 | $ 40,500 |  |
 | 3.55 | $ | 2.77 |
 | (.34) | — |  |
 | 3.21 | $ | 2.77 |
@@ -1731,7 +1720,6 @@ Extraordinary loss
 Why is the income statement of such great interest to investors? There are two main reasons:
 
 It shows the record of a company’s operating results for the whole year (unlike the balance sheet, which is a
-
 snapshot of the company’s financial position at a specific point in time, showing what the company owns and
 
 what it owes at the report date).
@@ -1890,21 +1878,11 @@ page 24
 
 The Income Statement
 
-Operating Income In the example, interest expense comes from:
-
+Operating Income
 6
 Determined by subtracting all operating expenses
-
- Notes payable
-
 from the gross margin, operating income is revenue
-
- Debentures
-
 earned from operations. It does not include other
-
- Other long-term debt
-
 miscellaneous charges or expenses (e.g., equity
 pickup in unconsolidated subsidiaries, extraordi-
 nary charges, restructuring charges and the like)
@@ -1920,6 +1898,19 @@ equity investments.
 
 Interest Expense
 8
+The interest expense paid on debt is sometimes
+called a “fixed charge.” It must be paid periodically
+whether or not the company is profitable. Fixed
+charges such as interest differ from stock dividends,
+which are payable only if the board of directors
+declares them. Interest expense is a cost of
+doing business.
+
+In the example, interest expense comes from:
+
+ Notes payable
+ Debentures
+ Other long-term debt
 
 ABC Manufacturing: Interest Expense
 (Dollars in Thousands)
@@ -1937,36 +1928,22 @@ Other Long-Term
 | --- | --- |
 | Total | $16,250 |
 
-Income Tax ExpenseThe interest expense paid on debt is sometimes
-
+Income Tax Expense
 9
-
-called a “fixed charge.” It must be paid periodically Every company has an “effective tax rate” that
-
-whether or not the company is profitable. Fixed is based on the level and nature of its income.
-
-charges such as interest differ from stock dividends, Large corporations such as ABC are subject to the
-
-which are payable only if the board of directors top statutory income tax rate. Tax credits, tax-free
-
-declares them. Interest expense is a cost of income and nondeductible expenses—better known
-
-doing business. as permanent differences—have an impact on the
-
+Every company has an “effective tax rate” that
+is based on the level and nature of its income.
+Large corporations such as ABC are subject to the
+top statutory income tax rate. Tax credits, tax-free
+income and nondeductible expenses—better known
+as permanent differences—have an impact on the
 overall effective tax rate. Therefore, it is not
-
 unusual for the effective tax rate to be less than
-
 the statutory rate.
 
 Income Before Extraordinary Loss
-
 10
-
 The amount by which all revenues exceed all
-
 expenses for the year, not counting extraordinary
-
 gains or losses as defined by GAAP.
 
 page 25
@@ -2007,11 +1984,7 @@ page 26
 
 As with the balance sheet, investors use certain ratios and calculations to analyze the income
 
-### statement. These comparisons provide detailed information about a company’s operating
-
-### results. The operating margin, operating cost ratio and net profit ratio provide general
-
-### information about the company and help investors assess its future prospects.
+### statement. These comparisons provide detailed information about a company’s operating results. The operating margin, operating cost ratio and net profit ratio provide general information about the company and help investors assess its future prospects.
 
 Operating Margin
 
@@ -2088,24 +2061,16 @@ page 27
 
 Analyzing the Income Statement
 
-Interest Coverage Earnings Per Common Share
+Interest Coverage
 
-Financial leverage compares a company’s long- Investors are often more interested in a stock’s earn-
-
-term debt and preferred stock to its common equity. ings than in its dividends, because earnings usually
-
-A company with a large proportion of bonds and drive stock market prices. This discussion will focus
-
-preferred stock relative to common stock is said to on net income per common share.
-
+Financial leverage compares a company’s long-
+term debt and preferred stock to its common equity.
+A company with a large proportion of bonds and
+preferred stock relative to common stock is said to
 be “highly leveraged.” High leverage can work for
-
-or against a company, depending on the earnings In the example, ABC’s income statement shows
-
-available to the common shareholders. Generally earnings per common share at $3.16. This can be
-
-speaking, analysts consider highly leveraged computed using the simple calculation shown.
-
+or against a company, depending on the earnings
+available to the common shareholders. Generally
+speaking, analysts consider highly leveraged
 companies to be riskier, because moderate declines
 in earnings can prove devastating for the common
 shareholders and the company’s ability to cover
@@ -2120,6 +2085,25 @@ Preferred Dividend Coverage
 Investors use net profit as the basis for calculating
 preferred dividend coverage, because federal
 income taxes and all interest charges must be paid
+before anything is available for shareholders. In the
+example, the total dividend requirement for ABC’s
+preferred stock is $350,000. Divide net income of
+$47,750,000 by this figure and the answer is 136.4—
+meaning that ABC has earned the preferred dividend
+requirement more than 136 times. This ratio is a
+comparatively high one because ABC has a relatively
+small amount of preferred stock outstanding.
+
+Earnings Per Common Share
+
+Investors are often more interested in a stock’s earn-
+ings than in its dividends, because earnings usually
+drive stock market prices. This discussion will focus
+on net income per common share.
+
+In the example, ABC’s income statement shows
+earnings per common share at $3.16. This can be
+computed using the simple calculation shown.
 
 ABC Manufacturing: Earnings Per Common Share
 (Dollars in Thousands, Except Per-Share Amounts)
@@ -2136,43 +2120,22 @@ Outstanding Common Shares ÷ 15,000,000
 Earnings Per Share of Common Stock
 Before Extraordinary Loss = $3.16
 
-before anything is available for shareholders. In the More Complex Earnings Calculations
-
-example, the total dividend requirement for ABC’s
+More Complex Earnings Calculations
 
 ABC Manufacturing’s capital structure is very
-
-preferred stock is $350,000. Divide net income of
-
 simple, consisting of common and preferred stock,
-
-$47,750,000 by this figure and the answer is 136.4—
-
 so the simple calculation suffices to show earnings
-
-meaning that ABC has earned the preferred dividend
-
 per share. More complex capital structures require
-
-requirement more than 136 times. This ratio is a
-
 more complex earnings calculations. Complex
 
-comparatively high one because ABC has a relatively
-small amount of preferred stock outstanding.
-
 Financial Leverage A comparison of a company’s long-term debt to its capital structure. Leverage is also the
-
 practice of obtaining capital using borrowed funds or preferred stock, rather than common stock.
 
 Preferred Dividend Coverage The number of times the preferred dividend is covered (earned) by net income.
 
 Convertible Security A debt or equity security that may, under certain circumstances, be exchanged for or
-
 converted into another security, generally common stock. Examples include convertible preferred stock or
-
 convertible bonds. Convertible securities are deemed to be only one step short of common stock; their value
-
 stems in large part from the value of the common stock to which they relate.
 
 Option The right to buy or sell a stock for a preset price (known as the “exercise price” or “strike price”) during a
@@ -2185,69 +2148,54 @@ page 28
 
 Analyzing the Income Statement
 
-capital structures typically contain convertible Diluted Earnings Per Common Share
-
+capital structures typically contain convertible
 securities, options, warrants or contingently
-
-Companies determine diluted earnings per share by
-
 issuable shares. To address these complex capital
-
-dividing the adjusted earnings available to common
-
 structures, companies are required to report two
-
-shareholders for the period by the average number
-
 different forms of earnings per share: basic earnings
-
-of common and potential common shares outstand-
-
 and diluted earnings.
-
-ing, if such potential common shares are dilutive.
-
-(Dilution occurs when earnings per share decreases
 
 Basic Earnings Per Common Share
 
-or loss per share increases.)
-
 Companies determine basic earnings by dividing the
-
-earnings available to common shareholders for the Adjustments to earnings can include:
-
+earnings available to common shareholders for the
 reporting period by the number of common shares
-
-outstanding during that period. What is called the  Dividends on convertible preferred stock
-
-“average calculation” is simply the arithmetic mean  After-tax interest on convertible debt
-
-of the average shares outstanding for the reporting  Effect of the change in earnings from other
-
+outstanding during that period. What is called the
+“average calculation” is simply the arithmetic mean
+of the average shares outstanding for the reporting
 period. The basic earnings per share equation does
 not include unexercised stock options, convertible
+securities and contingently issuable shares.
 
+As seen in the example on page 28, ABC had $3.16
+basic earnings per common share.
+
+Diluted Earnings Per Common Share
+
+Companies determine diluted earnings per share by
+dividing the adjusted earnings available to common
+shareholders for the period by the average number
+of common and potential common shares outstand-
+ing, if such potential common shares are dilutive.
+(Dilution occurs when earnings per share decreases
+or loss per share increases.)
+
+Adjustments to earnings can include:
+
+ Dividends on convertible preferred stock
+ After-tax interest on convertible debt
+ Effect of the change in earnings from other
 expenses
 
-securities and contingently issuable shares. An example of a change in earnings from “other
-
+An example of a change in earnings from “other
 expenses” would be an increase in profit-sharing
-
-As seen in the example on page 28, ABC had $3.16 expense stemming from a reduction in interest
-
-basic earnings per common share. expense upon conversion of convertible debt.
-
+expense stemming from a reduction in interest
+expense upon conversion of convertible debt.
 If diluted earnings per share assumes that the con-
-
 vertible debt is converted to common stock, the
-
 company will no longer have interest expense, and
-
 net income will increase. If profit-sharing expense is
-
 a percentage of net income, profit-sharing expense
-
 will increase as net income rises.
 
 Warrant A guarantee, usually evidenced by a certificate, of the right to buy a stock for a preset price during a
@@ -2263,11 +2211,9 @@ Basic Earnings Income available to common shareholders for the period, divided b
 of common shares outstanding for the period.
 
 Diluted Earnings The amount of current earnings or loss per share reflecting the maximum dilution, or negative
-
 impact, assuming the issuance of all potentially dilutive common shares.
 
 Potential Common Shares Securities and contractual arrangements—such as options and warrants, convertible
-
 securities or contingent stock arrangements—that may result in the issuance of common stock in the future.
 
 page 29
@@ -2478,12 +2424,11 @@ Shareholders’ equity is the total of shareholders’ investment in the company
 
 ### and losses since the company’s founding. Analysts and investors look to the Statement of
 
-### Changes in Shareholders’ Equity to assess dividend payout percentage, dividend yield and
+### Changes in Shareholders’ Equity to assess dividend payout percentage, return on equity (ROE).
 
-### return on equity (ROE).
+### dividend yield and
 
-### %
-
+%
 CONSOLIDATED STATEMENT OF CHANGES IN SHAREHOLDERS’ EQUITY
 (Dollars in Thousands)
 
@@ -2491,16 +2436,16 @@ Year Ended December 31, 2004
 
 Foreign
 
-| Additional | Currency Unrealized |  |  |  |  |
-| --- | --- | --- | --- | --- | --- |
-| Preferred Common | Paid-In Retained Translation Security Treasury |  |  |  |  |
-| Stock | Stock | Capital Earnings Adjustments | Gain | Stock | Total |
+Additional Currency Unrealized
+Preferred Common Paid-In Retained Translation Security Treasury
+
+Stock Stock Capital Earnings Adjustments
 
 Balance
 
-January 1, 2003 $6,000 $72,500 $13,500 $219,600 $(1,000) $ — $(5,000) $305,600
-
-Net income 47,750
+| January 1, 2003 | $6,000 $72,500 $13,500 $219,600 | $(1,000) |
+| --- | --- | --- |
+| Net income | 47,750 |  |
 
 Dividends paid on:
 
@@ -2519,7 +2464,12 @@ gain on available-
 for-sale securities
 
 Balance
-December 31, 2004 $6,000 $75,000 $20,000 $249,000 $ 1,000
+
+| December 31, 2004 $6,000 $75,000 $20,000 $249,000 | $ 1,000 |  |
+| --- | --- | --- |
+| Gain | Stock | Total |
+
+$ — $(5,000) $305,600
 
 47,750
 
@@ -2550,23 +2500,11 @@ page 33
 
 The Statement of Changes in Shareholders’ Equity
 
-As noted, the statement shows that ABC Dividend Payout Percentage
-
+As noted, the statement shows that ABC
 Manufacturing issued additional common stock
-
-Find the dividend payout percentage—the percent-
-
 during the year. It also experienced a foreign
-
-age of earnings per share paid to shareholders—by
-
 currency translation gain and an unrealized gain
-
-dividing dividend per common share by net income
-
 on investments classified as available-for-sale.
-
-per common share.
 
 Retained earnings reflect the cumulative earnings
 that the company has invested for future growth.
@@ -2577,6 +2515,25 @@ dividends on preferred and common stock.
 Dividends
 
 Dividends on common stock do not enter into the
+determination of net income and are not deductible
+for tax purposes.
+
+Dividend Per Share
+
+ABC paid its common shareholders $18 million in
+dividends this year. The balance sheet shows that
+the company has 15 million shares outstanding.
+Calculated by dividing common stock dividends
+by the number of shares outstanding, the dividend
+per share is an important item for some analysts
+and investors.
+
+Dividend Payout Percentage
+
+Find the dividend payout percentage—the percent-
+age of earnings per share paid to shareholders—by
+dividing dividend per common share by net income
+per common share.
 
 Dividend Payout Percentage
 
@@ -2588,53 +2545,24 @@ Dividend Payout Percentage = 37%
 
 Dividend Yield
 
-determination of net income and are not deductible
-
-for tax purposes. Investors also look at the dividend yield, which is
-
+Investors also look at the dividend yield, which is
 an estimate, expressed as a percentage, of the return
-
-Dividend Per Share per share on a given class of stock. The common
-
+per share on a given class of stock. The common
 dividend yield indicates the percentage return that
-
-ABC paid its common shareholders $18 million in
-
 the annual common dividend provides, based on
-
-dividends this year. The balance sheet shows that
-
 the market price of the common stock.
 
-the company has 15 million shares outstanding.
-Calculated by dividing common stock dividends
-
 If a company pays a dividend, this means the
-
-by the number of shares outstanding, the dividend
-
 company has excess cash flow that can be used to
-
-per share is an important item for some analysts
-
 compensate the shareholders for their investment.
-
-and investors.
-
 However, investors should not make assumptions
-
 about a company’s financial health based solely
-
 on whether or not the company pays a dividend.
 
 ABC added $29,400,000 to its retained earnings
-
 during the year after paying dividends totaling
-
 $18,350,000. Even if ABC has some unprofitable
-
 years in the future, it has plenty of retained earn-
-
 ings from which to keep paying dividends.
 
 page 34
@@ -2643,49 +2571,24 @@ page 34
 
 The Statement of Changes in Shareholders’ Equity
 
-A healthy stockpile of retained earnings gives a com- This means that for every dollar of shareholders’
-
-pany a cushion against hard times, but they can also equity, ABC earned nearly 15 cents. In considering
-
-spark a hostile takeover attempt. Another company how good a return this is—and, by extension,
-
-could buy enough of ABC’s common shares to vote whether to put money to work in ABC’s stock—
-
-out the current management and merge ABC into investors must:
-
+A healthy stockpile of retained earnings gives a com-
+pany a cushion against hard times, but they can also
+spark a hostile takeover attempt. Another company
+could buy enough of ABC’s common shares to vote
+out the current management and merge ABC into
 itself. The acquiring company could get the money
-
-to buy ABC’s stock by issuing shares of its own  Compare ABC’s 14.8% with ROE from ABC’s
-
+to buy ABC’s stock by issuing shares of its own
 stock, then use ABC’s retained earnings to pay the
-
-competitors
-
-dividends. This possibility makes it incumbent  Compare ABC’s return with the potential return
-
+dividends. This possibility makes it incumbent
 upon ABC’s management to ensure that its retained
 earnings are put to work to increase the company’s
 total wealth. Otherwise, the shareholders might
+cooperate in the raid on ABC.
 
-from other investments; e.g., CDs, corporate
-bonds, real estate or other common stocks.
-
-cooperate in the raid on ABC. Note that 14.8% is what ABC itself earns and by
-
-no means reflects what investors will receive in
-
-Return on Equity (ROE) dividends on ABC’s stock. What ROE really reveals is
-
-whether ABC Manufacturing is a relatively attractive
+Return on Equity (ROE)
 
 Return on equity shows how hard shareholders’
-
-investment. If so, investors can only hope that this
-
 equity is working. ROE is a popular measure for
-
-attractiveness will be reflected in ABC’s share price.
-
 investors making individual judgments on how
 much a certain stock is worth.
 
@@ -2693,6 +2596,25 @@ To compute ABC’s ROE, look at the balance sheet
 and compute the average common shareholders’
 equity for the year to find how much ABC made
 on it.
+
+This means that for every dollar of shareholders’
+equity, ABC earned nearly 15 cents. In considering
+how good a return this is—and, by extension,
+whether to put money to work in ABC’s stock—
+investors must:
+
+ Compare ABC’s 14.8% with ROE from ABC’s
+competitors
+ Compare ABC’s return with the potential return
+from other investments; e.g., CDs, corporate
+bonds, real estate or other common stocks.
+
+Note that 14.8% is what ABC itself earns and by
+no means reflects what investors will receive in
+dividends on ABC’s stock. What ROE really reveals is
+whether ABC Manufacturing is a relatively attractive
+investment. If so, investors can only hope that this
+attractiveness will be reflected in ABC’s share price.
 
 Common Dividend Yield
 
@@ -2703,18 +2625,10 @@ Market Price of Common Stock ÷ $33.00
 Common Dividend Yield = 3.6%
 
 Return on Equity
-
-Dividend yield shows how much the company
-
 (Dollars in Thousands)
 
-actually paid out to shareholders in cash (as a
-
 Net income of $47,750 less $350
-
-dividend), compared with the current market pricepreferred stock dividend $ 47,400
-
-of the stock.
+preferred stock dividend $ 47,400
 
 Average stockholders’ equity
 of $325,825 less $6,000
@@ -2723,6 +2637,11 @@ of $325,825 less $6,000
 | --- | --- | --- |
 | Return on Equity | = | 14.8% |
 
+Dividend yield shows how much the company
+actually paid out to shareholders in cash (as a
+dividend), compared with the current market price
+of the stock.
+
 page 35
 
 ---
@@ -2730,20 +2649,15 @@ page 35
 # The Statement of Cash Flows
 
 The Statement of Cash Flows completes the picture of ABC Manufacturing’s financial status.
-
 Cash-flow analysis is a critical part of any investment decision. As with the income statement, a
-
 single year’s cash flow statement does not tell the complete story of a company’s financial status.
-
 Indeed, the historical record for a series of years is more useful than any single year’s figures. For
-
 the purposes of this example, however, only one year of ABC Manufacturing’s cash flows is shown.
 
 CONSOLIDATED STATEMENT OF CASH FLOWS
 (Dollars in Thousands, Except Per-Share Amounts)
 
 Year Ended
-
 December 31
 
 Cash Flows Provided by (Used for) Operating Activities:
@@ -2760,11 +2674,7 @@ Cash Flows Provided by (Used for) Investing Activities:
 
 Securities purchases:
 
-27,050
-
-74,800
-
-Trading (14,100)
+Trading
 
 Held-to-maturity
 
@@ -2772,26 +2682,47 @@ Available-for-sale
 
 Principal payment received on held-to-maturity securities
 
+Purchase of fixed assets
+
+Net cash flows used for investing activities
+
+Cash Flows Provided by (Used for) Financing Activities:
+
+Net cash flows used for financing activities
+
+Effect of exchange rate changes on cash flows
+
+Increase in cash flows
+
+Cash and cash equivalents at beginning of year
+
+27,050
+
+74,800
+
+(14,100)
+
 (350)
 
 (150)
 
 50
 
-Purchase of fixed assets (38,400)
+(38,400)
 
-Net cash flows used for investing activities (52,950)
+(52,950)
 
-Cash Flows Provided by (Used for) Financing Activities:
+(19,350)
 
-Net cash flows used for financing activities (19,350)
+2,000
 
-| Effect of exchange rate changes on cash flows | 2,000 |
-| --- | --- |
-| Increase in cash flows | 4,500 |
-| Cash and cash equivalents at beginning of year | 15,000 |
+4,500
 
-Cash and Cash Equivalents at the End of Year $ 19,500
+15,000
+
+Cash and Cash Equivalents at the End of Year
+
+$ 19,500
 
 page 36page 36
 
@@ -2854,7 +2785,6 @@ activities include:
 # notes:
 
 Accrual Method of Accounting Method of accounting that recognizes revenue when earned and expenses
-
 when incurred, in order to appropriately match income with expenses in an accounting period.
 
 page 37
@@ -2961,8 +2891,7 @@ on assets and facilities on a per-year basis for the
 profits during inflationary times, while FIFO does.
 
 next several years, as well as total lease obligations
-
-over the remaining lease period.
+ over the remaining lease period.
 
 Inventory composition—the composition of
 the inventories by raw materials, work-in-process,
@@ -2970,11 +2899,9 @@ finished goods and supplies. Inventory composition
 is usually not shown on the balance sheet.
 
 Last-In, First-Out (LIFO) An inventory-costing method that states inventory at its earliest cost while charging
-
 cost of sales at its latest cost (in the reverse order that the inventory was accumulated).
 
 First-In, First-Out (FIFO) An inventory-costing method that states inventory at its current cost while charging
-
 cost of sales in the order that the inventory was accumulated.
 
 page 38
@@ -2983,90 +2910,68 @@ page 38
 
 Additional Disclosures and Audit Reports
 
- Long-term debt—details regarding the issuance Independent Audits
-
+ Long-term debt—details regarding the issuance
 and maturities of long-term debt.
 
-Printed in the annual report and often referred
-
-to as the auditors’ opinion, the report from the
-
  Contingent liabilities—disclosures relating to
-
-company’s independent auditors states that:
-
 potential or pending claims or lawsuits that might
-
-affect the company. 
+affect the company.
 
  Future contractual commitments—terms of
 contracts in force that will affect future periods.
 
-The audit steps taken to verify the financial
-statements meet the auditing profession’s
-approved standards of practice.
-
- The financial statements prepared by management
-
  Regulations/restrictions—description of regula-
 tory requirements and dividend or other restrictions.
 
-are management’s responsibility and follow GAAP.
-
- There is no material misstatement.
-
  Off-balance-sheet credit and market risks—
 the risks associated with certain investments,
-
-An unqualified, or “clean,” opinion from the inde-
-
 including interest rate swaps, forward and futures
-
-pendent auditors provides added assurance that the
-
 contracts, and options contracts. “Off-balance-sheet
-
-figures are reliable and fairly presented. By contrast,
-
 risk” is defined as the potential for loss over and
-
-if the auditors’ report contains the qualifying words
-
 above the amount recorded on the balance sheet.
 
-“except for,” the reader should investigate the
-
-reason(s) behind the qualification(s), which
-
  Fair value of financial instruments carried
-
-should be summarily explained in that report
-
 at cost—discloses fair market values of instruments
-
-and referenced in the notes.
-
 such as long-term debt and off-balance-sheet instru-
 ments (e.g., swaps and options), carried at cost.
 
-In cases where the auditors do not qualify the
-
-opinion, a separate paragraph may be inserted to
-
  Segment sales, operating profits and
-
-emphasize a particular item. Investors and analysts
-
 identifiable assets—information on each industry
-
-should carefully scrutinize any such matters.
-
 segment accounting for more than 10% of the
 company’s sales, operating profits and/or assets.
 Multinational companies also show sales and
 identifiable assets for each geographical area
 where sales or assets exceed 10% of the related
 consolidated amounts.
+
+Independent Audits
+
+Printed in the annual report and often referred
+to as the auditors’ opinion, the report from the
+company’s independent auditors states that:
+
+ The audit steps taken to verify the financial
+statements meet the auditing profession’s
+approved standards of practice.
+
+ The financial statements prepared by management
+are management’s responsibility and follow GAAP.
+
+ There is no material misstatement.
+
+An unqualified, or “clean,” opinion from the inde-
+pendent auditors provides added assurance that the
+figures are reliable and fairly presented. By contrast,
+if the auditors’ report contains the qualifying words
+“except for,” the reader should investigate the
+reason(s) behind the qualification(s), which
+should be summarily explained in that report
+and referenced in the notes.
+
+In cases where the auditors do not qualify the
+opinion, a separate paragraph may be inserted to
+emphasize a particular item. Investors and analysts
+should carefully scrutinize any such matters.
 
 page 39
 
@@ -3126,16 +3031,20 @@ financial report.
 FIVE-YEAR FINANCIAL SUMMARY
 (Dollars in Thousands, Except Per-Share Amounts)
 
-| 2004 | 2003 | 2002 | 2001 | 2000 |  |
-| --- | --- | --- | --- | --- | --- |
-| Net sales | $765,050 $725,000 $690,000 $660,000 $600,000 |  |  |  |  |
-| Income before income taxes and extraordinary loss | 94,196 | 66,750 | 59,760 | 54,750 | 50,400 |
+| 2004 | 2003 | 2002 | 2001 | 2000 |
+| --- | --- | --- | --- | --- |
+| Net sales | $765,050 $725,000 $690,000 $660,000 $600,000 |  |  |  |
+
+Income before income taxes and extraordinary loss
 
 Extraordinary loss
 
-| (5,000) | — | — | — | — |  |
+Net income
+
+| 94,196 | 66,750 | 59,760 | 54,750 | 50,400 |  |
 | --- | --- | --- | --- | --- | --- |
-| Net income | 47,750 | 40,500 | 37,700 | 33,650 | 29,850 |
+| (5,000) | — | — | — | — |  |
+| 47,750 | 40,500 | 37,700 | 33,650 | 29,850 |  |
 | Earnings per share before extraordinary loss | 3.55 | 2.77 | 2.57 | 2.28 | 2.00 |
 | Net income per share | 3.21 | 2.77 | 2.57 | 2.28 | 2.00 |
 | Dividend per common share | 1.20 | 1.20 | 1.20 | 1.00 | 1.00 |
