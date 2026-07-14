@@ -42,7 +42,7 @@
     {
       "id": "frameworks-applied",
       "question": "What frameworks were applied in preparing this report?",
-      "gold": ["Global Reporting Initiative (GRI) standards", "Sustainability Accounting Standards Board (SASB)", "Task Force on Climate-related Financial Disclosures (TCFD) recommendations"],
+      "gold": ["GRI", "SASB", "TCFD"],
       "type": "set"
     },
     {
@@ -54,13 +54,13 @@
     {
       "id": "three-climate-goals",
       "question": "What are the three climate related goals?",
-      "gold": ["Short-term: annual reduction against 2019 baseline", "Medium-term: carbon-neutral operations by 2027", "Long-term: net zero by 2050 or earlier"],
+      "gold": ["2019 baseline", "carbon-neutral", "net zero"],
       "type": "set"
     },
     {
       "id": "governance-elements-all-phases",
       "question": "Across all three phases of the approach to climate reporting, which named elements are related to Governance?",
-      "gold": ["Board oversight", "Management's role", "How the Board considers climate-related issues in reviewing capital expenditure, acquisitions and divestiture", "How the Board considers climate-related issues in reviewing and guiding strategy"],
+      "gold": ["Board oversight", "Management's role", "capital expenditure", "guiding strategy"],
       "type": "set"
     },
     {
@@ -72,8 +72,8 @@
     {
       "id": "legal-risks-timeframe",
       "question": "What time frame are the transition risks for legal considerations?",
-      "gold": "Medium term to long term",
-      "type": "exact"
+      "gold": ["medium", "long term"],
+      "type": "set"
     }
   ]
 }
