@@ -868,21 +868,7 @@ leading international climate-related standards as they develop.
 
 ## Phased alignment to global reporting standards and regulatory guidelines
 
-# OUR PHASED
-
-PHASE 1 PHASE 2
-
-# APPROACH TO
-
-### PHASE 3
-
-### Enhancements and additions
-
-Foundation Enhancements and additions of strategy
-
-# ADVANCING OUR
-
-### resilience
+# OUR PHASED APPROACH TO ADVANCING OUR
 
 # CLIMATE REPORTING
 
@@ -923,44 +909,54 @@ recognising the challenges associated with
 aligning to a new standard, we are committed
 to advancing our climate reporting.
 
-| G | Board oversight |
-| --- | --- |
-| G | Management’s role |
-| RM | Risk identification and assessment processes |
-| RM | Risk management processes |
-|  | KEY: |
-| G | Governance |
-| RM | Risk management |
-| S | Strategy |
-| MT | Metrics and targets |
-|  | Disclosed |
-|  | Not started |
-|  | In progress |
-| G | How the Board considers climate- related issues in reviewing capital expenditure, acquisitions and divestiture |
-| S | Material climate- related issues by sector and geography |
-| S | How these issues affected the business and strategy |
-| MT | Key metrics used to measure and manage climate-related issues over the past three years |
-| MT | Scope 1 and 2 GHG emissions disclosed over the past three years |
-| MT | Climate-related targets related to GHG emissions, timeframes and base year |
-| MT | KPIs used to assess progress against climate-related targets |
-| G | How the Board considers climate- related issues in reviewing and guiding strategy |
-| RM | Consideration of existing and emerging regulatory requirements related to climate change |
-| S | Timeframe (short, medium and long term) |
-| S | How material climate-related issues affect financial planning |
-| S | How climate-related scenarios inform strategy/financial planning |
-| S | Resilience of strategy to climate- related issues, including an indication of range |
-| S | Climate-related scenarios and associated time horizon(s) used |
-| S | Sensitivity to carbon pricing, if applicable |
-| MT | How climate-related performance metrics are incorporated in remuneration policies |
-| MT | Methodologies used to calculate or estimate climate-related metrics |
-| MT | Scope 3 GHG emissions over the past three years |
-| MT | Identification of climate-related targets as absolute or intensity based |
-| MT | Methodologies used to calculate or estimate climate-related targets |
+### PHASE 1 Foundation
+
+| G | Board oversight | Disclosed |
+| --- | --- | --- |
+| G | Management’s role | Disclosed |
+| RM | Risk identification and assessment processes | Disclosed |
+| RM | Risk management processes | Disclosed |
+|  | KEY: |  |
+| G | Governance |  |
+| RM | Risk management |  |
+| S | Strategy |  |
+| MT | Metrics and targets |  |
+|  | Disclosed |  |
+|  | Not started |  |
+|  | In progress |  |
+
+### PHASE 2 Enhancements and additions
+
+| G | How the Board considers climate- related issues in reviewing capital expenditure, acquisitions and divestiture | In progress |
+| --- | --- | --- |
+| S | Material climate- related issues by sector and geography | Disclosed |
+| S | How these issues affected the business and strategy | Disclosed |
+| MT | Key metrics used to measure and manage climate-related issues over the past three years | Disclosed |
+| MT | Scope 1 and 2 GHG emissions disclosed over the past three years | Disclosed |
+| MT | Climate-related targets related to GHG emissions, timeframes and base year | Disclosed |
+| MT | KPIs used to assess progress against climate-related targets | Disclosed |
+
+### PHASE 3 Enhancements and additions of strategy resilience
+
+| G | How the Board considers climate- related issues in reviewing and guiding strategy | Disclosed |
+| --- | --- | --- |
+| RM | Consideration of existing and emerging regulatory requirements related to climate change | Disclosed |
+| S | Timeframe (short, medium and long term) | Disclosed |
+| S | How material climate-related issues affect financial planning | In progress |
+| S | How climate-related scenarios inform strategy/financial planning | In progress |
+| S | Resilience of strategy to climate- related issues, including an indication of range | Not started |
+| S | Climate-related scenarios and associated time horizon(s) used | In progress |
+| S | Sensitivity to carbon pricing, if applicable | In progress |
+| MT | How climate-related performance metrics are incorporated in remuneration policies | Disclosed |
+| MT | Methodologies used to calculate or estimate climate-related metrics | In progress |
+| MT | Scope 3 GHG emissions over the past three years | In progress |
+| MT | Identification of climate-related targets as absolute or intensity based | In progress |
+| MT | Methodologies used to calculate or estimate climate-related targets | In progress |
 
 Source: TCFD Illustrative implementation plan
 based on expert users’ ratings, September 2020
 
-[chart on this page encodes values as colored symbols that are not text — rows here may be missing their values; see attached figure — page 9]
+[repeated icons on this page were decoded to text using the page's own key: In progress, Not started, Disclosed]
 
 [15 images omitted — page 9]
 
