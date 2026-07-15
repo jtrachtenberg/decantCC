@@ -74,6 +74,37 @@
       "question": "What time frame are the transition risks for legal considerations?",
       "gold": ["medium", "long term"],
       "type": "set"
+    },
+    {
+      "id": "governance-in-progress-phase",
+      "question": "In the three phases to climate reporting, which elements related to Governance are currently in progress? Include which phase heading they fall under.",
+      "gold": "A single element: 'How the Board considers climate-related issues in reviewing capital expenditure, acquisitions and divestiture', which falls under PHASE 2 (Enhancements and additions).",
+      "type": "open",
+      "source": "figure-9"
+    },
+    {
+      "id": "in-progress-all-phases",
+      "question": "Which disclosure elements across all three phases are marked In progress?",
+      "gold": [
+        "reviewing capital expenditure, acquisitions and divestiture",
+        "affect financial planning",
+        "scenarios inform strategy/financial planning",
+        "scenarios and associated time horizon(s)",
+        "Sensitivity to carbon pricing",
+        "Methodologies used to calculate or estimate climate-related metrics",
+        "Scope 3 GHG emissions over the past three years",
+        "targets as absolute or intensity based",
+        "Methodologies used to calculate or estimate climate-related targets"
+      ],
+      "type": "set",
+      "source": "figure-9"
+    },
+    {
+      "id": "not-started-element",
+      "question": "In the phased approach to climate reporting, which disclosure element is marked Not started?",
+      "gold": "Resilience of strategy to climate-related issues, including an indication of range",
+      "type": "exact",
+      "source": "figure-9"
     }
   ]
 }
