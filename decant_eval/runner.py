@@ -70,6 +70,14 @@ def _key(case: str, conversion: str, model: str, question_id: str):
     return (case, conversion, model, question_id)
 
 
+def _context_overflow(exc: Exception) -> bool:
+    """A representation that doesn't fit the target model's context window is a
+    transfer failure, not an ops error: the arena scores it 0 rather than
+    crashing the run (e.g. a 98-page raw PDF at 201K tokens vs Haiku's 200K).
+    Matched on the API's message so the runner stays SDK-free for offline tests."""
+    return "prompt is too long" in str(exc).lower()
+
+
 def load_completed(jsonl_path) -> tuple[list[Result], set]:
     """Rows already written to `jsonl_path`, and the set of their keys (for
     resume). Returns ([], empty set) when the file doesn't exist."""
@@ -127,16 +135,27 @@ def run_case(
                 for q in case.questions:
                     if _key(case.name, conv_name, model, q.id) in done:
                         continue
-                    res = client.answer(
-                        model=model,
-                        system=ANSWER_SYSTEM,
-                        prompt=_question_prompt(q.question),
-                        max_tokens=max_tokens,
-                        document=document,
-                    )
-                    correct, score, detail = grade(
-                        q, res.text, judge=judge, judge_model=judge_model
-                    )
+                    try:
+                        res = client.answer(
+                            model=model,
+                            system=ANSWER_SYSTEM,
+                            prompt=_question_prompt(q.question),
+                            max_tokens=max_tokens,
+                            document=document,
+                        )
+                    except Exception as exc:
+                        if not _context_overflow(exc):
+                            raise
+                        answer_text = ""
+                        correct, score = False, 0.0
+                        detail = f"context overflow: {exc}"[:200]
+                        in_tok, out_tok = 0, 0
+                    else:
+                        correct, score, detail = grade(
+                            q, res.text, judge=judge, judge_model=judge_model
+                        )
+                        answer_text = res.text
+                        in_tok, out_tok = res.input_tokens, res.output_tokens
                     row = Result(
                         case=case.name,
                         conversion=conv_name,
@@ -145,9 +164,9 @@ def run_case(
                         question_type=q.type,
                         correct=correct,
                         score=score,
-                        input_tokens=res.input_tokens,
-                        output_tokens=res.output_tokens,
-                        answer=res.text,
+                        input_tokens=in_tok,
+                        output_tokens=out_tok,
+                        answer=answer_text,
                         detail=detail,
                         source=q.source,
                     )

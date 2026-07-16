@@ -94,6 +94,45 @@ class TestRawArena(unittest.TestCase):
             self.assertNotIn(RAW, {r.conversion for r in rows})
 
 
+class TestContextOverflow(unittest.TestCase):
+    """A document too large for a target model's context window scores 0 for
+    that (conversion, model) instead of crashing the run — not fitting the
+    weak reader is a transfer failure the arena must record."""
+
+    class OverflowClient:
+        def __init__(self, too_big_for):
+            self.too_big_for = too_big_for
+        def answer(self, *, model, system, prompt, max_tokens=512, document=None):
+            if model == self.too_big_for:
+                raise RuntimeError(
+                    "Error code: 400 - prompt is too long: 201055 tokens > 200000 maximum"
+                )
+            return FakeModelClient(answerer).answer(
+                model=model, system=system, prompt=prompt,
+                max_tokens=max_tokens, document=document)
+
+    def test_overflow_scores_zero_and_run_continues(self):
+        case = Case(name="c", questions=qs(),
+                    conversions={"clean": "Total: 1250.00 USD\nVendor: Acme Corp"})
+        rows = run_case(case, client=self.OverflowClient(WEAK), models=[STRONG, WEAK])
+        by = {(r.model, r.question_id): r for r in rows}
+        self.assertEqual(len(rows), 4)  # both models recorded for both questions
+        self.assertTrue(by[(STRONG, "total")].correct)  # strong tier unaffected
+        weak_row = by[(WEAK, "total")]
+        self.assertFalse(weak_row.correct)
+        self.assertEqual(weak_row.score, 0.0)
+        self.assertEqual(weak_row.input_tokens, 0)  # nothing was billed
+        self.assertIn("context overflow", weak_row.detail)
+
+    def test_other_errors_still_raise(self):
+        class Boom:
+            def answer(self, **kw):
+                raise RuntimeError("connection reset")
+        case = Case(name="c", questions=qs(), conversions={"clean": "x"})
+        with self.assertRaises(RuntimeError):
+            run_case(case, client=Boom(), models=[STRONG])
+
+
 class TestControlArm(unittest.TestCase):
     def test_memorized_answer_is_flagged(self):
         case = Case(name="c", questions=qs(), conversions={"clean": "x"})
