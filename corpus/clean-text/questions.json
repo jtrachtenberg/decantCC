@@ -8,11 +8,10 @@
       "tolerance": 0
     },
     {
-      "id": "irc-section",
-      "question": "Which Internal Revenue Code section governs the project's low-income housing credits?",
-      "gold": "42",
-      "type": "numeric",
-      "tolerance": 0
+      "id": "ny-mgr-phone",
+      "question": "What phone number is listed in the contact information for Clint Baldeo, the Regional Accounting Manager for New York City?",
+      "gold": "410-772-5291",
+      "type": "exact"
     },
     {
       "id": "audit-firm",
