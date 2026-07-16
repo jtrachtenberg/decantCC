@@ -19,7 +19,9 @@ conversions and inverted the signal the harness measures. The fixes:
     line (or an explicit "ANSWER: x"), so a paragraph of hedging can't smuggle
     the gold string past a containment check.
   - numeric takes the answer's *first* number, not any number in the text, so
-    "800.00, not 1250.00" scores against 800, not 1250.
+    "800.00, not 1250.00" scores against 800, not 1250. When the answer has no
+    digit at all, spelled-out numbers count ("fifteen years" -> 15) — models
+    quoting a source verbatim were scored "no number in answer" otherwise.
   - exact is equality, or containment only when the answer barely exceeds the
     gold; anything longer routes to the judge (when one is configured).
   - set matches on word boundaries, so gold "ship" is not found in "shipping".
@@ -85,6 +87,47 @@ def _boundary(term: str) -> re.Pattern:
     return re.compile(r"(?<!\w)" + re.escape(term) + r"(?!\w)")
 
 
+# Spelled-out English numbers, the fallback when an answer has no digit at all.
+# A model quoting a source verbatim ("fifteen years for land improvements")
+# answers correctly but gives _NUM nothing to match — the 2026-07-15/16 runs
+# scored land-improvements-life 0 across every arm for exactly this reason.
+_UNITS = {
+    "zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+    "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11,
+    "twelve": 12, "thirteen": 13, "fourteen": 14, "fifteen": 15,
+    "sixteen": 16, "seventeen": 17, "eighteen": 18, "nineteen": 19,
+}
+_TENS = {
+    "twenty": 20, "thirty": 30, "forty": 40, "fifty": 50, "sixty": 60,
+    "seventy": 70, "eighty": 80, "ninety": 90,
+}
+
+
+def _word_number(text):
+    """The first spelled-out number in `text` (0-999: units, teens, tens,
+    "twenty-one" compounds, "three hundred (and) five"), or None. Deliberately
+    small — this is a fallback for verbatim quotes, not a NL number parser."""
+    toks = re.split(r"[\s\-]+", _norm(text))
+    for i, t in enumerate(toks):
+        if t not in _UNITS and t not in _TENS:
+            continue
+        val = _UNITS.get(t) if t in _UNITS else _TENS[t]
+        j = i + 1
+        if t in _UNITS and j < len(toks) and toks[j] == "hundred":
+            val *= 100
+            j += 1
+            if j < len(toks) and toks[j] == "and":
+                j += 1
+            if j < len(toks) and toks[j] in _TENS:
+                val += _TENS[toks[j]]
+                j += 1
+        if val is not None and j < len(toks) and toks[j] in _UNITS and 0 < _UNITS[toks[j]] < 10 \
+                and (t in _TENS or val >= 100):
+            val += _UNITS[toks[j]]
+        return float(val)
+    return None
+
+
 def _committed_number(text: str):
     """The number the model committed to, or None. A bolded span (**...**) is a
     strong commitment signal, so the first number inside the first bolded span
@@ -99,7 +142,12 @@ def _committed_number(text: str):
         if nums:
             return nums[0]
     nums = _numbers(_short_answer(text))
-    return nums[0] if nums else None
+    if nums:
+        return nums[0]
+    # No digit anywhere the model committed to — a verbatim quote may spell the
+    # number out ("fifteen years"). Digits always win when present, so the
+    # negation rule ("800.00, not 1250.00" -> 800) is untouched.
+    return _word_number(_short_answer(text))
 
 
 def _grade_numeric(answer: str, gold, tolerance: float):

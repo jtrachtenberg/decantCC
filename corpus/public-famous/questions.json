@@ -27,10 +27,11 @@
       "type": "exact"
     },
     {
-      "id": "product-costs",
-      "question": "According to the guide, what are the three basic components of product costs?",
-      "gold": ["direct materials", "direct labor", "manufacturing overhead"],
-      "type": "set"
+      "id": "book-value-per-share",
+      "question": "In the worked example, what is ABC Manufacturing's book value per share of common stock, in dollars?",
+      "gold": "22.54",
+      "type": "numeric",
+      "tolerance": 0
     },
     {
       "id": "doc-purpose",

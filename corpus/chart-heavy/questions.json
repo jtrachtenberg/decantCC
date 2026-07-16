@@ -28,10 +28,11 @@
       "type": "exact"
     },
     {
-      "id": "lhc-experiments",
-      "question": "What are the four large LHC experiments named in the report?",
-      "gold": ["ALICE", "ATLAS", "CMS", "LHCb"],
-      "type": "set"
+      "id": "theory-arxiv-papers",
+      "question": "According to the report, how many papers did CERN's Theoretical Physics Department submit to the arXiv preprint server in 2025?",
+      "gold": "269",
+      "type": "numeric",
+      "tolerance": 0
     },
     {
       "id": "doc-purpose",

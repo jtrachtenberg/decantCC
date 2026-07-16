@@ -161,6 +161,35 @@ class TestVerboseNumericRegressions(unittest.TestCase):
         self.assertEqual(score, 0.0)
 
 
+class TestSpelledOutNumbers(unittest.TestCase):
+    """clean-text/land-improvements-life scored 0 on EVERY arm in the
+    2026-07-15/16 billed runs: the source spells the value out ("fifteen years
+    for land improvements"), models quoted it verbatim, and _NUM found no digit.
+    Word-numbers are a fallback only — digits always take precedence."""
+
+    def test_verbatim_quote_word_number(self):
+        # Opus's actual committed answer from the billed run.
+        self.assertTrue(grade(q("numeric", "15", 0), "fifteen years")[0])
+        self.assertTrue(grade(q("numeric", "15", 0), "Fifteen years.")[0])
+
+    def test_wrong_word_number_fails(self):
+        self.assertFalse(grade(q("numeric", "15", 0), "forty years")[0])
+
+    def test_compound_word_numbers(self):
+        self.assertTrue(grade(q("numeric", "21", 0), "twenty-one units")[0])
+        self.assertTrue(grade(q("numeric", "40", 0), "forty")[0])
+        self.assertTrue(grade(q("numeric", "305", 0), "three hundred and five")[0])
+
+    def test_digits_still_win_over_words(self):
+        # "not fifteen" must not rescue a wrong digit answer.
+        self.assertFalse(grade(q("numeric", "15", 0), "40 years, not fifteen")[0])
+
+    def test_no_number_still_fails(self):
+        ok, _, detail = grade(q("numeric", "15", 0), "NOT FOUND")
+        self.assertFalse(ok)
+        self.assertIn("no number", detail)
+
+
 class TestReviewRegressions(unittest.TestCase):
     """The six executed-proof failures from the Fable review (memo table). Each
     was silently scored 1.0 by the old graders; each must now score 0. Pinned
