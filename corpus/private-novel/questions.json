@@ -38,6 +38,12 @@
       "question": "In one or two sentences, what is this document and why was it produced?",
       "gold": "Morgan Stanley Investment Management's Climate Report 2025 (published June 2026), a TCFD-aligned climate disclosure covering 1 January to 31 December 2025, produced to satisfy the FCA's ESG Sourcebook reporting requirements for the in-scope entities MSIM Ltd, EVAIL and MSIP - covering governance, strategy, scenario analysis, risk management, and financed-emissions metrics.",
       "type": "open"
+    },{
+      "id": "risk-assessment-high",
+      "question": "In GRA's climate risk assessment matrix, which type of risk was assessed as high in the medium term?",
+      "gold": "market",
+      "type": "exact",
+      "source": "figure-10"
     }
   ]
 }

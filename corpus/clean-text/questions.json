@@ -36,6 +36,18 @@
       "question": "In one or two sentences, what is this document and who is its intended audience?",
       "gold": "The 2021 Financial Statement Preparation Guide from Enterprise, telling CPAs and sponsors of low-income housing tax credit (LIHTC) limited partnerships how to prepare and submit year-end audited financial statements - deadlines, sample statements and notes, required auditor letters, and impairment analysis guidance.",
       "type": "open"
+    },{
+      "id": "sample-auditor-letter-year",
+      "question": "What is the exact date for the end of the audit referenced in the Sample Component Auditor Letter?",
+      "gold": "December 31, 2016",
+      "type": "exact",
+      "source": "figure-34"
+    },{
+      "id": "impairment-triggering-events",
+      "question": "What examples of triggering events are listed in the Impairment Worksheet?",
+      "gold": ["Negative NOI", "Mortgage default", "poor cash flow", "Section 8"],
+      "type": "set",
+      "source": "text"
     }
   ]
 }

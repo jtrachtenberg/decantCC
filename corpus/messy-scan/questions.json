@@ -37,6 +37,12 @@
       "question": "In one or two sentences, what is this document and what does it present?",
       "gold": "A U.S. Geological Survey data report presenting biosolids, crop, ground-water, and streambed-sediment chemical data for the year 2000 from an expanded monitoring program at a biosolids-application area near Deer Trail, Colorado, run by the USGS in cooperation with the Metro Wastewater Reclamation District (MWRD) and the North Kiowa Bijou Groundwater Management District.",
       "type": "open"
+    },{
+      "id": "bmp-abbreviation-meaning",
+      "question": "What is the stated meaning of the abbreviation BMP in the document?",
+      "gold": "below the measuring point of the well casing",
+      "type": "exact",
+      "source": "text"
     }
   ]
 }
