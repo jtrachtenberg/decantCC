@@ -127,6 +127,40 @@ class TestOpenJudge(unittest.TestCase):
         self.assertIn("judge error", detail)
 
 
+class TestVerboseNumericRegressions(unittest.TestCase):
+    """Two real rows from the 2026-07-15 billed run scored 0 despite containing
+    the exact gold value: the committed number was buried behind a lead-in year
+    or above a citation line, so _numbers()[0] grabbed the wrong figure. The
+    grader now prefers a bolded number. The negation guard must survive: a value
+    the model bolds is committed, but "800.00, not 1250.00" (no bold) still fails.
+    """
+
+    def test_bolded_value_beats_leadin_year(self):
+        # Row 1: gold 808, but the sentence opens with the year 2025.
+        ans = (
+            "According to the CERN staff breakdown for 2025, CERN employed "
+            "**808 technicians**, which represented 29.25% of personnel."
+        )
+        self.assertTrue(grade(q("numeric", "808", 0), ans)[0])
+
+    def test_bolded_value_beats_citation_line(self):
+        # Row 2: gold 42, bolded above a last line whose first number is 1.
+        ans = (
+            "Internal Revenue Code **Section 42** governs the credit.\n\n"
+            'This is stated in NOTE 1 - ORGANIZATION: "...Section 42..."'
+        )
+        self.assertTrue(grade(q("numeric", "42", 0), ans)[0])
+
+    def test_negation_without_bold_still_fails(self):
+        # No bold -> fall back to the short answer's first number (800), not gold.
+        ok, score, _ = grade(
+            q("numeric", "1250.00", 0.01),
+            "The total is 800.00, not 1250.00 as some rows suggest.",
+        )
+        self.assertFalse(ok)
+        self.assertEqual(score, 0.0)
+
+
 class TestReviewRegressions(unittest.TestCase):
     """The six executed-proof failures from the Fable review (memo table). Each
     was silently scored 1.0 by the old graders; each must now score 0. Pinned

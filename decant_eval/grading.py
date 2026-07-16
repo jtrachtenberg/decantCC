@@ -39,6 +39,9 @@ _WS = re.compile(r"\s+")
 _PUNCT = re.compile(r"[^\w\s%.\-/]")
 # First signed number, optional thousands separators and decimal.
 _NUM = re.compile(r"-?\d[\d,]*(?:\.\d+)?")
+# A markdown bold span (**...**), kept to a single line so it can't swallow a
+# whole paragraph. The number a model *bolds* is one it is committing to.
+_BOLD = re.compile(r"\*\*(.+?)\*\*")
 # An explicit "answer: x" / "final answer - x" line the model may have written.
 _ANSWER_MARKER = re.compile(r"(?im)^\s*(?:final\s+)?answer\s*[:\-]\s*(.+?)\s*$")
 # A bare verdict word, optionally "verdict: <word>" — the whole response, so a
@@ -82,15 +85,32 @@ def _boundary(term: str) -> re.Pattern:
     return re.compile(r"(?<!\w)" + re.escape(term) + r"(?!\w)")
 
 
+def _committed_number(text: str):
+    """The number the model committed to, or None. A bolded span (**...**) is a
+    strong commitment signal, so the first number inside the first bolded span
+    that has one wins over the short-answer's first number. This rescues verbose-
+    but-correct answers whose committed value is buried behind a lead-in ("...for
+    2025, CERN employed **808 technicians**...", gold 808 not 2025) or sits above
+    a citation line ("**Section 42**...\n\nstated in NOTE 1: ...", gold 42 not the
+    1 in "NOTE 1"). With no bolded number we fall back to the first number of the
+    short answer, so a negation like "800.00, not 1250.00" still grades as 800."""
+    for span in _BOLD.findall(str(text)):
+        nums = _numbers(span)
+        if nums:
+            return nums[0]
+    nums = _numbers(_short_answer(text))
+    return nums[0] if nums else None
+
+
 def _grade_numeric(answer: str, gold, tolerance: float):
     try:
         target = float(str(gold).replace(",", ""))
     except ValueError:
         return False, 0.0, f"gold {gold!r} is not numeric"
-    nums = _numbers(_short_answer(answer))
-    if not nums:
+    n = _committed_number(answer)
+    if n is None:
         return False, 0.0, "no number in answer"
-    n = nums[0]  # the committed value, not any number the model mentioned
+    # n is the committed value, not any number the model mentioned
     if abs(n - target) <= tolerance:
         return True, 1.0, f"answer {n} within +/-{tolerance} of {target}"
     return False, 0.0, f"answer {n} not within +/-{tolerance} of {target}"
