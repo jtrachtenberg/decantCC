@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DecantCC case questions",
+  "description": "Question set for one corpus case (see corpus/README.md). Gold answers come from the SOURCE document, never from a conversion.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["questions"],
+  "properties": {
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/question" }
+    }
+  },
+  "definitions": {
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "question", "gold"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "description": "Kebab-case slug, unique within the case."
+        },
+        "question": {
+          "type": "string",
+          "minLength": 10,
+          "description": "The question as posed to the model. Anchor it to the document (e.g. 'According to the FAQ...') so it can't be answered from world knowledge."
+        },
+        "type": {
+          "enum": ["numeric", "exact", "set", "ordered_list", "open"],
+          "default": "exact",
+          "description": "numeric: first committed number vs gold within tolerance (spelled-out numbers count when no digit). exact: normalized equality / barely-longer containment, judge fallback. set: fraction of gold items present as whole words. ordered_list: like set but in sequence. open: LLM judge."
+        },
+        "gold": {
+          "description": "The gold answer. String or number for numeric/exact/open; array of string anchors for set/ordered_list. Grader-aware: avoid space-separated thousands ('28 215') and hyphen/diacritic-fragile exact strings; prefer short anchors over long verbatim phrases.",
+          "anyOf": [
+            { "type": "string", "minLength": 1 },
+            { "type": "number" },
+            {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string", "minLength": 1 }
+            }
+          ]
+        },
+        "tolerance": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0,
+          "description": "numeric only: absolute tolerance on the value."
+        },
+        "source": {
+          "type": "string",
+          "description": "Where in the source document the answer lives ('figure-9', 'table-3', 'text') - free-form, case-scoped. Enables per-source report slicing; tag figure-borne questions so companion-subset arms can be compared."
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "numeric" } }, "required": ["type"] },
+          "then": {
+            "properties": {
+              "gold": {
+                "anyOf": [
+                  { "type": "number" },
+                  { "type": "string", "pattern": "^-?[0-9][0-9,]*(\\.[0-9]+)?$" }
+                ],
+                "description": "numeric gold must parse as a number (digits, optional thousands commas and decimal)."
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "enum": ["set", "ordered_list"] } },
+            "required": ["type"]
+          },
+          "then": {
+            "properties": {
+              "gold": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string", "minLength": 1 },
+                "description": "set/ordered_list gold is an array of short string anchors."
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

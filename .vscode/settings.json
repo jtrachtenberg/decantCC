@@ -1,0 +1,8 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["/corpus/*/questions.json"],
+      "url": "./corpus/questions.schema.json"
+    }
+  ]
+}
