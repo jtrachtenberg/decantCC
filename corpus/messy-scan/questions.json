@@ -42,7 +42,7 @@
       "question": "What is the stated meaning of the abbreviation BMP in the document?",
       "gold": "below the measuring point of the well casing",
       "type": "exact",
-      "source": "text"
+      "source": "figure-45"
     }
   ]
 }
