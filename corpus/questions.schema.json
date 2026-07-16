@@ -17,6 +17,64 @@
       "type": "object",
       "additionalProperties": false,
       "required": ["id", "question", "gold"],
+      "defaultSnippets": [
+        {
+          "label": "numeric question",
+          "description": "Graded by first committed number vs gold within tolerance",
+          "body": {
+            "id": "${1:kebab-case-id}",
+            "question": "${2:According to ..., what is ...?}",
+            "gold": "${3:42}",
+            "type": "numeric",
+            "tolerance": 0,
+            "source": "${4:text}"
+          }
+        },
+        {
+          "label": "exact question",
+          "description": "Normalized equality / barely-longer containment; judge fallback",
+          "body": {
+            "id": "${1:kebab-case-id}",
+            "question": "${2:Who/what is listed as ...?}",
+            "gold": "${3:Exact Answer}",
+            "type": "exact",
+            "source": "${4:text}"
+          }
+        },
+        {
+          "label": "set question",
+          "description": "Fraction of gold anchors present as whole words, any order",
+          "body": {
+            "id": "${1:kebab-case-id}",
+            "question": "${2:Which ... appear as ...?}",
+            "gold": ["${3:anchor one}", "${4:anchor two}"],
+            "type": "set",
+            "source": "${5:text}"
+          }
+        },
+        {
+          "label": "ordered_list question",
+          "description": "Like set, but anchors must appear in sequence",
+          "body": {
+            "id": "${1:kebab-case-id}",
+            "question": "${2:In order, what are the steps of ...?}",
+            "gold": ["${3:first}", "${4:second}", "${5:third}"],
+            "type": "ordered_list",
+            "source": "${6:text}"
+          }
+        },
+        {
+          "label": "open question",
+          "description": "Free-form, graded by LLM judge against the gold summary",
+          "body": {
+            "id": "${1:kebab-case-id}",
+            "question": "${2:In one or two sentences, ...?}",
+            "gold": "${3:A model answer the judge compares against.}",
+            "type": "open",
+            "source": "${4:text}"
+          }
+        }
+      ],
       "properties": {
         "id": {
           "type": "string",
