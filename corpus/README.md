@@ -84,3 +84,31 @@ a deliberately garbled conversion) lives at `tests/fixtures/sample-invoice/`,
 real conversion arms, so inside the corpus it would leave the report with no
 common case at all — nothing comparable. Keep test-only cases out of
 `corpus/`.
+
+## Known gap: recognition-hard content exists, but the questions under-probe it
+
+`messy-scan/` is genuinely recognition-hard, not native text: **~55% of its 98
+pages can't be read by parsing** — 14 are image-only, and ~40 more carry a
+**broken font encoding** (the ToUnicode map scrambles glyphs, so a text
+extractor pulls monoalphabetic-cipher garbage like `#'78+;'8+6` for a page that
+visibly reads "Wastewater"). Only OCR recovers those. Its figure pages also mix
+image with **context-dependent text** — axis rulers, distances across a depicted
+river cross-section — meaningless as extracted strings without the figure, which
+is extract-and-reference territory, not plain OCR-to-Markdown.
+
+The gap is therefore the *questions*, not the *document* — and note the question
+sets are **still being authored** (not yet complete), so this is a snapshot, not
+a designed endpoint. As they stand, 5 of the 7 messy-scan gold answers live in
+the clean front matter (pages ~9–23), so the arena mostly scores clean parsing
+and barely reaches the 55% that needs recognition. `decant.md` even ships the
+cipher scramble through (pdf.js carries the broken encoding), yet no question
+penalizes it. **Do not read `report.md` as evidence about the recognition
+tier** — both because authoring is unfinished and because, in particular,
+Docling's last-place finish is *not* attributable to "recognition untested":
+this case does test recognition, just not where the current questions look.
+
+To close it, author questions whose gold answers live in messy-scan's scrambled,
+image-only, or figure pages — the document already supplies the stress. For a
+*controlled* A/B, derive an image-only case from `clean-text/` (render pages,
+strip the text layer, reuse `questions.json`): same gold answers, but Decant
+passes through while Docling/OCR must actually read.
