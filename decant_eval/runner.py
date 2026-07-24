@@ -43,6 +43,11 @@ CONTROL_SYSTEM = (
 RAW = "raw"  # arena name for the source-PDF baseline
 CONTROL = "(memory)"  # arena name for the no-document control arm
 
+# Result.status for a row whose model call failed because the document exceeds
+# the target model's context window. Scored 0 by design (see _failure_status),
+# but the report shows it as a failed call, not a graded wrong answer.
+CONTEXT_OVERFLOW = "context_overflow"
+
 
 def _question_prompt(question: str) -> str:
     return f"QUESTION: {question}\n\nANSWER:"
@@ -64,18 +69,30 @@ class Result:
     # The question's answer-location tag (Question.source). Defaulted so rows
     # from a pre-tagging JSONL audit trail still load on --resume.
     source: str = ""
+    # "" when the model produced an answer that was graded; a machine-readable
+    # failure class (today only CONTEXT_OVERFLOW) when the API call itself
+    # failed and the row was scored 0 with no answer. Defaulted so rows from a
+    # pre-status audit trail still load on --resume; load_completed re-derives
+    # it for legacy failure rows.
+    status: str = ""
 
 
 def _key(case: str, conversion: str, model: str, question_id: str):
     return (case, conversion, model, question_id)
 
 
-def _context_overflow(exc: Exception) -> bool:
-    """A representation that doesn't fit the target model's context window is a
-    transfer failure, not an ops error: the arena scores it 0 rather than
-    crashing the run (e.g. a 98-page raw PDF at 201K tokens vs Haiku's 200K).
-    Matched on the API's message so the runner stays SDK-free for offline tests."""
-    return "prompt is too long" in str(exc).lower()
+def _failure_status(exc: Exception) -> str | None:
+    """The machine-readable Result.status when `exc` is an API failure the
+    arena records as a scored row, else None — the error re-raises and crashes
+    the run so --resume retries it (a transient outage must not be frozen into
+    the audit trail as a permanent 0). CONTEXT_OVERFLOW is recorded: a
+    representation that doesn't fit the target model's context window is a
+    transfer failure, not an ops error, and deterministic — retrying cannot
+    succeed (e.g. a 98-page raw PDF at 201K tokens vs Haiku's 200K). Matched on
+    the API's message so the runner stays SDK-free for offline tests."""
+    if "prompt is too long" in str(exc).lower():
+        return CONTEXT_OVERFLOW
+    return None
 
 
 def load_completed(jsonl_path) -> tuple[list[Result], set]:
@@ -90,7 +107,13 @@ def load_completed(jsonl_path) -> tuple[list[Result], set]:
         line = line.strip()
         if not line:
             continue
-        r = Result(**json.loads(line))
+        d = json.loads(line)
+        # Failure rows written before the status field carried only the detail
+        # prefix; re-derive it so legacy audit trails (e.g. the 2026-07 shipped
+        # runs) resume and re-report with failed calls still classified.
+        if "status" not in d and str(d.get("detail", "")).startswith("context overflow"):
+            d["status"] = CONTEXT_OVERFLOW
+        r = Result(**d)
         rows.append(r)
         done.add(_key(r.case, r.conversion, r.model, r.question_id))
     return rows, done
@@ -144,13 +167,15 @@ def run_case(
                             document=document,
                         )
                     except Exception as exc:
-                        if not _context_overflow(exc):
+                        status = _failure_status(exc)
+                        if status is None:
                             raise
                         answer_text = ""
                         correct, score = False, 0.0
-                        detail = f"context overflow: {exc}"[:200]
+                        detail = f"{status.replace('_', ' ')}: {exc}"[:200]
                         in_tok, out_tok = 0, 0
                     else:
+                        status = ""
                         correct, score, detail = grade(
                             q, res.text, judge=judge, judge_model=judge_model
                         )
@@ -169,6 +194,7 @@ def run_case(
                         answer=answer_text,
                         detail=detail,
                         source=q.source,
+                        status=status,
                     )
                     rows.append(row)
                     if sink is not None:
