@@ -10,9 +10,10 @@ from pathlib import Path
 
 from decant_eval.corpus import Case, Question
 from decant_eval.models import FakeModelClient
-from decant_eval.report import build_report
+from decant_eval.report import build_report, to_markdown
 from decant_eval.runner import (
-    CONTROL, RAW, Result, load_completed, run_case, run_control, run_corpus,
+    CONTEXT_OVERFLOW, CONTROL, RAW, Result, load_completed, run_case, run_control,
+    run_corpus,
 )
 
 STRONG, WEAK = "claude-opus-4-8", "claude-haiku-4-5"
@@ -46,6 +47,17 @@ def answerer(model, system, prompt):
     if "vendor" in prompt.lower():
         return "Acme Corp"
     return "NOT FOUND"
+
+
+OVERFLOW_MSG = "Error code: 400 - prompt is too long: 201055 tokens > 200000 maximum"
+
+
+def overflow_for_weak(model, system, prompt):
+    """Responder that fails the weak tier the way the API does when a document
+    exceeds the context window; FakeModelClient propagates the raise."""
+    if model == WEAK:
+        raise RuntimeError(OVERFLOW_MSG)
+    return answerer(model, system, prompt)
 
 
 class TestJsonlPersistence(unittest.TestCase):
@@ -97,40 +109,73 @@ class TestRawArena(unittest.TestCase):
 class TestContextOverflow(unittest.TestCase):
     """A document too large for a target model's context window scores 0 for
     that (conversion, model) instead of crashing the run — not fitting the
-    weak reader is a transfer failure the arena must record."""
+    weak reader is a transfer failure the arena must record — and the row
+    carries a machine-readable status so the report can show it as a failed
+    call rather than a graded wrong answer."""
 
-    class OverflowClient:
-        def __init__(self, too_big_for):
-            self.too_big_for = too_big_for
-        def answer(self, *, model, system, prompt, max_tokens=512, document=None):
-            if model == self.too_big_for:
-                raise RuntimeError(
-                    "Error code: 400 - prompt is too long: 201055 tokens > 200000 maximum"
-                )
-            return FakeModelClient(answerer).answer(
-                model=model, system=system, prompt=prompt,
-                max_tokens=max_tokens, document=document)
-
-    def test_overflow_scores_zero_and_run_continues(self):
+    def test_overflow_scores_zero_with_status_and_run_continues(self):
         case = Case(name="c", questions=qs(),
                     conversions={"clean": "Total: 1250.00 USD\nVendor: Acme Corp"})
-        rows = run_case(case, client=self.OverflowClient(WEAK), models=[STRONG, WEAK])
+        rows = run_case(case, client=FakeModelClient(overflow_for_weak),
+                        models=[STRONG, WEAK])
         by = {(r.model, r.question_id): r for r in rows}
         self.assertEqual(len(rows), 4)  # both models recorded for both questions
-        self.assertTrue(by[(STRONG, "total")].correct)  # strong tier unaffected
+        strong_row = by[(STRONG, "total")]
+        self.assertTrue(strong_row.correct)  # strong tier unaffected
+        self.assertEqual(strong_row.status, "")
         weak_row = by[(WEAK, "total")]
         self.assertFalse(weak_row.correct)
         self.assertEqual(weak_row.score, 0.0)
         self.assertEqual(weak_row.input_tokens, 0)  # nothing was billed
+        self.assertEqual(weak_row.answer, "")
+        self.assertEqual(weak_row.status, CONTEXT_OVERFLOW)
         self.assertIn("context overflow", weak_row.detail)
 
+    def test_status_survives_jsonl_roundtrip(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            case = _load(make_case(tmp))
+            path = Path(tmp) / "rows.jsonl"
+            run_case(case, client=FakeModelClient(overflow_for_weak),
+                     models=[STRONG, WEAK], jsonl_path=path)
+            reloaded, done = load_completed(path)
+            weak_rows = [r for r in reloaded if r.model == WEAK]
+            self.assertTrue(weak_rows)
+            self.assertTrue(all(r.status == CONTEXT_OVERFLOW for r in weak_rows))
+            self.assertTrue(all(r.status == "" for r in reloaded if r.model == STRONG))
+            # resume treats the failed rows as done — deterministic, no re-bill
+            self.assertIn((case.name, "clean", WEAK, "total"), done)
+
+    def test_pre_status_jsonl_loads_and_classifies_legacy_failures(self):
+        # Audit trails written before the status field existed (the 2026-07
+        # shipped runs): a graded row loads with status "", and a failure row —
+        # recognizable by the detail the old catch wrote — re-derives its status.
+        graded = {"case": "c", "conversion": "clean", "model": STRONG,
+                  "question_id": "q1", "question_type": "exact", "correct": True,
+                  "score": 1.0, "input_tokens": 120, "output_tokens": 5,
+                  "answer": "Acme Corp", "detail": "exact match", "source": ""}
+        failed = {"case": "c", "conversion": RAW, "model": WEAK,
+                  "question_id": "q1", "question_type": "exact", "correct": False,
+                  "score": 0.0, "input_tokens": 0, "output_tokens": 0,
+                  "answer": "", "detail": f"context overflow: {OVERFLOW_MSG}",
+                  "source": ""}
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "rows.jsonl"
+            path.write_text(json.dumps(graded) + "\n" + json.dumps(failed) + "\n",
+                            encoding="utf-8")
+            rows, done = load_completed(path)
+            self.assertEqual(rows[0].status, "")
+            self.assertEqual(rows[1].status, CONTEXT_OVERFLOW)
+            self.assertIn(("c", "clean", STRONG, "q1"), done)
+            self.assertIn(("c", RAW, WEAK, "q1"), done)
+
     def test_other_errors_still_raise(self):
-        class Boom:
-            def answer(self, **kw):
-                raise RuntimeError("connection reset")
+        # Transient failures must crash the run so --resume retries them
+        # instead of freezing a permanent 0 into the audit trail.
+        def boom(model, system, prompt):
+            raise RuntimeError("connection reset")
         case = Case(name="c", questions=qs(), conversions={"clean": "x"})
         with self.assertRaises(RuntimeError):
-            run_case(case, client=Boom(), models=[STRONG])
+            run_case(case, client=FakeModelClient(boom), models=[STRONG])
 
 
 class TestControlArm(unittest.TestCase):
@@ -185,6 +230,54 @@ class TestReportIntegrity(unittest.TestCase):
                 self._row("c2", "b", STRONG, 0.0)]  # forces excluded-case + floor notes
         md = to_markdown(build_report(rows, strong=STRONG, weak=WEAK))
         self.assertTrue(md.isascii(), "printed report must be pure ASCII for any console")
+
+
+class TestFailedCallAnnotation(unittest.TestCase):
+    """Failed API calls must surface in the scoreboard as failed calls, not as
+    an arm that answered everything wrong — the shipped messy-scan report read
+    'raw: Haiku 0.00 / spread +0.70' when the PDF simply didn't fit Haiku."""
+
+    def _row(self, conv, model, qid, score, status=""):
+        failed = bool(status)
+        return Result(
+            "c1", conv, model, qid, "exact", score == 1.0, score,
+            0 if failed else 100, 0 if failed else 5, "" if failed else "a",
+            f"context overflow: {OVERFLOW_MSG}" if failed else "d", status=status,
+        )
+
+    def _rows_with_weak_overflow_on_raw(self):
+        rows = []
+        for i in range(4):
+            rows += [
+                self._row(RAW, STRONG, f"q{i}", 1.0),
+                self._row(RAW, WEAK, f"q{i}", 0.0, status=CONTEXT_OVERFLOW),
+                self._row("decant", STRONG, f"q{i}", 1.0),
+                self._row("decant", WEAK, f"q{i}", 1.0),
+            ]
+        return rows
+
+    def test_failed_calls_counted_per_arm(self):
+        rep = build_report(self._rows_with_weak_overflow_on_raw(), strong=STRONG, weak=WEAK)
+        raw = next(cs for cs in rep.scores if cs.conversion == RAW)
+        self.assertEqual(raw.failed_calls[WEAK], (4, 4, (CONTEXT_OVERFLOW,)))
+        self.assertNotIn(STRONG, raw.failed_calls)  # strong tier answered fine
+        decant = next(cs for cs in rep.scores if cs.conversion == "decant")
+        self.assertEqual(decant.failed_calls, {})
+
+    def test_markdown_flags_cells_and_footnotes_failed_arm(self):
+        md = to_markdown(build_report(self._rows_with_weak_overflow_on_raw(),
+                                      strong=STRONG, weak=WEAK))
+        self.assertIn("0.00!", md)   # not a bare 0.00 accuracy
+        self.assertIn("+1.00!", md)  # spread built on the failed tier is flagged too
+        self.assertIn(f"raw / {WEAK}: 4/4 calls failed", md)
+        self.assertIn("does not fit the model's context window", md)
+        self.assertTrue(md.isascii(), "report must survive a cp1252 Windows console")
+
+    def test_clean_report_carries_no_failure_marks(self):
+        rows = [self._row("decant", STRONG, "q", 1.0), self._row("decant", WEAK, "q", 1.0)]
+        md = to_markdown(build_report(rows, strong=STRONG, weak=WEAK))
+        self.assertNotIn("calls failed", md)
+        self.assertNotIn("!", md)
 
 
 class TestSourceSlice(unittest.TestCase):

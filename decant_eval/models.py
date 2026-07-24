@@ -29,6 +29,12 @@ reasoning its way around a corrupted conversion, which would confound the
 signal, and it sharpens the strong-vs-weak reliability spread. (It's a knob we
 can revisit; see README.) Note Haiku 4.5 rejects the `effort` param outright,
 so we send neither.
+
+answer() raises on API failure rather than returning a sentinel result. The
+runner classifies the exception (see runner._failure_status): a deterministic
+failure — the document exceeds the model's context window — becomes a
+status-tagged score-0 row, while transient errors propagate and crash the run
+so --resume retries them instead of freezing a 0 into the audit trail.
 """
 
 from __future__ import annotations
@@ -148,7 +154,11 @@ class FakeModelClient:
     """Scripted client for tests. `responder(model, system, prompt) -> str`
     supplies the answer; the document (if any) is rendered into `prompt` so the
     responder sees exactly what the real model would. Token counts approximate
-    at ~4 chars/token so the accounting paths still exercise real numbers."""
+    at ~4 chars/token so the accounting paths still exercise real numbers.
+
+    A responder may raise instead of returning: the exception propagates out of
+    answer() exactly like an SDK error from the real client — how tests script
+    API failures such as a context-window overflow."""
 
     def __init__(self, responder):
         self._responder = responder

@@ -23,6 +23,10 @@ Metric-integrity guards (a scoreboard that misleads is worse than none):
   - Cost is per-model. Opus and Haiku tokenize differently, so averaging their
     input-token counts into one number compares apples to oranges; the strong
     tier's cost is the reported figure.
+  - A failed model call (Result.status set — e.g. the document exceeds the
+    target model's context window) is scored 0 by the runner but must not read
+    as "answered everything wrong": affected cells are flagged with `!` and a
+    footnote counts the failed calls per arm.
 """
 
 from __future__ import annotations
@@ -30,9 +34,17 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from statistics import mean
 
+from .runner import CONTEXT_OVERFLOW
+
 # Below this strong-tier accuracy, a small spread means "uniformly useless", not
 # "robust" — so the spread is flagged rather than read as a virtue.
 SPREAD_ACCURACY_FLOOR = 0.25
+
+# Footnote wording for Result.status values; an unrecognized status falls back
+# to the raw value with underscores spaced.
+_FAILURE_REASONS = {
+    CONTEXT_OVERFLOW: "document does not fit the model's context window",
+}
 
 
 @dataclass
@@ -43,6 +55,10 @@ class ConversionScore:
     spread: float | None = None  # strong_acc - weak_acc, when both tiers ran
     spread_reliable: bool = False  # False when strong accuracy is below the floor
     n_cases: int = 0  # cases contributing (after the common-case restriction)
+    # model -> (failed, total, statuses) over this conversion's scored rows,
+    # present only when failed > 0: calls that failed outright (Result.status
+    # set, e.g. context overflow) and were scored 0 without an answer.
+    failed_calls: dict[str, tuple[int, int, tuple[str, ...]]] = field(default_factory=dict)
 
 
 @dataclass
@@ -86,6 +102,10 @@ def build_report(
             if mr:
                 cs.accuracy[model] = mean(r.score for r in mr)
                 cs.cost_by_model[model] = mean(r.input_tokens for r in mr)
+                failed = [r for r in mr if getattr(r, "status", "")]
+                if failed:
+                    statuses = tuple(sorted({r.status for r in failed}))
+                    cs.failed_calls[model] = (len(failed), len(mr), statuses)
         if strong in cs.accuracy and weak in cs.accuracy:
             cs.spread = cs.accuracy[strong] - cs.accuracy[weak]
             cs.spread_reliable = cs.accuracy[strong] >= floor
@@ -171,15 +191,24 @@ def to_markdown(report: Report) -> str:
     for cs in report.scores:
         cells = [cs.conversion]
         for m in report.models:
-            cells.append(f"{cs.accuracy[m]:.2f}" if m in cs.accuracy else "-")
+            # `!` — the mean includes calls that failed outright; see footnote.
+            flag = "!" if m in cs.failed_calls else ""
+            cells.append(f"{cs.accuracy[m]:.2f}{flag}" if m in cs.accuracy else "-")
         strong_cost = cs.cost_by_model.get(report.strong)
-        cells.append(f"{strong_cost:.0f}" if strong_cost is not None else "-")
+        cost_flag = "!" if report.strong in cs.failed_calls else ""
+        cells.append(f"{strong_cost:.0f}{cost_flag}" if strong_cost is not None else "-")
+        # Spread built on a tier with failed calls inherits the flag — a +0.70
+        # spread from a document that never fit the weak reader must not read
+        # as "the weak model answered wrong".
+        spread_flag = "!" if (
+            report.strong in cs.failed_calls or report.weak in cs.failed_calls
+        ) else ""
         if cs.spread is None:
             cells.append("-")
         elif cs.spread_reliable:
-            cells.append(f"{cs.spread:+.2f}")
+            cells.append(f"{cs.spread:+.2f}{spread_flag}")
         else:
-            cells.append(f"{cs.spread:+.2f}*")  # below the accuracy floor — see note
+            cells.append(f"{cs.spread:+.2f}*{spread_flag}")  # below the accuracy floor — see note
         cells.append(str(cs.n_cases))
         lines.append("| " + " | ".join(cells) + " |")
     lines.append("")
@@ -194,6 +223,15 @@ def to_markdown(report: Report) -> str:
             f"_* spread is below the {SPREAD_ACCURACY_FLOOR:.0%} accuracy floor -- "
             "a tight spread here means uniformly wrong, not robust._"
         )
+    for cs in report.scores:
+        for model in sorted(cs.failed_calls):
+            n_failed, n_total, statuses = cs.failed_calls[model]
+            reasons = "; ".join(_FAILURE_REASONS.get(s, s.replace("_", " ")) for s in statuses)
+            lines.append(
+                f"_! {cs.conversion} / {model}: {n_failed}/{n_total} calls failed "
+                f"({reasons}); failed calls score 0 with 0 tokens billed -- the "
+                "document was never read, not answered wrong._"
+            )
     if not report.comparable:
         lines.append(
             "_WARNING: conversions share no common case; scores are over each conversion's "
