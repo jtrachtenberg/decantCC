@@ -70,6 +70,9 @@ class Report:
     common_cases: list[str]
     excluded_cases: list[str]
     comparable: bool  # False when conversions share no common case
+    # Tier the ranking and the cost column read from — `strong`, except on a run
+    # that had no strong tier (weak-only), where it is the tier that did run.
+    rank_model: str | None = None
 
 
 def build_report(
@@ -111,20 +114,28 @@ def build_report(
             cs.spread_reliable = cs.accuracy[strong] >= floor
         scores.append(cs)
 
-    # Rank: strong-model accuracy (missing strong tier sinks to the bottom, not
-    # substituted by a mean), then cheapest on the strong tier, then — only when
+    # The tier the ranking and the cost column are read from. Normally the
+    # strong one. A run with no strong tier at all — a weak-only dev pass, which
+    # is how the compression loop iterates cheaply, since weak-reader accuracy is
+    # the binding constraint — would otherwise tie every conversion at "missing
+    # strong" and order them arbitrarily, with no cost column at all.
+    rank_model = strong if strong in models else (models[0] if len(models) == 1 else strong)
+
+    # Rank: rank-tier accuracy (a conversion missing that tier sinks to the
+    # bottom, not substituted by a mean), then cheapest on it, then — only when
     # the spread is reliable — tightest spread. None spread sorts last.
     def key(cs: ConversionScore):
-        has_strong = strong in cs.accuracy
-        acc = cs.accuracy.get(strong, 0.0)
-        cost = cs.cost_by_model.get(strong, float("inf"))
+        has_rank = rank_model in cs.accuracy
+        acc = cs.accuracy.get(rank_model, 0.0)
+        cost = cs.cost_by_model.get(rank_model, float("inf"))
         spread = cs.spread if (cs.spread is not None and cs.spread_reliable) else float("inf")
-        return (0 if has_strong else 1, -acc, cost, spread)
+        return (0 if has_rank else 1, -acc, cost, spread)
 
     scores.sort(key=key)
     return Report(
         scores=scores, strong=strong, weak=weak, models=models,
         common_cases=sorted(scoring_cases), excluded_cases=excluded, comparable=comparable,
+        rank_model=rank_model,
     )
 
 
@@ -283,7 +294,9 @@ def truncation_note(rows) -> str:
 
 def to_markdown(report: Report) -> str:
     lines = ["# Decant eval report", ""]
-    header = ["conversion", *report.models, "cost (strong tok)", "spread", "n"]
+    rank_model = report.rank_model or report.strong
+    cost_label = "cost (strong tok)" if rank_model == report.strong else f"cost ({rank_model} tok)"
+    header = ["conversion", *report.models, cost_label, "spread", "n"]
     lines.append("| " + " | ".join(header) + " |")
     lines.append("| " + " | ".join("---" for _ in header) + " |")
     for cs in report.scores:
@@ -292,9 +305,9 @@ def to_markdown(report: Report) -> str:
             # `!` — the mean includes calls that failed outright; see footnote.
             flag = "!" if m in cs.failed_calls else ""
             cells.append(f"{cs.accuracy[m]:.2f}{flag}" if m in cs.accuracy else "-")
-        strong_cost = cs.cost_by_model.get(report.strong)
-        cost_flag = "!" if report.strong in cs.failed_calls else ""
-        cells.append(f"{strong_cost:.0f}{cost_flag}" if strong_cost is not None else "-")
+        rank_cost = cs.cost_by_model.get(rank_model)
+        cost_flag = "!" if rank_model in cs.failed_calls else ""
+        cells.append(f"{rank_cost:.0f}{cost_flag}" if rank_cost is not None else "-")
         # Spread built on a tier with failed calls inherits the flag — a +0.70
         # spread from a document that never fit the weak reader must not read
         # as "the weak model answered wrong".
