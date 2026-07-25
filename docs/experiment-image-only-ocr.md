@@ -1,4 +1,14 @@
-# clean-text-image-only — derived recognition-tier A/B
+# clean-text-image-only — derived recognition-tier A/B (RETIRED 2026-07-25)
+
+> **Retired.** The case was removed from `corpus/` on 2026-07-25: it was built
+> to exercise the unlimited-ocr arm, and its `questions.json` was a verbatim
+> copy of `clean-text/`'s, so it added duplicate question ids and a case with
+> no Decant arm to the arena without adding independent signal about the codec.
+> This file and `report-clean-text-image-only.md` are the surviving record; the
+> case is reproducible from `corpus/clean-text/source.pdf` by the recipe below.
+> Its two durable findings are carried into `PLAN.md`: Decant declines
+> image-only PDFs outright, and OCR text beat raw vision on the weak reader at
+> less than half the tokens.
 
 **Derived case**, not an independent document: `source.pdf` is
 `corpus/clean-text/source.pdf` with every page re-rendered as a 200-dpi
