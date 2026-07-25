@@ -43,6 +43,11 @@ CONTROL_SYSTEM = (
 RAW = "raw"  # arena name for the source-PDF baseline
 CONTROL = "(memory)"  # arena name for the no-document control arm
 
+# Result.status for a row whose model call failed because the document exceeds
+# the target model's context window. Scored 0 by design (see _failure_status),
+# but the report shows it as a failed call, not a graded wrong answer.
+CONTEXT_OVERFLOW = "context_overflow"
+
 
 def _question_prompt(question: str) -> str:
     return f"QUESTION: {question}\n\nANSWER:"
@@ -79,6 +84,12 @@ class Result:
     # such by report.cost_summary rather than reported as fact.
     cache_read_tokens: int = 0
     cache_creation_tokens: int = 0
+    # "" when the model produced an answer that was graded; a machine-readable
+    # failure class (today only CONTEXT_OVERFLOW) when the API call itself
+    # failed and the row was scored 0 with no answer. Defaulted so rows from a
+    # pre-status audit trail still load on --resume; load_completed re-derives
+    # it for legacy failure rows.
+    status: str = ""
 
 
 def _key(case: str, conversion: str, model: str, question_id: str, repeat: int = 0):
@@ -94,12 +105,18 @@ def _truncated(res) -> bool:
     return getattr(res, "stop_reason", "") == "max_tokens"
 
 
-def _context_overflow(exc: Exception) -> bool:
-    """A representation that doesn't fit the target model's context window is a
-    transfer failure, not an ops error: the arena scores it 0 rather than
-    crashing the run (e.g. a 98-page raw PDF at 201K tokens vs Haiku's 200K).
-    Matched on the API's message so the runner stays SDK-free for offline tests."""
-    return "prompt is too long" in str(exc).lower()
+def _failure_status(exc: Exception) -> str | None:
+    """The machine-readable Result.status when `exc` is an API failure the
+    arena records as a scored row, else None — the error re-raises and crashes
+    the run so --resume retries it (a transient outage must not be frozen into
+    the audit trail as a permanent 0). CONTEXT_OVERFLOW is recorded: a
+    representation that doesn't fit the target model's context window is a
+    transfer failure, not an ops error, and deterministic — retrying cannot
+    succeed (e.g. a 98-page raw PDF at 201K tokens vs Haiku's 200K). Matched on
+    the API's message so the runner stays SDK-free for offline tests."""
+    if "prompt is too long" in str(exc).lower():
+        return CONTEXT_OVERFLOW
+    return None
 
 
 def load_completed(jsonl_path) -> tuple[list[Result], set]:
@@ -114,7 +131,13 @@ def load_completed(jsonl_path) -> tuple[list[Result], set]:
         line = line.strip()
         if not line:
             continue
-        r = Result(**json.loads(line))
+        d = json.loads(line)
+        # Failure rows written before the status field carried only the detail
+        # prefix; re-derive it so legacy audit trails (e.g. the 2026-07 shipped
+        # runs) resume and re-report with failed calls still classified.
+        if "status" not in d and str(d.get("detail", "")).startswith("context overflow"):
+            d["status"] = CONTEXT_OVERFLOW
+        r = Result(**d)
         rows.append(r)
         done.add(_key(r.case, r.conversion, r.model, r.question_id, r.repeat))
     return rows, done
@@ -185,15 +208,17 @@ def run_case(
                     document=document,
                 )
             except Exception as exc:
-                if not _context_overflow(exc):
+                status = _failure_status(exc)
+                if status is None:
                     raise
                 answer_text = ""
                 correct, score = False, 0.0
-                detail = f"context overflow: {exc}"[:200]
+                detail = f"{status.replace('_', ' ')}: {exc}"[:200]
                 in_tok, out_tok = 0, 0
                 cache_read = cache_creation = 0
                 truncated = False
             else:
+                status = ""
                 correct, score, detail = grade(
                     q, res.text, judge=judge, judge_model=judge_model
                 )
@@ -221,6 +246,7 @@ def run_case(
                 repeat=rep,
                 cache_read_tokens=cache_read,
                 cache_creation_tokens=cache_creation,
+                status=status,
             )
             rows.append(row)
             if sink is not None:
@@ -265,8 +291,10 @@ def regrade_rows(rows, cases, *, judge=None, judge_model: str = ""):
 
     Returns (new_rows, changed, skipped) — `skipped` counts rows left at their
     stored verdict because grading them would have needed a judge that wasn't
-    supplied. Rows that failed with a context overflow keep their verdict too:
-    there is no answer text to grade, and the detail is the finding."""
+    supplied. Rows whose call failed (`status` set) keep their verdict too and
+    are not counted as skipped: there is no answer text to grade, and the
+    failure is the finding. load_completed re-derives `status` for legacy rows,
+    so this classifies pre-status audit trails correctly too."""
     by_case: dict[str, dict[str, object]] = {}
     for case in cases:
         by_case[case.name] = {q.id: q for q in case.questions}
@@ -277,11 +305,11 @@ def regrade_rows(rows, cases, *, judge=None, judge_model: str = ""):
         q = by_case.get(row.case, {}).get(row.question_id)
         gradable = (
             q is not None
-            and not row.detail.startswith("context overflow")
+            and not row.status
             and (row.question_type in OFFLINE_TYPES or judge is not None)
         )
         if not gradable:
-            if q is not None and not row.detail.startswith("context overflow"):
+            if q is not None and not row.status:
                 skipped += 1
             out.append(row)
             continue

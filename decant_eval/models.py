@@ -49,6 +49,12 @@ audit trail shows which happened. It has never fired at the 512-token default
 a guard rather than a fix for an observed problem — but a silently truncated
 answer grades identically to a wrong one, and the report would then read a
 budget artifact as a representation failure.
+
+answer() raises on API failure rather than returning a sentinel result. The
+runner classifies the exception (see runner._failure_status): a deterministic
+failure — the document exceeds the model's context window — becomes a
+status-tagged score-0 row, while transient errors propagate and crash the run
+so --resume retries them instead of freezing a 0 into the audit trail.
 """
 
 from __future__ import annotations
@@ -191,7 +197,10 @@ class FakeModelClient:
     at ~4 chars/token so the accounting paths still exercise real numbers.
 
     A responder may return `(text, stop_reason)` instead of a bare string to
-    script a truncated response; a bare string means "end_turn"."""
+    script a truncated response; a bare string means "end_turn". It may also
+    raise instead of returning: the exception propagates out of answer() exactly
+    like an SDK error from the real client — how tests script API failures such
+    as a context-window overflow."""
 
     def __init__(self, responder):
         self._responder = responder
