@@ -613,5 +613,54 @@ def _load(case_dir):
     return load_case(case_dir)
 
 
+class TestWeakOnlyRun(unittest.TestCase):
+    """Weak-reader accuracy is the binding constraint, so the compression loop
+    iterates weak-only to keep a lever test cheap. Such a run must still rank
+    and price honestly — and must not imply a spread it did not measure."""
+
+    def _rows(self):
+        def row(conv, model, qid, score, tokens):
+            return Result("c1", conv, model, qid, "exact", score == 1.0, score,
+                          tokens, 5, "a", "d")
+        rows = []
+        for i in range(4):
+            # `lean` is worse but much cheaper; `decant` wins on accuracy.
+            rows += [row("decant", WEAK, f"q{i}", 1.0, 900),
+                     row("lean", WEAK, f"q{i}", 0.0 if i else 1.0, 300)]
+        return rows
+
+    def test_ranks_on_the_tier_that_ran(self):
+        rep = build_report(self._rows(), strong=STRONG, weak=WEAK)
+        self.assertEqual(rep.rank_model, WEAK)
+        self.assertEqual([cs.conversion for cs in rep.scores], ["decant", "lean"])
+
+    def test_no_spread_is_claimed(self):
+        rep = build_report(self._rows(), strong=STRONG, weak=WEAK)
+        self.assertTrue(all(cs.spread is None for cs in rep.scores))
+        md = to_markdown(rep)
+        # The spread column is present but empty — never +0.00, which would
+        # read as "perfectly robust" from a run that measured one tier.
+        self.assertNotIn("+0.00", md)
+
+    def test_cost_column_reports_the_tier_that_ran(self):
+        md = to_markdown(build_report(self._rows(), strong=STRONG, weak=WEAK))
+        self.assertIn(f"cost ({WEAK} tok)", md)
+        self.assertIn("900", md)
+
+    def test_both_tiers_still_rank_on_strong(self):
+        rows = self._rows() + [
+            Result("c1", "decant", STRONG, f"q{i}", "exact", True, 1.0, 900, 5, "a", "d")
+            for i in range(4)
+        ] + [
+            Result("c1", "lean", STRONG, f"q{i}", "exact", True, 1.0, 300, 5, "a", "d")
+            for i in range(4)
+        ]
+        rep = build_report(rows, strong=STRONG, weak=WEAK)
+        self.assertEqual(rep.rank_model, STRONG)
+        # Equal strong accuracy -> cheaper wins, and the spread is measured.
+        self.assertEqual([cs.conversion for cs in rep.scores], ["lean", "decant"])
+        self.assertIn("cost (strong tok)", to_markdown(rep))
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -76,7 +76,7 @@ def _assemble_report(rows, *, strong: str, weak: str):
 
 def _regrade(args) -> int:
     """Re-grade an audit trail against the current graders and questions."""
-    cases = load_corpus(args.corpus)
+    cases = load_corpus(args.corpus, split=args.split)
     rows, _ = load_completed(args.rows)
     if not rows:
         print(f"{args.rows}: no rows to re-grade")
@@ -119,6 +119,20 @@ def main(argv=None) -> int:
     run.add_argument("--no-control", action="store_true", help="skip the no-document control arm")
     run.add_argument("--max-tokens", type=int, default=512)
     run.add_argument(
+        "--split", default="all", choices=("all", "dev", "test", "retired"),
+        help="question bank to score (default all = everything not retired). "
+             "Iterate compression candidates on `dev` and keep `test` held out "
+             "until declaring one done — tuning against the questions you also "
+             "report on converges on keeping just the asked-about facts.",
+    )
+    run.add_argument(
+        "--weak-only", action="store_true",
+        help="run the weak target model alone. Weak-reader accuracy is the "
+             "binding constraint, so loop iterations don't need the strong tier; "
+             "this cuts a lever test to a fraction of the cost. No reliability "
+             "spread is reported (it needs both tiers).",
+    )
+    run.add_argument(
         "--repeats", type=int, default=1, metavar="N",
         help="ask each question N times and average (default 1). Sampling can't "
              "be pinned on the strong tier, so a single sample per cell is one "
@@ -131,6 +145,11 @@ def main(argv=None) -> int:
         help="re-grade an existing JSONL audit trail and rewrite the report (free by default)",
     )
     rg.add_argument("--corpus", required=True, help="corpus directory (supplies the questions)")
+    rg.add_argument(
+        "--split", default="all", choices=("all", "dev", "test", "retired"),
+        help="question bank to re-grade (default all = everything not retired). "
+             "Rows whose question the filter excludes keep their stored verdict.",
+    )
     rg.add_argument("--rows", required=True, help="JSONL audit trail to re-grade")
     rg.add_argument("--out", default="report-regraded.md", help="output markdown path")
     rg.add_argument(
@@ -155,9 +174,9 @@ def main(argv=None) -> int:
     if args.repeats < 1:
         parser.error("--repeats must be at least 1")
 
-    cases = load_corpus(args.corpus)
+    cases = load_corpus(args.corpus, split=args.split)
     client = AnthropicModelClient()
-    models = [args.strong, args.weak]
+    models = [args.weak] if args.weak_only else [args.strong, args.weak]
     rows_path = args.rows or f"{args.out}.jsonl"
 
     rows = run_corpus(

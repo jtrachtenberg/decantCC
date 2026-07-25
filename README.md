@@ -65,8 +65,12 @@ corpus/<case>/
     raw.md  decant.md  markitdown.md  docling.md
 ```
 
-`questions.json`: a list of `{id, question, gold, type, tolerance?}`, where
-`type` ∈ `numeric | exact | set | open`.
+`questions.json`: a list of `{id, question, gold, type, tolerance?, source?,
+split?}`, where `type` ∈ `numeric | exact | set | ordered_list | open`.
+`source` tags where the answer lives (`figure-9`, `table-3`, `text`) and drives
+the report's per-source slice. `split` ∈ `dev | test | retired` selects the
+question's bank — see `--split` below. Both are optional; see
+`corpus/questions.schema.json`.
 
 ## Run
 
@@ -85,7 +89,32 @@ complete, so a crash mid-run loses nothing and the graded-testing pass has a
 per-answer audit trail; `--resume` continues from it without re-billing done
 rows. The document sits in its own `cache_control` block, so the loop re-uses it
 across every question about it (~90% cheaper on large documents). Flags:
-`--no-raw` skips the source-PDF baseline, `--no-control` skips the control arm.
+`--no-raw` skips the source-PDF baseline, `--no-control` skips the control arm,
+`--repeats N` samples each question N times (sampling can't be pinned on the
+strong tier, so one draw per cell is a draw, not a measurement).
+
+Two flags exist for the compression phase, where the job is to cut tokens
+without losing meaning:
+
+- `--split dev|test|all|retired` picks the question bank. Tune a compression
+  candidate against `dev` and keep `test` held out until declaring it done —
+  iterating against the same questions you report on converges on keeping only
+  the asked-about facts. `all` (the default) is everything not `retired`;
+  retiring a question that every arm answers perfectly stops it costing money
+  for no discrimination.
+- `--weak-only` runs the weak model alone. Weak-reader accuracy is the binding
+  constraint — a compression only the strong model can read is the treacherous
+  degradation this project exists to prevent — so loop iterations don't need
+  the strong tier. The report then ranks and prices on the tier that ran and
+  reports no spread, rather than implying one it never measured.
+
+`python -m decant_eval.cli regrade --corpus DIR --rows FILE.jsonl --out OUT.md`
+re-grades an existing audit trail against the current graders and questions.
+Free by default (`numeric`/`set`/`ordered_list` never consult the judge;
+`exact`/`open` keep their stored verdict unless `--judge MODEL` is passed, which
+is billed). It never modifies the input file. This is what makes a grader fix
+applicable to answers already paid for, and it repairs the resumed-run trap
+where `--resume` carries rows graded under an older grader.
 
 `tests/fixtures/sample-invoice/` is a worked example case (clean vs.
 deliberately garbled conversion) and the harness's end-to-end fixture. It
