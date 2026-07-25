@@ -43,6 +43,26 @@
       "gold": "below the measuring point of the well casing",
       "type": "exact",
       "source": "figure-45"
+    },{
+      "id": "max-water-depth-diff",
+      "question": "Which week's end date, expressed in mm/dd, had the highest increase in maximum depth below land surface?",
+      "gold": "07/21",
+      "type": "exact",
+      "source": "figure-6"
+    },{
+      "id": "border-application-areas",
+      "question": "How many application areas directly touching the border between between Arapahoe county and Elbert County are only in Arapahoe county?  Give you answer as a single integer only.",
+      "gold": "4",
+      "type": "numeric",
+      "tolerance": 0,
+      "source": "figure-2"
+    },{
+      "id": "well-depth-difference",
+      "question": "What is the difference (in ft bmp) between the top and bottom measurements of well DTX1 taken on Feb. 16th 1999?  Answer only as a single number.",
+      "gold": "1.6",
+      "type": "numeric",
+      "tolerance": 0,
+      "source": "table-10"
     }
   ]
 }
