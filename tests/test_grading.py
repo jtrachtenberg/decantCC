@@ -224,7 +224,13 @@ class TestSpelledOutNumbers(unittest.TestCase):
         self.assertFalse(grade(q("numeric", "15", 0), "40 years, not fifteen")[0])
 
     def test_no_number_still_fails(self):
+        # NOT FOUND is now reported as a decline rather than as a parse miss;
+        # both are failures, the decline is just the more accurate reason.
         ok, _, detail = grade(q("numeric", "15", 0), "NOT FOUND")
+        self.assertFalse(ok)
+        self.assertIn("declined", detail)
+        # An answer with no number and no decline still reports the parse miss.
+        ok, _, detail = grade(q("numeric", "15", 0), "The document is silent on this.")
         self.assertFalse(ok)
         self.assertIn("no number", detail)
 
@@ -272,6 +278,85 @@ class TestReviewRegressions(unittest.TestCase):
         self.assertFalse(ok)
         self.assertEqual(score, 0.0)
         self.assertIn("unparseable", detail)
+
+
+class TestContextNumbers(unittest.TestCase):
+    """A prose answer usually restates the question's context before the value,
+    so the *first* number is a year or a section label rather than the answer.
+    22 of 304 numeric rows in the 2026-07 trails were graded against one of
+    those, and every single one was a weak-tier row -- the defect inflated the
+    reliability spread, which is the harness's headline metric."""
+
+    def test_leading_year_is_not_the_answer(self):
+        self.assertTrue(grade(q("numeric", "70"), (
+            "According to the document, in 1999, the three MWRD properties "
+            "encompassed almost 70 square miles of farmland."))[0])
+
+    def test_for_year_is_not_the_answer(self):
+        self.assertTrue(grade(q("numeric", "808"), (
+            "According to the CERN staff breakdown for 2025, CERN employed 808 "
+            "technicians, which represented 29.25% of the total staff."))[0])
+
+    def test_section_label_is_not_the_answer(self):
+        self.assertTrue(grade(q("numeric", "3782020"), (
+            "MSIM's total financed Scope 1 GHG emissions for 2025 were "
+            "3,782,020 tCO2e."))[0])
+
+    def test_year_gold_still_grades_when_it_is_the_only_number(self):
+        # Discounting context numbers must not make a year-valued answer
+        # ungradeable: with nothing else to pick, the year stands.
+        self.assertTrue(grade(q("numeric", "2021"), "The report was published in 2021.")[0])
+
+    def test_date_word_does_not_discount_a_non_year(self):
+        self.assertTrue(grade(q("numeric", "70"), "Biosolids are applied for 70 days.")[0])
+
+    def test_negation_guard_survives_context_filtering(self):
+        self.assertFalse(grade(q("numeric", "1250.00", 0.01), "800.00, not 1250.00")[0])
+
+
+class TestRatioColon(unittest.TestCase):
+    """The commitment-marker rule reads the text after the last `=` or `:` as
+    the model's result. A colon *between digits* is a ratio, not a marker."""
+
+    def test_ratio_answer_grades_as_the_ratio_value(self):
+        self.assertTrue(grade(q("numeric", "2.31", 0.001), "2.31, or 2.31:1")[0])
+
+    def test_label_colon_is_still_a_marker(self):
+        self.assertTrue(grade(q("numeric", "1.60", 0.001),
+                              "Top: 20.59, Bottom: 22.19. Difference: 1.60")[0])
+
+
+class TestDeclinedAnswers(unittest.TestCase):
+    """ANSWER_SYSTEM tells the model to reply exactly NOT FOUND when the
+    document lacks the answer. When it does, the explanation that follows is an
+    account of what it could not find -- mining it for a match credits the
+    hedged non-answer a corrupted conversion provokes."""
+
+    def test_not_found_then_explanation_is_not_credited(self):
+        correct, score, detail = grade(q("numeric", "75"), (
+            "NOT FOUND\n\nThe document does not contain the distance. It states "
+            'that "biosolids are transported about 75 mi east from Denver", but '
+            "that is a different measurement."))
+        self.assertFalse(correct)
+        self.assertEqual(score, 0.0)
+        self.assertIn("declined", detail)
+
+    def test_declined_set_answer_is_not_credited(self):
+        correct, score, _ = grade(q("set", ["medium", "long term"]), (
+            "NOT FOUND\n\nThe document does not specify a time frame. It only "
+            'lists "MT LT" (indicating Medium Term and Long Term) without a '
+            "designation."))
+        self.assertFalse(correct)
+        self.assertEqual(score, 0.0)
+
+    def test_plain_not_found_still_fails(self):
+        self.assertFalse(grade(q("numeric", "75"), "NOT FOUND")[0])
+
+    def test_answer_merely_mentioning_not_found_is_still_graded(self):
+        # The rule keys on the opening line, so a real answer that happens to
+        # discuss the phrase is unaffected.
+        self.assertTrue(grade(q("numeric", "75"), (
+            "The distance is 75 miles; nothing here is NOT FOUND."))[0])
 
 
 if __name__ == "__main__":
