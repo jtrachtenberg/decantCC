@@ -30,6 +30,9 @@ from pathlib import Path
 # Question types the grader understands (see grading.py).
 QUESTION_TYPES = ("numeric", "exact", "set", "ordered_list", "open")
 
+# Question banks. See Question.split; "" (unassigned) is always allowed too.
+SPLITS = ("dev", "test", "retired")
+
 
 @dataclass(frozen=True)
 class Question:
@@ -43,6 +46,14 @@ class Question:
     # report can slice accuracy by answer location (e.g. do chart-borne
     # questions survive without the figures companion?). Empty = untagged.
     source: str = ""
+    # Which bank the question belongs to: "dev" (iterated against while tuning a
+    # compression candidate), "test" (held out, run only to declare a candidate
+    # done), "retired" (kept as the record but not scored — e.g. a question every
+    # arm answers perfectly, which costs money and discriminates nothing), or ""
+    # (unassigned, scored with everything). Iterating a compressor against the
+    # same questions it is tuned on converges on keeping only the asked-about
+    # facts, so the held-out bank is what keeps a reported win honest.
+    split: str = ""
 
 
 @dataclass(frozen=True)
@@ -83,6 +94,12 @@ def _parse_questions(raw: list[dict], where: str) -> tuple[Question, ...]:
             raise ValueError(f"{where}: question {i} has unknown type {qtype!r}")
         if "id" not in q or "question" not in q or "gold" not in q:
             raise ValueError(f"{where}: question {i} needs id, question, and gold")
+        split = str(q.get("split", ""))
+        if split and split not in SPLITS:
+            raise ValueError(
+                f"{where}: question {i} has unknown split {split!r} "
+                f"(expected one of {', '.join(SPLITS)})"
+            )
         out.append(
             Question(
                 id=str(q["id"]),
@@ -91,9 +108,20 @@ def _parse_questions(raw: list[dict], where: str) -> tuple[Question, ...]:
                 type=qtype,
                 tolerance=float(q.get("tolerance", 0.0)),
                 source=str(q.get("source", "")),
+                split=split,
             )
         )
     return tuple(out)
+
+
+def select_split(questions, split: str) -> tuple[Question, ...]:
+    """`questions` filtered to a bank. "all" keeps everything except retired
+    questions — retiring one has to actually stop it costing money, or the
+    label means nothing. "retired" selects only those, for auditing what was
+    parked. Anything else selects that bank exactly."""
+    if split == "all":
+        return tuple(q for q in questions if q.split != "retired")
+    return tuple(q for q in questions if q.split == split)
 
 
 def _read_conversions(conv_dir: Path) -> dict[str, str]:
@@ -111,7 +139,7 @@ def _read_conversions(conv_dir: Path) -> dict[str, str]:
     return out
 
 
-def load_case(case_dir: Path) -> Case:
+def load_case(case_dir: Path, *, split: str = "all") -> Case:
     case_dir = Path(case_dir)
     qfile = next(
         (case_dir / f"questions{ext}" for ext in (".json", ".yaml", ".yml") if (case_dir / f"questions{ext}").exists()),
@@ -119,7 +147,7 @@ def load_case(case_dir: Path) -> Case:
     )
     if qfile is None:
         raise FileNotFoundError(f"{case_dir}: no questions.json/.yaml")
-    questions = _parse_questions(_load_questions_file(qfile), qfile.name)
+    questions = select_split(_parse_questions(_load_questions_file(qfile), qfile.name), split)
 
     conv_dir = case_dir / "conversions"
     if not conv_dir.is_dir():
@@ -150,12 +178,17 @@ def load_case(case_dir: Path) -> Case:
     )
 
 
-def load_corpus(corpus_dir: str | Path) -> list[Case]:
+def load_corpus(corpus_dir: str | Path, *, split: str = "all") -> list[Case]:
     """Every immediate subdirectory of corpus_dir that is a complete case:
     a questions file plus at least one conversion. Scaffold dirs that are
     still missing either half are skipped, so cases can be authored
     incrementally in any order (questions-first or conversions-first).
     load_case() stays strict — pointing it at an incomplete case is an error.
+
+    `split` selects a question bank (see select_split); the default "all" keeps
+    every question that isn't retired. A case left with no questions by the
+    filter is dropped, so `--split dev` on a corpus where only some cases have
+    a dev bank runs those cases rather than failing.
     """
     corpus_dir = Path(corpus_dir)
     cases = []
@@ -167,7 +200,9 @@ def load_corpus(corpus_dir: str | Path) -> list[Case]:
         )
         has_conversions = bool(_read_conversions(child / "conversions"))
         if has_questions and has_conversions:
-            cases.append(load_case(child))
+            case = load_case(child, split=split)
+            if case.questions:
+                cases.append(case)
     if not cases:
         raise ValueError(f"{corpus_dir}: no cases found")
     return cases

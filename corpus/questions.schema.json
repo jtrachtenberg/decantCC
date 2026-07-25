@@ -112,6 +112,10 @@
         "source": {
           "type": "string",
           "description": "Where in the source document the answer lives ('figure-9', 'table-3', 'text') - free-form, case-scoped. Enables per-source report slicing; tag figure-borne questions so companion-subset arms can be compared."
+        },
+        "split": {
+          "enum": ["dev", "test", "retired"],
+          "description": "Which bank this question belongs to, selected by `--split`. dev = iterated against while tuning a compression candidate; test = held out, run only to declare a candidate done; retired = kept as the record but never scored (e.g. a question every arm answers perfectly - it costs money and discriminates nothing). Omit for unassigned, which is scored with everything."
         }
       },
       "allOf": [
