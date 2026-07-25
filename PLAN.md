@@ -93,22 +93,43 @@ text-free PDF, while OCR scored 1.00/1.00 at 29K tokens against raw vision's
 
 ---
 
-## Phase A — close the measurement leaks (offline, free)
+## Phase A — close the measurement leaks (offline, free) — **DONE 2026-07-25**
 
-1. Merge `fix/grader-repeats-cost-accounting` to `main` so the baseline runs
-   off a clean tree.
-2. `regrade` the 450-row trail against today's questions (free; input file is
-   never modified). This says exactly how many stored verdicts are stale and
-   therefore how much of the baseline `--resume` may legitimately reuse.
-3. Fix the known grader false negatives, then regrade the 450- and 360-row
-   trails and confirm nothing else moves:
-   - `well-depth-difference` — correct answer, failed the first-number rule by
-     showing its work against a "single number only" instruction;
-   - the bold-rule swing.
-   **Every grader bug left in place is indistinguishable from compression loss
-   later.**
-4. Add `split` (question field) + `--split dev|test|all`.
-5. Add a weak-only run mode.
+1. ~~Merge `fix/grader-repeats-cost-accounting` to `main`.~~ Done; merged with
+   PR #5's failed-call `status` work, which had landed on main in parallel.
+2. ~~`regrade` the 450-row trail against today's questions.~~ Done. The
+   2026-07-16 baseline **disagrees with today's questions and graders**, so it
+   cannot be reused wholesale as the definitive baseline.
+3. ~~Fix the known grader false negatives.~~ Done — and the diagnosis was
+   wrong in a way that mattered. `well-depth-difference` was already fixed by
+   `2bf3373`, and the "bold-rule swing" was a symptom, not the defect. The real
+   defect: **a prose answer restates context before the value, so the first
+   number is a year or a section label** — "for 2025, CERN employed 808
+   technicians" graded 2025; "Scope 1 GHG emissions … were 3,782,020" graded 1.
+   22 of 304 numeric rows were affected and **every one was a weak-tier row**,
+   so the bug was suppressing weak-model accuracy and inflating the reliability
+   spread — the headline metric. Fixes, both of which *reduce* over-crediting:
+   - numbers introduced by a date or label word are discounted when another
+     number is available (a year-valued gold still grades, and the
+     `"800.00, not 1250.00"` negation guard is intact);
+   - an answer opening with the harness's own `NOT FOUND` convention is a
+     decline, so no grader mines the explanation that follows for a match —
+     this removed 6 rows that had been credited for anchors appearing in the
+     model's account of what it *couldn't* find;
+   - plus a genuine regression found by measurement, not by the plan: the `:`
+     commitment-marker rule read the **ratio colon** in `"2.31, or 2.31:1"` and
+     graded the answer as 1, costing five strong-tier rows.
+
+   Net effect on the 2026-07-15 trail: 20 rows up, 6 down, all weak-tier.
+4. ~~Add `split` + `--split`.~~ Done: `dev | test | retired | ""`, with
+   `--split` on both `run` and `regrade`. `all` (default) = everything not
+   retired, so retiring a saturated question actually stops it costing money.
+5. ~~Add a weak-only run mode.~~ Done: `--weak-only`. The report ranks and
+   prices on the tier that ran and reports **no** spread, rather than the
+   `+0.00` that a single-tier run would otherwise produce and that would read
+   as "perfectly robust".
+
+124 tests green.
 
 ## Phase B — finalize questions
 
