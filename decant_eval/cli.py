@@ -16,7 +16,9 @@ question with no document and flags any answered from the model's memory.
 from __future__ import annotations
 
 import argparse
+import json
 import sys
+from dataclasses import asdict
 from pathlib import Path
 
 from .corpus import load_corpus
@@ -25,7 +27,7 @@ from .report import (
     build_report, build_source_scores, cost_summary, source_scores_markdown, to_markdown,
     truncation_note,
 )
-from .runner import CONTROL, run_control, run_corpus
+from .runner import CONTROL, load_completed, regrade_rows, run_control, run_corpus
 
 
 def _control_note(control_rows) -> str:
@@ -47,6 +49,58 @@ def _control_note(control_rows) -> str:
         for r in memorized:
             lines.append(f"- `{r.case}` / `{r.question_id}` ({r.model})")
     return "\n".join(lines)
+
+
+def _assemble_report(rows, *, strong: str, weak: str):
+    """The full markdown report for `rows`, and the arena subset it ranked.
+
+    Shared by `run` and `regrade` so a re-graded report is the same document as
+    a freshly-run one — a regrade that formatted differently would invite
+    comparing it against the wrong baseline."""
+    # Keep the control arm out of the ranked scoreboard.
+    arena_rows = [r for r in rows if r.conversion != CONTROL]
+    report = build_report(arena_rows, strong=strong, weak=weak)
+    md = to_markdown(report)
+    source_md = source_scores_markdown(build_source_scores(arena_rows), report.models)
+    if source_md:
+        md += "\n\n" + source_md
+    trunc_md = truncation_note(arena_rows)
+    if trunc_md:
+        md += "\n\n" + trunc_md
+    # Cost covers every row the run billed, control arm included.
+    cost_md = cost_summary(rows)
+    if cost_md:
+        md += "\n\n" + cost_md
+    return md, arena_rows
+
+
+def _regrade(args) -> int:
+    """Re-grade an audit trail against the current graders and questions."""
+    cases = load_corpus(args.corpus)
+    rows, _ = load_completed(args.rows)
+    if not rows:
+        print(f"{args.rows}: no rows to re-grade")
+        return 1
+
+    judge = AnthropicModelClient() if args.judge else None
+    new_rows, changed, skipped = regrade_rows(
+        rows, cases, judge=judge, judge_model=args.judge or "")
+
+    out_rows = args.out_rows or f"{args.out}.jsonl"
+    with open(out_rows, "w", encoding="utf-8") as fh:
+        for r in new_rows:
+            fh.write(json.dumps(asdict(r), ensure_ascii=True) + "\n")
+
+    md, arena_rows = _assemble_report(new_rows, strong=args.strong, weak=args.weak)
+    Path(args.out).write_text(md, encoding="utf-8")
+    print(md)
+    print(f"\nRe-graded {len(rows)} row(s): {changed} verdict(s) changed.")
+    if skipped:
+        print(f"{skipped} row(s) kept their stored verdict — `exact`/`open` need a "
+              f"judge; pass --judge MODEL to re-grade them too (BILLED).")
+    print(f"Wrote {args.out} ({len(arena_rows)} arena rows) and {out_rows}; "
+          f"{args.rows} unchanged.")
+    return 0
 
 
 def main(argv=None) -> int:
@@ -72,7 +126,30 @@ def main(argv=None) -> int:
              "Cost scales linearly with N.",
     )
 
+    rg = sub.add_parser(
+        "regrade",
+        help="re-grade an existing JSONL audit trail and rewrite the report (free by default)",
+    )
+    rg.add_argument("--corpus", required=True, help="corpus directory (supplies the questions)")
+    rg.add_argument("--rows", required=True, help="JSONL audit trail to re-grade")
+    rg.add_argument("--out", default="report-regraded.md", help="output markdown path")
+    rg.add_argument(
+        "--out-rows", default=None,
+        help="re-graded JSONL (default <out>.jsonl). The input file is never "
+             "modified — it is the record of what the run actually returned.",
+    )
+    rg.add_argument("--strong", default="claude-opus-4-8")
+    rg.add_argument("--weak", default="claude-haiku-4-5")
+    rg.add_argument(
+        "--judge", default=None, metavar="MODEL",
+        help="BILLED. Also re-grade `exact` and `open` rows, which need a judge. "
+             "Omitted by default so a regrade costs nothing; those rows then keep "
+             "their stored verdict.",
+    )
+
     args = parser.parse_args(argv)
+    if args.cmd == "regrade":
+        return _regrade(args)
     if args.cmd != "run":  # pragma: no cover - argparse enforces
         parser.error("unknown command")
     if args.repeats < 1:
@@ -95,20 +172,7 @@ def main(argv=None) -> int:
         jsonl_path=rows_path,
         resume=args.resume,
     )
-    # Keep the control arm out of the ranked scoreboard.
-    arena_rows = [r for r in rows if r.conversion != CONTROL]
-    report = build_report(arena_rows, strong=args.strong, weak=args.weak)
-    md = to_markdown(report)
-    source_md = source_scores_markdown(build_source_scores(arena_rows), report.models)
-    if source_md:
-        md += "\n\n" + source_md
-    trunc_md = truncation_note(arena_rows)
-    if trunc_md:
-        md += "\n\n" + trunc_md
-    # Cost covers every row the run billed, control arm included.
-    cost_md = cost_summary(rows)
-    if cost_md:
-        md += "\n\n" + cost_md
+    md, arena_rows = _assemble_report(rows, strong=args.strong, weak=args.weak)
 
     if not args.no_control:
         control_rows = []

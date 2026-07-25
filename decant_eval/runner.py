@@ -17,7 +17,7 @@ thesis is measured against. It's fed as a document block, not extracted text.
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 
 from .corpus import Case
@@ -243,6 +243,53 @@ def run_corpus(cases: list[Case], *, jsonl_path=None, resume: bool = False, **kw
             run_case(case, jsonl_path=jsonl_path, done=done, **kwargs)
         )
     return rows
+
+
+# Question types graded purely programmatically — `grade` never reaches for the
+# judge on these, so they re-grade offline with no API call and no risk of a
+# different verdict than the run would have produced. `exact` falls back to the
+# judge when the answer isn't a match, and `open` is judge-only: re-grading
+# either without a judge would turn judge-awarded passes into spurious zeros,
+# so regrade_rows leaves them alone unless a judge is supplied.
+OFFLINE_TYPES = ("numeric", "set", "ordered_list")
+
+
+def regrade_rows(rows, cases, *, judge=None, judge_model: str = ""):
+    """Re-grade `rows` against `cases`' current questions.
+
+    The audit trail exists so a grader fix can be applied to answers already
+    paid for. It is also the only way to repair a resumed run: rows carried
+    over by --resume keep the verdict the *old* grader gave them, so a file
+    that spans a grader change holds two regimes at once and averages across
+    them silently.
+
+    Returns (new_rows, changed, skipped) — `skipped` counts rows left at their
+    stored verdict because grading them would have needed a judge that wasn't
+    supplied. Rows that failed with a context overflow keep their verdict too:
+    there is no answer text to grade, and the detail is the finding."""
+    by_case: dict[str, dict[str, object]] = {}
+    for case in cases:
+        by_case[case.name] = {q.id: q for q in case.questions}
+
+    out: list[Result] = []
+    changed = skipped = 0
+    for row in rows:
+        q = by_case.get(row.case, {}).get(row.question_id)
+        gradable = (
+            q is not None
+            and not row.detail.startswith("context overflow")
+            and (row.question_type in OFFLINE_TYPES or judge is not None)
+        )
+        if not gradable:
+            if q is not None and not row.detail.startswith("context overflow"):
+                skipped += 1
+            out.append(row)
+            continue
+        correct, score, detail = grade(q, row.answer, judge=judge, judge_model=judge_model)
+        if score != row.score:
+            changed += 1
+        out.append(replace(row, correct=correct, score=score, detail=detail))
+    return out, changed, skipped
 
 
 def run_control(

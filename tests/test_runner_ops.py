@@ -6,13 +6,14 @@ control arm, and the report's common-case / floor / missing-tier guards. Offline
 import json
 import tempfile
 import unittest
+from dataclasses import asdict
 from pathlib import Path
 
 from decant_eval.corpus import Case, Question
 from decant_eval.models import FakeModelClient
 from decant_eval.report import billed_input_tokens, build_report, cost_summary, truncation_note
 from decant_eval.runner import (
-    CONTROL, RAW, Result, load_completed, run_case, run_control, run_corpus,
+    CONTROL, RAW, Result, load_completed, regrade_rows, run_case, run_control, run_corpus,
 )
 
 STRONG, WEAK = "claude-opus-4-8", "claude-haiku-4-5"
@@ -237,6 +238,74 @@ class TestRepeats(unittest.TestCase):
         rows = run_case(case, client=client, models=[STRONG], repeats=3)
         rep = build_report(rows, strong=STRONG, weak=WEAK)
         self.assertAlmostEqual(rep.scores[0].accuracy[STRONG], 2 / 3, places=2)
+
+
+class TestRegrade(unittest.TestCase):
+    """A grader fix must be applicable to answers already paid for — and must
+    not silently downgrade rows whose verdict came from a judge that isn't
+    available offline."""
+
+    def case(self):
+        return Case(name="c", conversions={"clean": "x"}, questions=(
+            Question(id="num", question="?", gold="1.6", type="numeric"),
+            Question(id="ex", question="?", gold="Acme Corp", type="exact"),
+            Question(id="op", question="?", gold="a summary", type="open"),
+        ))
+
+    def row(self, qid, qtype, answer, score):
+        return Result(case="c", conversion="clean", model=STRONG, question_id=qid,
+                      question_type=qtype, correct=score == 1.0, score=score,
+                      input_tokens=1, output_tokens=1, answer=answer, detail="")
+
+    def test_numeric_row_picks_up_a_grader_fix(self):
+        # Scored 0 under the old grader; the equation rule now credits it.
+        rows = [self.row("num", "numeric", "22.19 - 20.59 = 1.60", 0.0)]
+        new, changed, skipped = regrade_rows(rows, [self.case()])
+        self.assertEqual(changed, 1)
+        self.assertEqual(new[0].score, 1.0)
+        self.assertEqual(skipped, 0)
+
+    def test_judge_backed_rows_keep_their_verdict_without_a_judge(self):
+        # An `exact` row that passed via the judge would regrade to 0 offline.
+        # It must be skipped, not downgraded.
+        rows = [self.row("ex", "exact", "It was Acme Corp, per the invoice header.", 1.0),
+                self.row("op", "open", "A long prose answer.", 1.0)]
+        new, changed, skipped = regrade_rows(rows, [self.case()])
+        self.assertEqual(changed, 0)
+        self.assertEqual(skipped, 2)
+        self.assertTrue(all(r.score == 1.0 for r in new))
+
+    def test_judge_supplied_regrades_the_skipped_types(self):
+        rows = [self.row("ex", "exact", "It was Acme Corp, per the invoice header.", 1.0)]
+        judge = FakeModelClient(lambda m, s, p: "incorrect")
+        new, changed, skipped = regrade_rows(rows, [self.case()], judge=judge, judge_model="j")
+        self.assertEqual(skipped, 0)
+        self.assertEqual(changed, 1)
+        self.assertEqual(new[0].score, 0.0)
+
+    def test_context_overflow_rows_are_left_alone(self):
+        r = self.row("num", "numeric", "", 0.0)
+        r = Result(**{**asdict(r), "detail": "context overflow: prompt is too long"})
+        new, changed, skipped = regrade_rows([r], [self.case()])
+        self.assertEqual((changed, skipped), (0, 0))
+        self.assertIn("context overflow", new[0].detail)
+
+    def test_unknown_question_is_left_alone(self):
+        rows = [self.row("vanished", "numeric", "1.60", 0.0)]
+        new, changed, skipped = regrade_rows(rows, [self.case()])
+        self.assertEqual((changed, skipped), (0, 0))
+        self.assertEqual(new[0].score, 0.0)
+
+    def test_other_row_fields_survive_regrading(self):
+        rows = [Result(case="c", conversion="clean", model=STRONG, question_id="num",
+                       question_type="numeric", correct=False, score=0.0,
+                       input_tokens=99, output_tokens=7, answer="= 1.60", detail="",
+                       source="table-10", repeat=2, cache_read_tokens=50)]
+        new, _, _ = regrade_rows(rows, [self.case()])
+        self.assertEqual(new[0].source, "table-10")
+        self.assertEqual(new[0].repeat, 2)
+        self.assertEqual(new[0].input_tokens, 99)
+        self.assertEqual(new[0].cache_read_tokens, 50)
 
 
 class TestCostAccounting(unittest.TestCase):
