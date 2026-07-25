@@ -163,6 +163,104 @@ def source_scores_markdown(scores: list[SourceScore], models: list[str]) -> str:
     return "\n".join(lines)
 
 
+# Per-million-token list prices, USD. Cached 2026-07-24 — verify against
+# platform.claude.com/docs/en/pricing before quoting a figure that matters.
+PRICES = {
+    "claude-opus-4-8": (5.00, 25.00),
+    "claude-opus-5": (5.00, 25.00),
+    "claude-sonnet-5": (3.00, 15.00),
+    "claude-haiku-4-5": (1.00, 5.00),
+}
+
+# Cache multipliers on the base input price: a read is ~0.1x, a write ~1.25x at
+# the 5-minute TTL the harness uses (models.py sets no explicit ttl).
+CACHE_READ_MULTIPLIER = 0.1
+CACHE_WRITE_MULTIPLIER = 1.25
+
+
+def billed_input_tokens(row) -> float:
+    """`row`'s input priced in full-rate-equivalent tokens.
+
+    input_tokens is the total the request covered; the cached portions inside it
+    bill at a fraction of base rate, so charging all of it at full price
+    overstates a cached run several fold. Rows written before the components
+    were recorded carry 0/0 and therefore price as fully uncached — an upper
+    bound, which cost_summary labels rather than passing off as measured."""
+    read = getattr(row, "cache_read_tokens", 0) or 0
+    written = getattr(row, "cache_creation_tokens", 0) or 0
+    uncached = max(0, row.input_tokens - read - written)
+    return uncached + read * CACHE_READ_MULTIPLIER + written * CACHE_WRITE_MULTIPLIER
+
+
+def cost_summary(rows) -> str:
+    """A '## Cost' table: per-model billed tokens and USD at list price."""
+    models = sorted({r.model for r in rows})
+    if not models:
+        return ""
+    lines = ["## Cost", "", "| model | billed input tok | output tok | USD (list) |",
+             "| --- | --- | --- | --- |"]
+    total = 0.0
+    unpriced, uninstrumented = [], 0
+    for m in models:
+        mr = [r for r in rows if r.model == m]
+        bin_tok = sum(billed_input_tokens(r) for r in mr)
+        out_tok = sum(r.output_tokens for r in mr)
+        uninstrumented += sum(
+            1 for r in mr
+            if r.input_tokens and not (getattr(r, "cache_read_tokens", 0)
+                                       or getattr(r, "cache_creation_tokens", 0))
+        )
+        if m in PRICES:
+            in_price, out_price = PRICES[m]
+            usd = bin_tok / 1e6 * in_price + out_tok / 1e6 * out_price
+            total += usd
+            cell = f"${usd:,.2f}"
+        else:
+            unpriced.append(m)
+            cell = "-"
+        lines.append(f"| {m} | {bin_tok:,.0f} | {out_tok:,} | {cell} |")
+    lines.append(f"| **total** | | | **${total:,.2f}** |")
+    lines.append("")
+    lines.append(
+        "_Billed input counts cache reads at "
+        f"{CACHE_READ_MULTIPLIER}x and writes at {CACHE_WRITE_MULTIPLIER}x base rate, "
+        "so it is well below the raw input-token total on a cached run. List "
+        "prices only — no discounts, batch rates, or negotiated terms._"
+    )
+    if unpriced:
+        lines.append(f"_No price on file for: {', '.join(unpriced)} — see PRICES in report.py._")
+    if uninstrumented:
+        lines.append(
+            f"_WARNING: {uninstrumented} row(s) predate cache-component recording and are "
+            "priced as fully uncached. The real figure is lower; treat this as a ceiling._"
+        )
+    return "\n".join(lines)
+
+
+def truncation_note(rows) -> str:
+    """A warning listing rows the model was cut off on (stop_reason
+    "max_tokens"), or "" when none were. Such a row scored what it scored
+    because of the output budget, not because the conversion failed to carry
+    the fact — reading it as the latter is exactly the misreading the
+    scoreboard's other guards exist to prevent. Raise --max-tokens and re-run
+    the affected rows (--resume skips the rest)."""
+    hits = [r for r in rows if getattr(r, "truncated", False)]
+    if not hits:
+        return ""
+    lines = [
+        "## Truncated answers",
+        "",
+        f"_WARNING: {len(hits)} of {len(rows)} answers hit the output-token cap "
+        "(stop_reason `max_tokens`) and were cut off mid-answer. Their scores "
+        "measure the budget, not the representation -- re-run them with a higher "
+        "`--max-tokens` before drawing conclusions:_",
+        "",
+    ]
+    for r in hits:
+        lines.append(f"- `{r.case}` / `{r.question_id}` ({r.model}, {r.conversion})")
+    return "\n".join(lines)
+
+
 def to_markdown(report: Report) -> str:
     lines = ["# Decant eval report", ""]
     header = ["conversion", *report.models, "cost (strong tok)", "spread", "n"]

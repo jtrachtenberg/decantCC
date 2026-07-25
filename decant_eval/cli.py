@@ -21,7 +21,10 @@ from pathlib import Path
 
 from .corpus import load_corpus
 from .models import AnthropicModelClient
-from .report import build_report, build_source_scores, source_scores_markdown, to_markdown
+from .report import (
+    build_report, build_source_scores, cost_summary, source_scores_markdown, to_markdown,
+    truncation_note,
+)
 from .runner import CONTROL, run_control, run_corpus
 
 
@@ -61,10 +64,19 @@ def main(argv=None) -> int:
     run.add_argument("--no-raw", action="store_true", help="skip the source-PDF raw-upload baseline")
     run.add_argument("--no-control", action="store_true", help="skip the no-document control arm")
     run.add_argument("--max-tokens", type=int, default=512)
+    run.add_argument(
+        "--repeats", type=int, default=1, metavar="N",
+        help="ask each question N times and average (default 1). Sampling can't "
+             "be pinned on the strong tier, so a single sample per cell is one "
+             "draw, not a measurement — repeats are the only variance control. "
+             "Cost scales linearly with N.",
+    )
 
     args = parser.parse_args(argv)
     if args.cmd != "run":  # pragma: no cover - argparse enforces
         parser.error("unknown command")
+    if args.repeats < 1:
+        parser.error("--repeats must be at least 1")
 
     cases = load_corpus(args.corpus)
     client = AnthropicModelClient()
@@ -78,6 +90,7 @@ def main(argv=None) -> int:
         judge=client,
         judge_model=args.judge,
         max_tokens=args.max_tokens,
+        repeats=args.repeats,
         raw_arena=not args.no_raw,
         jsonl_path=rows_path,
         resume=args.resume,
@@ -89,13 +102,21 @@ def main(argv=None) -> int:
     source_md = source_scores_markdown(build_source_scores(arena_rows), report.models)
     if source_md:
         md += "\n\n" + source_md
+    trunc_md = truncation_note(arena_rows)
+    if trunc_md:
+        md += "\n\n" + trunc_md
+    # Cost covers every row the run billed, control arm included.
+    cost_md = cost_summary(rows)
+    if cost_md:
+        md += "\n\n" + cost_md
 
     if not args.no_control:
         control_rows = []
         for case in cases:
             control_rows.extend(
                 run_control(case, client=client, models=models,
-                            judge=client, judge_model=args.judge, max_tokens=args.max_tokens)
+                            judge=client, judge_model=args.judge,
+                            max_tokens=args.max_tokens)
             )
         md += "\n" + _control_note(control_rows)
 

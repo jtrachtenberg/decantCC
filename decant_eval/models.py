@@ -23,12 +23,32 @@ this path so caching applies uniformly. Note a companion PDF is billed as
 rendered page images on every (cache-miss) request — that token weight is part
 of what the eval measures for such arms.
 
-Deliberate: no thinking / effort is requested. The harness measures whether a
+No thinking and no sampling parameters are sent. The harness measures whether a
 *representation transfers meaning* — thinking off keeps a strong model from
 reasoning its way around a corrupted conversion, which would confound the
-signal, and it sharpens the strong-vs-weak reliability spread. (It's a knob we
-can revisit; see README.) Note Haiku 4.5 rejects the `effort` param outright,
-so we send neither.
+signal, and it sharpens the strong-vs-weak reliability spread.
+
+Neither knob is a simple on/off across the two tiers, which is why a thinking
+arm was dropped rather than built (2026-07-24):
+
+  - `budget_tokens` is REMOVED on Opus 4.7+ (400). Opus 4.8 takes
+    `thinking={"type": "adaptive"}` + `output_config={"effort": ...}`; Haiku 4.5
+    still takes `budget_tokens` and rejects `effort` outright. "Thinking budget"
+    is not the same knob on the two tiers, so a thinking arm would weaken the
+    tier comparability the reliability spread depends on.
+  - `temperature`/`top_p`/`top_k` are likewise REMOVED on Opus 4.7+ (400), so
+    sampling cannot be pinned on the strong tier. Runs therefore sample at the
+    API default (temperature 1.0) and per-cell variance is real — see
+    `repeats` in runner.py, which is the only variance control available.
+
+Truncation: a response can end because the model finished ("end_turn") or
+because it ran out of budget ("max_tokens") — a partial answer that grades as
+wrong. `AnswerResult.stop_reason` carries that distinction to the runner so the
+audit trail shows which happened. It has never fired at the 512-token default
+(the largest answer across every billed run so far was ~307 tokens), so this is
+a guard rather than a fix for an observed problem — but a silently truncated
+answer grades identically to a wrong one, and the report would then read a
+budget artifact as a representation failure.
 """
 
 from __future__ import annotations
@@ -42,8 +62,26 @@ from typing import Protocol
 @dataclass(frozen=True)
 class AnswerResult:
     text: str
+    # Total input the request covered: uncached + cache reads + cache writes.
+    # An upper bound on what was billed, never the billed figure itself — the
+    # three tiers price differently (see cache_read_tokens).
     input_tokens: int
     output_tokens: int
+    # The cached portions of input_tokens, kept separate so actual spend is
+    # recoverable from the audit trail. Cache reads bill at ~0.1x base input
+    # and writes at ~1.25x (5-minute TTL), so a run whose documents are cached
+    # costs a small fraction of what input_tokens alone implies. Folding them
+    # together — as this client originally did — makes the JSONL unable to
+    # answer "what did this run cost?" after the fact. Defaulted to 0 for
+    # clients that don't report them.
+    cache_read_tokens: int = 0
+    cache_creation_tokens: int = 0
+    # The API's stop_reason ("end_turn", "max_tokens", ...). Carried so the
+    # runner can tell a model that *answered wrongly* from one that was *cut
+    # off* mid-answer — scoring those the same silently turns a budget artifact
+    # into a claim about the representation. Empty when the client doesn't
+    # report one. See the truncation note in the module docstring.
+    stop_reason: str = ""
 
 
 class ModelClient(Protocol):
@@ -107,8 +145,8 @@ class AnthropicModelClient:
         return blocks
 
     def answer(self, *, model, system, prompt, max_tokens=512, document=None) -> AnswerResult:
-        # No thinking/effort (see module docstring): omit thinking → Opus 4.8
-        # runs without it; Haiku 4.5 would 400 on effort, so it's absent too.
+        # No thinking, effort, or sampling parameters — see the module docstring
+        # for why each is absent and why none of them is safely tier-portable.
         content = list(self._document_blocks(document))
         content.append({"type": "text", "text": prompt})
         resp = self._client.messages.create(
@@ -118,18 +156,20 @@ class AnthropicModelClient:
             messages=[{"role": "user", "content": content}],
         )
         text = "".join(b.text for b in resp.content if getattr(b, "type", None) == "text")
-        # cache reads/writes still count as input the run paid for; usage.input_tokens
-        # is the uncached remainder, so add the cached portions back for a true cost.
+        # usage.input_tokens is the UNCACHED remainder only. Total input the
+        # request covered adds the cached portions back; the components are also
+        # carried separately so the audit trail can price them at their real
+        # rates rather than all at full input price.
         usage = resp.usage
-        input_tokens = (
-            usage.input_tokens
-            + getattr(usage, "cache_read_input_tokens", 0)
-            + getattr(usage, "cache_creation_input_tokens", 0)
-        )
+        cache_read = getattr(usage, "cache_read_input_tokens", 0) or 0
+        cache_creation = getattr(usage, "cache_creation_input_tokens", 0) or 0
         return AnswerResult(
             text=text,
-            input_tokens=input_tokens,
+            input_tokens=usage.input_tokens + cache_read + cache_creation,
             output_tokens=usage.output_tokens,
+            cache_read_tokens=cache_read,
+            cache_creation_tokens=cache_creation,
+            stop_reason=getattr(resp, "stop_reason", "") or "",
         )
 
     def count_input_tokens(self, *, model, system, prompt) -> int:
@@ -148,7 +188,10 @@ class FakeModelClient:
     """Scripted client for tests. `responder(model, system, prompt) -> str`
     supplies the answer; the document (if any) is rendered into `prompt` so the
     responder sees exactly what the real model would. Token counts approximate
-    at ~4 chars/token so the accounting paths still exercise real numbers."""
+    at ~4 chars/token so the accounting paths still exercise real numbers.
+
+    A responder may return `(text, stop_reason)` instead of a bare string to
+    script a truncated response; a bare string means "end_turn"."""
 
     def __init__(self, responder):
         self._responder = responder
@@ -157,9 +200,11 @@ class FakeModelClient:
     def answer(self, *, model, system, prompt, max_tokens=512, document=None) -> AnswerResult:
         full = _render(document) + prompt
         self.calls.append((model, full))
-        text = self._responder(model, system, full)
+        reply = self._responder(model, system, full)
+        text, stop_reason = reply if isinstance(reply, tuple) else (reply, "end_turn")
         return AnswerResult(
             text=text,
             input_tokens=max(1, (len(system) + len(full)) // 4),
             output_tokens=max(1, len(text) // 4),
+            stop_reason=stop_reason,
         )

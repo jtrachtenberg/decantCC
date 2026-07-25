@@ -64,10 +64,34 @@ class Result:
     # The question's answer-location tag (Question.source). Defaulted so rows
     # from a pre-tagging JSONL audit trail still load on --resume.
     source: str = ""
+    # True when the model hit the output budget mid-answer (stop_reason
+    # "max_tokens") rather than finishing. Such a row's score is about the
+    # budget, not the representation — see _truncated. Defaulted for --resume.
+    truncated: bool = False
+    # 0-based sample index when a question is asked more than once (--repeats).
+    # Part of the row key, so resume never conflates two samples of one cell.
+    # Defaulted so rows from a pre-repeats JSONL still load.
+    repeat: int = 0
+    # The cached portions of input_tokens. Needed to price a run: reads bill at
+    # ~0.1x and writes at ~1.25x, so input_tokens alone overstates spend several
+    # fold on a cached run. 0 on rows written before these were recorded, which
+    # makes those rows price as if fully uncached — an upper bound, flagged as
+    # such by report.cost_summary rather than reported as fact.
+    cache_read_tokens: int = 0
+    cache_creation_tokens: int = 0
 
 
-def _key(case: str, conversion: str, model: str, question_id: str):
-    return (case, conversion, model, question_id)
+def _key(case: str, conversion: str, model: str, question_id: str, repeat: int = 0):
+    return (case, conversion, model, question_id, repeat)
+
+
+def _truncated(res) -> bool:
+    """The model ran out of output budget mid-answer. Distinct from a wrong
+    answer: the representation may well have carried the fact and the model was
+    simply cut off before it said so. The row is still graded (a truncated
+    answer can already contain the value) but is flagged, so a run can never
+    quietly report a budget artifact as a transfer failure."""
+    return getattr(res, "stop_reason", "") == "max_tokens"
 
 
 def _context_overflow(exc: Exception) -> bool:
@@ -92,7 +116,7 @@ def load_completed(jsonl_path) -> tuple[list[Result], set]:
             continue
         r = Result(**json.loads(line))
         rows.append(r)
-        done.add(_key(r.case, r.conversion, r.model, r.question_id))
+        done.add(_key(r.case, r.conversion, r.model, r.question_id, r.repeat))
     return rows, done
 
 
@@ -114,6 +138,22 @@ def _arena_entries(case: Case, *, raw_arena: bool):
     return entries
 
 
+def _cells(case: Case, models: list[str], *, repeats: int, raw_arena: bool):
+    """Every (conversion, document, model, question, repeat) the run must ask.
+
+    `repeats` > 1 asks each question that many times. Sampling cannot be pinned
+    on the strong tier (temperature is rejected on Opus 4.7+ — see models.py),
+    so a single sample per cell is one draw from a distribution, not a
+    measurement: on a 10-question case one flipped answer moves accuracy 0.10,
+    which is the same size as the effects the arena is trying to resolve.
+    Repeats are the only variance control available; the report averages them."""
+    for conv_name, document in _arena_entries(case, raw_arena=raw_arena):
+        for model in models:
+            for q in case.questions:
+                for rep in range(max(1, repeats)):
+                    yield conv_name, document, model, q, rep
+
+
 def run_case(
     case: Case,
     *,
@@ -122,6 +162,7 @@ def run_case(
     judge=None,
     judge_model: str = "claude-opus-4-8",
     max_tokens: int = 512,
+    repeats: int = 1,
     raw_arena: bool = True,
     jsonl_path=None,
     done: set | None = None,
@@ -130,50 +171,61 @@ def run_case(
     sink = open(jsonl_path, "a", encoding="utf-8") if jsonl_path else None
     rows: list[Result] = []
     try:
-        for conv_name, document in _arena_entries(case, raw_arena=raw_arena):
-            for model in models:
-                for q in case.questions:
-                    if _key(case.name, conv_name, model, q.id) in done:
-                        continue
-                    try:
-                        res = client.answer(
-                            model=model,
-                            system=ANSWER_SYSTEM,
-                            prompt=_question_prompt(q.question),
-                            max_tokens=max_tokens,
-                            document=document,
-                        )
-                    except Exception as exc:
-                        if not _context_overflow(exc):
-                            raise
-                        answer_text = ""
-                        correct, score = False, 0.0
-                        detail = f"context overflow: {exc}"[:200]
-                        in_tok, out_tok = 0, 0
-                    else:
-                        correct, score, detail = grade(
-                            q, res.text, judge=judge, judge_model=judge_model
-                        )
-                        answer_text = res.text
-                        in_tok, out_tok = res.input_tokens, res.output_tokens
-                    row = Result(
-                        case=case.name,
-                        conversion=conv_name,
-                        model=model,
-                        question_id=q.id,
-                        question_type=q.type,
-                        correct=correct,
-                        score=score,
-                        input_tokens=in_tok,
-                        output_tokens=out_tok,
-                        answer=answer_text,
-                        detail=detail,
-                        source=q.source,
-                    )
-                    rows.append(row)
-                    if sink is not None:
-                        sink.write(json.dumps(asdict(row), ensure_ascii=True) + "\n")
-                        sink.flush()
+        for conv_name, document, model, q, rep in _cells(
+            case, models, repeats=repeats, raw_arena=raw_arena
+        ):
+            if _key(case.name, conv_name, model, q.id, rep) in done:
+                continue
+            try:
+                res = client.answer(
+                    model=model,
+                    system=ANSWER_SYSTEM,
+                    prompt=_question_prompt(q.question),
+                    max_tokens=max_tokens,
+                    document=document,
+                )
+            except Exception as exc:
+                if not _context_overflow(exc):
+                    raise
+                answer_text = ""
+                correct, score = False, 0.0
+                detail = f"context overflow: {exc}"[:200]
+                in_tok, out_tok = 0, 0
+                cache_read = cache_creation = 0
+                truncated = False
+            else:
+                correct, score, detail = grade(
+                    q, res.text, judge=judge, judge_model=judge_model
+                )
+                answer_text = res.text
+                in_tok, out_tok = res.input_tokens, res.output_tokens
+                cache_read = res.cache_read_tokens
+                cache_creation = res.cache_creation_tokens
+                truncated = _truncated(res)
+                if truncated:
+                    detail = f"truncated (max_tokens): {detail}"[:200]
+            row = Result(
+                case=case.name,
+                conversion=conv_name,
+                model=model,
+                question_id=q.id,
+                question_type=q.type,
+                correct=correct,
+                score=score,
+                input_tokens=in_tok,
+                output_tokens=out_tok,
+                answer=answer_text,
+                detail=detail,
+                source=q.source,
+                truncated=truncated,
+                repeat=rep,
+                cache_read_tokens=cache_read,
+                cache_creation_tokens=cache_creation,
+            )
+            rows.append(row)
+            if sink is not None:
+                sink.write(json.dumps(asdict(row), ensure_ascii=True) + "\n")
+                sink.flush()
     finally:
         if sink is not None:
             sink.close()
@@ -215,10 +267,15 @@ def run_control(
                 prompt=_question_prompt(q.question), max_tokens=max_tokens, document=None,
             )
             correct, score, detail = grade(q, res.text, judge=judge, judge_model=judge_model)
+            truncated = _truncated(res)
+            if truncated:
+                detail = f"truncated (max_tokens): {detail}"[:200]
             rows.append(Result(
                 case=case.name, conversion=CONTROL, model=model,
                 question_id=q.id, question_type=q.type, correct=correct, score=score,
                 input_tokens=res.input_tokens, output_tokens=res.output_tokens,
-                answer=res.text, detail=detail, source=q.source,
+                answer=res.text, detail=detail, source=q.source, truncated=truncated,
+                cache_read_tokens=res.cache_read_tokens,
+                cache_creation_tokens=res.cache_creation_tokens,
             ))
     return rows

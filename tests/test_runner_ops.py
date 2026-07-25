@@ -10,7 +10,7 @@ from pathlib import Path
 
 from decant_eval.corpus import Case, Question
 from decant_eval.models import FakeModelClient
-from decant_eval.report import build_report
+from decant_eval.report import billed_input_tokens, build_report, cost_summary, truncation_note
 from decant_eval.runner import (
     CONTROL, RAW, Result, load_completed, run_case, run_control, run_corpus,
 )
@@ -40,6 +40,10 @@ def make_case(tmp, name="c1", with_pdf=False):
     return d
 
 
+def case_with_two_qs():
+    return Case(name="c", questions=qs(), conversions={"clean": "x"})
+
+
 def answerer(model, system, prompt):
     if "total" in prompt.lower():
         return "1250.00"
@@ -59,7 +63,7 @@ class TestJsonlPersistence(unittest.TestCase):
             self.assertEqual(len(lines), len(rows))
             reloaded, done = load_completed(path)
             self.assertEqual(len(reloaded), len(rows))
-            self.assertIn((case.name, "clean", STRONG, "total"), done)
+            self.assertIn((case.name, "clean", STRONG, "total", 0), done)
 
     def test_resume_skips_completed_rows(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -131,6 +135,189 @@ class TestContextOverflow(unittest.TestCase):
         case = Case(name="c", questions=qs(), conversions={"clean": "x"})
         with self.assertRaises(RuntimeError):
             run_case(case, client=Boom(), models=[STRONG])
+
+
+class TestTruncation(unittest.TestCase):
+    """A model cut off at the output cap (stop_reason "max_tokens") must be
+    distinguishable from one that answered wrongly — otherwise a budget
+    artifact reads as a representation failure. Has never fired at the 512-token
+    default, so this is a guard, not a fix for an observed problem."""
+
+    def test_truncated_row_is_flagged_and_still_graded(self):
+        # Answers correctly but is cut off; the row is graded AND marked.
+        client = FakeModelClient(lambda m, s, p: ("1250.00", "max_tokens"))
+        case = Case(name="c", questions=qs(), conversions={"clean": "x"})
+        rows = run_case(case, client=client, models=[STRONG])
+        by = {r.question_id: r for r in rows}
+        self.assertTrue(by["total"].truncated)
+        self.assertTrue(by["total"].correct)  # graded on what did come back
+        self.assertIn("truncated (max_tokens)", by["total"].detail)
+
+    def test_untruncated_row_is_not_flagged(self):
+        case = Case(name="c", questions=qs(), conversions={"clean": "x"})
+        rows = run_case(case, client=FakeModelClient(answerer), models=[STRONG])
+        self.assertTrue(all(not r.truncated for r in rows))
+        self.assertTrue(all("truncated" not in r.detail for r in rows))
+
+    def test_context_overflow_is_not_reported_as_truncation(self):
+        case = Case(name="c", questions=qs(),
+                    conversions={"clean": "Total: 1250.00 USD\nVendor: Acme Corp"})
+        rows = run_case(case, client=TestContextOverflow.OverflowClient(WEAK),
+                        models=[STRONG, WEAK])
+        self.assertTrue(all(not r.truncated for r in rows))
+
+    def test_control_arm_flags_truncation_too(self):
+        client = FakeModelClient(lambda m, s, p: ("Acme Corp", "max_tokens"))
+        case = Case(name="c", questions=qs(), conversions={"clean": "x"})
+        rows = run_control(case, client=client, models=[STRONG])
+        self.assertTrue(all(r.truncated for r in rows))
+
+    def test_resume_loads_rows_written_before_the_field_existed(self):
+        # A pre-truncation-field JSONL row must still load on --resume.
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "rows.jsonl"
+            p.write_text(json.dumps({
+                "case": "c", "conversion": "clean", "model": STRONG,
+                "question_id": "total", "question_type": "numeric", "correct": True,
+                "score": 1.0, "input_tokens": 10, "output_tokens": 2,
+                "answer": "1250.00", "detail": "",
+            }) + "\n", encoding="utf-8")
+            rows, done = load_completed(p)
+            self.assertEqual(len(rows), 1)
+            self.assertFalse(rows[0].truncated)
+            self.assertEqual(rows[0].repeat, 0)
+            self.assertIn(("c", "clean", STRONG, "total", 0), done)
+
+
+class TestRepeats(unittest.TestCase):
+    """Repeats are the only variance control the arena has (temperature is
+    rejected on the strong tier), so each sample must be its own row, keyed
+    distinctly enough that --resume never conflates two samples of one cell."""
+
+    def test_default_is_one_sample_per_cell(self):
+        case = Case(name="c", questions=qs(), conversions={"clean": "x"})
+        rows = run_case(case, client=FakeModelClient(answerer), models=[STRONG])
+        self.assertEqual(len(rows), 2)  # 2 questions x 1 conversion x 1 model
+        self.assertTrue(all(r.repeat == 0 for r in rows))
+
+    def test_repeats_produce_one_row_per_sample(self):
+        case = Case(name="c", questions=qs(), conversions={"clean": "x"})
+        rows = run_case(case, client=FakeModelClient(answerer), models=[STRONG], repeats=3)
+        self.assertEqual(len(rows), 6)
+        self.assertEqual(sorted(r.repeat for r in rows if r.question_id == "total"), [0, 1, 2])
+
+    def test_samples_of_one_cell_have_distinct_keys(self):
+        # Same (case, conversion, model, question) — only `repeat` separates
+        # them. A key without it would mark the whole cell done after sample 0.
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "rows.jsonl"
+            run_case(case_with_two_qs(), client=FakeModelClient(answerer),
+                     models=[STRONG], repeats=3, jsonl_path=p)
+            rows, done = load_completed(p)
+            self.assertEqual(len(rows), 6)
+            self.assertEqual(len(done), 6)  # no collisions
+
+    def test_resume_continues_a_partial_repeat_set(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "rows.jsonl"
+            run_case(case_with_two_qs(), client=FakeModelClient(answerer),
+                     models=[STRONG], repeats=1, jsonl_path=p)
+            _, done = load_completed(p)
+            fresh = run_case(case_with_two_qs(), client=FakeModelClient(answerer),
+                             models=[STRONG], repeats=3, jsonl_path=p, done=done)
+            # Sample 0 of each question was already done; only 1 and 2 re-run.
+            self.assertEqual(len(fresh), 4)
+            self.assertTrue(all(r.repeat in (1, 2) for r in fresh))
+
+    def test_report_averages_repeats(self):
+        # One question answered right twice and wrong once -> 0.67, not 1.0.
+        answers = iter(["1250.00", "1250.00", "wrong"])
+        client = FakeModelClient(lambda m, s, p: next(answers))
+        case = Case(name="c", questions=qs()[:1], conversions={"clean": "x"})
+        rows = run_case(case, client=client, models=[STRONG], repeats=3)
+        rep = build_report(rows, strong=STRONG, weak=WEAK)
+        self.assertAlmostEqual(rep.scores[0].accuracy[STRONG], 2 / 3, places=2)
+
+
+class TestCostAccounting(unittest.TestCase):
+    """input_tokens is the total the request covered; the cached portions inside
+    it bill at a fraction of base rate. Pricing all of it at full rate — what
+    the client used to force by folding the components together — overstates a
+    cached run several fold."""
+
+    def row(self, **kw):
+        base = dict(case="c", conversion="decant", model=STRONG, question_id="q",
+                    question_type="exact", correct=True, score=1.0,
+                    input_tokens=0, output_tokens=0, answer="a", detail="")
+        return Result(**{**base, **kw})
+
+    def test_fully_uncached_bills_at_face_value(self):
+        r = self.row(input_tokens=1000)
+        self.assertEqual(billed_input_tokens(r), 1000)
+
+    def test_cache_read_bills_at_a_tenth(self):
+        # 1000 total, 900 of it a cache read -> 100 + 90 = 190
+        r = self.row(input_tokens=1000, cache_read_tokens=900)
+        self.assertAlmostEqual(billed_input_tokens(r), 190.0)
+
+    def test_cache_write_bills_at_1_25x(self):
+        r = self.row(input_tokens=1000, cache_creation_tokens=800)
+        self.assertAlmostEqual(billed_input_tokens(r), 200 + 800 * 1.25)
+
+    def test_components_never_exceed_the_total(self):
+        # Defensive: a malformed row must not produce negative uncached tokens.
+        r = self.row(input_tokens=100, cache_read_tokens=500)
+        self.assertAlmostEqual(billed_input_tokens(r), 50.0)
+
+    def test_summary_prices_each_model_and_totals(self):
+        rows = [
+            self.row(model=STRONG, input_tokens=1_000_000, output_tokens=1_000),
+            self.row(model=WEAK, input_tokens=1_000_000, output_tokens=4_000),
+        ]
+        out = cost_summary(rows)
+        self.assertIn("$5.03", out)   # Opus: 1M in @ $5 + 1k out @ $25/M = 5.025
+        self.assertIn("$1.02", out)   # Haiku: 1M in @ $1 + 4k out @ $5/M = 1.02
+        # Total sums the unrounded values (6.045), so it can differ by a cent
+        # from adding up the rounded per-model cells. That's display rounding,
+        # not a miscount — the total is the more accurate figure.
+        self.assertIn("$6.04", out)
+
+    def test_uninstrumented_rows_are_flagged_as_a_ceiling(self):
+        # A row with input but no cache components predates the recording.
+        out = cost_summary([self.row(input_tokens=1_000_000)])
+        self.assertIn("WARNING", out)
+        self.assertIn("ceiling", out)
+
+    def test_instrumented_rows_are_not_flagged(self):
+        out = cost_summary([self.row(input_tokens=1_000_000, cache_read_tokens=900_000)])
+        self.assertNotIn("WARNING", out)
+
+    def test_unknown_model_is_named_not_silently_zeroed(self):
+        out = cost_summary([self.row(model="claude-future-9", input_tokens=1000)])
+        self.assertIn("claude-future-9", out)
+        self.assertIn("No price on file", out)
+
+
+class TestTruncationNote(unittest.TestCase):
+    def test_note_lists_truncated_rows(self):
+        rows = [
+            Result(case="c", conversion="decant", model=STRONG, question_id="q1",
+                   question_type="exact", correct=False, score=0.0, input_tokens=1,
+                   output_tokens=1, answer="", detail="", truncated=True),
+            Result(case="c", conversion="decant", model=STRONG, question_id="q2",
+                   question_type="exact", correct=True, score=1.0, input_tokens=1,
+                   output_tokens=1, answer="x", detail=""),
+        ]
+        note = truncation_note(rows)
+        self.assertIn("1 of 2", note)
+        self.assertIn("q1", note)
+        self.assertNotIn("q2", note)
+
+    def test_no_note_when_nothing_truncated(self):
+        rows = [Result(case="c", conversion="decant", model=STRONG, question_id="q2",
+                       question_type="exact", correct=True, score=1.0, input_tokens=1,
+                       output_tokens=1, answer="x", detail="")]
+        self.assertEqual(truncation_note(rows), "")
 
 
 class TestControlArm(unittest.TestCase):
@@ -220,7 +407,7 @@ class TestSourceSlice(unittest.TestCase):
             path.write_text(json.dumps(old) + "\n", encoding="utf-8")
             rows, done = load_completed(path)
             self.assertEqual(rows[0].source, "")
-            self.assertIn(("c", "clean", STRONG, "q"), done)
+            self.assertIn(("c", "clean", STRONG, "q", 0), done)
 
     def test_slice_groups_by_case_and_source(self):
         from decant_eval.report import build_source_scores, source_scores_markdown
