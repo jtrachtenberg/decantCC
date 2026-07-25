@@ -136,18 +136,34 @@ def _committed_number(text: str):
     2025, CERN employed **808 technicians**...", gold 808 not 2025) or sits above
     a citation line ("**Section 42**...\n\nstated in NOTE 1: ...", gold 42 not the
     1 in "NOTE 1"). With no bolded number we fall back to the first number of the
-    short answer, so a negation like "800.00, not 1250.00" still grades as 800."""
+    short answer, so a negation like "800.00, not 1250.00" still grades as 800.
+
+    When the short answer *shows its work* the first number is an input, not the
+    result: "22.19 - 20.59 = 1.60" and "Top: 20.59, Bottom: 22.19. Difference:
+    1.60" both commit to 1.60 while leading with 22.19 / 20.59. The commitment
+    is what follows the last `=` or `:`. Both phrasings are real messy-scan
+    well-depth-difference rows (2026-07-24) that scored 0 on the correct value.
+
+    The negation guard survives because it has neither marker: "800.00, not
+    1250.00" still falls through to the short answer's first number."""
     for span in _BOLD.findall(str(text)):
         nums = _numbers(span)
         if nums:
             return nums[0]
-    nums = _numbers(_short_answer(text))
+    short = _short_answer(text)
+    # Last commitment marker, whichever comes later.
+    marker = max(short.rfind("="), short.rfind(":"))
+    if marker >= 0:
+        nums = _numbers(short[marker + 1:])
+        if nums:
+            return nums[0]
+    nums = _numbers(short)
     if nums:
         return nums[0]
     # No digit anywhere the model committed to — a verbatim quote may spell the
     # number out ("fifteen years"). Digits always win when present, so the
     # negation rule ("800.00, not 1250.00" -> 800) is untouched.
-    return _word_number(_short_answer(text))
+    return _word_number(short)
 
 
 def _grade_numeric(answer: str, gold, tolerance: float):

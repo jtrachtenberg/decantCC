@@ -161,6 +161,45 @@ class TestVerboseNumericRegressions(unittest.TestCase):
         self.assertEqual(score, 0.0)
 
 
+class TestShownArithmetic(unittest.TestCase):
+    """messy-scan/well-depth-difference: raw/Opus answered the correct value
+    1.60 in BOTH 2026-07-24 runs and scored 0 both times, because an answer that
+    shows its work leads with an input, not the result. The commitment is what
+    follows the last `=` or `:`."""
+
+    def test_equation_result_beats_left_operand(self):
+        # The AFTER-run row: correct value 1.60, previously graded 22.19.
+        ans = "From Table 10, DTX1: Top = 20.59, Bottom = 22.19.\n\n22.19 - 20.59 = 1.60"
+        ok, _, detail = grade(q("numeric", "1.6", 0), ans)
+        self.assertTrue(ok, detail)
+
+    def test_labelled_result_beats_leading_inputs(self):
+        # The BEFORE-run row, one line, no equals sign: previously graded 20.59.
+        ans = "Top: 20.59, Bottom: 22.19. Difference: 1.60"
+        ok, _, detail = grade(q("numeric", "1.6", 0), ans)
+        self.assertTrue(ok, detail)
+
+    def test_unicode_minus_equation(self):
+        # Models emit U+2212, not ASCII hyphen — the real row did.
+        ans = "22.19 − 20.59 = 1.60"
+        self.assertTrue(grade(q("numeric", "1.6", 0), ans)[0])
+
+    def test_last_equation_wins(self):
+        self.assertTrue(grade(q("numeric", "7", 0), "x = 5, then y = 7")[0])
+
+    def test_bold_still_outranks_the_equation(self):
+        # Bold is the stronger commitment signal and must keep precedence.
+        self.assertTrue(grade(q("numeric", "42", 0), "**42** is the answer, since 1 = 1")[0])
+
+    def test_plain_answer_unaffected(self):
+        self.assertTrue(grade(q("numeric", "1.6", 0), "1.60")[0])
+
+    def test_negation_guard_survives(self):
+        # No "=" and no bold -> still the short answer's first number.
+        ok, _, _ = grade(q("numeric", "1250.00", 0.01), "The total is 800.00, not 1250.00.")
+        self.assertFalse(ok)
+
+
 class TestSpelledOutNumbers(unittest.TestCase):
     """clean-text/land-improvements-life scored 0 on EVERY arm in the
     2026-07-15/16 billed runs: the source spells the value out ("fifteen years
