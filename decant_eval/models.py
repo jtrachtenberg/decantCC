@@ -28,6 +28,19 @@ No thinking and no sampling parameters are sent. The harness measures whether a
 reasoning its way around a corrupted conversion, which would confound the
 signal, and it sharpens the strong-vs-weak reliability spread.
 
+CAREFUL: "no thinking" is a property of the request *as this model interprets
+it*, not of the request itself. Omitting `thinking` means thinking-off only on
+models whose default is off — Opus 4.8/4.7/4.6, Sonnet 4.6/4.5, Haiku 4.5. On
+Opus 5, Sonnet 5, and Fable 5 the same omitted parameter runs *adaptive
+thinking*, so pointing --strong at one of those silently inverts the property
+the paragraph above rests on, with no code change and no error. Two
+consequences beyond the confound itself: thinking bills as output tokens with
+no separate usage field (so the split is unrecoverable from the response), and
+it is charged against `max_tokens` alongside the visible answer, so the 512
+default below stops being an answer budget. THINKING_OFF_BY_DEFAULT encodes
+the split and cli.py refuses an unvetted model on that basis; keep it current
+rather than relying on this comment.
+
 Neither knob is a simple on/off across the two tiers, which is why a thinking
 arm was dropped rather than built (2026-07-24):
 
@@ -45,7 +58,9 @@ Truncation: a response can end because the model finished ("end_turn") or
 because it ran out of budget ("max_tokens") — a partial answer that grades as
 wrong. `AnswerResult.stop_reason` carries that distinction to the runner so the
 audit trail shows which happened. It has never fired at the 512-token default
-(the largest answer across every billed run so far was ~307 tokens), so this is
+(the largest answer across every billed trail on disk is 363 tokens, in
+messy-scan-3x — 71% of the cap, so the headroom is thinner than it looks and a
+thinking model would have none), so this is
 a guard rather than a fix for an observed problem — but a silently truncated
 answer grades identically to a wrong one, and the report would then read a
 budget artifact as a representation failure.
@@ -63,6 +78,38 @@ import base64
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
+
+# What omitting the `thinking` parameter means, per model. answer() never sends
+# it, so this table -- not the request -- is what decides whether a run thinks.
+# It is the arena's central assumption written down: every published number was
+# measured with the strong tier NOT thinking, and a model in the second set
+# breaks that silently rather than loudly (see the module docstring).
+#
+# Verified against the Anthropic model docs 2026-07-30. A model missing from
+# both sets is UNKNOWN, not assumed safe -- cli.py refuses to run one until it
+# is classified here, which is the point: the failure should be a startup error
+# for a human to resolve, not a quietly different measurement regime.
+THINKING_OFF_BY_DEFAULT = frozenset({
+    "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", "claude-opus-4-5",
+    "claude-sonnet-4-6", "claude-sonnet-4-5", "claude-haiku-4-5",
+})
+# Omitting `thinking` runs ADAPTIVE thinking on these -- thinking tokens bill as
+# output, are charged against max_tokens, and vary with the input, so the two
+# arms think different amounts by construction.
+THINKING_ON_BY_DEFAULT = frozenset({
+    "claude-opus-5", "claude-sonnet-5", "claude-fable-5", "claude-mythos-5",
+})
+
+
+def default_thinks(model: str):
+    """True if `model` thinks when `thinking` is omitted, False if it does not,
+    None if the model is unclassified. None is deliberately distinct from False:
+    an unrecognized model is an open question, not a safe default."""
+    if model in THINKING_OFF_BY_DEFAULT:
+        return False
+    if model in THINKING_ON_BY_DEFAULT:
+        return True
+    return None
 
 
 @dataclass(frozen=True)
@@ -88,6 +135,14 @@ class AnswerResult:
     # into a claim about the representation. Empty when the client doesn't
     # report one. See the truncation note in the module docstring.
     stop_reason: str = ""
+    # The reasoning parameters this request actually sent, echoed back so the
+    # audit trail records the regime instead of assuming it. Both are "" today,
+    # meaning "not sent" — which resolves to an actual regime only through
+    # default_thinks(model), so a row needs BOTH these and `model` to be
+    # interpretable. Carried from the client rather than filled in by the runner
+    # so a future client that does send them stays honest for free.
+    effort: str = ""
+    thinking: str = ""
 
 
 class ModelClient(Protocol):
@@ -176,6 +231,11 @@ class AnthropicModelClient:
             cache_read_tokens=cache_read,
             cache_creation_tokens=cache_creation,
             stop_reason=getattr(resp, "stop_reason", "") or "",
+            # Neither parameter is in the create() call above, so both are ""
+            # ("not sent"). Set these from the request if that ever changes —
+            # they are what makes a row's regime readable after the fact.
+            effort="",
+            thinking="",
         )
 
     def count_input_tokens(self, *, model, system, prompt) -> int:

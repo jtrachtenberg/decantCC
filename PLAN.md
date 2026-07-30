@@ -32,6 +32,17 @@ and the banks now hold 52, and `messy-scan`'s decant arms were regenerated
 after it (`6ced6bd`). Every other conversion is byte-intact, so most of those
 450 rows remain reusable via `--resume`.
 
+**These rows are clean — the regime warning on them is a provenance gap, not a
+defect.** Every trail on disk predates regime recording, so a regenerated
+report now carries _"N row(s) predate regime recording and assert nothing about
+how they were measured."_ That is accurate about the *file* and wrong as an
+impression of the *data*: all five trails are `claude-opus-4-8` / `haiku-4-5`
+only, both thinking-off by default, so every row was measured under the one
+regime the harness has ever used. The warning stays as-is deliberately — it
+says what the file can prove rather than what we happen to know, and softening
+it would mean trusting exactly the assumption that stopped holding on Opus 5.
+Rows written from here carry the fields and the warning goes away on its own.
+
 **Three measurement problems block the reduction phase:**
 
 1. **Saturation.** 27 of the 45 baseline questions are perfect on every arm ×

@@ -34,6 +34,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from statistics import mean
 
+from .grading import JUDGE_ERROR_PREFIX
 from .runner import CONTEXT_OVERFLOW
 
 # Below this strong-tier accuracy, a small spread means "uniformly useless", not
@@ -264,6 +265,128 @@ def cost_summary(rows) -> str:
         lines.append(
             f"_WARNING: {uninstrumented} row(s) predate cache-component recording and are "
             "priced as fully uncached. The real figure is lower; treat this as a ceiling._"
+        )
+    return "\n".join(lines)
+
+
+def regime_note(rows) -> str:
+    """A '## Run regime' section: the reasoning configuration each model's rows
+    were measured under, or "" when there is nothing to report.
+
+    Accuracy is only comparable across rows measured the same way. Until Opus 5
+    that was free -- every model the harness ran thought nothing when `thinking`
+    was omitted, so `model` pinned the regime by itself. It no longer does, so
+    the regime rides on the row (runner.Result) and this section states it.
+
+    Three things get flagged, all of which otherwise average in silently:
+      - more than one regime for a single model, which is what --resume across
+        a config change produces (and _cells emits conversion-major, so the
+        split falls on an arm boundary -- a per-arm difference, not noise);
+      - rows predating the fields, which assert nothing about their own regime;
+      - a model that thinks by default, where the arms think different amounts
+        because thinking depth follows the input.
+    """
+    from .models import default_thinks
+
+    if not rows:
+        return ""
+    combos: dict[str, set[tuple[int, str, str]]] = {}
+    uninstrumented: dict[str, int] = {}
+    for r in rows:
+        m = r.model
+        mt = getattr(r, "max_tokens", 0) or 0
+        if mt:
+            combos.setdefault(m, set()).add(
+                (mt, getattr(r, "effort", "") or "", getattr(r, "thinking", "") or "")
+            )
+        else:
+            uninstrumented[m] = uninstrumented.get(m, 0) + 1
+
+    thinkers = sorted({r.model for r in rows if default_thinks(r.model) is True})
+    unclassified = sorted({r.model for r in rows if default_thinks(r.model) is None})
+    mixed = sorted(m for m, c in combos.items() if len(c) > 1)
+    if not (combos or uninstrumented or thinkers or unclassified):
+        return ""
+
+    lines = ["## Run regime", "",
+             "| model | max_tok | effort | thinking | default |",
+             "| --- | --- | --- | --- | --- |"]
+    for m in sorted(set(combos) | set(uninstrumented)):
+        thinks = default_thinks(m)
+        default = {True: "**thinks**", False: "no thinking", None: "**UNKNOWN**"}[thinks]
+        for mt, effort, thinking in sorted(combos.get(m, set())):
+            lines.append(
+                f"| {m} | {mt} | {effort or '(not sent)'} | "
+                f"{thinking or '(not sent)'} | {default} |"
+            )
+        if m in uninstrumented:
+            lines.append(f"| {m} | ? | ? | ? | {default} |")
+    lines.append("")
+    lines.append(
+        "_`(not sent)` means the parameter was omitted, so the regime is the "
+        "model's own default -- see the `default` column. Both columns are "
+        "needed to read a row._"
+    )
+    if mixed:
+        lines.append(
+            f"_WARNING: {', '.join(mixed)} ran under MORE THAN ONE regime in this "
+            "file. Rows measured different ways are averaged together above, and "
+            "`_cells` emits conversion-major, so a resumed run splits on an arm "
+            "boundary -- expect the difference to look like an arm effect. Do not "
+            "compare arms across this file._"
+        )
+    if uninstrumented:
+        total = sum(uninstrumented.values())
+        lines.append(
+            f"_WARNING: {total} row(s) predate regime recording and assert nothing "
+            "about how they were measured. They are only comparable to newer rows "
+            "if the run config never changed -- which this file cannot confirm._"
+        )
+    if thinkers:
+        lines.append(
+            f"_WARNING: {', '.join(thinkers)} "
+            f"{'run' if len(thinkers) > 1 else 'runs'} adaptive thinking when "
+            "`thinking` is omitted. Thinking depth follows the input, so the arms think "
+            "different amounts by construction; thinking also bills as output "
+            "tokens with no separate usage field and is charged against "
+            "max_tokens. Accuracy and the spread are confounded -- see models.py._"
+        )
+    if unclassified:
+        lines.append(
+            f"_WARNING: no thinking-default on file for {', '.join(unclassified)}. "
+            "Whether these rows thought is unknown; classify the model in "
+            "models.py before trusting the numbers._"
+        )
+    return "\n".join(lines)
+
+
+def judge_failure_note(rows) -> str:
+    """A warning listing rows whose score reflects the JUDGE failing rather than
+    the answer being wrong -- an outage, or a verdict cut off at max_tokens.
+
+    Both score 0, because there is no verdict to score, but neither is evidence
+    about the representation. Worse, they are not evenly spread: the judge is
+    reached for `open` questions and as the fallback for `exact` answers that
+    missed a strict match, which is what a *weaker* representation produces. So
+    judge failures land preferentially on the arms that need rescuing, and a
+    silent one flatters the gap. Same reasoning as truncation_note, one layer
+    further in."""
+    hits = [r for r in rows if JUDGE_ERROR_PREFIX in str(getattr(r, "detail", ""))]
+    if not hits:
+        return ""
+    lines = [
+        "## Judge failures",
+        "",
+        f"_WARNING: {len(hits)} of {len(rows)} rows scored 0 because the judge did "
+        "not return a usable verdict, not because the answer was wrong. The judge "
+        "is the rescue path for answers that missed a strict match, so these "
+        "concentrate on the weaker arms and widen the gap. Re-grade them "
+        "(`regrade --judge MODEL`) before reading the scoreboard:_",
+        "",
+    ]
+    for r in hits:
+        lines.append(
+            f"- `{r.case}` / `{r.question_id}` ({r.model}, {r.conversion}): {r.detail}"
         )
     return "\n".join(lines)
 

@@ -23,9 +23,10 @@ from pathlib import Path
 
 from .corpus import load_corpus
 from .models import AnthropicModelClient
+from .models import THINKING_OFF_BY_DEFAULT, default_thinks
 from .report import (
-    build_report, build_source_scores, cost_summary, source_scores_markdown, to_markdown,
-    truncation_note,
+    build_report, build_source_scores, cost_summary, judge_failure_note,
+    regime_note, source_scores_markdown, to_markdown, truncation_note,
 )
 from .runner import CONTROL, load_completed, regrade_rows, run_control, run_corpus
 
@@ -67,11 +68,68 @@ def _assemble_report(rows, *, strong: str, weak: str):
     trunc_md = truncation_note(arena_rows)
     if trunc_md:
         md += "\n\n" + trunc_md
+    # A judge that failed produced a 0 that is not about the representation,
+    # and those land preferentially on the weaker arms — flag before the cost.
+    judge_md = judge_failure_note(arena_rows)
+    if judge_md:
+        md += "\n\n" + judge_md
     # Cost covers every row the run billed, control arm included.
     cost_md = cost_summary(rows)
     if cost_md:
         md += "\n\n" + cost_md
+    # Regime last and over ALL rows: it qualifies every number above it, and a
+    # report that cannot say how it was measured should say so on its face.
+    regime_md = regime_note(rows)
+    if regime_md:
+        md += "\n\n" + regime_md
     return md, arena_rows
+
+
+def _check_models(parser, models: dict, allow_thinking: bool) -> None:
+    """Refuse to bill a run against a model whose reasoning regime isn't the one
+    every published number was measured under.
+
+    `models` maps a flag name to the model it names. The harness sends no
+    `thinking` parameter (models.py), which means thinking-off ONLY on models
+    whose default is off. On Opus 5 / Sonnet 5 / Fable 5 the same omitted
+    parameter runs adaptive thinking, which breaks the arena three ways at
+    once: a strong reader that reasons around a corrupted conversion is the
+    confound the design exists to exclude, thinking depth follows the input so
+    the arms think different amounts, and thinking is charged against
+    --max-tokens alongside the answer.
+
+    An unclassified model is refused too. The alternative is assuming a default
+    for a model nobody checked, which is precisely how this became a problem:
+    the assumption was true for years, stayed written down as though it were a
+    property of the request, and then quietly stopped being true.
+
+    This is a startup error rather than a footnote because the failure is
+    otherwise silent -- no exception, no empty output, just plausible numbers
+    from a different experiment landing in the same JSONL as the old ones."""
+    for flag, model in models.items():
+        if not model:
+            continue
+        thinks = default_thinks(model)
+        if thinks is False:
+            continue
+        if thinks is True and allow_thinking:
+            continue
+        if thinks is True:
+            parser.error(
+                f"{flag} {model!r} runs adaptive thinking when `thinking` is "
+                f"omitted, which this harness relies on NOT happening -- every "
+                f"baseline on disk was measured thinking-off, so its numbers "
+                f"would not be comparable. Use one of: "
+                f"{', '.join(sorted(THINKING_OFF_BY_DEFAULT))}. "
+                f"Pass --allow-thinking-default to run it anyway as a deliberate "
+                f"experiment (the report will flag every affected row)."
+            )
+        parser.error(
+            f"{flag} {model!r} has no thinking-default on file, so whether it "
+            f"would think is unknown and the run's regime is undefined. Add it "
+            f"to THINKING_OFF_BY_DEFAULT or THINKING_ON_BY_DEFAULT in "
+            f"decant_eval/models.py once verified against the model docs."
+        )
 
 
 def _regrade(args) -> int:
@@ -133,6 +191,15 @@ def main(argv=None) -> int:
              "spread is reported (it needs both tiers).",
     )
     run.add_argument(
+        "--allow-thinking-default", action="store_true",
+        help="run a model that thinks by default (Opus 5, Sonnet 5, Fable 5). "
+             "Refused otherwise: the harness sends no `thinking` parameter and "
+             "reads that as thinking-off, which is only true on the older tiers, "
+             "and every baseline on disk was measured that way. Thinking also "
+             "bills as output tokens and eats --max-tokens. The report flags "
+             "every affected row regardless of this flag.",
+    )
+    run.add_argument(
         "--repeats", type=int, default=1, metavar="N",
         help="ask each question N times and average (default 1). Sampling can't "
              "be pinned on the strong tier, so a single sample per cell is one "
@@ -168,11 +235,21 @@ def main(argv=None) -> int:
 
     args = parser.parse_args(argv)
     if args.cmd == "regrade":
+        # Only --judge is billed here; --strong/--weak are labels for the
+        # scoreboard, and validating them would block re-grading a file that
+        # already contains rows from a model we refuse to run.
+        _check_models(parser, {"--judge": args.judge}, allow_thinking=False)
         return _regrade(args)
     if args.cmd != "run":  # pragma: no cover - argparse enforces
         parser.error("unknown command")
     if args.repeats < 1:
         parser.error("--repeats must be at least 1")
+    _check_models(
+        parser,
+        {"--strong": None if args.weak_only else args.strong,
+         "--weak": args.weak, "--judge": args.judge},
+        allow_thinking=args.allow_thinking_default,
+    )
 
     cases = load_corpus(args.corpus, split=args.split)
     client = AnthropicModelClient()
