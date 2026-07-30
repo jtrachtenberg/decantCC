@@ -90,6 +90,24 @@ class Result:
     # pre-status audit trail still load on --resume; load_completed re-derives
     # it for legacy failure rows.
     status: str = ""
+    # The reasoning regime this row was measured under. `model` alone used to
+    # pin it -- every model the harness ran thought nothing when `thinking` was
+    # omitted -- but that stopped being true with Opus 5 (models.py), so the
+    # regime is now recorded rather than inferred. "" means "not sent", which
+    # resolves through models.default_thinks(model); max_tokens 0 means the row
+    # predates this field. All three defaulted so pre-instrumentation trails
+    # still load on --resume, and report.regime_note flags rows carrying the
+    # defaults instead of letting them average in silently.
+    #
+    # These exist for --resume specifically: rows already written are carried
+    # over untouched, so a file that spans a config change holds two regimes at
+    # once. That is the same hazard regrade_rows exists to repair for the
+    # grader, and _cells emits conversion-major, so an interrupted-and-resumed
+    # run splits cleanly ON an arm boundary -- the config change lands as a
+    # per-arm difference, which is the shape of a confound rather than noise.
+    max_tokens: int = 0
+    effort: str = ""
+    thinking: str = ""
 
 
 def _key(case: str, conversion: str, model: str, question_id: str, repeat: int = 0):
@@ -217,6 +235,10 @@ def run_case(
                 in_tok, out_tok = 0, 0
                 cache_read = cache_creation = 0
                 truncated = False
+                # The call failed, so there is no response to read the regime
+                # back from. The request was still built the same way, so the
+                # row carries the client's defaults rather than a false blank.
+                effort, thinking = "", ""
             else:
                 status = ""
                 correct, score, detail = grade(
@@ -227,6 +249,8 @@ def run_case(
                 cache_read = res.cache_read_tokens
                 cache_creation = res.cache_creation_tokens
                 truncated = _truncated(res)
+                effort = getattr(res, "effort", "")
+                thinking = getattr(res, "thinking", "")
                 if truncated:
                     detail = f"truncated (max_tokens): {detail}"[:200]
             row = Result(
@@ -247,6 +271,9 @@ def run_case(
                 cache_read_tokens=cache_read,
                 cache_creation_tokens=cache_creation,
                 status=status,
+                max_tokens=max_tokens,
+                effort=effort,
+                thinking=thinking,
             )
             rows.append(row)
             if sink is not None:
@@ -352,5 +379,8 @@ def run_control(
                 answer=res.text, detail=detail, source=q.source, truncated=truncated,
                 cache_read_tokens=res.cache_read_tokens,
                 cache_creation_tokens=res.cache_creation_tokens,
+                max_tokens=max_tokens,
+                effort=getattr(res, "effort", ""),
+                thinking=getattr(res, "thinking", ""),
             ))
     return rows

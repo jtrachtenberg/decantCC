@@ -295,6 +295,20 @@ def _grade_ordered_list(answer: str, gold):
     return score == 1.0, score, f"{hits}/{len(items)} items present in order"
 
 
+# Marks a detail string whose score reflects the judge failing, not the answer
+# being wrong. Both failure modes score 0 -- there is no verdict to score --
+# but they are not evidence about the representation, so report.judge_failure_note
+# surfaces them rather than letting them sit in the mean as graded zeros.
+JUDGE_ERROR_PREFIX = "judge error:"
+
+# Verdict budget. The reply is a one-line JSON object, so 256 was ample for a
+# model that answers immediately; it is *not* ample for one that thinks first,
+# because thinking is charged against max_tokens and emits no visible text. The
+# harness refuses thinking-by-default models (cli.py), so this is headroom
+# rather than a fix -- paired with the stop_reason check below, which is what
+# actually makes the failure visible.
+_JUDGE_MAX_TOKENS = 1024
+
 _JUDGE_SYSTEM = (
     "You are a strict grader. Given a QUESTION, the GOLD answer, and a CANDIDATE "
     "answer, decide whether the candidate conveys the same factual content as the "
@@ -312,9 +326,23 @@ def _grade_open(answer: str, gold, question: str, judge, judge_model: str):
         "Respond with the JSON object only."
     )
     try:
-        res = judge.answer(model=judge_model, system=_JUDGE_SYSTEM, prompt=prompt, max_tokens=256)
+        res = judge.answer(
+            model=judge_model, system=_JUDGE_SYSTEM, prompt=prompt,
+            max_tokens=_JUDGE_MAX_TOKENS,
+        )
     except Exception as exc:  # a judge outage must not crash a 400-question run
-        return False, 0.0, f"judge error: {type(exc).__name__}: {exc}"
+        return False, 0.0, f"{JUDGE_ERROR_PREFIX} {type(exc).__name__}: {exc}"
+    # A judge cut off before it finished the JSON leaves _parse_verdict nothing
+    # to parse, and its no-guessing rule then returns a hard `incorrect`. That
+    # is a budget artifact scored as a wrong answer -- the exact confusion
+    # runner._truncated exists to prevent on the answer path, which never
+    # covered this one because _grade_open discarded stop_reason. Report it as
+    # a judge failure so it lands in the report instead of in the mean.
+    if getattr(res, "stop_reason", "") == "max_tokens":
+        return False, 0.0, (
+            f"{JUDGE_ERROR_PREFIX} verdict truncated at max_tokens="
+            f"{_JUDGE_MAX_TOKENS} -- not a graded verdict"
+        )
     verdict, reason = _parse_verdict(res.text)
     score = {"correct": 1.0, "partial": 0.5, "incorrect": 0.0}.get(verdict, 0.0)
     return score == 1.0, score, f"judge: {verdict} - {reason}"
