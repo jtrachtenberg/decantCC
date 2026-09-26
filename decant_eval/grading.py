@@ -6,8 +6,10 @@ treacherous-degradation problem the eval exists to measure — and fall back to
 an LLM judge only where wording genuinely varies.
 
     numeric       the answer's number vs. gold, within tolerance
-    exact         normalized equality (or barely-longer containment); else the judge
-    set           every gold item present as a whole word — score = fraction
+    exact         normalized equality (or barely-longer, whole-word, un-negated
+                  containment); else the judge
+    set           every gold item present as a whole word and not negated —
+                  score = fraction present x precision over extra listed items
     ordered_list  like set, but each item must appear *after* the previous one
     open          LLM judge → correct / partial / incorrect
 
@@ -24,7 +26,12 @@ conversions and inverted the signal the harness measures. The fixes:
     quoting a source verbatim were scored "no number in answer" otherwise.
   - exact is equality, or containment only when the answer barely exceeds the
     gold; anything longer routes to the judge (when one is configured).
-  - set matches on word boundaries, so gold "ship" is not found in "shipping".
+  - set matches on word boundaries, so gold "ship" is not found in "shipping";
+    an item inside a negation ("does not apply GRI") is not credited, and
+    every extra item listed alongside the gold ones costs precision, so a
+    kitchen-sink list of everything plausible cannot score like knowledge.
+  - hyphens/dashes/slashes joining letters are spaced on both sides, so
+    "long-term" and "long term" grade the same.
   - the judge parser never keyword-guesses: an unparseable verdict is a logged
     incorrect, so "not correct" can't be read as "correct".
 
@@ -358,6 +365,45 @@ def _grade_numeric(answer: str, gold, tolerance: float, sign_insensitive: bool =
     return False, 0.0, f"answer {n} not within +/-{tolerance} of {target}"
 
 
+# Words that negate the list item or entity following them within a few
+# tokens ("does not apply GRI or SASB", "non-market"). The scope stops at a
+# sentence end or a contrast word, so "does not use SASB but applies GRI"
+# still credits GRI, and "not only X" still credits X.
+_ITEM_NEGATORS = frozenset({
+    "not", "no", "never", "neither", "nor", "except", "excluding", "without",
+    "non", "cannot", "doesn", "don", "didn", "isn", "aren", "wasn", "weren",
+    "hasn", "haven",
+})
+_NEGATION_STOP = frozenset({
+    "but", "however", "instead", "although", "though", "while", "whereas",
+    "yet", "only", "rather",
+})
+_NEGATION_WINDOW = 5
+
+
+def _negated_at(norm_text: str, start: int) -> bool:
+    """True when the match starting at `start` in `norm_text` (a _norm'd
+    string) falls in a negation scope."""
+    toks = norm_text[:start].split()[-_NEGATION_WINDOW:]
+    for t in reversed(toks):
+        if t.endswith("."):  # sentence boundary right before this point
+            return False
+        if t in _NEGATION_STOP:
+            return False
+        if t in _ITEM_NEGATORS:
+            return True
+    return False
+
+
+def _find_unnegated(pattern: re.Pattern, text: str, pos: int = 0):
+    """The first match of `pattern` in `text` at or after `pos` that is not
+    inside a negation scope, or None."""
+    for m in pattern.finditer(text, pos):
+        if not _negated_at(text, m.start()):
+            return m
+    return None
+
+
 def _grade_exact(answer: str, gold, *, question=None, judge=None, judge_model=""):
     g = _norm(gold)
     if not g:
@@ -365,37 +411,126 @@ def _grade_exact(answer: str, gold, *, question=None, judge=None, judge_model=""
     a = _norm(_short_answer(answer))
     if a == g:
         return True, 1.0, "exact match"
-    if g in a and len(a) - len(g) <= _EXACT_SLACK:
+    # Containment is whole-token ("Marketing" is not gold "market") and not
+    # negated ("Not KPMG", "non-market").
+    if len(a) - len(g) <= _EXACT_SLACK and _find_unnegated(_boundary(g), a):
         return True, 1.0, "answer contains gold (barely longer)"
     if judge is not None and question is not None:
         return _grade_open(answer, gold, question, judge, judge_model)
     return False, 0.0, "answer does not match gold"
 
 
+# A markdown bullet or enumerator opening a line ("- GRI", "2. Assess").
+_LIST_LINE = re.compile(r"^\s*(?:[-*+•]|\d{1,2}[.)])\s+")
+# Separators between items inside one sentence or bullet.
+_ITEM_SPLIT = re.compile(r"[,;]|\s(?:and|or|&)\s|\s&\s", re.IGNORECASE)
+_SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
+# An unmatched segment this short is a listed item; a longer one is prose
+# (a lead-in or a remark), which is not evidence of a padded list.
+_EXTRA_ITEM_MAX_WORDS = 4
+_FILLER_SEGMENTS = frozenset({
+    "", "etc", "and more", "and others", "among others", "others", "respectively",
+    "and", "or",
+})
+
+
+def _answer_units(answer: str) -> list[list[str]]:
+    """The answer as units of raw item text: a run of bullet lines is one unit
+    (one item per bullet), and each prose sentence is one unit."""
+    units: list[list[str]] = []
+    bullets: list[str] = []
+    for line in str(answer).splitlines():
+        if _LIST_LINE.match(line):
+            bullets.append(_LIST_LINE.sub("", line))
+            continue
+        if bullets:
+            units.append(bullets)
+            bullets = []
+        for sentence in _SENTENCE_SPLIT.split(line):
+            if sentence.strip():
+                units.append([sentence])
+    if bullets:
+        units.append(bullets)
+    return units
+
+
+def _extra_items(answer: str, golds: list[str]) -> int:
+    """How many listed items match no gold anchor -- the precision term.
+
+    Only units that credit at least one gold item count: a sentence with no
+    hit is commentary, not the list. Within such a unit, each item that is
+    neither a gold anchor nor part of one, and is short enough to be an item
+    rather than prose, is an extra. A kitchen-sink answer ("arsenic, cadmium,
+    copper, lead, zinc, chromium, ...") pays for every guessed item."""
+    patterns = [_boundary(g) for g in golds]
+    extras = 0
+    for unit in _answer_units(answer):
+        norm_unit = _norm(" ".join(unit))
+        if not any(_find_unnegated(p, norm_unit) for p in patterns):
+            continue
+        for chunk in unit:
+            # A parenthetical glosses the item before it ("long term (MT,
+            # LT)"); its contents are not further items.
+            chunk = re.sub(r"\([^)]*\)", " ", chunk)
+            for raw in _ITEM_SPLIT.split(chunk):
+                seg = _norm(raw).strip(" .")
+                seg = re.sub(r"^(?:and|or)\s+", "", seg)
+                if seg in _FILLER_SEGMENTS:
+                    continue
+                if any(p.search(seg) for p in patterns):
+                    continue
+                if any(_boundary(seg).search(g) for g in golds):
+                    continue  # a fragment of an anchor split on its own comma
+                if len(seg.split()) <= _EXTRA_ITEM_MAX_WORDS:
+                    extras += 1
+    return extras
+
+
+def _list_score(answer: str, golds: list[str], hits: int, total: int):
+    """Recall x precision. Recall is the fraction of gold items credited;
+    precision is credited items over credited-plus-extra items, so an answer
+    that lists everything plausible cannot score like one that knew."""
+    recall = hits / total if total else 0.0
+    extras = _extra_items(answer, golds) if hits else 0
+    precision = hits / (hits + extras) if hits else 0.0
+    return recall * precision, extras
+
+
 def _grade_set(answer: str, gold):
+    """Fraction of gold items present as whole words and not negated, times a
+    precision factor for extra listed items (see _list_score)."""
     items = list(gold) if isinstance(gold, (list, tuple)) else [gold]
+    golds = [_norm(g) for g in items if _norm(g)]
     a = _norm(answer)
-    hits = [g for g in items if _norm(g) and _boundary(_norm(g)).search(a)]
-    score = len(hits) / len(items) if items else 0.0
-    return score == 1.0, score, f"{len(hits)}/{len(items)} items present"
+    hits = [g for g in golds if _find_unnegated(_boundary(g), a)]
+    score, extras = _list_score(answer, golds, len(hits), len(items))
+    detail = f"{len(hits)}/{len(items)} items present"
+    if extras:
+        detail += f"; {extras} extra item(s) listed"
+    return score == 1.0, score, detail
 
 
 def _grade_ordered_list(answer: str, gold):
-    """Each gold item must appear (whole-token) after the previous item's match,
-    so a correct list in the wrong order scores as misses from the first
-    out-of-place item onward. Score = fraction matched in sequence."""
+    """Each gold item must appear (whole-token, not negated) after the previous
+    item's match, so a correct list in the wrong order scores as misses from
+    the first out-of-place item onward. Score = fraction matched in sequence,
+    times the same extra-item precision factor as set."""
     items = list(gold) if isinstance(gold, (list, tuple)) else [gold]
+    golds = [_norm(g) for g in items if _norm(g)]
     a = _norm(answer)
     pos = 0
     hits = 0
     for g in items:
         ng = _norm(g)
-        m = _boundary(ng).search(a, pos) if ng else None
+        m = _find_unnegated(_boundary(ng), a, pos) if ng else None
         if m:
             hits += 1
             pos = m.end()
-    score = hits / len(items) if items else 0.0
-    return score == 1.0, score, f"{hits}/{len(items)} items present in order"
+    score, extras = _list_score(answer, golds, hits, len(items))
+    detail = f"{hits}/{len(items)} items present in order"
+    if extras:
+        detail += f"; {extras} extra item(s) listed"
+    return score == 1.0, score, detail
 
 
 # Marks a detail string whose score reflects the judge failing, not the answer

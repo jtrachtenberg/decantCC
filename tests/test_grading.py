@@ -382,6 +382,79 @@ class TestHyphenNormalization(unittest.TestCase):
         self.assertFalse(grade(q("exact", "410-772-5291"), "410 772 5291")[0])
 
 
+class TestListPrecisionAndNegation(unittest.TestCase):
+    """B3: set/ordered_list read the whole response with no negation handling
+    and no precision term, so a negated or kitchen-sink list scored 1.0."""
+
+    def test_negated_items_are_not_credited(self):
+        ok, score, _ = grade(q("set", ["GRI", "SASB", "TCFD"]),
+                             "The report applies TCFD. It does not apply GRI or SASB.")
+        self.assertFalse(ok)
+        self.assertAlmostEqual(score, 1 / 3)
+
+    def test_kitchen_sink_list_is_penalized(self):
+        ok, score, detail = grade(
+            q("set", ["arsenic", "cadmium", "copper"]),
+            "Possibly arsenic, cadmium, copper, lead, zinc, chromium, selenium, "
+            "nickel (the document is garbled).")
+        self.assertFalse(ok)
+        self.assertLess(score, 0.5)
+        self.assertIn("extra", detail)
+
+    def test_negation_scope_stops_at_contrast_and_sentence_end(self):
+        self.assertEqual(grade(q("set", ["GRI", "SASB", "TCFD"]),
+                               "The report does not use ISSB but applies GRI, SASB and TCFD.")[1], 1.0)
+        self.assertEqual(grade(q("set", ["GRI", "TCFD"]),
+                               "It does not apply SASB. GRI and TCFD are applied.")[1], 1.0)
+
+    def test_legitimate_list_shapes_keep_full_credit(self):
+        utilities = ["fuel oil", "coal", "electricity", "gas", "water", "sewer"]
+        for ans in (
+            "The Utilities Expenses line items are:\n- Fuel oil\n- Coal\n- Electricity\n"
+            "- Gas\n- Water\n- Sewer",
+            "Fuel oil, coal, electricity, gas, water and sewer.\nSee page 12.",
+        ):
+            self.assertEqual(grade(q("set", utilities), ans)[1], 1.0, ans)
+        # An anchor containing its own comma is not split into extra items.
+        self.assertEqual(grade(
+            q("set", ["reviewing capital expenditure, acquisitions and divestiture"]),
+            "Reviewing capital expenditure, acquisitions and divestiture")[1], 1.0)
+        # A parenthetical gloss is not a further item.
+        self.assertEqual(grade(q("set", ["medium", "long term"]),
+                               "Medium and long term (MT, LT).")[1], 1.0)
+
+    def test_one_extra_item_costs_its_share(self):
+        _, score, _ = grade(q("set", ["GRI", "SASB", "TCFD"]), "GRI, SASB, TCFD, and ISSB")
+        self.assertAlmostEqual(score, 3 / 4)
+
+    def test_ordered_list_skips_negated_and_penalizes_extras(self):
+        gold = ["Identify", "Assess", "Treat", "Report", "Monitor"]
+        self.assertEqual(grade(q("ordered_list", gold),
+                               "1. Identify\n2. Assess\n3. Treat\n4. Report\n5. Monitor")[1], 1.0)
+        _, score, _ = grade(q("ordered_list", gold),
+                            "Identify, assess, treat, report, monitor, escalate, audit")
+        self.assertAlmostEqual(score, 5 / 7)
+        _, score, _ = grade(q("ordered_list", ["Identify", "Assess"]),
+                            "Not identify first. Assess, then identify.")
+        self.assertAlmostEqual(score, 0.5)
+
+
+class TestExactBoundaryAndNegation(unittest.TestCase):
+    """B9: exact containment was a raw substring test."""
+
+    def test_substring_of_a_word_is_not_a_match(self):
+        self.assertFalse(grade(q("exact", "market"), "Marketing")[0])
+
+    def test_negated_entity_is_not_a_match(self):
+        self.assertFalse(grade(q("exact", "market"), "Not market")[0])
+        self.assertFalse(grade(q("exact", "market"), "non-market")[0])
+        self.assertFalse(grade(q("exact", "KPMG"), "Not KPMG")[0])
+
+    def test_barely_longer_whole_word_still_passes(self):
+        self.assertTrue(grade(q("exact", "KPMG"), "KPMG LLP")[0])
+        self.assertTrue(grade(q("exact", "market"), "Market risk")[0])
+
+
 class TestNumericExtraction(unittest.TestCase):
     """B5 (2026-09 code review): digits inside words, range dashes, chained
     labels, and comma-joined digits were read as the answer. The corpus is
