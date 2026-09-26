@@ -17,8 +17,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
-from dataclasses import asdict
+import tempfile
+from dataclasses import asdict, replace
 from pathlib import Path
 
 from .corpus import load_corpus
@@ -26,33 +28,39 @@ from .models import AnthropicModelClient
 from .models import THINKING_OFF_BY_DEFAULT, default_thinks
 from .report import (
     build_report, build_source_scores, cost_summary, judge_failure_note,
-    regime_note, source_scores_markdown, to_markdown, truncation_note,
+    regime_note, source_scores_markdown, stale_rows_note, to_markdown,
+    truncation_note,
 )
-from .runner import CONTROL, load_completed, regrade_rows, run_control, run_corpus
+from .runner import (
+    CONTROL, RAW, _arena_entries, current_rows, load_completed, regrade_rows,
+    run_control, run_corpus,
+)
 
 
 def _control_note(control_rows) -> str:
-    """A short section flagging questions answered from memory (no document)."""
-    memorized = [r for r in control_rows if r.correct]
+    """A short section flagging questions answered from memory (no document).
+    Any credit counts, not just a full score: a set question answered 2/3
+    from memory is two-thirds contaminated."""
+    memorized = [r for r in control_rows if r.score > 0]
     lines = ["", "## Memory-contamination control", ""]
     if not memorized:
         lines.append(
-            "_No question was answered correctly with no document — the arena scores "
+            "_No question earned any credit with no document — the arena scores "
             "reflect the representation, not the model's prior knowledge._"
         )
     else:
         lines.append(
-            f"_{len(memorized)} of {len(control_rows)} question x model runs were answered "
-            "correctly with NO document -- those answers come from training data, so a "
+            f"_{len(memorized)} of {len(control_rows)} question x model runs earned credit "
+            "with NO document -- those answers come from training data, so a "
             "conversion 'transferring' them proves nothing. Discount or exclude them:_"
         )
         lines.append("")
         for r in memorized:
-            lines.append(f"- `{r.case}` / `{r.question_id}` ({r.model})")
+            lines.append(f"- `{r.case}` / `{r.question_id}` ({r.model}, score {r.score:.2f})")
     return "\n".join(lines)
 
 
-def _assemble_report(rows, *, strong: str, weak: str):
+def _assemble_report(rows, *, strong: str, weak: str, counts: dict | None = None):
     """The full markdown report for `rows`, and the arena subset it ranked.
 
     Shared by `run` and `regrade` so a re-graded report is the same document as
@@ -62,6 +70,9 @@ def _assemble_report(rows, *, strong: str, weak: str):
     arena_rows = [r for r in rows if r.conversion != CONTROL]
     report = build_report(arena_rows, strong=strong, weak=weak)
     md = to_markdown(report)
+    stale_md = stale_rows_note(counts or {})
+    if stale_md:
+        md += "\n\n" + stale_md
     source_md = source_scores_markdown(build_source_scores(arena_rows), report.models)
     if source_md:
         md += "\n\n" + source_md
@@ -73,7 +84,7 @@ def _assemble_report(rows, *, strong: str, weak: str):
     judge_md = judge_failure_note(arena_rows)
     if judge_md:
         md += "\n\n" + judge_md
-    # Cost covers every row the run billed, control arm included.
+    # Cost covers every row passed in, control arm and judge calls included.
     cost_md = cost_summary(rows)
     if cost_md:
         md += "\n\n" + cost_md
@@ -132,9 +143,60 @@ def _check_models(parser, models: dict, allow_thinking: bool) -> None:
         )
 
 
-def _regrade(args) -> int:
+def _without_arms(cases, exclude):
+    """`cases` with the named conversions removed (see --exclude-arm)."""
+    if not exclude:
+        return cases
+    out = []
+    for c in cases:
+        convs = {k: v for k, v in c.conversions.items() if k not in exclude}
+        comps = {k: v for k, v in c.companions.items() if k in convs}
+        out.append(replace(c, conversions=convs, companions=comps))
+    return out
+
+
+def _partial_arms(cases, raw_arena: bool):
+    """(arm -> number of cases it appears in, for arms missing from some case;
+    number of cases every arm shares)."""
+    by_case = {c.name: {name for name, _ in _arena_entries(c, raw_arena=raw_arena)}
+               for c in cases}
+    arms = set().union(*by_case.values()) if by_case else set()
+    counts = {a: sum(a in v for v in by_case.values()) for a in arms}
+    common = sum(1 for v in by_case.values() if arms <= v)
+    return {a: n for a, n in counts.items() if n < len(cases)}, common
+
+
+def _write_atomic(path, text: str) -> None:
+    """Write via a temp file + rename, so a crash never leaves a half file."""
+    path = Path(path)
+    fd, tmp = tempfile.mkstemp(dir=path.parent or ".", prefix=f".{path.name}.")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            fh.write(text)
+        os.replace(tmp, path)
+    except BaseException:
+        Path(tmp).unlink(missing_ok=True)
+        raise
+
+
+def _regrade(parser, args) -> int:
     """Re-grade an audit trail against the current graders and questions."""
-    cases = load_corpus(args.corpus, split=args.split)
+    out_rows = args.out_rows or f"{args.out}.jsonl"
+    # The input trail is the record of what the run actually returned; the
+    # natural `--rows report.md.jsonl --out report.md` used to overwrite it.
+    if Path(out_rows).resolve() == Path(args.rows).resolve():
+        parser.error(
+            f"the re-graded rows would overwrite the input trail {args.rows}; "
+            f"pass --out-rows (or a different --out) so the original is kept"
+        )
+    try:
+        cases = load_corpus(args.corpus, split=args.split)
+    except ValueError as exc:
+        if "no cases found" not in str(exc):
+            raise
+        print(f"{exc} for --split {args.split}: nothing to re-grade")
+        return 1
+    cases = _without_arms(cases, set(args.exclude_arm or ()))
     rows, _ = load_completed(args.rows)
     if not rows:
         print(f"{args.rows}: no rows to re-grade")
@@ -144,13 +206,15 @@ def _regrade(args) -> int:
     new_rows, changed, skipped = regrade_rows(
         rows, cases, judge=judge, judge_model=args.judge or "")
 
-    out_rows = args.out_rows or f"{args.out}.jsonl"
-    with open(out_rows, "w", encoding="utf-8") as fh:
-        for r in new_rows:
-            fh.write(json.dumps(asdict(r), ensure_ascii=True) + "\n")
+    # Every row is kept in the re-graded trail; only rows that measure the
+    # current corpus/split (and today's files) reach the report.
+    _write_atomic(out_rows, "".join(
+        json.dumps(asdict(r), ensure_ascii=True) + "\n" for r in new_rows))
+    scored, counts = current_rows(new_rows, cases)
 
-    md, arena_rows = _assemble_report(new_rows, strong=args.strong, weak=args.weak)
-    Path(args.out).write_text(md, encoding="utf-8")
+    md, arena_rows = _assemble_report(scored, strong=args.strong, weak=args.weak,
+                                      counts=counts)
+    _write_atomic(args.out, md)
     print(md)
     print(f"\nRe-graded {len(rows)} row(s): {changed} verdict(s) changed.")
     if skipped:
@@ -169,7 +233,13 @@ def main(argv=None) -> int:
     run.add_argument("--corpus", required=True, help="corpus directory")
     run.add_argument("--strong", default="claude-opus-4-8", help="strong target model")
     run.add_argument("--weak", default="claude-haiku-4-5", help="weak target model")
-    run.add_argument("--judge", default="claude-opus-4-8", help="judge model for open questions")
+    run.add_argument(
+        "--judge", default="claude-opus-4-8",
+        help="judge model for open questions and exact misses (default "
+             "claude-opus-4-8). The default is also the default strong tier, so "
+             "it grades its own answers -- pass a model outside both target "
+             "tiers to avoid self-preference bias.",
+    )
     run.add_argument("--out", default="report.md", help="output markdown path")
     run.add_argument("--rows", default=None, help="JSONL audit trail (default <out>.jsonl)")
     run.add_argument("--resume", action="store_true", help="continue from an existing --rows file")
@@ -200,6 +270,17 @@ def main(argv=None) -> int:
              "every affected row regardless of this flag.",
     )
     run.add_argument(
+        "--exclude-arm", action="append", metavar="NAME",
+        help="leave a conversion (or `raw`) out of the run; repeatable. For a "
+             "diagnostic arm present in only some cases, which would otherwise "
+             "shrink the scoreboard to the cases it appears in.",
+    )
+    run.add_argument(
+        "--allow-partial-arms", action="store_true",
+        help="run even though some arm is missing from so many cases that the "
+             "scoreboard would cover fewer than half of them (refused otherwise).",
+    )
+    run.add_argument(
         "--repeats", type=int, default=1, metavar="N",
         help="ask each question N times and average (default 1). Sampling can't "
              "be pinned on the strong tier, so a single sample per cell is one "
@@ -222,7 +303,12 @@ def main(argv=None) -> int:
     rg.add_argument(
         "--out-rows", default=None,
         help="re-graded JSONL (default <out>.jsonl). The input file is never "
-             "modified — it is the record of what the run actually returned.",
+             "modified — it is the record of what the run actually returned — "
+             "so a path that resolves to --rows is refused.",
+    )
+    rg.add_argument(
+        "--exclude-arm", action="append", metavar="NAME",
+        help="leave a conversion (or `raw`) out of the report; repeatable.",
     )
     rg.add_argument("--strong", default="claude-opus-4-8")
     rg.add_argument("--weak", default="claude-haiku-4-5")
@@ -239,7 +325,7 @@ def main(argv=None) -> int:
         # scoreboard, and validating them would block re-grading a file that
         # already contains rows from a model we refuse to run.
         _check_models(parser, {"--judge": args.judge}, allow_thinking=False)
-        return _regrade(args)
+        return _regrade(parser, args)
     if args.cmd != "run":  # pragma: no cover - argparse enforces
         parser.error("unknown command")
     if args.repeats < 1:
@@ -251,11 +337,34 @@ def main(argv=None) -> int:
         allow_thinking=args.allow_thinking_default,
     )
 
-    cases = load_corpus(args.corpus, split=args.split)
-    client = AnthropicModelClient()
+    exclude = set(args.exclude_arm or ())
+    raw_arena = not args.no_raw and RAW not in exclude
+    cases = _without_arms(load_corpus(args.corpus, split=args.split), exclude)
+    empty = [c.name for c in cases if not c.conversions and not raw_arena]
+    if empty:
+        parser.error(f"--exclude-arm leaves no arm in: {', '.join(empty)}")
+    # Refuse BEFORE billing a run whose scoreboard would cover a minority of
+    # the cases: the common-case rule drops every case a partial arm lacks.
+    partial, common = _partial_arms(cases, raw_arena)
+    if partial and common * 2 < len(cases) and not args.allow_partial_arms:
+        names = ", ".join(f"{a} ({n}/{len(cases)} cases)" for a, n in sorted(partial.items()))
+        parser.error(
+            f"the scoreboard would be scored on {common} of {len(cases)} cases, "
+            f"because these arms are missing from the rest: {names}. Pass "
+            f"--exclude-arm NAME for a diagnostic arm (run it on its own case "
+            f"separately), or --allow-partial-arms to run anyway."
+        )
     models = [args.weak] if args.weak_only else [args.strong, args.weak]
     rows_path = args.rows or f"{args.out}.jsonl"
+    if not args.resume and Path(rows_path).exists() and Path(rows_path).stat().st_size:
+        parser.error(
+            f"{rows_path} already holds rows; pass --resume to continue it, or "
+            f"--rows NEW.jsonl for a fresh run (appending would double-count "
+            f"every cell the two runs share)"
+        )
+    client = AnthropicModelClient()
 
+    counts: dict = {}
     rows = run_corpus(
         cases,
         client=client,
@@ -264,23 +373,35 @@ def main(argv=None) -> int:
         judge_model=args.judge,
         max_tokens=args.max_tokens,
         repeats=args.repeats,
-        raw_arena=not args.no_raw,
+        raw_arena=raw_arena,
         jsonl_path=rows_path,
         resume=args.resume,
+        stats=counts,
     )
-    md, arena_rows = _assemble_report(rows, strong=args.strong, weak=args.weak)
+    md, arena_rows = _assemble_report(rows, strong=args.strong, weak=args.weak,
+                                      counts=counts)
+    # Write the arena report before the control arm: an error there must not
+    # discard a finished (and paid-for) arena.
+    _write_atomic(args.out, md)
 
     if not args.no_control:
-        control_rows = []
+        prior_control = [r for r in rows if r.conversion == CONTROL]
+        done = {(r.case, r.conversion, r.model, r.question_id, r.repeat)
+                for r in prior_control}
+        new_control = []
         for case in cases:
-            control_rows.extend(
+            new_control.extend(
                 run_control(case, client=client, models=models,
                             judge=client, judge_model=args.judge,
-                            max_tokens=args.max_tokens)
+                            max_tokens=args.max_tokens,
+                            jsonl_path=rows_path, done=done)
             )
-        md += "\n" + _control_note(control_rows)
+        # Re-assemble so the cost table and regime cover the control arm too.
+        md, arena_rows = _assemble_report(
+            rows + new_control, strong=args.strong, weak=args.weak, counts=counts)
+        md += "\n" + _control_note(prior_control + new_control)
+        _write_atomic(args.out, md)
 
-    Path(args.out).write_text(md, encoding="utf-8")
     print(md)
     print(f"\nWrote {args.out} ({len(arena_rows)} rows across {len(cases)} case(s)); "
           f"audit trail {rows_path}.")

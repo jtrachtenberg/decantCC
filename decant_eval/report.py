@@ -35,7 +35,8 @@ from dataclasses import dataclass, field
 from statistics import mean
 
 from .grading import JUDGE_ERROR_PREFIX
-from .runner import CONTEXT_OVERFLOW
+from .models import base_model
+from .runner import CONTEXT_OVERFLOW, PDF_TOO_MANY_PAGES, REFUSAL, REQUEST_TOO_LARGE
 
 # Below this strong-tier accuracy, a small spread means "uniformly useless", not
 # "robust" — so the spread is flagged rather than read as a virtue.
@@ -45,6 +46,9 @@ SPREAD_ACCURACY_FLOOR = 0.25
 # to the raw value with underscores spaced.
 _FAILURE_REASONS = {
     CONTEXT_OVERFLOW: "document does not fit the model's context window",
+    PDF_TOO_MANY_PAGES: "PDF exceeds the per-request page limit",
+    REQUEST_TOO_LARGE: "request exceeds the API's size limit",
+    REFUSAL: "the model declined (refusal), so the answer was not graded",
 }
 
 
@@ -74,6 +78,11 @@ class Report:
     # Tier the ranking and the cost column read from — `strong`, except on a run
     # that had no strong tier (weak-only), where it is the tier that did run.
     rank_model: str | None = None
+    # conversion -> number of cases it appears in, for conversions missing from
+    # at least one case: the arms that shrink the common-case set.
+    partial_conversions: dict[str, int] = field(default_factory=dict)
+    n_all_cases: int = 0
+    floor: float = SPREAD_ACCURACY_FLOOR
 
 
 def build_report(
@@ -92,6 +101,10 @@ def build_report(
     common = set(all_cases)
     for cases in cases_by_conv.values():
         common &= cases
+    partial = {
+        conv: len(cases) for conv, cases in cases_by_conv.items()
+        if len(cases) < len(all_cases)
+    }
     comparable = bool(common)
     scoring_cases = common if comparable else set(all_cases)
     excluded = sorted(set(all_cases) - scoring_cases)
@@ -105,7 +118,13 @@ def build_report(
             mr = [r for r in conv_rows if r.model == model]
             if mr:
                 cs.accuracy[model] = mean(r.score for r in mr)
-                cs.cost_by_model[model] = mean(r.input_tokens for r in mr)
+                # Token weight over calls that reported usage: a call that
+                # failed before reading the document (context overflow) bills
+                # 0 tokens, and averaging those in made an arm that never fit
+                # look light. None when every call failed.
+                billed = [r.input_tokens for r in mr if r.input_tokens > 0]
+                if billed:
+                    cs.cost_by_model[model] = mean(billed)
                 failed = [r for r in mr if getattr(r, "status", "")]
                 if failed:
                     statuses = tuple(sorted({r.status for r in failed}))
@@ -129,14 +148,18 @@ def build_report(
         has_rank = rank_model in cs.accuracy
         acc = cs.accuracy.get(rank_model, 0.0)
         cost = cs.cost_by_model.get(rank_model, float("inf"))
-        spread = cs.spread if (cs.spread is not None and cs.spread_reliable) else float("inf")
+        # A negative spread (weak beat strong) is noise, not extra robustness,
+        # so it ties with 0 rather than ranking ahead of it.
+        spread = max(cs.spread, 0.0) if (cs.spread is not None and cs.spread_reliable) \
+            else float("inf")
         return (0 if has_rank else 1, -acc, cost, spread)
 
     scores.sort(key=key)
     return Report(
         scores=scores, strong=strong, weak=weak, models=models,
         common_cases=sorted(scoring_cases), excluded_cases=excluded, comparable=comparable,
-        rank_model=rank_model,
+        rank_model=rank_model, partial_conversions=partial, n_all_cases=len(all_cases),
+        floor=floor,
     )
 
 
@@ -195,19 +218,36 @@ def source_scores_markdown(scores: list[SourceScore], models: list[str]) -> str:
     return "\n".join(lines)
 
 
-# Per-million-token list prices, USD. Cached 2026-07-24 — verify against
+# Per-million-token list prices, USD, keyed by alias (a dated snapshot prices
+# as its alias). Cached 2026-09 — verify against
 # platform.claude.com/docs/en/pricing before quoting a figure that matters.
 PRICES = {
+    "claude-opus-4-6": (5.00, 25.00),
+    "claude-opus-4-7": (5.00, 25.00),
     "claude-opus-4-8": (5.00, 25.00),
     "claude-opus-5": (5.00, 25.00),
-    "claude-sonnet-5": (3.00, 15.00),
+    "claude-opus-5-5": (4.00, 20.00),
+    "claude-fable-5": (10.00, 50.00),
+    "claude-fable-5-1": (10.00, 50.00),
+    "claude-sonnet-4-6": (3.00, 15.00),
+    "claude-sonnet-5": (2.00, 10.00),
     "claude-haiku-4-5": (1.00, 5.00),
 }
 
 # Cache multipliers on the base input price: a read is ~0.1x, a write ~1.25x at
-# the 5-minute TTL the harness uses (models.py sets no explicit ttl).
+# the 5-minute TTL the harness uses (models.py sets no explicit ttl). Reads are
+# cheaper on some models; CACHE_READ_BY_MODEL overrides the default.
 CACHE_READ_MULTIPLIER = 0.1
+CACHE_READ_BY_MODEL = {
+    "claude-opus-5-5": 0.05,   # $0.20 on $4
+    "claude-fable-5-1": 0.025,  # $0.25 on $10
+    "claude-mythos-5-1": 0.025,
+}
 CACHE_WRITE_MULTIPLIER = 1.25
+
+
+def _cache_read_multiplier(model: str) -> float:
+    return CACHE_READ_BY_MODEL.get(base_model(model), CACHE_READ_MULTIPLIER)
 
 
 def billed_input_tokens(row) -> float:
@@ -221,11 +261,23 @@ def billed_input_tokens(row) -> float:
     read = getattr(row, "cache_read_tokens", 0) or 0
     written = getattr(row, "cache_creation_tokens", 0) or 0
     uncached = max(0, row.input_tokens - read - written)
-    return uncached + read * CACHE_READ_MULTIPLIER + written * CACHE_WRITE_MULTIPLIER
+    read_mult = _cache_read_multiplier(getattr(row, "model", ""))
+    return uncached + read * read_mult + written * CACHE_WRITE_MULTIPLIER
+
+
+def _price_line(label: str, model: str, bin_tok: float, out_tok: int, unpriced: list):
+    """(markdown row, usd) for one model's billed tokens."""
+    price = PRICES.get(base_model(model))
+    if price is None:
+        unpriced.append(model)
+        return f"| {label} | {bin_tok:,.0f} | {out_tok:,} | - |", 0.0
+    usd = bin_tok / 1e6 * price[0] + out_tok / 1e6 * price[1]
+    return f"| {label} | {bin_tok:,.0f} | {out_tok:,} | ${usd:,.2f} |", usd
 
 
 def cost_summary(rows) -> str:
-    """A '## Cost' table: per-model billed tokens and USD at list price."""
+    """A '## Cost' table: per-model billed tokens and USD at list price, plus a
+    line per judge model for the grading calls recorded on the rows."""
     models = sorted({r.model for r in rows})
     if not models:
         return ""
@@ -237,30 +289,39 @@ def cost_summary(rows) -> str:
         mr = [r for r in rows if r.model == m]
         bin_tok = sum(billed_input_tokens(r) for r in mr)
         out_tok = sum(r.output_tokens for r in mr)
+        # Uninstrumented = written before cache components were recorded. A
+        # current row always carries max_tokens, so a genuinely uncached
+        # request (a prefix below the cache minimum) is not mistaken for one.
         uninstrumented += sum(
             1 for r in mr
             if r.input_tokens and not (getattr(r, "cache_read_tokens", 0)
                                        or getattr(r, "cache_creation_tokens", 0))
+            and not (getattr(r, "max_tokens", 0) or 0)
         )
-        if m in PRICES:
-            in_price, out_price = PRICES[m]
-            usd = bin_tok / 1e6 * in_price + out_tok / 1e6 * out_price
-            total += usd
-            cell = f"${usd:,.2f}"
-        else:
-            unpriced.append(m)
-            cell = "-"
-        lines.append(f"| {m} | {bin_tok:,.0f} | {out_tok:,} | {cell} |")
+        line, usd = _price_line(m, m, bin_tok, out_tok, unpriced)
+        total += usd
+        lines.append(line)
+    judges = sorted({getattr(r, "judge_model", "") for r in rows} - {""})
+    for j in judges:
+        jr = [r for r in rows if getattr(r, "judge_model", "") == j]
+        # Judge prompts carry no cache breakpoint, so they bill at full rate.
+        line, usd = _price_line(
+            f"{j} (judge)", j, sum(r.judge_input_tokens for r in jr),
+            sum(r.judge_output_tokens for r in jr), unpriced)
+        total += usd
+        lines.append(line)
     lines.append(f"| **total** | | | **${total:,.2f}** |")
     lines.append("")
     lines.append(
         "_Billed input counts cache reads at "
-        f"{CACHE_READ_MULTIPLIER}x and writes at {CACHE_WRITE_MULTIPLIER}x base rate, "
+        f"{CACHE_READ_MULTIPLIER}x (less on some models) and writes at "
+        f"{CACHE_WRITE_MULTIPLIER}x base rate, "
         "so it is well below the raw input-token total on a cached run. List "
         "prices only — no discounts, batch rates, or negotiated terms._"
     )
     if unpriced:
-        lines.append(f"_No price on file for: {', '.join(unpriced)} — see PRICES in report.py._")
+        lines.append(f"_No price on file for: {', '.join(sorted(set(unpriced)))} — "
+                     "see PRICES in report.py._")
     if uninstrumented:
         lines.append(
             f"_WARNING: {uninstrumented} row(s) predate cache-component recording and are "
@@ -305,6 +366,14 @@ def regime_note(rows) -> str:
     thinkers = sorted({r.model for r in rows if default_thinks(r.model) is True})
     unclassified = sorted({r.model for r in rows if default_thinks(r.model) is None})
     mixed = sorted(m for m, c in combos.items() if len(c) > 1)
+    # The snapshot behind an alias, per requested model. More than one means
+    # the alias was re-pointed mid-file and two model versions average together.
+    served: dict[str, set[str]] = {}
+    for r in rows:
+        sm = getattr(r, "served_model", "") or ""
+        if sm:
+            served.setdefault(r.model, set()).add(sm)
+    mixed_served = sorted(m for m, v in served.items() if len(v) > 1)
     if not (combos or uninstrumented or thinkers or unclassified):
         return ""
 
@@ -334,6 +403,14 @@ def regime_note(rows) -> str:
             "`_cells` emits conversion-major, so a resumed run splits on an arm "
             "boundary -- expect the difference to look like an arm effect. Do not "
             "compare arms across this file._"
+        )
+    if mixed_served:
+        detail = "; ".join(f"{m} -> {', '.join(sorted(served[m]))}" for m in mixed_served)
+        lines.append(
+            f"_WARNING: more than one model version served the same requested "
+            f"model in this file ({detail}). Rows from different snapshots are "
+            "averaged together above; pin a dated snapshot ID for a locked "
+            "baseline._"
         )
     if uninstrumented:
         total = sum(uninstrumented.values())
@@ -430,7 +507,8 @@ def to_markdown(report: Report) -> str:
             cells.append(f"{cs.accuracy[m]:.2f}{flag}" if m in cs.accuracy else "-")
         rank_cost = cs.cost_by_model.get(rank_model)
         cost_flag = "!" if rank_model in cs.failed_calls else ""
-        cells.append(f"{rank_cost:.0f}{cost_flag}" if rank_cost is not None else "-")
+        cells.append(f"{rank_cost:.0f}{cost_flag}" if rank_cost is not None
+                     else f"-{cost_flag}")
         # Spread built on a tier with failed calls inherits the flag — a +0.70
         # spread from a document that never fit the weak reader must not read
         # as "the weak model answered wrong".
@@ -446,15 +524,20 @@ def to_markdown(report: Report) -> str:
         cells.append(str(cs.n_cases))
         lines.append("| " + " | ".join(cells) + " |")
     lines.append("")
-    if report.strong and report.weak:
+    both_tiers = report.strong in report.models and report.weak in report.models
+    if both_tiers:
         lines.append(
             f"_Spread = {report.strong} accuracy - {report.weak} accuracy; "
-            "lower means the conversion transfers meaning robustly to the weaker reader. "
-            f"Cost is {report.strong} input tokens (tiers tokenize differently)._"
+            "lower means the conversion transfers meaning robustly to the weaker reader._"
+        )
+    if rank_model:
+        lines.append(
+            f"_Cost is mean {rank_model} input tokens per answered call "
+            "(tiers tokenize differently; failed calls are excluded)._"
         )
     if any(cs.spread is not None and not cs.spread_reliable for cs in report.scores):
         lines.append(
-            f"_* spread is below the {SPREAD_ACCURACY_FLOOR:.0%} accuracy floor -- "
+            f"_* spread is below the {report.floor:.0%} accuracy floor -- "
             "a tight spread here means uniformly wrong, not robust._"
         )
     for cs in report.scores:
@@ -463,8 +546,8 @@ def to_markdown(report: Report) -> str:
             reasons = "; ".join(_FAILURE_REASONS.get(s, s.replace("_", " ")) for s in statuses)
             lines.append(
                 f"_! {cs.conversion} / {model}: {n_failed}/{n_total} calls failed "
-                f"({reasons}); failed calls score 0 with 0 tokens billed -- the "
-                "document was never read, not answered wrong._"
+                f"({reasons}); these calls score 0 without being graded -- a "
+                "failure to read or answer at all, not a wrong answer._"
             )
     if not report.comparable:
         lines.append(
@@ -476,5 +559,48 @@ def to_markdown(report: Report) -> str:
             "_Compared on "
             + f"{len(report.common_cases)} common case(s); excluded (not present for every "
             + f"conversion): {', '.join(report.excluded_cases)}._"
+        )
+        # Most of the corpus dropped out of the headline: say so loudly and
+        # name the arms responsible, not in a footnote.
+        if len(report.common_cases) * 2 < report.n_all_cases:
+            partial = ", ".join(
+                f"{conv} ({n}/{report.n_all_cases} cases)"
+                for conv, n in sorted(report.partial_conversions.items())
+            )
+            lines.insert(2, (
+                f"**WARNING: this table is scored on {len(report.common_cases)} of "
+                f"{report.n_all_cases} cases** ({', '.join(report.common_cases)}), "
+                f"because these arms are missing from the others: {partial}. "
+                "Re-run or regrade with `--exclude-arm` to score every case.\n"
+            ))
+    return "\n".join(lines)
+
+
+def stale_rows_note(counts: dict) -> str:
+    """A section counting audit-trail rows left out of the scoreboard (see
+    runner.current_rows), or "" when every row was current and verified."""
+    out_of_scope = counts.get("out_of_scope", 0)
+    stale = counts.get("stale", 0)
+    unverified = counts.get("unverified", 0)
+    if not (out_of_scope or stale or unverified):
+        return ""
+    lines = ["## Rows not scored from the audit trail", ""]
+    if out_of_scope:
+        lines.append(
+            f"_{out_of_scope} row(s) in the rows file are outside this run's "
+            "configuration (a retired or removed question, a dropped arm, model "
+            "or case, or a repeat index beyond --repeats) and were ignored._"
+        )
+    if stale:
+        lines.append(
+            f"_{stale} row(s) were measured against a conversion, question or "
+            "gold that has since changed and were ignored (a resumed run asks "
+            "those cells again)._"
+        )
+    if unverified:
+        lines.append(
+            f"_{unverified} reused row(s) predate content hashing, so whether "
+            "their conversion and question still match today's files cannot be "
+            "checked._"
         )
     return "\n".join(lines)
