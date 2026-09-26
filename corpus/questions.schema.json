@@ -109,6 +109,11 @@
           "default": 0,
           "description": "numeric only: absolute tolerance on the value."
         },
+        "sign_insensitive": {
+          "type": "boolean",
+          "default": false,
+          "description": "numeric only: compare magnitudes, so '-21.4%' and 'a 21.4% reduction' both grade against gold 21.4. Use for reductions, declines, and differences that prose states with either sign."
+        },
         "source": {
           "type": "string",
           "description": "Where in the source document the answer lives ('figure-9', 'table-3', 'text') - free-form, case-scoped. Enables per-source report slicing; tag figure-borne questions so companion-subset arms can be compared."

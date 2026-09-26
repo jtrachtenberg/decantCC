@@ -19,7 +19,8 @@
       "question": "What cumulative percentage reduction in Scope 1 and 2 emissions against the 2019 baseline did Discovery actually reach in FY2024?",
       "gold": "21.4",
       "type": "numeric",
-      "tolerance": 0
+      "tolerance": 0,
+      "sign_insensitive": true
     },
     {
       "id": "asset-manager",

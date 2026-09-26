@@ -54,6 +54,10 @@ class Question:
     # same questions it is tuned on converges on keeping only the asked-about
     # facts, so the held-out bank is what keeps a reported win honest.
     split: str = ""
+    # numeric only: grade |answer| against |gold|. For a question whose value
+    # is a magnitude that prose states either way round -- "a reduction of
+    # 21.4%" and "emissions changed by -21.4%" are the same fact.
+    sign_insensitive: bool = False
 
 
 @dataclass(frozen=True)
@@ -109,6 +113,7 @@ def _parse_questions(raw: list[dict], where: str) -> tuple[Question, ...]:
                 tolerance=float(q.get("tolerance", 0.0)),
                 source=str(q.get("source", "")),
                 split=split,
+                sign_insensitive=bool(q.get("sign_insensitive", False)),
             )
         )
     return tuple(out)

@@ -359,5 +359,119 @@ class TestDeclinedAnswers(unittest.TestCase):
             "The distance is 75 miles; nothing here is NOT FOUND."))[0])
 
 
+class TestHyphenNormalization(unittest.TestCase):
+    """B4: the table-heavy source spells long-term / long term, net-zero / net
+    zero, carbon-neutral / carbon neutral both ways, so the grade depended on
+    which passage the model echoed."""
+
+    def test_hyphenated_answer_matches_spaced_gold(self):
+        self.assertEqual(grade(q("set", ["medium", "long term"]), "Medium- to long-term")[1], 1.0)
+        self.assertEqual(grade(q("set", ["medium", "long term"]), "Medium-term and long-term")[1], 1.0)
+
+    def test_spaced_answer_matches_hyphenated_gold(self):
+        gold = ["2019 baseline", "carbon-neutral", "net zero"]
+        self.assertEqual(grade(q("set", gold),
+                               "2019 baseline; carbon neutral by 2030; net-zero by 2050")[1], 1.0)
+
+    def test_exact_ignores_the_joiner(self):
+        self.assertTrue(grade(q("exact", "Laramie-Fox Hills aquifer"), "Laramie Fox Hills aquifer")[0])
+        self.assertTrue(grade(q("exact", "long term"), "long\u2013term")[0])
+
+    def test_digit_hyphens_are_kept(self):
+        self.assertTrue(grade(q("exact", "410-772-5291"), "410-772-5291")[0])
+        self.assertFalse(grade(q("exact", "410-772-5291"), "410 772 5291")[0])
+
+
+class TestNumericExtraction(unittest.TestCase):
+    """B5 (2026-09 code review): digits inside words, range dashes, chained
+    labels, and comma-joined digits were read as the answer. The corpus is
+    GHG/finance heavy, so these are the phrasings a prose answer produces."""
+
+    def test_digit_inside_a_word_is_not_a_number(self):
+        self.assertTrue(grade(q("numeric", "942"),
+                              "The CO2e from mobile combustion is 942 tonnes.")[0])
+        self.assertTrue(grade(q("numeric", "4.5"),
+                              "PM2.5-free waste to landfill was 4.5%.")[0])
+
+    def test_chained_label_is_context(self):
+        self.assertTrue(grade(q("numeric", "3782020"),
+                              "The Scope 1 and 2 total is 3,782,020 tCO2e.")[0])
+
+    def test_year_ranges_are_context(self):
+        self.assertTrue(grade(q("numeric", "21.4"),
+                              "Between 2019-2024 emissions fell 21.4%.")[0])
+        self.assertTrue(grade(q("numeric", "21.4"),
+                              "From 2019 to 2024 emissions fell 21.4%.")[0])
+
+    def test_spaced_dash_after_a_label_is_not_a_range(self):
+        self.assertTrue(grade(q("numeric", "1234"), "Per Table 6 - 1,234 units.")[0])
+
+    def test_range_dash_is_not_a_minus_sign(self):
+        # The only numbers are the years; the second must not read as -2024.
+        ok, _, detail = grade(q("numeric", "2024"), "It covers 2019-2024")
+        self.assertIn("2019", detail)
+        self.assertNotIn("-2024", detail)
+
+    def test_leading_minus_is_still_a_sign(self):
+        self.assertTrue(grade(q("numeric", "-3.5", 0), "The change was -3.5%.")[0])
+        self.assertFalse(grade(q("numeric", "3.5", 0), "The change was -3.5%.")[0])
+
+    def test_sign_insensitive_question_accepts_either_sign(self):
+        reduction = Question(id="r", question="?", gold="21.4", type="numeric",
+                             sign_insensitive=True)
+        self.assertTrue(grade(reduction, "Emissions changed by -21.4% versus the baseline.")[0])
+        self.assertTrue(grade(reduction, "A 21.4% reduction.")[0])
+        self.assertFalse(grade(reduction, "A 12.4% reduction.")[0])
+
+    def test_comma_between_digits_is_not_a_thousands_separator(self):
+        # "2,3" used to parse as 23. It is now 2 (still wrong for gold 2.3, but
+        # no longer a fabricated value).
+        _, _, detail = grade(q("numeric", "2.3"), "2,3 degrees")
+        self.assertIn("answer 2.0", detail)
+        self.assertTrue(grade(q("numeric", "1250.00", 0.01), "$1,250.00")[0])
+
+
+class TestBoldPrecedence(unittest.TestCase):
+    """B6: the first bold span anywhere used to win, so a bolded label, a
+    heading, or a negated value outranked the committed answer."""
+
+    def test_bold_label_does_not_win(self):
+        _, _, detail = grade(q("numeric", "1.6"),
+                             "**Table 10** lists Top 20.59 and Bottom 22.19, a difference of 1.60.")
+        self.assertNotIn("answer 10.0", detail)
+
+    def test_bold_heading_does_not_win(self):
+        self.assertTrue(grade(q("numeric", "808"),
+                              "**2025 staff breakdown**\n\nCERN employed 808 technicians.")[0])
+
+    def test_negated_bold_value_is_not_credited(self):
+        ok, score, _ = grade(q("numeric", "1250"), "It is not **1250**; the invoice total is 800.")
+        self.assertFalse(ok)
+        self.assertEqual(score, 0.0)
+
+    def test_bold_value_on_its_own_line_still_counts(self):
+        # A bare bold value with an explanation after it is an answer, not a heading.
+        self.assertTrue(grade(q("numeric", "808"),
+                              "**808 technicians**\n\nThis is from the staff breakdown.")[0])
+
+    def test_not_less_than_is_not_a_negation(self):
+        self.assertTrue(grade(q("numeric", "10"), "Not less than 10 years.")[0])
+
+
+class TestDeclineAnywhereInFirstSentence(unittest.TestCase):
+    """B19: NOT FOUND after a lead-in was mined for a number."""
+
+    def test_lead_in_then_not_found_is_a_decline(self):
+        ok, score, detail = grade(q("numeric", "75"),
+                                  "Based on the document: NOT FOUND. It mentions 75 mi elsewhere.")
+        self.assertFalse(ok)
+        self.assertEqual(score, 0.0)
+        self.assertIn("declined", detail)
+
+    def test_lowercase_prose_is_not_a_decline(self):
+        self.assertTrue(grade(q("numeric", "75"),
+                              "The distance is 75 miles; the rest was not found.")[0])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -39,8 +39,22 @@ import re
 
 _WS = re.compile(r"\s+")
 _PUNCT = re.compile(r"[^\w\s%.\-/]")
-# First signed number, optional thousands separators and decimal.
-_NUM = re.compile(r"-?\d[\d,]*(?:\.\d+)?")
+# A hyphen, dash, or slash joining two letters ("long-term", "net-zero",
+# "and/or"). The corpus sources spell these both ways -- table-heavy's decant.md
+# has `long-term` x11 and `long term` x14 -- so which one a model echoes depends
+# on the passage it read, not on whether it read it. Both gold and answer are
+# normalized, so the spelling can't decide the grade. A minus before a digit
+# ("-21.4", "COVID-19") is untouched: only letter-to-letter joins are spaced.
+_LETTER_JOIN = re.compile(r"(?<=[^\W\d_])[-\u2010\u2011\u2012\u2013\u2014/](?=[^\W\d_])")
+# A number: plain digits or properly grouped thousands ("3,782,020"), optional
+# decimal. Never starts inside a word or another number, so the 2 in "CO2e" /
+# "tCO2e" and the 2.5 in "PM2.5" are not values. A leading "-" is a sign only
+# where a sign can stand (start, whitespace, or an opening bracket): the "-" in
+# "2019-2024" is a range dash, not a negative 2024. Grouping must be exact, so
+# "2,3" reads as 2 and 3, not as the 23 the old `[\d,]*` produced.
+_NUM = re.compile(
+    r"(?:(?<![^\s(\[])-)?(?<![A-Za-z_\d.,])(?:\d{1,3}(?:,\d{3})+(?!\d)|\d+)(?:\.\d+)?"
+)
 # A markdown bold span (**...**), kept to a single line so it can't swallow a
 # whole paragraph. The number a model *bolds* is one it is committing to.
 _BOLD = re.compile(r"\*\*(.+?)\*\*")
@@ -56,18 +70,9 @@ _EXACT_SLACK = 8
 
 
 def _norm(s) -> str:
-    s = _PUNCT.sub(" ", str(s).lower())
+    s = _LETTER_JOIN.sub(" ", str(s).lower())
+    s = _PUNCT.sub(" ", s)
     return _WS.sub(" ", s).strip()
-
-
-def _numbers(s) -> list[float]:
-    out = []
-    for m in _NUM.findall(str(s)):
-        try:
-            out.append(float(m.replace(",", "")))
-        except ValueError:
-            pass
-    return out
 
 
 def _short_answer(text: str) -> str:
@@ -137,54 +142,106 @@ def _word_number(text):
 # inflated the reliability spread, the metric the whole harness exists to
 # report.
 _CONTEXT_WORDS = (
-    "in|for|by|during|since|from|until|through|of"          # date phrases
+    "in|for|by|during|since|from|until|through|of|between"  # date phrases
     "|scope|table|tab|note|figure|fig|phase|section|sec"     # labels
     "|chapter|page|item|tier|level|appendix|part|step|no|number"
 )
 _CONTEXT_BEFORE = re.compile(r"(?i)(?:^|[^\w])(?:" + _CONTEXT_WORDS + r")[\s.:#]*$")
 # Only a plausible year is discountable as a date; "in 70 square miles" keeps 70.
 _YEAR = re.compile(r"^(?:1[89]|20)\d\d$")
-_DATE_WORDS = ("in", "for", "by", "during", "since", "from", "until", "through", "of")
+_DATE_WORDS = ("in", "for", "by", "during", "since", "from", "until", "through", "of", "between")
+# A connector that continues a context phrase onto the next number: "Scope 1
+# and 2", "Tables 3-4", "from 2019 to 2024", "between 2019-2024". The second
+# number inherits the first one's context -- it is the same label or date range.
+# A dash chains only unspaced: "Table 6 - 1,234 units" is a label, then a value.
+_CONTEXT_CHAIN = re.compile(
+    r"(?i)(?:\s+(?:and|or|to|through|vs\.?|versus)\s+|\s*&\s*|[-‐-—])$"
+)
+# A number directly negated ("not 1250", "isn't **1250**") is one the model
+# rejected. Two tokens of look-back, so "not less than 10" still reads 10.
+_NUMBER_NEGATORS = frozenset({
+    "not", "never", "isn", "wasn", "aren", "weren", "doesn", "don", "didn", "cannot",
+})
 
 
 def _is_context_number(text: str, m: re.Match) -> bool:
     """True when the number at `m` is introduced by a label or date word, so it
     restates context rather than answering. A date word only disqualifies a
-    number that actually looks like a year, so "for 70 acres" is still a value."""
-    before = _CONTEXT_BEFORE.search(text[:m.start()])
-    if not before:
-        return False
-    word = re.sub(r"[^\w]", "", before.group(0)).lower()
-    if word in _DATE_WORDS:
-        # _NUM's thousands class also swallows a trailing comma ("1999," in
-        # "in 1999, the ..."), so test the bare digits.
-        return bool(_YEAR.match(m.group(0).strip(",")))
-    return True
+    number that actually looks like a year, so "for 70 acres" is still a value.
+    A number chained onto a context number ("Scope 1 and 2", "from 2019 to
+    2024") shares its context."""
+    before_text = text[:m.start()]
+    before = _CONTEXT_BEFORE.search(before_text)
+    if before:
+        word = re.sub(r"[^\w]", "", before.group(0)).lower()
+        if word in _DATE_WORDS:
+            return bool(_YEAR.match(m.group(0)))
+        return True
+    chain = _CONTEXT_CHAIN.search(before_text)
+    if chain and chain.group(0):
+        prev = None
+        for p in _NUM.finditer(text, 0, chain.start()):
+            prev = p
+        if prev is not None and prev.end() == chain.start():
+            if not _is_context_number(text, prev):
+                return False
+            # A chained date only discounts another year: "from 2019 to 70
+            # acres" is not a phrase anyone writes, but "2019 to 2024" is.
+            if _YEAR.match(prev.group(0)):
+                return bool(_YEAR.match(m.group(0)))
+            return True
+    return False
 
 
-def _value_numbers(text: str) -> list[float]:
-    """`_numbers`, minus numbers that merely restate context -- unless that
-    leaves nothing, in which case the context numbers are all we have and the
-    original behaviour stands (a question whose gold IS a year still grades)."""
-    matches = list(_NUM.finditer(str(text)))
-    kept = [m for m in matches if not _is_context_number(str(text), m)]
-    use = kept or matches
-    out = []
-    for m in use:
-        try:
-            out.append(float(m.group(0).replace(",", "")))
-        except ValueError:
-            pass
-    return out
+def _is_negated_number(text: str, start: int) -> bool:
+    """True when one of the two tokens before `start` is a negator ("it is not
+    1250", "isn't **1250**"). Stops at a clause break."""
+    before = re.split(r"[.;:\n]", text[:start])[-1]
+    toks = re.findall(r"[a-z]+", before.lower())[-2:]
+    return any(t in _NUMBER_NEGATORS for t in toks)
+
+
+def _number_matches(text: str):
+    """(match, is_context) for every non-negated number in `text`."""
+    text = str(text)
+    return [(m, _is_context_number(text, m)) for m in _NUM.finditer(text)
+            if not _is_negated_number(text, m.start())]
+
+
+def _to_float(m: re.Match):
+    try:
+        return float(m.group(0).replace(",", ""))
+    except ValueError:  # pragma: no cover - _NUM only matches parseable text
+        return None
+
+
+def _value_numbers(text: str, *, allow_context: bool = True) -> list[float]:
+    """The non-negated numbers in `text`, minus numbers that merely restate
+    context -- unless that leaves nothing and `allow_context` is set, in which
+    case the context numbers are all we have and the original behaviour stands
+    (a question whose gold IS a year still grades)."""
+    matches = _number_matches(text)
+    kept = [m for m, ctx in matches if not ctx]
+    use = kept or ([m for m, _ in matches] if allow_context else [])
+    return [v for v in (_to_float(m) for m in use) if v is not None]
 
 
 def _declined(text: str) -> bool:
-    """True when the model opened with the harness's own NOT FOUND convention
+    """True when the model answered with the harness's own NOT FOUND convention
     (see ANSWER_SYSTEM). It declined; a value mentioned in the explanation that
     follows is discussion, not an answer, and crediting it would over-credit
-    exactly the hedged non-answer a corrupted conversion produces."""
+    exactly the hedged non-answer a corrupted conversion produces.
+
+    Either the response opens with it, or its first sentence carries the
+    literal upper-case NOT FOUND before any number ("Based on the document:
+    NOT FOUND. It mentions 75 mi elsewhere."). An answer that states a value
+    first and only mentions the phrase afterwards is still graded."""
     first = next((ln.strip() for ln in str(text).splitlines() if ln.strip()), "")
-    return _norm(first).startswith("not found")
+    if _norm(first).startswith("not found"):
+        return True
+    sentence = re.split(r"[.!?](?:\s|$)", first, maxsplit=1)[0]
+    at = sentence.find("NOT FOUND")
+    return at >= 0 and not re.search(r"\d", sentence[:at])
 
 
 def _commitment_marker(short: str) -> int:
@@ -204,15 +261,34 @@ def _commitment_marker(short: str) -> int:
     return -1
 
 
+def _bold_spans(text: str):
+    """(span_text, is_heading) for each bold span not itself negated ("It is
+    not **1250**"). A heading is a bold span that is its whole line with more
+    lines after it ("**2025 staff breakdown**" above the answer): a title the
+    model wrote, not a value it committed to."""
+    text = str(text)
+    out = []
+    for m in _BOLD.finditer(text):
+        if _is_negated_number(text, m.start()):
+            continue
+        line_start = text.rfind("\n", 0, m.start()) + 1
+        line_end = text.find("\n", m.end())
+        line = text[line_start:len(text) if line_end < 0 else line_end]
+        rest = "" if line_end < 0 else text[line_end:]
+        bare = re.sub(r"^\s*(?:#{1,6}\s+|>\s*|[-*+]\s+)?", "", line)
+        whole_line = re.sub(r"[\s:.]+$", "", bare) == m.group(0)
+        out.append((m.group(1), whole_line and bool(rest.strip())))
+    return out
+
+
 def _committed_number(text: str):
     """The number the model committed to, or None. A bolded span (**...**) is a
-    strong commitment signal, so the first number inside the first bolded span
+    strong commitment signal, so the first value inside the first bolded span
     that has one wins over the short-answer's first number. This rescues verbose-
     but-correct answers whose committed value is buried behind a lead-in ("...for
-    2025, CERN employed **808 technicians**...", gold 808 not 2025) or sits above
-    a citation line ("**Section 42**...\n\nstated in NOTE 1: ...", gold 42 not the
-    1 in "NOTE 1"). With no bolded number we fall back to the first number of the
-    short answer, so a negation like "800.00, not 1250.00" still grades as 800.
+    2025, CERN employed **808 technicians**...", gold 808 not 2025). With no
+    bolded value we fall back to the short answer, so a negation like "800.00,
+    not 1250.00" still grades as 800.
 
     When the short answer *shows its work* the first number is an input, not the
     result: "22.19 - 20.59 = 1.60" and "Top: 20.59, Bottom: 22.19. Difference:
@@ -220,28 +296,53 @@ def _committed_number(text: str):
     is what follows the last `=` or `:`. Both phrasings are real messy-scan
     well-depth-difference rows (2026-07-24) that scored 0 on the correct value.
 
-    The negation guard survives because it has neither marker: "800.00, not
-    1250.00" still falls through to the short answer's first number."""
-    for span in _BOLD.findall(str(text)):
-        nums = _value_numbers(span)
-        if nums:
-            return nums[0]
+    Bold is only trusted where it marks a value. A bold span holding nothing but
+    a label or date ("**Table 10** lists ...", "**Section 42**"), a heading line
+    ("**2025 staff breakdown**" above the answer), or a negated value ("not
+    **1250**") used to win outright; each is now consulted only after the short
+    answer has offered no value of its own. Precedence, first hit wins:
+
+      1. an inline bold span's value number
+      2. the value numbers after the short answer's commitment marker
+      3. the short answer's value numbers
+      4. a heading bold span's value number
+      5. any number (labels and dates included) after the marker, in the short
+         answer, then in any bold span -- a year-valued gold still grades
+      6. a spelled-out number in the short answer
+
+    Numbers the model negated ("not 1250") are never the answer."""
+    spans = _bold_spans(text)
+    for span, heading in spans:
+        if not heading:
+            nums = _value_numbers(span, allow_context=False)
+            if nums:
+                return nums[0]
     short = _short_answer(text)
     marker = _commitment_marker(short)
-    if marker >= 0:
-        nums = _value_numbers(short[marker + 1:])
+    after = short[marker + 1:] if marker >= 0 else None
+    if after is not None:
+        nums = _value_numbers(after, allow_context=False)
         if nums:
             return nums[0]
-    nums = _value_numbers(short)
+    nums = _value_numbers(short, allow_context=False)
     if nums:
         return nums[0]
+    for span, heading in spans:
+        if heading:
+            nums = _value_numbers(span, allow_context=False)
+            if nums:
+                return nums[0]
+    for region in ([after] if after is not None else []) + [short] + [sp for sp, _ in spans]:
+        nums = _value_numbers(region)
+        if nums:
+            return nums[0]
     # No digit anywhere the model committed to — a verbatim quote may spell the
     # number out ("fifteen years"). Digits always win when present, so the
     # negation rule ("800.00, not 1250.00" -> 800) is untouched.
     return _word_number(short)
 
 
-def _grade_numeric(answer: str, gold, tolerance: float):
+def _grade_numeric(answer: str, gold, tolerance: float, sign_insensitive: bool = False):
     try:
         target = float(str(gold).replace(",", ""))
     except ValueError:
@@ -249,6 +350,8 @@ def _grade_numeric(answer: str, gold, tolerance: float):
     n = _committed_number(answer)
     if n is None:
         return False, 0.0, "no number in answer"
+    if sign_insensitive:
+        n, target = abs(n), abs(target)
     # n is the committed value, not any number the model mentioned
     if abs(n - target) <= tolerance:
         return True, 1.0, f"answer {n} within +/-{tolerance} of {target}"
@@ -374,7 +477,10 @@ def grade(question, answer: str, *, judge=None, judge_model: str = "claude-opus-
     if _declined(answer):
         return False, 0.0, "declined (NOT FOUND)"
     if question.type == "numeric":
-        return _grade_numeric(answer, question.gold, question.tolerance)
+        return _grade_numeric(
+            answer, question.gold, question.tolerance,
+            getattr(question, "sign_insensitive", False),
+        )
     if question.type == "exact":
         return _grade_exact(
             answer, question.gold,
