@@ -196,7 +196,8 @@ def _regrade(parser, args) -> int:
             raise
         print(f"{exc} for --split {args.split}: nothing to re-grade")
         return 1
-    cases = _without_arms(cases, set(args.exclude_arm or ()))
+    exclude = set(args.exclude_arm or ())
+    cases = _without_arms(cases, exclude)
     rows, _ = load_completed(args.rows)
     if not rows:
         print(f"{args.rows}: no rows to re-grade")
@@ -210,7 +211,7 @@ def _regrade(parser, args) -> int:
     # current corpus/split (and today's files) reach the report.
     _write_atomic(out_rows, "".join(
         json.dumps(asdict(r), ensure_ascii=True) + "\n" for r in new_rows))
-    scored, counts = current_rows(new_rows, cases)
+    scored, counts = current_rows(new_rows, cases, raw_arena=RAW not in exclude)
 
     md, arena_rows = _assemble_report(scored, strong=args.strong, weak=args.weak,
                                       counts=counts)

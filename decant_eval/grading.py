@@ -169,10 +169,9 @@ _CONTEXT_CHAIN = re.compile(
     r"(?i)(?:\s+(?:and|or|to|through|vs\.?|versus)\s+|\s*&\s*|[-‐-—])$"
 )
 # A number directly negated ("not 1250", "isn't **1250**") is one the model
-# rejected. Two tokens of look-back, so "not less than 10" still reads 10.
-_NUMBER_NEGATORS = frozenset({
-    "not", "never", "isn", "wasn", "aren", "weren", "doesn", "don", "didn", "cannot",
-})
+# rejected. Only the token right before the number counts, so "not less than
+# 10" and "cannot exceed 5" still read as values.
+_NUMBER_NEGATORS = frozenset({"not", "never"})
 
 
 def _is_context_number(text: str, m: re.Match) -> bool:
@@ -205,10 +204,11 @@ def _is_context_number(text: str, m: re.Match) -> bool:
 
 
 def _is_negated_number(text: str, start: int) -> bool:
-    """True when one of the two tokens before `start` is a negator ("it is not
-    1250", "isn't **1250**"). Stops at a clause break."""
-    before = re.split(r"[.;:\n]", text[:start])[-1]
-    toks = re.findall(r"[a-z]+", before.lower())[-2:]
+    """True when the word right before `start` is a negator ("it is not 1250",
+    "isn't **1250**"). A clause break in between ends the negation."""
+    before = re.split(r"[.;:\n]", text[:start])[-1].lower()
+    before = re.sub(r"n['\u2019]t\b", " not", before)
+    toks = re.findall(r"[a-z]+", before)[-1:]
     return any(t in _NUMBER_NEGATORS for t in toks)
 
 

@@ -558,6 +558,10 @@ class TestBoldPrecedence(unittest.TestCase):
 
     def test_not_less_than_is_not_a_negation(self):
         self.assertTrue(grade(q("numeric", "10"), "Not less than 10 years.")[0])
+        self.assertTrue(grade(q("numeric", "5"), "The term cannot exceed 5 years.")[0])
+
+    def test_contracted_negation(self):
+        self.assertFalse(grade(q("numeric", "1250"), "It isn't **1250**; it is 800.")[0])
 
 
 class TestDeclineAnywhereInFirstSentence(unittest.TestCase):

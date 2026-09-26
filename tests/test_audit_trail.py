@@ -275,6 +275,15 @@ class TestRegradeCli(unittest.TestCase):
         self.assertIn("1 row(s) in the rows file are outside", md)
         self.assertIn("| a | 1.00 |", md)
 
+    def test_exclude_arm_drops_rows_from_the_report(self):
+        code, _ = self._main(["regrade", "--corpus", str(self.w / "corp"),
+                              "--rows", str(self.inp), "--out", str(self.w / "new.md"),
+                              "--exclude-arm", "a"])
+        self.assertEqual(code, 0)
+        md = (self.w / "new.md").read_text()
+        self.assertNotIn("| a |", md)
+        self.assertIn("2 row(s) in the rows file are outside", md)
+
     def test_split_with_no_cases_is_a_message_not_a_traceback(self):
         code, out = self._main(["regrade", "--corpus", str(self.w / "corp"), "--split", "dev",
                                 "--rows", str(self.inp), "--out", str(self.w / "new.md")])
