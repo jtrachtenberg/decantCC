@@ -75,6 +75,7 @@ so --resume retries them instead of freezing a 0 into the audit trail.
 from __future__ import annotations
 
 import base64
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
@@ -98,13 +99,29 @@ THINKING_OFF_BY_DEFAULT = frozenset({
 # arms think different amounts by construction.
 THINKING_ON_BY_DEFAULT = frozenset({
     "claude-opus-5", "claude-sonnet-5", "claude-fable-5", "claude-mythos-5",
+    # 5.x point releases: thinking cannot be disabled at all on these.
+    "claude-opus-5-5", "claude-fable-5-1", "claude-mythos-5-1",
 })
+
+# A dated snapshot ID ("claude-haiku-4-5-20251001") pins one release of the
+# model its alias names. The date suffix is the only difference.
+_SNAPSHOT_SUFFIX = re.compile(r"-\d{8}$")
+
+
+def base_model(model: str) -> str:
+    """`model` with any dated-snapshot suffix removed, for lookups in tables
+    keyed by alias (thinking defaults, prices). Pinning a snapshot is how a
+    locked baseline stays reproducible when an alias is re-pointed, so a
+    snapshot must classify exactly like its alias rather than be refused."""
+    return _SNAPSHOT_SUFFIX.sub("", str(model))
 
 
 def default_thinks(model: str):
     """True if `model` thinks when `thinking` is omitted, False if it does not,
     None if the model is unclassified. None is deliberately distinct from False:
-    an unrecognized model is an open question, not a safe default."""
+    an unrecognized model is an open question, not a safe default. A dated
+    snapshot classifies as its alias."""
+    model = base_model(model)
     if model in THINKING_OFF_BY_DEFAULT:
         return False
     if model in THINKING_ON_BY_DEFAULT:
@@ -143,6 +160,10 @@ class AnswerResult:
     # so a future client that does send them stays honest for free.
     effort: str = ""
     thinking: str = ""
+    # The model the API reports actually served the call (the response's
+    # `model` field). For an alias this names the snapshot behind it, so two
+    # runs an alias re-point apart are distinguishable in the audit trail.
+    served_model: str = ""
 
 
 class ModelClient(Protocol):
@@ -175,13 +196,23 @@ class AnthropicModelClient:
 
             client = Anthropic()
         self._client = client
+        # path -> ((mtime_ns, size), encoded base64). A 16 MB source PDF was
+        # re-read and re-encoded on every question about it (O2); the request
+        # bytes are identical either way.
+        self._pdf_cache: dict[str, tuple[tuple[int, int], str]] = {}
 
-    @staticmethod
-    def _pdf_block(path):
-        data = base64.standard_b64encode(Path(path).read_bytes()).decode("ascii")
+    def _pdf_block(self, path):
+        p = Path(path)
+        st = p.stat()
+        stamp = (st.st_mtime_ns, st.st_size)
+        key = str(p.resolve())
+        hit = self._pdf_cache.get(key)
+        if hit is None or hit[0] != stamp:
+            data = base64.standard_b64encode(p.read_bytes()).decode("ascii")
+            self._pdf_cache[key] = hit = (stamp, data)
         return {
             "type": "document",
-            "source": {"type": "base64", "media_type": "application/pdf", "data": data},
+            "source": {"type": "base64", "media_type": "application/pdf", "data": hit[1]},
         }
 
     def _document_blocks(self, document) -> list:
@@ -236,16 +267,19 @@ class AnthropicModelClient:
             # they are what makes a row's regime readable after the fact.
             effort="",
             thinking="",
+            served_model=getattr(resp, "model", "") or "",
         )
 
     def count_input_tokens(self, *, model, system, prompt) -> int:
         """A-priori input-token cost of feeding (system + prompt) to `model` —
         the count_tokens endpoint, model-specific. Used to estimate a
-        conversion's token weight before a run (see tokens.py)."""
+        conversion's token weight before a run (see tokens.py). An empty
+        system prompt is omitted rather than sent as ""."""
+        kwargs = {"system": system} if system else {}
         resp = self._client.messages.count_tokens(
             model=model,
-            system=system,
             messages=[{"role": "user", "content": prompt}],
+            **kwargs,
         )
         return resp.input_tokens
 
@@ -276,4 +310,5 @@ class FakeModelClient:
             input_tokens=max(1, (len(system) + len(full)) // 4),
             output_tokens=max(1, len(text) // 4),
             stop_reason=stop_reason,
+            served_model=model,
         )
