@@ -34,9 +34,11 @@ case's `conversions/` folder.
    the question allows. The graders **must not over-credit hedged, negated, or
    verbose answers** — the exact answers a model produces when reading a
    *corrupted* conversion — so they grade a short answer (final line / explicit
-   `ANSWER:`), take the answer's *first* number, match set items on word
-   boundaries, route anything wordier to the judge, and never keyword-guess an
-   unparseable verdict. See `grading.py`.
+   `ANSWER:`), take the answer's *first* value number (not a label, year, or
+   negated number), match set items on word boundaries outside negations,
+   charge list answers for extra items they guess, treat `long-term` and
+   `long term` alike, route anything wordier to the judge, and never
+   keyword-guess an unparseable verdict. See `grading.py`.
 2. **Endpoints — strong + weak** (`claude-opus-4-8` + `claude-haiku-4-5`), for
    the reliability spread. *Caveat:* this measures answer quality via the API;
    platform image-token billing is a separate accounting model.
@@ -66,7 +68,11 @@ corpus/<case>/
 ```
 
 `questions.json`: a list of `{id, question, gold, type, tolerance?, source?,
-split?}`, where `type` ∈ `numeric | exact | set | ordered_list | open`.
+split?, sign_insensitive?}`, where `type` ∈ `numeric | exact | set |
+ordered_list | open`. `sign_insensitive` (numeric only) grades the magnitude,
+for reductions that prose states as either `21.4%` or `-21.4%`. The loader
+rejects duplicate ids, unparseable numeric golds, negative tolerances and
+non-list set golds.
 `source` tags where the answer lives (`figure-9`, `table-3`, `text`) and drives
 the report's per-source slice. `split` ∈ `dev | test | retired` selects the
 question's bank — see `--split` below. Both are optional; see
@@ -87,11 +93,25 @@ python -m decant_eval.cli run --corpus ./corpus \
 Rows stream to a JSONL sidecar (`--rows`, default `<out>.jsonl`) as they
 complete, so a crash mid-run loses nothing and the graded-testing pass has a
 per-answer audit trail; `--resume` continues from it without re-billing done
-rows. The document sits in its own `cache_control` block, so the loop re-uses it
+rows. Each row records content hashes of the document, question and gold it
+was measured against, so a resumed run re-asks cells whose conversion or
+question changed, and the report counts only rows for the current corpus,
+split, arms, models and repeats (the rest stay in the file and are counted in
+a "Rows not scored" section). A fresh run refuses a non-empty rows file —
+resume it or pick a new `--rows`. The control arm is written to the same
+trail and resumes too; judge calls are costed on the row. The document sits in its own `cache_control` block, so the loop re-uses it
 across every question about it (~90% cheaper on large documents). Flags:
 `--no-raw` skips the source-PDF baseline, `--no-control` skips the control arm,
 `--repeats N` samples each question N times (sampling can't be pinned on the
 strong tier, so one draw per cell is a draw, not a measurement).
+
+The scoreboard compares arms only on cases where every arm appears, so a
+diagnostic arm present in one case would shrink it to that case. A run whose
+common cases would be under half the corpus is refused before billing: pass
+`--exclude-arm NAME` (repeatable; also on `regrade`) to leave that arm out, or
+`--allow-partial-arms` to run anyway. Dated snapshot IDs
+(`claude-haiku-4-5-20251001`) are accepted and classify as their alias; pin
+them for a locked baseline.
 
 Two flags exist for the compression phase, where the job is to cut tokens
 without losing meaning:
@@ -112,7 +132,8 @@ without losing meaning:
 re-grades an existing audit trail against the current graders and questions.
 Free by default (`numeric`/`set`/`ordered_list` never consult the judge;
 `exact`/`open` keep their stored verdict unless `--judge MODEL` is passed, which
-is billed). It never modifies the input file. This is what makes a grader fix
+is billed). It never modifies the input file, and refuses an `--out-rows` that
+would. This is what makes a grader fix
 applicable to answers already paid for, and it repairs the resumed-run trap
 where `--resume` carries rows graded under an older grader.
 
