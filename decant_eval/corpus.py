@@ -16,6 +16,10 @@ question set authored against it and the candidate conversions to score:
           markitdown.md
           docling.md
 
+The loader validates what questions.schema.json describes (the schema is
+otherwise only enforced by an editor): unique ids, a parseable numeric gold,
+a non-negative tolerance, and a list gold for set/ordered_list.
+
 Hard rule (enforced by convention, not code): gold answers in questions.json
 come from the SOURCE document, never from a conversion — otherwise the eval
 measures conformance to a converter instead of correctness.
@@ -90,14 +94,41 @@ def _load_questions_file(path: Path) -> list[dict]:
     return data
 
 
+def _check_gold(q: dict, qtype: str, where: str, i: int) -> None:
+    gold = q["gold"]
+    if qtype == "numeric":
+        try:
+            float(str(gold).replace(",", ""))
+        except ValueError:
+            raise ValueError(f"{where}: question {i} numeric gold {gold!r} is not a number") \
+                from None
+    elif qtype in ("set", "ordered_list"):
+        if not (isinstance(gold, list) and gold
+                and all(isinstance(g, str) and g.strip() for g in gold)):
+            raise ValueError(
+                f"{where}: question {i} {qtype} gold must be a non-empty list of strings")
+    elif isinstance(gold, (list, dict)) or not str(gold).strip():
+        raise ValueError(f"{where}: question {i} {qtype} gold must be a non-empty string")
+    tol = float(q.get("tolerance", 0.0))
+    if tol < 0:
+        raise ValueError(f"{where}: question {i} has negative tolerance {tol}")
+
+
 def _parse_questions(raw: list[dict], where: str) -> tuple[Question, ...]:
     out = []
+    seen: set[str] = set()
     for i, q in enumerate(raw):
         qtype = q.get("type", "exact")
         if qtype not in QUESTION_TYPES:
             raise ValueError(f"{where}: question {i} has unknown type {qtype!r}")
         if "id" not in q or "question" not in q or "gold" not in q:
             raise ValueError(f"{where}: question {i} needs id, question, and gold")
+        # Two questions sharing an id share a resume key, so one would
+        # silently stand in for the other.
+        if str(q["id"]) in seen:
+            raise ValueError(f"{where}: duplicate question id {q['id']!r}")
+        seen.add(str(q["id"]))
+        _check_gold(q, qtype, where, i)
         split = str(q.get("split", ""))
         if split and split not in SPLITS:
             raise ValueError(
@@ -130,21 +161,30 @@ def select_split(questions, split: str) -> tuple[Question, ...]:
 
 
 def _read_conversions(conv_dir: Path) -> dict[str, str]:
-    """Non-empty .md/.txt files in conv_dir, keyed by filename stem. Empty or
-    whitespace-only files are skipped so a placeholder or half-written arm
-    (e.g. a decant.md the converter hasn't populated yet) cannot become a
-    silently-blank arena entry that scores uniformly wrong in a billed run."""
+    """Non-empty .md/.txt files in conv_dir (any case: .MD counts), keyed by
+    filename stem. Empty or whitespace-only files are skipped so a placeholder
+    or half-written arm (e.g. a decant.md the converter hasn't populated yet)
+    cannot become a silently-blank arena entry that scores uniformly wrong in
+    a billed run. Two files with one stem (decant.md + decant.txt) are an
+    error -- which one is the arm would otherwise depend on sort order."""
     out: dict[str, str] = {}
+    origin: dict[str, Path] = {}
     if conv_dir.is_dir():
         for p in sorted(conv_dir.iterdir()):
-            if p.is_file() and p.suffix in (".md", ".txt"):
+            if p.is_file() and p.suffix.lower() in (".md", ".txt"):
                 text = p.read_text(encoding="utf-8")
                 if text.strip():
+                    if p.stem in out:
+                        raise ValueError(
+                            f"{conv_dir}: {origin[p.stem].name} and {p.name} are both "
+                            f"conversion {p.stem!r}; keep one"
+                        )
                     out[p.stem] = text
+                    origin[p.stem] = p
     return out
 
 
-def load_case(case_dir: Path, *, split: str = "all") -> Case:
+def load_case(case_dir: Path, *, split: str = "all", _conversions=None) -> Case:
     case_dir = Path(case_dir)
     qfile = next(
         (case_dir / f"questions{ext}" for ext in (".json", ".yaml", ".yml") if (case_dir / f"questions{ext}").exists()),
@@ -157,7 +197,7 @@ def load_case(case_dir: Path, *, split: str = "all") -> Case:
     conv_dir = case_dir / "conversions"
     if not conv_dir.is_dir():
         raise FileNotFoundError(f"{case_dir}: no conversions/ directory")
-    conversions = _read_conversions(conv_dir)
+    conversions = _conversions if _conversions is not None else _read_conversions(conv_dir)
     if not conversions:
         raise ValueError(f"{conv_dir}: no non-empty .md/.txt conversions found")
 
@@ -176,7 +216,13 @@ def load_case(case_dir: Path, *, split: str = "all") -> Case:
                     "conversion to attach to"
                 )
 
-    source = next((p for p in case_dir.glob("source.*") if p.is_file()), None)
+    sources = sorted(p for p in case_dir.glob("source.*") if p.is_file())
+    if len(sources) > 1:
+        raise ValueError(
+            f"{case_dir}: several source files ({', '.join(p.name for p in sources)}); "
+            "keep one so the raw arm is well defined"
+        )
+    source = sources[0] if sources else None
     return Case(
         name=case_dir.name, questions=questions, conversions=conversions,
         source=source, companions=companions,
@@ -203,9 +249,9 @@ def load_corpus(corpus_dir: str | Path, *, split: str = "all") -> list[Case]:
         has_questions = any(
             (child / f"questions{ext}").exists() for ext in (".json", ".yaml", ".yml")
         )
-        has_conversions = bool(_read_conversions(child / "conversions"))
-        if has_questions and has_conversions:
-            case = load_case(child, split=split)
+        conversions = _read_conversions(child / "conversions")
+        if has_questions and conversions:
+            case = load_case(child, split=split, _conversions=conversions)
             if case.questions:
                 cases.append(case)
     if not cases:

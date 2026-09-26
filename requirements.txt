@@ -5,7 +5,7 @@
 # models and real corpora:
 
 # Real model client (Opus/Haiku target tiers + the judge).
-anthropic>=0.40
+anthropic>=1.0,<2
 
 # Optional: author question sets in YAML instead of JSON.
 # pyyaml>=6.0

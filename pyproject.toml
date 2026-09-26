@@ -14,7 +14,7 @@ requires-python = ">=3.9"
 dependencies = []
 
 [project.optional-dependencies]
-live = ["anthropic>=0.40"]   # real Opus/Haiku target tiers + the judge
+live = ["anthropic>=1.0,<2"]   # real Opus/Haiku target tiers + the judge (1.x needs Python >= 3.10)
 yaml = ["pyyaml>=6.0"]       # author question sets in YAML instead of JSON
 
 [project.scripts]
