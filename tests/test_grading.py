@@ -510,7 +510,7 @@ class TestNumericExtraction(unittest.TestCase):
 
     def test_range_dash_is_not_a_minus_sign(self):
         # The only numbers are the years; the second must not read as -2024.
-        ok, _, detail = grade(q("numeric", "2024"), "It covers 2019-2024")
+        _, _, detail = grade(q("numeric", "2024"), "It covers 2019-2024")
         self.assertIn("2019", detail)
         self.assertNotIn("-2024", detail)
 

@@ -161,7 +161,7 @@ class TestFreshRunRefusesExistingTrail(unittest.TestCase):
             run_case(case, client=FakeModelClient(lambda m, s, p: "1"), models=[STRONG],
                      jsonl_path=path)
             with contextlib.redirect_stderr(io.StringIO()) as err:
-                rows, done = load_completed(path)
+                rows, _ = load_completed(path)
             self.assertEqual(len(rows), 1)
             self.assertEqual(rows[0].score, 1.0)
             self.assertIn("duplicate", err.getvalue())
@@ -240,9 +240,9 @@ class TestRegradeCli(unittest.TestCase):
             {"id": "gone", "question": "gone?", "gold": "5", "type": "numeric",
              "split": "retired"},
         ], conversions={"a": "x"})
-        base = dict(case="c1", conversion="a", model=STRONG, question_type="numeric",
-                    correct=False, score=0.0, input_tokens=1, output_tokens=1,
-                    detail="", max_tokens=512)
+        base = {"case": "c1", "conversion": "a", "model": STRONG,
+                "question_type": "numeric", "correct": False, "score": 0.0,
+                "input_tokens": 1, "output_tokens": 1, "detail": "", "max_tokens": 512}
         self.inp = self.w / "report.md.jsonl"
         self.inp.write_text("".join(
             json.dumps({**base, "question_id": qid, "answer": ans}) + "\n"
